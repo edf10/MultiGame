@@ -12,58 +12,74 @@ import javax.swing.ImageIcon;
 import campominado.TelaCM;
 
 public class MultiGameTela extends JFrame{
-    //Atributos (Construct)
+    //Painel
     private JPanel pnIniciar;
+    
+    //Labels
     private JLabel lbgif;
-    private ImageIcon gifArq;
     private JLabel lbtitulo;
-    private JButton btnStart;
+    
+    //ImageIcons
+    private ImageIcon gifArq;
     private ImageIcon btnImageArq;
+    
+    //Buttons
+    private JButton btnStart;
+    
     //Construct
     public MultiGameTela() {
+        /* Configurações padrão da tela */
         setSize(800, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);
-
+        /* ---------------------------- */
+        
+        /* Painel Inicial */
         pnIniciar = new JPanel();
+        pnIniciar.setLayout(null);
+        pnIniciar.setBounds(0, 0, 800, 600);
+        /* -------------- */
+        
+        /* Configurando ImageIcons */
         gifArq = new ImageIcon(getClass().getResource("01.gif"));
+        btnImageArq = new ImageIcon(getClass().getResource("btn1.png"));
+        /* ----------------------- */
+        
+        /* Configurando lbs - PainelInicial */
+        Font titulo = new Font("Arial", Font.PLAIN, 40);//Fonte
+        
         lbgif = new JLabel(gifArq);
         lbtitulo = new JLabel("MULTIGAME");
-        btnImageArq = new ImageIcon(getClass().getResource("btn1.png"));
-        btnStart = new JButton(btnImageArq);
-        Font titulo = new Font("Arial", Font.PLAIN, 40);
-        pnIniciar.setLayout(null);
-
-        //lbtitulo.setOpaque(true);
-        //lbtitulo.setBackground(Color.BLACK);
+        
         lbtitulo.setForeground(Color.WHITE);
+        
         lbtitulo.setHorizontalAlignment((int)CENTER_ALIGNMENT);
+        
         lbtitulo.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+        
         lbtitulo.setFont(titulo);
-
-        btnStart.setLayout(null);
-        btnStart.setContentAreaFilled(false);
-        //btnStart.setOpaque(false);
-        //btnStart.setBackground(Color.black);
-        btnStart.setBorder(null);
-
-
-        pnIniciar.setBounds(0, 0, 800, 600);
+        
         lbgif.setBounds(0, 0, 800, 600);
         lbtitulo.setBounds(250, 40, 300, 60);
-        btnStart.setBounds(300, 200, 200, 200);
-
+        /* -------------------------------- */
+        
+        /* Configurando BtnStart */
+        btnStart = new JButton(btnImageArq);
+        btnStart.setLayout(null);
+        btnStart.setContentAreaFilled(false);
+        btnStart.setBorder(null);
+        btnStart.setBounds(300, 200, 200, 200);   
+        BtnStart evento = new BtnStart();
+        btnStart.addActionListener(evento);
+        /* --------------------- */
+        
+        //Adicionando
         pnIniciar.add(btnStart);
         pnIniciar.add(lbtitulo);
         pnIniciar.add(lbgif);
 
         add(pnIniciar);
-
-        BtnStart evento = new BtnStart();
-        btnStart.addActionListener(evento);
-
-
 
         setVisible(true);
     }
@@ -74,44 +90,64 @@ public class MultiGameTela extends JFrame{
             Jogos();
         }
     }
-    //Atributos (Jogos)
+    
+    //Painel
     private JPanel pnJogos;
+    
+    //Labels
     private JLabel lbCM;
+    private JLabel lbFundo;
+    
+    //Buttons
     private JButton btnCM;
+    
+    //ImageIcons
     private ImageIcon btnImArq;
     private ImageIcon fundoArq;
-    private JLabel lbFundo;
+    
     //Painel de exibição dos jogos
     private void Jogos() {
+        
+        /* Painel Jogos */
         pnJogos = new JPanel();
-        lbCM = new JLabel("CAMPO MINADO");
-        btnImArq = new ImageIcon(getClass().getResource("minesweeper_100815.png"));
-        btnCM = new JButton(btnImArq);
-        Font jogos = new Font("Tahoma", Font.PLAIN, 24);
-        fundoArq = new ImageIcon(getClass().getResource("1fa3cfe7aba3549af9fff427ad6a7a32.gif"));
-        lbFundo = new JLabel(fundoArq);
-
         pnJogos.setBackground(Color.white);
         pnJogos.setLayout(null);
-
+        pnJogos.setBounds(0, 0, 800, 600);
+        /* ----------- */
+        
+        /* Configurando ImageIcons */
+        btnImArq = new ImageIcon(getClass().getResource("minesweeper_100815.png"));
+        fundoArq = new ImageIcon(getClass().getResource("1fa3cfe7aba3549af9fff427ad6a7a32.gif"));
+        /* ----------------------- */
+        
+        /* Configurando lbs - PainelJogos */
+        Font jogos = new Font("Tahoma", Font.PLAIN, 24);
+        
+        lbCM = new JLabel("CAMPO MINADO");
+        lbFundo = new JLabel(fundoArq);
+        
+        lbCM.setForeground(Color.black);
+        
+        lbCM.setFont(jogos);
+        
+        lbCM.setHorizontalAlignment((int)CENTER_ALIGNMENT);
+        
+        lbFundo.setBounds(0, 0, 800, 600);
+        lbCM.setBounds(20, 230, 200, 20);
+        /* ------------------------------ */
+        
+        /* Configurando btns */
+        btnCM = new JButton(btnImArq);
         btnCM.setLayout(null);
         btnCM.setHorizontalAlignment((int)CENTER_ALIGNMENT);
         btnCM.setContentAreaFilled(false);
         btnCM.setBorder(null);
-
-        lbCM.setForeground(Color.black);
-        lbCM.setFont(jogos);
-        lbCM.setHorizontalAlignment((int)CENTER_ALIGNMENT);
-
-        lbFundo.setBounds(0, 0, 800, 600);
-        pnJogos.setBounds(0, 0, 800, 600);
         btnCM.setBounds(20, 20, 200, 200);
-        lbCM.setBounds(20, 230, 200, 20);
-
         BtnJogo event = new BtnJogo();
         btnCM.addActionListener(event);
-
-
+        /* ----------------- */
+        
+        //Adicionando
         pnJogos.add(lbCM);
         pnJogos.add(btnCM);
         pnJogos.add(lbFundo);
