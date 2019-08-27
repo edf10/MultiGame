@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import java.lang.Thread;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import multigame.MultiGameTela;
 
 public class TelaCM extends JFrame{
     public TelaCM() {
@@ -59,12 +60,23 @@ public class TelaCM extends JFrame{
     private JButton btnFacil;
     private JButton btnMedio;
     private JButton btnDificil;
+    private JButton btnLeft;
     
     //ImageIcons
     private ImageIcon imFundo;
     private ImageIcon imAnima;
+    private ImageIcon imLeft;
     
     private void configTela(){
+        /* Btns e ImageIcons Setas */
+        imLeft = new ImageIcon(getClass().getResource("seta-rigth.png"));
+        btnLeft = new JButton(imLeft);
+        btnLeft.setBounds(0, 0, 100, 100);
+        btnLeft.setContentAreaFilled(false);
+        btnLeft.setBorder(null);
+        btnLeft.setFocusPainted(false);
+        /*------------*/
+        
         /* Painel dos Niveis */
         painelNiveis = new JPanel();
         painelNiveis.setLayout(null);
@@ -136,7 +148,7 @@ public class TelaCM extends JFrame{
         painelNiveis.add(btnFacil);
         painelNiveis.add(btnMedio);
         painelNiveis.add(btnDificil);
-        painelNiveis.add(lbAnima);
+        //painelNiveis.add(lbAnima);
         painelNiveis.add(lbFundo);
         /* ------------------------------- */
         
@@ -148,8 +160,7 @@ public class TelaCM extends JFrame{
         painelTempo = new JPanel();
         painelTempo.setBounds(0, 0, 700, 117);
         painelTempo.setBackground(Color.black);
-        GridLayout t6x1 = new GridLayout(1,2);
-        painelTempo.setLayout(t6x1);
+        painelTempo.setLayout(null);
         /* ------------------------------------------------------ */
         
         /* Configurações Labels - Painel Jogo e tempo*/
@@ -164,6 +175,10 @@ public class TelaCM extends JFrame{
         lbsegundos.setHorizontalAlignment((int)CENTER_ALIGNMENT);
         lbminutos.setHorizontalAlignment((int)CENTER_ALIGNMENT);
         lbdoispontos.setHorizontalAlignment((int)CENTER_ALIGNMENT);
+        
+        lbsegundos.setBounds(460, 15, 100, 100);
+        lbdoispontos.setBounds(295, 11, 100, 100);
+        lbminutos.setBounds(130, 15, 100, 100);
         
         //Adicionando fonte
         lbsegundos.setFont(tempo);
@@ -180,6 +195,7 @@ public class TelaCM extends JFrame{
         painelTempo.add(lbminutos);
         painelTempo.add(lbdoispontos);
         painelTempo.add(lbsegundos);
+        //painelTempo.add(btnLeft);
         /* ------------------------------ */
         add(painelNiveis);
     }
@@ -478,7 +494,6 @@ public class TelaCM extends JFrame{
                 if(iniciarJogo==1){
                     ct.start();
                 }
-                
                 if(r.posNumero(x, y)){
                     //Caso seja número, abrir só essa posição.
                     posAlt(x,y);
