@@ -27,59 +27,62 @@ public class MultiGameTela extends JFrame{
     private JButton btnStart;
     
     //Construct
-    public MultiGameTela() {
+    public MultiGameTela(int i) {
         /* Configurações padrão da tela */
         setSize(800, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);
         /* ---------------------------- */
-        
-        /* Painel Inicial */
-        pnIniciar = new JPanel();
-        pnIniciar.setLayout(null);
-        pnIniciar.setBounds(0, 0, 800, 600);
-        /* -------------- */
-        
-        /* Configurando ImageIcons */
-        gifArq = new ImageIcon(getClass().getResource("01.gif"));
-        btnImageArq = new ImageIcon(getClass().getResource("btn1.png"));
-        /* ----------------------- */
-        
-        /* Configurando lbs - PainelInicial */
-        Font titulo = new Font("Arial", Font.PLAIN, 40);//Fonte
-        
-        lbgif = new JLabel(gifArq);
-        lbtitulo = new JLabel("MULTIGAME");
-        
-        lbtitulo.setForeground(Color.WHITE);
-        
-        lbtitulo.setHorizontalAlignment((int)CENTER_ALIGNMENT);
-        
-        lbtitulo.setBorder(BorderFactory.createLineBorder(Color.WHITE));
-        
-        lbtitulo.setFont(titulo);
-        
-        lbgif.setBounds(0, 0, 800, 600);
-        lbtitulo.setBounds(250, 40, 300, 60);
-        /* -------------------------------- */
-        
-        /* Configurando BtnStart */
-        btnStart = new JButton(btnImageArq);
-        btnStart.setLayout(null);
-        btnStart.setContentAreaFilled(false);
-        btnStart.setBorder(null);
-        btnStart.setBounds(300, 200, 200, 200);   
-        BtnStart evento = new BtnStart();
-        btnStart.addActionListener(evento);
-        /* --------------------- */
-        
-        //Adicionando
-        pnIniciar.add(btnStart);
-        pnIniciar.add(lbtitulo);
-        pnIniciar.add(lbgif);
+        if(i==1){
+            /* Painel Inicial */
+            pnIniciar = new JPanel();
+            pnIniciar.setLayout(null);
+            pnIniciar.setBounds(0, 0, 800, 600);
+            /* -------------- */
 
-        add(pnIniciar);
+            /* Configurando ImageIcons */
+            gifArq = new ImageIcon(getClass().getResource("01.gif"));
+            btnImageArq = new ImageIcon(getClass().getResource("btn1.png"));
+            /* ----------------------- */
+
+            /* Configurando lbs - PainelInicial */
+            Font titulo = new Font("Arial", Font.PLAIN, 40);//Fonte
+
+            lbgif = new JLabel(gifArq);
+            lbtitulo = new JLabel("MULTIGAME");
+
+            lbtitulo.setForeground(Color.WHITE);
+
+            lbtitulo.setHorizontalAlignment((int)CENTER_ALIGNMENT);
+
+            lbtitulo.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+
+            lbtitulo.setFont(titulo);
+
+            lbgif.setBounds(0, 0, 800, 600);
+            lbtitulo.setBounds(250, 40, 300, 60);
+            /* -------------------------------- */
+
+            /* Configurando BtnStart */
+            btnStart = new JButton(btnImageArq);
+            btnStart.setLayout(null);
+            btnStart.setContentAreaFilled(false);
+            btnStart.setBorder(null);
+            btnStart.setBounds(300, 200, 200, 200);   
+            BtnStart evento = new BtnStart();
+            btnStart.addActionListener(evento);
+            /* --------------------- */
+
+            //Adicionando
+            pnIniciar.add(btnStart);
+            pnIniciar.add(lbtitulo);
+            pnIniciar.add(lbgif);
+
+            add(pnIniciar);
+        }else{
+            Jogos();
+        }
 
         setVisible(true);
     }
