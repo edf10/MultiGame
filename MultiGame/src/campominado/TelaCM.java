@@ -28,7 +28,6 @@ public class TelaCM extends JFrame{
         setLayout(null);
         //setUndecorated(win);
         /* ------------------------- */
-        
         configTela();
         
         setVisible(true);
@@ -52,7 +51,7 @@ public class TelaCM extends JFrame{
     private JPanel painelCampo;
     private JPanel painelTempo;
     private JPanel painelNiveis;
-        
+   
     //Labels
     private JLabel lbsegundos = lbsTempo("00", 460, 15);
     private JLabel lbminutos = lbsTempo("00", 130, 15);
@@ -131,17 +130,19 @@ public class TelaCM extends JFrame{
     }
     
     public boolean start = false;
+    private static int nivel;
     //Evento btns niveis
     private class Nivel implements ActionListener{
-        private int n = 0;
-        private Nivel(int n){
-            this.n = n;
+        private int nil;
+        private Nivel(int nil){
+            System.out.println(nil);
+            this.nil = nil;
         }
         @Override
         public void actionPerformed(ActionEvent e){
             start = true;
             painelNiveis.setVisible(false);
-            switch(n){
+            switch(nil){
                 case 1:
                     x = y = 12;
                     break;
@@ -164,17 +165,42 @@ public class TelaCM extends JFrame{
                     marc[i][j] = 0;
                 }
             }
-            CM(n);
+            nivel = nil;
+            CM(nivel);
         }
     }
     
+    public int getN(){
+        return nivel;
+    }
+    
+    public void newCM(int n){
+        if(n==1){
+            x = y = 12;
+        }else if(n==2){
+            x = y = 16;
+        }else{
+            x = y = 18;
+        }
+        r = new Campo(x, y);
+        vet = new Btn[r.getX()][r.getY()];
+        m4 = new int[r.getX()][r.getY()];
+        marc = new int[r.getX()][r.getY()];
+        for(int i = 0; i<r.getX(); i++){
+            for(int j = 0; j<r.getY(); j++){
+                marc[i][j] = 0;
+            }
+        }
+        painelNiveis.setVisible(false);
+        CM(n);
+    }
+    
     //Jogo
-    private void CM(int n) {
+    public void CM(int n) {
         /* Definindo painel e gridlayout do campo */
         painelCampo = new JPanel();
         GridLayout mx = new GridLayout(x,y);//Matriz
         painelCampo.setLayout(mx);
-        System.out.println(getSize());
         r.declararVars();//Configurações iniciais do campo
         if(n==1){
             painelCampo.setBounds(0, 109, 684, 552);   
@@ -310,17 +336,15 @@ public class TelaCM extends JFrame{
         if(press){
             for(int i = 0; i<r.getX(); i++){
                 for(int j = 0; j<r.getY(); j++){
-                    if(marc[i][j]!=1){
-                        marc[i][j] = 2;
-                    }
+                    marc[i][j] = 2;
                     posAlt(i,j);
                 }
             }
         }
         ct.stop();//Para o cronômetro.
         //System.out.println("Perdeu.");
-        //TelaGameOver tgo = new TelaGameOver();
-        JOptionPane.showMessageDialog(null, minutosP+":"+segundosP);
+        TelaGameOver tgo = new TelaGameOver(minutosP+":"+segundosP, this);
+        //JOptionPane.showMessageDialog(null, minutosP+":"+segundosP);
     }
     private int abertos = 0;
     public void Ganhar(int x, int y){
@@ -348,6 +372,7 @@ public class TelaCM extends JFrame{
                     marc[posxM[i]][posyM[i]] = 2;
                     posAlt(posxM[i], posyM[i]);
                 }
+                
                 ct.stop();//Para o cronômetro
                 //System.out.println("Ganhei.");
                 JOptionPane.showMessageDialog(null, minutosP+":"+segundosP);
@@ -489,7 +514,6 @@ public class TelaCM extends JFrame{
                 public void mouseEntered(MouseEvent me) {}
                 @Override
                 public void mouseExited(MouseEvent me) {}
-
                 public boolean getPressM(){
                     return pressM;
                 }
