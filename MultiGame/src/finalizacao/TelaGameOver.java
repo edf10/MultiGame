@@ -100,14 +100,14 @@ public class TelaGameOver extends JFrame{
             CM.dispose();
             switch(n){
                 case 1:
-                    TelaCM tc = new TelaCM();
-                    tc.newCM(tc.getN());
+                    //TelaCM tc = new TelaCM();
+                    //tc.newCM(tc.getN());
                     break;
                 case 2:
                     MultiGameTela mgt = new MultiGameTela(2);
                     break;
                 case 3:
-                    TelaCM tcm = new TelaCM();
+                    //TelaCM tcm = new TelaCM();
                     break;
                 default:
                     break;

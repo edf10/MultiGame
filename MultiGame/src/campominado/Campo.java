@@ -8,7 +8,10 @@ public class Campo {
     private int[] posxM;
     private int[] posyM;
     private int[][] m3;
+    private int[][] m4;
+    private int[][] marc;
     private int bombs;
+    boolean minas[][];
     
     //Construct
     public Campo(int x, int y) {
@@ -78,7 +81,6 @@ public class Campo {
                 }
             }
         }
-       
         return "";
     }
 
@@ -86,32 +88,25 @@ public class Campo {
     public void sortMinas(int quant) {
         Random posM = new Random();
         int cont = 0;
-        boolean igual = false;
-        boolean conf = false;
         bombs = quant;
         posxM = new int[bombs];
         posyM = new int[bombs];
         for(int i = 0; i<bombs; i++){
-            posxM[i] = 0;
-            posyM[i] = 0;
+            posxM[i] = x+1; //Pra o valor inicial ser diferente de qualquer posição da matriz
+            posyM[i] = y+1;
         }
-        while(cont<bombs){
+        minas = new boolean[bombs][bombs];
+        while(cont!=bombs){
+            int l = posM.nextInt(x);
+            int c = posM.nextInt(y);
             for(int i = 0; i<bombs; i++) {
-                conf = false;
-                igual = false;
-                int l = posM.nextInt(x);
-                int c = posM.nextInt(x);
-                for(int k = 0; k<bombs; k++){
-                    if (posxM[k]==l&&posyM[k]==c) {
-                        igual = true;
-                        continue;
+                if(l!=posxM[i]&&c!=posyM[i]){
+                    if(posxM[i]==x+1&&posyM[i]==y+1&&minas[l][c]==false){
+                        minas[l][c] = true;
+                        posxM[i] = l;
+                        posyM[i] = c;
+                        cont++;
                     }
-                }
-                if(posxM[i]==0&&posyM[i]==0&&igual==false) {
-                    posxM[i] = l;
-                    posyM[i] = c;
-                    conf = true;
-                    cont++;
                 }
             }
         }
@@ -163,15 +158,6 @@ public class Campo {
         }
         return false;
     }
-    
-    //Verifica se a posição é um vazio
-    public boolean posVazio(int l, int c){
-        if(m[l][c]==0){
-            return true;
-        }
-        return false;
-    }
-    
     
     
 }
