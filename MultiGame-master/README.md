@@ -1,2 +1,0 @@
-# MultiGame
-Projeto Poo
