@@ -7,7 +7,7 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import java.lang.Thread;
 import javax.swing.JOptionPane;
-import finalizacao.TelaGameOver;
+import finalizacao.TelaGOWin;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -19,51 +19,38 @@ import java.awt.Component;
 public class TelaCM extends JFrame{
     private IntroductionCM intro;
     public TelaCM(int nivel, int x, int y, IntroductionCM intro) {
-        /* Definições Padrão da TELA */
         setSize(700, 700);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);
         //setUndecorated(win);
         this.intro = intro;
-        /* ------------------------- */
         redeclaracoes(nivel, x, y);
         setVisible(true);
     }
     private int x; 
     private int y;
-
-    public IntroductionCM getIntro() {
-        return intro;
-    }
     
     //Campo do jogo
     private Campo r;
-    
     //Vetor de btns
     private Button vet[][]; 
-    
     //Variáveis testes
     private int[][] m3;
     private int[][] m;
     private int[] posxM;
     private int[] posyM;
-
     //Paineis
     private JPanel painelCampo;
     private Pn painelTempo;
     private JPanel painelNiveis;
-   
     //Labels
     private Lb lbsegundos;
     private Lb lbminutos;
     private Lb lbdoispontos;
-    
     //ImageIcons
     private final ImageIcon imFundo = new ImageIcon(getClass().getResource("fundoNiveis.jpg"));
-    
     private static int nivel;
-    
     public void redeclaracoes(int nil, int x, int y){
         //Redeclaração. Por causa da atualização de valores.
         this.x = x;
@@ -259,7 +246,7 @@ public class TelaCM extends JFrame{
             }
         }
         ct.stop();//Para o cronômetro.
-        TelaGameOver tgo = new TelaGameOver(minutosP+":"+segundosP, this, r, intro);
+        TelaGOWin tgo = new TelaGOWin(minutosP+":"+segundosP, this, r, intro, false);
     }
     private int abertos = 0;
     public void Ganhar(int x, int y){
