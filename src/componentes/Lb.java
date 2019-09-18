@@ -19,4 +19,8 @@ public class Lb extends JLabel{
         setBounds(pos[0], pos[1], pos[2], pos[3]);
         setHorizontalAlignment((int)CENTER_ALIGNMENT);
     }
+    public Lb(Color c, int pos[]){
+        setBackground(c);
+        setBounds(pos[0], pos[1], pos[2], pos[3]);
+    }
 }

@@ -14,6 +14,14 @@ public class Btn extends JButton{
         setContentAreaFilled(area);
         addActionListener(ac);
     }
+    public Btn(ImageIcon im, int pos[], Border b, boolean focus, ActionListener ac){
+        setLayout(null);
+        setIcon(im);
+        setBorder(b);
+        setBounds(pos[0], pos[1], pos[2], pos[3]);
+        setContentAreaFilled(focus);
+        addActionListener(ac);
+    }
     public Btn(String s, Font f, Color c, int pos[], Border b, boolean area, boolean focus, ActionListener ac){
         setText(s);
         setFont(f);
