@@ -1,4 +1,5 @@
 package finalizacao;
+import campominado.IntroductionCM;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.BorderFactory;
@@ -11,6 +12,8 @@ import java.awt.event.ActionEvent;
 import campominado.TelaCM;
 import multigame.MultiGameTela;
 import javax.swing.JPanel;
+import campominado.Campo;
+import campominado.IntroductionCM;
 
 public class TelaGameOver extends JFrame{
     
@@ -23,17 +26,21 @@ public class TelaGameOver extends JFrame{
     private JButton btnMenuJogos = new JButton(imMenuJogos);
     private JButton btnJogarMesmo = new JButton(imJogarMesmo);
     private JButton btnJogarOutro = new JButton(imJogarOutro);
-    private JFrame CM;
+    private TelaCM CM;
+    private Campo c;
+    private IntroductionCM intro;
     
-    public TelaGameOver(String tempoCM, JFrame cm){
+    public TelaGameOver(String tempoCM, TelaCM cm, Campo c, IntroductionCM intro){
         setSize(400, 300);
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        
+        this.c = c;
+        CM = cm;
+        this.intro = intro;
         gameOverCM(tempoCM);
         getContentPane().setBackground(Color.LIGHT_GRAY);
-        CM = cm;
+        
         
         setVisible(true);
     }
@@ -91,6 +98,8 @@ public class TelaGameOver extends JFrame{
     
     private class Funcao implements ActionListener{
         private int n;
+        private int x;
+        private int y;
         public Funcao(int n){
             this.n = n;
         }
@@ -98,15 +107,17 @@ public class TelaGameOver extends JFrame{
         public void actionPerformed(ActionEvent ae) {
             dispose();
             CM.dispose();
+            intro.dispose();
             switch(n){
                 case 1:
-                    //TelaCM tc = new TelaCM();
-                    //tc.newCM(tc.getN());
+                    System.out.println(c.getX()+" "+c.getY());
+                    TelaCM tc = new TelaCM(CM.getN(), c.getX(), c.getY(), intro);
                     break;
                 case 2:
                     MultiGameTela mgt = new MultiGameTela(2);
                     break;
                 case 3:
+                    IntroductionCM i = new IntroductionCM(700, 700);
                     //TelaCM tcm = new TelaCM();
                     break;
                 default:

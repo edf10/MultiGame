@@ -11,6 +11,7 @@ import componentes.Lb;
 import componentes.Btn;
 import java.awt.Component;
 import componentes.Pn;
+import campominado.IntroductionCM;
 
 public class MultiGameTela extends JFrame{
     //Painel
@@ -97,6 +98,7 @@ public class MultiGameTela extends JFrame{
         public void actionPerformed(ActionEvent e) {
             dispose();
             if(n==1){
+                IntroductionCM i = new IntroductionCM(700, 700);
             }else if(n==2){
             }
         }

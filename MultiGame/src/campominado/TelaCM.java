@@ -17,19 +17,25 @@ import componentes.Btn;
 import java.awt.Component;
 
 public class TelaCM extends JFrame{
-    public TelaCM(int nivel, int x, int y) {
+    private IntroductionCM intro;
+    public TelaCM(int nivel, int x, int y, IntroductionCM intro) {
         /* Definições Padrão da TELA */
         setSize(700, 700);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);
         //setUndecorated(win);
+        this.intro = intro;
         /* ------------------------- */
         redeclaracoes(nivel, x, y);
         setVisible(true);
     }
     private int x; 
     private int y;
+
+    public IntroductionCM getIntro() {
+        return intro;
+    }
     
     //Campo do jogo
     private Campo r;
@@ -60,6 +66,8 @@ public class TelaCM extends JFrame{
     
     public void redeclaracoes(int nil, int x, int y){
         //Redeclaração. Por causa da atualização de valores.
+        this.x = x;
+        this.y = y;
         r = new Campo(x, y);
         vet = new Button[r.getX()][r.getY()];
         m4 = new int[r.getX()][r.getY()];
@@ -95,7 +103,7 @@ public class TelaCM extends JFrame{
             }
         }
         painelNiveis.setVisible(false);
-        CM(n, x, y);
+        CM(nivel, x, y);
     }
     
     //Jogo
@@ -122,6 +130,9 @@ public class TelaCM extends JFrame{
             r.sortMinas(20);//Input das minas
         }else if(n==2){
             setSize(800, 700);
+            lbminutos.setBounds(175, 5, 100, 100);
+            lbsegundos.setBounds(508, 5, 100, 100);
+            lbdoispontos.setBounds(341, 1, 100, 100);
             painelCampo.setBounds(0, 101, 784, 560);
             painelTempo.setBounds(0, 0, 800, 101);
             btn = new Font("Arial", Font.PLAIN, 20);
@@ -130,6 +141,9 @@ public class TelaCM extends JFrame{
             r.sortMinas(25);
         }else if(n==3){
             setSize(1006, 732);
+            lbminutos.setBounds(611, 5, 100, 100);
+            lbsegundos.setBounds(278, 5, 100, 100);
+            lbdoispontos.setBounds(444, 1, 100, 100);
             minas = "minasD.png";
             marcador = "flagD.png";
             btn = new Font("Arial", Font.PLAIN, 17);
@@ -245,7 +259,7 @@ public class TelaCM extends JFrame{
             }
         }
         ct.stop();//Para o cronômetro.
-        TelaGameOver tgo = new TelaGameOver(minutosP+":"+segundosP, this);
+        TelaGameOver tgo = new TelaGameOver(minutosP+":"+segundosP, this, r, intro);
     }
     private int abertos = 0;
     public void Ganhar(int x, int y){

@@ -56,6 +56,7 @@ public class IntroductionCM extends IntroductionGame{
         private int nil;
         private int x;
         private int y;
+        
         private Nivel(int nil){
             this.nil = nil;
         }
@@ -68,7 +69,7 @@ public class IntroductionCM extends IntroductionGame{
                 case 3:x = y = 18;break;
                 default:break;
             }
-            tcm = new TelaCM(nil, x, y);
+            tcm = new TelaCM(nil, x, y, IntroductionCM.this);
         }
     }
     
