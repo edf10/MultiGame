@@ -1,8 +1,4 @@
 package multigame;
-import testes.Cronometro;
-import jogodavelha.TelaJogoDaVelha;
-import finalizacao.TelaGameOver;
-import campominado.IntroductionCM;
 public class MultiGame {
     public static void main(String []args) {
         MultiGameTela mg = new MultiGameTela(1);
