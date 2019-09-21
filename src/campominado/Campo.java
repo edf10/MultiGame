@@ -15,33 +15,16 @@ public class Campo {
     
     //Construct
     public Campo(int x, int y) {
-        this.x = x;
-        this.y = y;
+        this.x = x; this.y = y;
     }
     
-    /* Getters */
-    public int getX(){
-        return x;
-    }
-    public int getY(){
-        return y;
-    }
-    public int[][] getM(){
-        return m;
-    }
-    public int[][] getM3(){
-        return m3;
-    }
-    public int[] getPosxM(){
-        return posxM;
-    }
-    public int[] getPosyM(){
-        return posyM;
-    }
-    public int getBombs(){
-        return bombs;
-    }
-    /* -------- */
+    public int getX(){return x;}
+    public int getY(){return y;}
+    public int[][] getM(){return m;}
+    public int[][] getM3(){return m3;}
+    public int[] getPosxM(){return posxM;}
+    public int[] getPosyM(){return posyM;}
+    public int getBombs(){return bombs;}
     
     //Zerar e configurar váriaveis
     protected void declararVars() {
@@ -66,17 +49,11 @@ public class Campo {
             for(int j = 0; j<y; j++) {
                 if(m3[i][j]!=-2) {
                     if(m[i][j]==-1) {
-                        m3[i][j] = -2;
-                        s = "-1";
-                        return s;
+                        m3[i][j] = -2;s = "-1";return s;
                     }else if(m[i][j]>0) {
-                        m3[i][j] = -2;
-                        s = ""+m[i][j];
-                        return s;
+                        m3[i][j] = -2;s = ""+m[i][j];return s;
                     }else {
-                        m3[i][j] = -2;
-                        s = "0";
-                        return s;
+                        m3[i][j] = -2;s = "0";return s;
                     }
                 }
             }
@@ -87,24 +64,19 @@ public class Campo {
     /* Sorteia as minas, tomando cuidado para não repetir posições e ao final adicionando estes pares ordenados, o x em um vetor e o y em outro */
     public void sortMinas(int quant) {
         Random posM = new Random();
-        int cont = 0;
-        bombs = quant;
-        posxM = new int[bombs];
-        posyM = new int[bombs];
-        for(int i = 0; i<bombs; i++){
-            posxM[i] = x; //Pra o valor inicial ser diferente de qualquer posição da matriz
-            posyM[i] = y;
+        int cont = 0; bombs = quant;
+        posxM = new int[bombs] ;posyM = new int[bombs];
+        for(int i = 0; i<bombs; i++){ //Pra o valor inicial ser diferente de qualquer posição da matriz
+            posxM[i] = x; posyM[i] = y;
         }
         minas = new boolean[x][y];
         while(cont<bombs){
-            int l = posM.nextInt(x);
-            int c = posM.nextInt(y);
+            int l = posM.nextInt(x); int c = posM.nextInt(y);
             for(int i = 0; i<bombs; i++) {
                 if(l!=posxM[i]&&c!=posyM[i]){
                     if(posxM[i]==x&&posyM[i]==y&&minas[l][c]==false){
                         minas[l][c] = true;
-                        posxM[i] = l;
-                        posyM[i] = c;
+                        posxM[i] = l; posyM[i] = c;
                         cont++;
                     }
                 }
@@ -115,18 +87,14 @@ public class Campo {
         }
 
     }
-    
     //Organiza os números encontrados
     public void orgNumeros() {
         for(int i = 0; i<x; i++) {
             for(int j = 0; j<y; j++) {
-                if(posBomba(i, j)==false) {
-                    numeros(i, j);
-                }
+                if(posBomba(i, j)==false){ numeros(i, j);}
             }
         }
     }
-    
     //Encontra os números e armazena na matriz.
     private void numeros(int l, int c) {
         int[][] maux = {{l+1, c+1},{l-1, c-1},{l+1, c-1},{l-1, c+1},{l, c+1},{l, c-1},{l+1, c},{l-1, c}};
@@ -142,24 +110,8 @@ public class Campo {
             m[l][c] = cont;
         }
     }
-    
     //Verifica se a posição é uma bomba
-    public boolean posBomba(int l, int c) {
-        if(m[l][c] == -1) {
-            return true;
-        }
-        return false;
-    }
-    
+    public boolean posBomba(int l, int c) {if(m[l][c] == -1){return true;}return false;}
     //Verifica se a posição é um número
-    public boolean posNumero(int l, int c){
-        if(m[l][c]>0){
-            return true;
-        }
-        return false;
-    }
-    
-    
+    public boolean posNumero(int l, int c){if(m[l][c]>0){return true;}return false;}
 }
-
-

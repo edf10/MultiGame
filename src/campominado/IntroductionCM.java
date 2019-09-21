@@ -12,7 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 public class IntroductionCM extends IntroductionGame{
-
     private TelaCM tcm;
     public IntroductionCM(int x, int y) {
         super(x, y);
@@ -27,13 +26,9 @@ public class IntroductionCM extends IntroductionGame{
     public void niveis() {
         Font nivel = new Font("Arial", Font.PLAIN, 30);
         Color c = new Color(231, 218, 87);
-        Nivel e1 = new Nivel(1);
-        Nivel e2 = new Nivel(2);
-        Nivel e3 = new Nivel(3);
-        int posF[] = {240,270,220,50};
-        int posM[] = {240,340,220,50};
-        int posD[] = {240,410,220,50};
-        int lbFundoP[] = {0,0,700,700};
+        Nivel e1 = new Nivel(1); Nivel e2 = new Nivel(2); Nivel e3 = new Nivel(3);
+        int posF[] = {240,270,220,50}; int posM[] = {240,340,220,50}; int posD[] = {240,410,220,50};
+        int lbFundoP[] = {0,0,700,700}; int pnNiveisP[] = {0,0,700,700};
         Border b = BorderFactory.createLineBorder(Color.black, 3);
         Component cp[] = {
             new Btn("FÁCIL", nivel, c, posF, b, false, false, e1),
@@ -41,7 +36,6 @@ public class IntroductionCM extends IntroductionGame{
             new Btn("DIFÍCIL", nivel, c, posD, b, false, false, e3),
             new Lb(imFundo, lbFundoP)
         };
-        int pnNiveisP[] = {0,0,700,700};
         pnNiveis = new Pn(pnNiveisP, cp);
         add(pnNiveis);
     }
@@ -53,10 +47,7 @@ public class IntroductionCM extends IntroductionGame{
     }
     private static int nivel;
     private class Nivel implements ActionListener{
-        private int nil;
-        private int x;
-        private int y;
-        
+        private int nil; private int x; private int y;
         private Nivel(int nil){
             this.nil = nil;
         }
