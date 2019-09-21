@@ -85,7 +85,6 @@ public class IntroductionCM extends IntroductionGame{
             tcm = new TelaCM(nil, x, y);
         }
     }
-    
     private class Btns implements ActionListener{
         private int n;
         public Btns(int n) {this.n = n;}
