@@ -28,9 +28,7 @@ public class TelaGOWin extends JFrame{
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        this.c = c;
-        CM = cm;
-        this.intro = intro;
+        this.c = c; CM = cm; this.intro = intro;
         goWinCM(tempoCM, t);
         getContentPane().setBackground(Color.LIGHT_GRAY);
         
@@ -54,8 +52,7 @@ public class TelaGOWin extends JFrame{
             new Btn(imJogarOutro, jogarOutroP, null, false, e3),
             new Btn(imMenuJogos, menuJogosP, null, false, e2)
         };
-        int pnGOP[] = {0,0,400,300};
-        pnGO = new Pn(pnGOP, lis, null);
+        int pnGOP[] = {0,0,400,300}; pnGO = new Pn(pnGOP, lis, null);
         add(pnGO);
     }
     

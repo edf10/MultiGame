@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import campominado.TelaCM;
 import componentes.Lb;
 import componentes.Btn;
 import java.awt.Component;
@@ -29,26 +28,19 @@ public class MultiGameTela extends JFrame{
         if(i==1){
             /* Configurando lbs - PainelInicial */
             Font titulo = new Font("Arial", Font.PLAIN, 40);//Fonte
-            int lbtituloP[] = {250,40,300,60};
-            int lbgifP[] = {0,0,800,600};
-            /* -------------------------------- */
+            int lbtituloP[] = {250,40,300,60}; int lbgifP[] = {0,0,800,600};
             /* Configurando BtnStart */
-            int btnStartP[] = {300,200,200,200};
-            BtnStart evento = new BtnStart();
-            /* --------------------- */
+            int btnStartP[] = {300,200,200,200}; BtnStart evento = new BtnStart();
             /* Painel Iniciar */
             Component cp[] = {
                 new Btn(btnImageArq, null, null, btnStartP, null, false, evento),
                 new Lb("MULTIGAME", titulo, lbtituloP, Color.WHITE, BorderFactory.createLineBorder(Color.WHITE)),
                 new Lb(gifArq, lbgifP)
             };
-            int pnIniciarP[] = {0,0,800,600};
-            pnIniciar = new Pn(pnIniciarP, cp);
+            int pnIniciarP[] = {0,0,800,600}; pnIniciar = new Pn(pnIniciarP, cp);
             add(pnIniciar);
             /* -------------- */
-        }else{
-            Jogos();
-        }
+        }else{Jogos();}
         setVisible(true);
     }
     private class BtnStart implements ActionListener{
@@ -58,8 +50,7 @@ public class MultiGameTela extends JFrame{
             Jogos();
         }
     }
-    //Painel
-    private Pn pnJogos;
+    private Pn pnJogos; //Painel
     //ImageIcons
     private final ImageIcon imCM = new ImageIcon(getClass().getResource("campominado.png"));
     private final ImageIcon imJDV = new ImageIcon(getClass().getResource("jogodavelha.png"));
@@ -67,16 +58,12 @@ public class MultiGameTela extends JFrame{
     private void Jogos() { //Painel de exibição dos jogos
         /* Configurando lbs - PainelJogos */
         Font jogos = new Font("Tahoma", Font.PLAIN, 24);
-        int lbCMP[] = {20,230,200,20};
-        int lbFundoP[] = {0,0,800,600};
-        int lbJDVP[] = {230,230,200,20};
-        /* ------------------------------ */
+        int lbCMP[] = {20,230,200,20}; int lbFundoP[] = {0,0,800,600};int lbJDVP[] = {230,230,200,20};
+        
         /* Configurando btns */
-        BtnJogo cm = new BtnJogo(1);
-        BtnJogo jdv = new BtnJogo(2);
-        int btnCMP[] = {20,20,200,200};
-        int btnJDVP[] = {230,20,200,200};
-        /* ----------------- */
+        BtnJogo cm = new BtnJogo(1);BtnJogo jdv = new BtnJogo(2);
+        int btnCMP[] = {20,20,200,200}; int btnJDVP[] = {230,20,200,200};
+        
         /* Painel Jogos */
         Component cp[] = {
             new Lb("CAMPO MINADO", jogos, lbCMP, Color.black, null),
@@ -85,20 +72,16 @@ public class MultiGameTela extends JFrame{
             new Btn(imJDV, null, null, btnJDVP, null, false, jdv),
             new Lb(fundoArq, lbFundoP)
         };
-        int pnJogosP[] = {0,0,800,600};
-        pnJogos = new Pn(pnJogosP, cp);
+        int pnJogosP[] = {0,0,800,600}; pnJogos = new Pn(pnJogosP, cp);
         add(pnJogos);
         /* ----------- */
     }
     private class BtnJogo implements ActionListener{ //Evento dos btns de jogo
         private int n;
-        public BtnJogo(int n){
-            this.n = n;
-        }
+        public BtnJogo(int n){this.n = n;}
         public void actionPerformed(ActionEvent e) {
             dispose();
-            if(n==1){
-                IntroductionCM i = new IntroductionCM(700, 700);
+            if(n==1){IntroductionCM i = new IntroductionCM(700, 700);
             }else if(n==2){
             }
         }
