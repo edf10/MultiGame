@@ -69,7 +69,8 @@ public class IntroductionCM extends IntroductionGame{
                 case 3:x = y = 18;break;
                 default:break;
             }
-            tcm = new TelaCM(nil, x, y, IntroductionCM.this);
+            dispose();
+            tcm = new TelaCM(nil, x, y);
         }
     }
     
