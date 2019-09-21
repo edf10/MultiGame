@@ -1,16 +1,16 @@
 package jogodavelha;
 import java.awt.Color;
 import javax.swing.JFrame;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
+import componentes.Btn;
 
-public class TelaJogoDaVelha extends JFrame{
+public class TelaJDV extends JFrame{
     
-    public TelaJogoDaVelha(){
+    public TelaJDV(){
         setSize(700, 700);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -25,7 +25,7 @@ public class TelaJogoDaVelha extends JFrame{
     private int x;
     private int y;
     
-    private Btn vet[][];
+    private Button vet[][];
     
     private JPanel pnCC;
     
@@ -39,10 +39,10 @@ public class TelaJogoDaVelha extends JFrame{
         pnCC.setLayout(mz);
         pnCC.setBounds(100, 162, 500, 500);
         
-        vet = new Btn[x][y];
+        vet = new Button[x][y];
         for(int i = 0; i<x; i++){
             for(int j = 0; j<y ; j++){
-                vet[i][j] = new Btn();
+                vet[i][j] = new Button();
             }
         }
         for(int i = 0; i<x; i++){
@@ -54,10 +54,10 @@ public class TelaJogoDaVelha extends JFrame{
         add(pnCC);
     }
     
-    private class Btn extends JButton{
+    private class Button extends Btn{
         private ImageIcon imX = new ImageIcon(getClass().getResource("x.png"));
         private ImageIcon imO = new ImageIcon(getClass().getResource("o.png"));
-        public Btn(){
+        public Button(){
             setLayout(null);
             setHorizontalAlignment((int)CENTER_ALIGNMENT);
             setFocusPainted(false);
@@ -66,6 +66,11 @@ public class TelaJogoDaVelha extends JFrame{
             Troca t = new Troca(2);
             addActionListener(t);
         }
+        
+        public void altBtn(){
+            
+        }
+        
         private class Troca implements ActionListener{
             private int n;
             public Troca(int n){
