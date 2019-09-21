@@ -61,11 +61,11 @@ public class TelaGOWin extends JFrame{
         public Funcao(int n){this.n = n;}
         @Override
         public void actionPerformed(ActionEvent ae) {
-            dispose();CM.dispose();
+            dispose();CM.dispose();IntroductionCM i = new IntroductionCM(700, 700);
             switch(n){
                 case 1:TelaCM tc = new TelaCM(CM.getN(), c.getX(), c.getY());break;
                 case 2:MultiGameTela mgt = new MultiGameTela(2);break;
-                case 3:IntroductionCM i = new IntroductionCM(700, 700);break;
+                case 3:i.niveis();break;
                 default:break;
             }
         }
