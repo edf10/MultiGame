@@ -6,7 +6,6 @@ import javax.swing.ImageIcon;
 import java.awt.Color;
 import javax.swing.JPanel;
 import java.lang.Thread;
-import javax.swing.JOptionPane;
 import finalizacao.TelaGOWin;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
@@ -18,18 +17,19 @@ import java.awt.Component;
 
 public class TelaCM extends JFrame{
     private IntroductionCM intro;
-    public TelaCM(int nivel, int x, int y, IntroductionCM intro) {
+    public TelaCM(int nivel, int x, int y) {
         setSize(700, 700);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);
         //setUndecorated(win);
-        this.intro = intro;
-        redeclaracoes(nivel, x, y);
+        this.x = x;
+        this.y = y;
+        redeclaracoes(nivel);
         setVisible(true);
     }
-    private int x; 
-    private int y;
+    private static int x; 
+    private static int y;
     
     //Campo do jogo
     private Campo r;
@@ -43,7 +43,6 @@ public class TelaCM extends JFrame{
     //Paineis
     private JPanel painelCampo;
     private Pn painelTempo;
-    private JPanel painelNiveis;
     //Labels
     private Lb lbsegundos;
     private Lb lbminutos;
@@ -51,50 +50,27 @@ public class TelaCM extends JFrame{
     //ImageIcons
     private final ImageIcon imFundo = new ImageIcon(getClass().getResource("fundoNiveis.jpg"));
     private static int nivel;
-    public void redeclaracoes(int nil, int x, int y){
+    public void redeclaracoes(int nil){
         //Redeclaração. Por causa da atualização de valores.
-        this.x = x;
-        this.y = y;
         r = new Campo(x, y);
-        vet = new Button[r.getX()][r.getY()];
-        m4 = new int[r.getX()][r.getY()];
-        marc = new int[r.getX()][r.getY()];
-        for(int i = 0; i<r.getX(); i++){
-            for(int j = 0; j<r.getY(); j++){
+        vet = new Button[x][y];
+        m4 = new int[x][y];
+        marc = new int[x][y];
+        for(int i = 0; i<x; i++){
+            for(int j = 0; j<y; j++){
                 marc[i][j] = 0;
             }
         }
         nivel = nil;
-        CM(nivel, x, y);
+        CM();
     }
     
     public int getN(){
         return nivel;
     }
     
-    public void newCM(int n){
-        if(n==1){
-            x = y = 12;
-        }else if(n==2){
-            x = y = 16;
-        }else{
-            x = y = 18;
-        }
-        r = new Campo(x, y);
-        vet = new Button[r.getX()][r.getY()];
-        m4 = new int[r.getX()][r.getY()];
-        marc = new int[r.getX()][r.getY()];
-        for(int i = 0; i<r.getX(); i++){
-            for(int j = 0; j<r.getY(); j++){
-                marc[i][j] = 0;
-            }
-        }
-        painelNiveis.setVisible(false);
-        CM(nivel, x, y);
-    }
-    
     //Jogo
-    public void CM(int n, int x, int y) {
+    public void CM() {
         /* Painel Tempo */
         Font tempo = new Font("Arial", Font.PLAIN, 60);
         int lbSegundosP[] = {460,15,100,100};
@@ -112,10 +88,10 @@ public class TelaCM extends JFrame{
         GridLayout mx = new GridLayout(x,y);//Matriz
         painelCampo.setLayout(mx);
         r.declararVars();//Configurações iniciais do campo
-        if(n==1){
+        if(nivel==1){
             painelCampo.setBounds(0, 109, 684, 552);   
             r.sortMinas(20);//Input das minas
-        }else if(n==2){
+        }else if(nivel==2){
             setSize(800, 700);
             lbminutos.setBounds(175, 5, 100, 100);
             lbsegundos.setBounds(508, 5, 100, 100);
@@ -126,7 +102,7 @@ public class TelaCM extends JFrame{
             minas = "minasM.png";
             marcador = "flagM.png";
             r.sortMinas(25);
-        }else if(n==3){
+        }else if(nivel==3){
             setSize(1006, 732);
             lbminutos.setBounds(611, 5, 100, 100);
             lbsegundos.setBounds(278, 5, 100, 100);
@@ -148,22 +124,22 @@ public class TelaCM extends JFrame{
         posyM = r.getPosyM();
         /* ------------------ */
         /* Adicionar btns no vetor */
-        for(int i = 0; i<r.getX(); i++) {
-            for(int j = 0; j<r.getY(); j++){
+        for(int i = 0; i<x; i++) {
+            for(int j = 0; j<y; j++){
                 String s = r.Click();
                 vet[i][j] = new Button(s, i, j);
             }
         }
         /* ------------------------ */
         //Zerando a matriz m3.
-        for(int i = 0; i<r.getX(); i++){
-            for(int j = 0; j<r.getY(); j++){
+        for(int i = 0; i<x; i++){
+            for(int j = 0; j<y; j++){
                 m3[i][j] = 0;
             }
         }
         /* Adicionando vetor de btns no painelCampo */
-        for(int i = 0; i<r.getX(); i++){
-            for(int j = 0; j<r.getY(); j++){
+        for(int i = 0; i<x; i++){
+            for(int j = 0; j<y; j++){
                 painelCampo.add(vet[i][j]);
             }
         }
@@ -275,7 +251,7 @@ public class TelaCM extends JFrame{
                     posAlt(posxM[i], posyM[i]);
                 }
                 ct.stop();//Para o cronômetro
-                JOptionPane.showMessageDialog(null, minutosP+":"+segundosP);
+                TelaGOWin tgo = new TelaGOWin(minutosP+":"+segundosP, this, r, intro, true);
             }
         }
         abertos = 0;

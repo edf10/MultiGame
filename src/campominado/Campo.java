@@ -92,16 +92,16 @@ public class Campo {
         posxM = new int[bombs];
         posyM = new int[bombs];
         for(int i = 0; i<bombs; i++){
-            posxM[i] = x+1; //Pra o valor inicial ser diferente de qualquer posição da matriz
-            posyM[i] = y+1;
+            posxM[i] = x; //Pra o valor inicial ser diferente de qualquer posição da matriz
+            posyM[i] = y;
         }
-        minas = new boolean[bombs][bombs];
-        while(cont!=bombs){
+        minas = new boolean[x][y];
+        while(cont<bombs){
             int l = posM.nextInt(x);
             int c = posM.nextInt(y);
             for(int i = 0; i<bombs; i++) {
                 if(l!=posxM[i]&&c!=posyM[i]){
-                    if(posxM[i]==x+1&&posyM[i]==y+1&&minas[l][c]==false){
+                    if(posxM[i]==x&&posyM[i]==y&&minas[l][c]==false){
                         minas[l][c] = true;
                         posxM[i] = l;
                         posyM[i] = c;

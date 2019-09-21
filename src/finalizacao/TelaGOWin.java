@@ -38,12 +38,8 @@ public class TelaGOWin extends JFrame{
     }
     private JPanel pnGO;
     public void goWinCM(String tempoCM, boolean t){
-        String goWin = "";
-        if(t){
-            goWin = "You Win!";
-        }else{
-            goWin = "GameOver!";
-        }
+        String goWin = (t)?"You Win!":"GameOver!";
+        
         Font lbT = new Font("Arial", Font.BOLD, 20);
         Font lbGO = new Font("Arial", Font.PLAIN, 40);
         int lbtempoP[] = {87,110,210,30}; int lbtitleP[] = {87,40,210,50};
@@ -53,7 +49,7 @@ public class TelaGOWin extends JFrame{
         int jogarMesmoP[] = {100,160,55,50}; int jogarOutroP[] = {240,160,55,50}; int menuJogosP[] = {170,160,55,50};
         Component lis[] = {
             new Lb("Tempo: "+tempoCM, lbT, lbtempoP, Color.blue, null),
-            new Lb("GameOver!", lbGO, lbtitleP, Color.black, null),
+            new Lb(goWin, lbGO, lbtitleP, Color.black, null),
             new Btn(imJogarMesmo, jogarMesmoP, null, false, e1),
             new Btn(imJogarOutro, jogarOutroP, null, false, e3),
             new Btn(imMenuJogos, menuJogosP, null, false, e2)
@@ -68,9 +64,9 @@ public class TelaGOWin extends JFrame{
         public Funcao(int n){this.n = n;}
         @Override
         public void actionPerformed(ActionEvent ae) {
-            dispose();CM.dispose();intro.dispose();
+            dispose();CM.dispose();
             switch(n){
-                case 1:TelaCM tc = new TelaCM(CM.getN(), c.getX(), c.getY(), intro);break;
+                case 1:TelaCM tc = new TelaCM(CM.getN(), c.getX(), c.getY());break;
                 case 2:MultiGameTela mgt = new MultiGameTela(2);break;
                 case 3:IntroductionCM i = new IntroductionCM(700, 700);break;
                 default:break;
