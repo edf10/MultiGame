@@ -83,7 +83,14 @@ public class TelaJDV extends JFrame{
         add(pnVez);
         add(pnCC);
     }
-    
+    public void vez(){
+        vez = (vez==1)? 2:1;
+        if(vez==1){
+            lbJog.setText(jog1);
+        }else if(vez==2){
+            lbJog.setText(jog2);
+        }
+    }
     private int vez; //Determina de qual jogador é a vez.
     private class Button extends Btn{
         private final ImageIcon imX = new ImageIcon(getClass().getResource("x.png"));
@@ -97,26 +104,24 @@ public class TelaJDV extends JFrame{
             setBackground(Color.gray);
             addActionListener(new Troca());
         }
+        public void altBtn(){
+            if(!press&&!answer){
+                if(vez==1){
+                    setIcon(imX);
+                }else if(vez==2){
+                    setIcon(imO);
+                }
+                press = true;
+                j.addPress(x, y, vez);
+                j.ganhar();
+            }
+        }
         private boolean press = false;
         private class Troca implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent ae) {
-                if(!press&&!answer){
-                    if(vez==1){
-                        setIcon(imX);
-                        lbJog.setText(jog2);
-                        Perguntas p = new Perguntas();
-                        vez = 2;
-                    }else if(vez==2){
-                        setIcon(imO);
-                        lbJog.setText(jog1);
-                        Perguntas p = new Perguntas();
-                        vez = 1;
-                    }
-                    press = true;
-                    j.addPress(x, y, vez);
-                    j.ganhar();
-                }
+                answer = true;
+                Perguntas p = new Perguntas(x, y);
             }
         }
     }
@@ -124,32 +129,74 @@ public class TelaJDV extends JFrame{
     private class Perguntas extends JFrame{
         private final ReadQuestions rq = new ReadQuestions();
         private final Random escPer = new Random();
-        public Perguntas(){
+        private final contarTempo ct = new contarTempo();
+        private int xb; private int yb;
+        private int question = 0;
+        public Perguntas(int xb, int yb){
             setSize(400, 300);
             setDefaultCloseOperation(EXIT_ON_CLOSE);
             setLocationRelativeTo(null);
             setLayout(null);
+            this.xb = xb;
+            this.yb = yb;
             rq.readTabuada();
-            answer = true;
+            while(question==0){
+                question = escPer.nextInt(rq.getLengthHashTabuada());
+            }
             tela();
             setVisible(true);
         }
-        private Pn pnPer;
+        private Pn pnTempo;
         private Txt txtRes;
+        private final Enter e = new Enter();
         public void tela(){
-            int lbper[] = {50,100,200,100}; int txtResP[] = {250,125,60,50};
+            int lbper[] = {50,120,200,100}; int txtResP[] = {250,145,60,50};
+            int lbseg[] = {145,0,100,100};
+            Font ms = new Font("Arial", Font.PLAIN, 70);
+            lbsegundos = new Lb("0", ms, lbseg, Color.blue, null);
             Font f = new Font("Arial", Font.PLAIN, 40);
             Border b = BorderFactory.createLineBorder(Color.black, 3);
             txtRes = new Txt(txtResP, f, Color.black, b);
+            txtRes.addActionListener(e);
             Component cp[] = {
-                new Lb(rq.getQuestionTabuada(escPer.nextInt(rq.getLengthHashTabuada()+1)), f, lbper, Color.black, null),
-                txtRes
+                lbsegundos,
             };
-            int pnPerP[] = {0,0,400,300};
-            pnPer = new Pn(pnPerP, cp);
-            add(pnPer);
+            int pnTemP[] = {0,0,400,100};
+            pnTempo = new Pn(pnTemP, cp, Color.DARK_GRAY);
+            add(pnTempo);
+            add(new Lb(rq.getQuestionTabuada(question), f, lbper, Color.black, null));
+            add(txtRes);
+            ct.start();
         }
-        
+        private Lb lbsegundos;
+        public class contarTempo extends Thread{
+            @Override
+            public void run(){
+                int s = 0;
+                while(true){
+                    try{Thread.sleep(1000);}catch(Exception e){};
+                    s++;
+                    lbsegundos.setText(""+s);
+                    if(s==5){
+                        Perguntas.this.dispose();
+                        answer = false; vez();
+                        this.stop();
+                    }
+                }
+            }
+        }
+        private class Enter implements ActionListener{
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                ct.stop();
+                Perguntas.this.dispose();
+                answer = false;
+                vez();
+                if(txtRes.getText().equals(rq.getAnswerTabuada(question))){
+                    vet[xb][yb].altBtn();
+                }
+            }
+        }
     }
     
 }

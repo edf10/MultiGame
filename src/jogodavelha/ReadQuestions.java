@@ -40,6 +40,9 @@ public class ReadQuestions {
     public String getQuestionTabuada(int question){
         return perT.get(question);
     }
+    public String getAnswerTabuada(int question){
+        return resT.get(question);
+    }
     public int getLengthHashTabuada(){
         return linesNumberPerTabuada;
     }

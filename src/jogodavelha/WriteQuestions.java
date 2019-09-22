@@ -22,7 +22,7 @@ public class WriteQuestions {
     public void writeTabuada(){
         for(int i = 1; i<11; i++){
             for(int j = 1; j<11; j++){
-                pwt.println(i+" x "+j+" = "+i*j);
+                pwt.println(i+" x "+j+" ="+i*j);
             }
         }
         pwt.close();
