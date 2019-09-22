@@ -3,8 +3,6 @@ import java.util.Random;
 public class Jogo {
     
     private int m[][];
-    //tamanho da matriz
-    //True=X and False=O
     private boolean icJog1;
     private boolean icJog2;
     private final Random gVez = new Random();

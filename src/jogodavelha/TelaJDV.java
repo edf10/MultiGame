@@ -38,7 +38,7 @@ public class TelaJDV extends JFrame{
     
     private Pn pnCC;
     private Pn pnVez;
-    private Lb lbVez;
+    private Lb lbJog;
     
     public void redeclaracoes(){
         j.jdvClassic();
@@ -49,11 +49,14 @@ public class TelaJDV extends JFrame{
     }
     
     private void JDV(){
-        String jogVez = ""; int lbVezP[] = {100,10,500,140};
-        Font f = new Font("Arial", Font.PLAIN, 40);
-        lbVez = new Lb("Vez:", f, lbVezP, Color.yellow);
+        int lbVezP[] = {0,10,150,140};
+        Font f = new Font("Arial", Font.PLAIN, 50);
+        String s = (vez==1)? jog1:jog2;
+        int lbJogP[] = {110,10,250,140};
+        lbJog = new Lb(s, f, lbJogP, Color.yellow);
         Component cp[] = {
-            lbVez
+            new Lb("Vez:", f, lbVezP, Color.yellow),
+            lbJog
         };
         int pnVezP[] = {100,10,500,140};
         pnVez = new Pn(pnVezP, cp, Color.darkGray);
@@ -78,7 +81,6 @@ public class TelaJDV extends JFrame{
     }
     
     private int vez; //Determina de qual jogador é a vez.
-    
     private class Button extends Btn{
         private final ImageIcon imX = new ImageIcon(getClass().getResource("x.png"));
         private final ImageIcon imO = new ImageIcon(getClass().getResource("o.png"));
@@ -91,10 +93,6 @@ public class TelaJDV extends JFrame{
             setBackground(Color.gray);
             addActionListener(new Troca());
         }
-        
-        public void altBtn(){
-            
-        }
         private boolean press = false;
         private class Troca implements ActionListener{
             @Override
@@ -104,16 +102,16 @@ public class TelaJDV extends JFrame{
                 if(!press){
                     if(vez==1){
                         setIcon(imX);
+                        lbJog.setText(jog2);
                         vez = 2;
                     }else if(vez==2){
                         setIcon(imO);
+                        lbJog.setText(jog1);
                         vez = 1;
                     }
                     press = true;
                 }
-                
             }
         }
     }
-    
 }
