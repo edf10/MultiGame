@@ -8,8 +8,12 @@ import javax.swing.ImageIcon;
 import componentes.Btn;
 import componentes.Lb;
 import componentes.Pn;
+import componentes.Txt;
 import java.awt.Component;
 import java.awt.Font;
+import java.util.Random;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
 
 public class TelaJDV extends JFrame{
     
@@ -97,21 +101,55 @@ public class TelaJDV extends JFrame{
         private class Troca implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent ae) {
-                j.addPress(x, y, vez);
-                j.ganhar();
-                if(!press){
+                if(!press&&!answer){
                     if(vez==1){
                         setIcon(imX);
                         lbJog.setText(jog2);
+                        Perguntas p = new Perguntas();
                         vez = 2;
                     }else if(vez==2){
                         setIcon(imO);
                         lbJog.setText(jog1);
+                        Perguntas p = new Perguntas();
                         vez = 1;
                     }
                     press = true;
+                    j.addPress(x, y, vez);
+                    j.ganhar();
                 }
             }
         }
     }
+    private boolean answer = false;
+    private class Perguntas extends JFrame{
+        private final ReadQuestions rq = new ReadQuestions();
+        private final Random escPer = new Random();
+        public Perguntas(){
+            setSize(400, 300);
+            setDefaultCloseOperation(EXIT_ON_CLOSE);
+            setLocationRelativeTo(null);
+            setLayout(null);
+            rq.readTabuada();
+            answer = true;
+            tela();
+            setVisible(true);
+        }
+        private Pn pnPer;
+        private Txt txtRes;
+        public void tela(){
+            int lbper[] = {50,100,200,100}; int txtResP[] = {250,125,60,50};
+            Font f = new Font("Arial", Font.PLAIN, 40);
+            Border b = BorderFactory.createLineBorder(Color.black, 3);
+            txtRes = new Txt(txtResP, f, Color.black, b);
+            Component cp[] = {
+                new Lb(rq.getQuestionTabuada(escPer.nextInt(rq.getLengthHashTabuada()+1)), f, lbper, Color.black, null),
+                txtRes
+            };
+            int pnPerP[] = {0,0,400,300};
+            pnPer = new Pn(pnPerP, cp);
+            add(pnPer);
+        }
+        
+    }
+    
 }
