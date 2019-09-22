@@ -12,6 +12,7 @@ public class Jogo {
     private final Random gVez = new Random();
     private int x;
     private int y;
+    private boolean velha;
     
     public Jogo(){}
 
@@ -28,6 +29,8 @@ public class Jogo {
     public void setX(int x){this.x = x;}
     public int getY(){return y;}
     public void setY(int y){this.y = y;}
+    public boolean isVelha(){return velha;}
+    public void setVelha(boolean velha){this.velha = velha;}
     
     public int sortVez(){
         return gVez.nextInt(2)+1; //Varia de acordo com o ícone
@@ -47,7 +50,6 @@ public class Jogo {
             System.out.println("");
         }
     }
-    
     public void ganhar(){
         int m2[][][] = {{{0,0},{1,0},{2,0}},{{0,0},{0,1},{0,2}},{{0,0},{1,1},{2,2}},{{0,1},{1,1},{2,1}},
                         {{1,0},{1,1},{1,2}},{{0,2},{1,1},{2,0}},{{0,2},{1,2},{2,2}},{{2,0},{2,1},{2,2}}};
@@ -58,6 +60,21 @@ public class Jogo {
             if(m[m2[i][0][0]][m2[i][0][1]]==2&&m[m2[i][1][0]][m2[i][1][1]]==2&&m[m2[i][2][0]][m2[i][2][1]]==2){
                 System.out.println("Ganhou 02");
             }
+        }
+        velha();
+    }
+    
+    public void velha(){
+        int cont = 0;
+        for(int i = 0; i<x; i++){
+            for(int j = 0; j<y; j++){
+                if(m[i][j]!=0){
+                    cont++;
+                }
+            }
+        }
+        if(cont==x*y){
+            velha = true;
         }
     }
     
