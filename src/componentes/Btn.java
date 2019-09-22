@@ -37,6 +37,5 @@ public class Btn extends JButton{
         setLayout(null);
         setHorizontalAlignment((int)CENTER_ALIGNMENT);
         setFocusPainted(false);
-        setBackground(Color.darkGray);
     }
 }
