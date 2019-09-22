@@ -22,7 +22,6 @@ public class IntroductionCM extends IntroductionGame{
     
     private Pn pnNiveis;
     private final ImageIcon imFundo = new ImageIcon(getClass().getResource("fundoNiveis.jpg"));
-    @Override
     public void niveis() {
         pnIntro.setVisible(false);
         Font nivel = new Font("Arial", Font.PLAIN, 30);

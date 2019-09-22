@@ -210,6 +210,7 @@ public class TelaCM extends JFrame{
         
         public Button(String s, int x, int y) {
             super();
+            setBackground(Color.darkGray);
             this.s = s; //Evento do botão (tipo)
             this.x = x; this.y = y;//Posição do btn em relação a matriz
             addMouseListener(t);

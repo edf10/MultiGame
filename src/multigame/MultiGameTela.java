@@ -11,6 +11,7 @@ import componentes.Btn;
 import java.awt.Component;
 import componentes.Pn;
 import campominado.IntroductionCM;
+import jogodavelha.IntroductionJDV;
 
 public class MultiGameTela extends JFrame{
     //Painel
@@ -81,9 +82,8 @@ public class MultiGameTela extends JFrame{
         public BtnJogo(int n){this.n = n;}
         public void actionPerformed(ActionEvent e) {
             dispose();
-            if(n==1){IntroductionCM i = new IntroductionCM(700, 700);
-            }else if(n==2){
-            }
+            if(n==1){IntroductionCM j1 = new IntroductionCM(700, 700);
+            }else if(n==2){IntroductionJDV j2 = new IntroductionJDV(600, 600);}
         }
     }
 }
