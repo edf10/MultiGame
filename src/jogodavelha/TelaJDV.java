@@ -6,16 +6,22 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import componentes.Btn;
+import componentes.Lb;
 import componentes.Pn;
+import java.awt.Component;
+import java.awt.Font;
 
 public class TelaJDV extends JFrame{
     
-    public TelaJDV(){
+    public TelaJDV(IntroductionJDV i){
         setSize(700, 700);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);
+        jog1 = i.getJog1().getText();
+        jog2 = i.getJog2().getText();
         redeclaracoes();
+        getContentPane().setBackground(Color.darkGray);
         JDV();
         
         setVisible(true);
@@ -24,11 +30,15 @@ public class TelaJDV extends JFrame{
     //Tamanho da matriz
     private int x;
     private int y;
+    private String jog1;
+    private String jog2;
     
     private Button vet[][];
-    private Jogo j = new Jogo();
+    private final Jogo j = new Jogo();
     
     private Pn pnCC;
+    private Pn pnVez;
+    private Lb lbVez;
     
     public void redeclaracoes(){
         j.jdvClassic();
@@ -38,7 +48,16 @@ public class TelaJDV extends JFrame{
         vez = j.sortVez();
     }
     
-    private void JDV(){ 
+    private void JDV(){
+        String jogVez = ""; int lbVezP[] = {100,10,500,140};
+        Font f = new Font("Arial", Font.PLAIN, 40);
+        lbVez = new Lb("Vez:", f, lbVezP, Color.yellow);
+        Component cp[] = {
+            lbVez
+        };
+        int pnVezP[] = {100,10,500,140};
+        pnVez = new Pn(pnVezP, cp, Color.darkGray);
+        
         GridLayout mz = new GridLayout(x, y);
         int pnCCP[] = {100,162,500,500};
         pnCC = new Pn(pnCCP, mz);
@@ -54,7 +73,7 @@ public class TelaJDV extends JFrame{
                 pnCC.add(vet[i][j]);
             }
         }
-        
+        add(pnVez);
         add(pnCC);
     }
     
@@ -69,7 +88,7 @@ public class TelaJDV extends JFrame{
             super();
             this.x = x;
             this.y = y;
-            setBackground(Color.white);
+            setBackground(Color.gray);
             addActionListener(new Troca());
         }
         

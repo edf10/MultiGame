@@ -22,7 +22,10 @@ public class IntroductionJDV extends IntroductionGame{
     @Override
     public void tutorial() {
     }
-    
+
+    public Txt getJog1(){return jog1;}
+    public Txt getJog2(){return jog2;}
+
     private Pn pnEsc;
     private Txt jog1;
     private Txt jog2;
@@ -39,6 +42,7 @@ public class IntroductionJDV extends IntroductionGame{
         Font jog = new Font("Arial", Font.PLAIN, 30);
         Font lb = new Font("Arial", Font.PLAIN, 20);
         Font xo = new Font("Arial", Font.PLAIN, 70);
+        Start b1 = new Start();
         Component cp[] = {
             new Lb("NOME", lb, lbn1, Color.black, null),
             new Lb("NOME", lb, lbn2, Color.black, null),
@@ -46,7 +50,7 @@ public class IntroductionJDV extends IntroductionGame{
             new Lb("O", xo, lby, Color.white, b),
             new Lb("Jogador 01", jog, lbjog1, Color.black, b),
             new Lb("Jogador 02", jog, lbjog2, Color.black, b),
-            new Btn(imBtn, btnP, null, false, null),
+            new Btn(imBtn, btnP, null, false, b1),
             jog1, jog2
         };
         int pnEscP[] = {0,0,600,600};
@@ -82,13 +86,19 @@ public class IntroductionJDV extends IntroductionGame{
         public Btns(int n) {this.n = n;}
         @Override
         public void actionPerformed(ActionEvent ae) {
-            escJog();
             switch (n) {
                 case 1:escJog();break;
                 case 2:escJog();break;
                 case 3:tutorial();break;
                 default:break;
             }
+        }
+    }
+    private class Start implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            dispose();
+        TelaJDV tjdv = new TelaJDV(IntroductionJDV.this);
         }
         
     }

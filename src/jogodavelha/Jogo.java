@@ -4,8 +4,6 @@ public class Jogo {
     
     private int m[][];
     //tamanho da matriz
-    private String jog1;
-    private String jog2;
     //True=X and False=O
     private boolean icJog1;
     private boolean icJog2;
@@ -16,10 +14,6 @@ public class Jogo {
     
     public Jogo(){}
 
-    public String getJog1(){return jog1;}
-    public void setJog1(String jog1){this.jog1 = jog1;}
-    public String getJog2(){return jog2;}
-    public void setJog2(String jog2){this.jog2 = jog2;}
     public boolean isIcJog1(){return icJog1;}
     public void setIcJog1(boolean icJog1){this.icJog1 = icJog1;}
     public boolean isIcJog2(){return icJog2;}
