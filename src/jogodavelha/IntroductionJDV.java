@@ -22,7 +22,7 @@ public class IntroductionJDV extends IntroductionGame{
     @Override
     public void tutorial() {
     }
-    
+
     private Pn pnEsc;
     private Txt jog1;
     private Txt jog2;
@@ -33,12 +33,14 @@ public class IntroductionJDV extends IntroductionGame{
         Border b = BorderFactory.createLineBorder(Color.black, 3);
         int txtjog1[] = {50,260,200,40}; int txtjog2[] = {330,260,200,40};
         jog1 = new Txt(txtjog1, txt, Color.cyan, b); jog2 = new Txt(txtjog2, txt, Color.cyan, b);
+        jog1.setText("Jogador01"); jog2.setText("Jogador02");
         int lbjog1[] = {30,70,250,100}; int lbjog2[] = {310,70,250,100};
         int lbn1[] = {50,210,200,40}; int lbn2[] = {330,210,200,40};
         int lbx[] = {96,330,100,100}; int lby[] = {376,330,100,100}; int btnP[] = {460,450,100,100};
         Font jog = new Font("Arial", Font.PLAIN, 30);
         Font lb = new Font("Arial", Font.PLAIN, 20);
         Font xo = new Font("Arial", Font.PLAIN, 70);
+        Start b1 = new Start();
         Component cp[] = {
             new Lb("NOME", lb, lbn1, Color.black, null),
             new Lb("NOME", lb, lbn2, Color.black, null),
@@ -46,7 +48,7 @@ public class IntroductionJDV extends IntroductionGame{
             new Lb("O", xo, lby, Color.white, b),
             new Lb("Jogador 01", jog, lbjog1, Color.black, b),
             new Lb("Jogador 02", jog, lbjog2, Color.black, b),
-            new Btn(imBtn, btnP, null, false, null),
+            new Btn(imBtn, btnP, null, false, b1),
             jog1, jog2
         };
         int pnEscP[] = {0,0,600,600};
@@ -82,13 +84,19 @@ public class IntroductionJDV extends IntroductionGame{
         public Btns(int n) {this.n = n;}
         @Override
         public void actionPerformed(ActionEvent ae) {
-            escJog();
             switch (n) {
                 case 1:escJog();break;
                 case 2:escJog();break;
                 case 3:tutorial();break;
                 default:break;
             }
+        }
+    }
+    private class Start implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            dispose();
+            TelaJDV tjdv = new TelaJDV(jog1.getText(), jog2.getText());
         }
         
     }
