@@ -1,6 +1,5 @@
 package jogodavelha;
 import java.awt.Color;
-import javax.swing.JFrame;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -14,31 +13,32 @@ import java.awt.Font;
 import java.util.Random;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
+import componentes.Frame;
 
-public class TelaJDV extends JFrame{
-    
-    public TelaJDV(IntroductionJDV i){
-        setSize(700, 700);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setLayout(null);
-        jog1 = i.getJog1().getText();
-        jog2 = i.getJog2().getText();
+public class TelaJDV extends Frame{
+    public TelaJDV(String jog1, String jog2){
+        super(700,700);
+        this.jog1 = jog1;
+        this.jog2 = jog2;
         redeclaracoes();
         getContentPane().setBackground(Color.darkGray);
         JDV();
         
         setVisible(true);
     }
-    
     //Tamanho da matriz
     private int x;
     private int y;
     private String jog1;
     private String jog2;
-    
+    public String getJog1() {
+        return jog1;
+    }
+    public String getJog2() {
+        return jog2;
+    }
     private Button vet[][];
-    private final Jogo j = new Jogo();
+    private final Jogo j = new Jogo(this);
     
     private Pn pnCC;
     private Pn pnVez;
@@ -48,6 +48,8 @@ public class TelaJDV extends JFrame{
         j.jdvClassic();
         x = j.getX();
         y = j.getY();
+        j.setJog1(jog1);
+        j.setJog2(jog2);
         j.defIc(true, false);
         vez = j.sortVez();
     }
@@ -120,23 +122,22 @@ public class TelaJDV extends JFrame{
         private class Troca implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent ae) {
-                answer = true;
-                Perguntas p = new Perguntas(x, y);
+                if(!press){
+                    answer = true;
+                    Perguntas p = new Perguntas(x, y);
+                }
             }
         }
     }
     private boolean answer = false;
-    private class Perguntas extends JFrame{
+    private class Perguntas extends Frame{
         private final ReadQuestions rq = new ReadQuestions();
         private final Random escPer = new Random();
         private final contarTempo ct = new contarTempo();
         private int xb; private int yb;
         private int question = 0;
         public Perguntas(int xb, int yb){
-            setSize(400, 300);
-            setDefaultCloseOperation(EXIT_ON_CLOSE);
-            setLocationRelativeTo(null);
-            setLayout(null);
+            super(400,300);
             this.xb = xb;
             this.yb = yb;
             rq.readTabuada();
@@ -191,10 +192,10 @@ public class TelaJDV extends JFrame{
                 ct.stop();
                 Perguntas.this.dispose();
                 answer = false;
-                vez();
                 if(txtRes.getText().equals(rq.getAnswerTabuada(question))){
                     vet[xb][yb].altBtn();
                 }
+                vez();
             }
         }
     }

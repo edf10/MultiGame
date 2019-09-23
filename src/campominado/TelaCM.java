@@ -1,5 +1,4 @@
 package campominado;
-import javax.swing.JFrame;
 import java.awt.GridLayout;
 import java.awt.Font;
 import javax.swing.ImageIcon;
@@ -12,15 +11,12 @@ import java.awt.event.MouseListener;
 import componentes.Lb; 
 import componentes.Pn;
 import componentes.Btn;
+import componentes.Frame;
 import java.awt.Component;
 
-public class TelaCM extends JFrame{
-    private IntroductionCM intro;
+public class TelaCM extends Frame{
     public TelaCM(int nivel, int x, int y) {
-        setSize(700, 700);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setLayout(null);
+        super(700,700);
         //setUndecorated(win);
         this.x = x; this.y = y;
         redeclaracoes(nivel);
@@ -168,7 +164,7 @@ public class TelaCM extends JFrame{
             }
         }
         ct.stop();//Para o cronômetro.
-        TelaGOWin tgo = new TelaGOWin(minutosP+":"+segundosP, this, r, intro, false);
+        TelaGOWin tgo = new TelaGOWin(minutosP+":"+segundosP, this, r, false);
     }
     private int abertos = 0;
     public void Ganhar(){
@@ -192,7 +188,7 @@ public class TelaCM extends JFrame{
                 posAlt(posxM[i], posyM[i]);
             }
             ct.stop();//Para o cronômetro
-            TelaGOWin tgo = new TelaGOWin(minutosP+":"+segundosP, this, r, intro, true);
+            TelaGOWin tgo = new TelaGOWin(minutosP+":"+segundosP, this, r, true);
         }
         abertos = 0;
     }

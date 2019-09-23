@@ -23,9 +23,6 @@ public class IntroductionJDV extends IntroductionGame{
     public void tutorial() {
     }
 
-    public Txt getJog1(){return jog1;}
-    public Txt getJog2(){return jog2;}
-
     private Pn pnEsc;
     private Txt jog1;
     private Txt jog2;
@@ -36,6 +33,7 @@ public class IntroductionJDV extends IntroductionGame{
         Border b = BorderFactory.createLineBorder(Color.black, 3);
         int txtjog1[] = {50,260,200,40}; int txtjog2[] = {330,260,200,40};
         jog1 = new Txt(txtjog1, txt, Color.cyan, b); jog2 = new Txt(txtjog2, txt, Color.cyan, b);
+        jog1.setText("Jogador01"); jog2.setText("Jogador02");
         int lbjog1[] = {30,70,250,100}; int lbjog2[] = {310,70,250,100};
         int lbn1[] = {50,210,200,40}; int lbn2[] = {330,210,200,40};
         int lbx[] = {96,330,100,100}; int lby[] = {376,330,100,100}; int btnP[] = {460,450,100,100};
@@ -98,7 +96,7 @@ public class IntroductionJDV extends IntroductionGame{
         @Override
         public void actionPerformed(ActionEvent ae) {
             dispose();
-        TelaJDV tjdv = new TelaJDV(IntroductionJDV.this);
+            TelaJDV tjdv = new TelaJDV(jog1.getText(), jog2.getText());
         }
         
     }
