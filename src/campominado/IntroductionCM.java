@@ -13,8 +13,8 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 public class IntroductionCM extends IntroductionGame{
     private TelaCM tcm;
-    public IntroductionCM(int x, int y) {
-        super(x, y);
+    public IntroductionCM() {
+        super(700,700);
         //niveis();
         intro();
         setVisible(true);
