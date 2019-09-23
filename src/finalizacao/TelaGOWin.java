@@ -92,16 +92,16 @@ public class TelaGOWin extends Frame{
                 switch(n){
                     case 1:TelaCM tc = new TelaCM(CM.getN(), c.getX(), c.getY());break;
                     case 2:MultiGameTela mgt = new MultiGameTela(2);break;
-                    case 3:IntroductionCM i = new IntroductionCM(700, 700);i.niveis();break;
+                    case 3:IntroductionCM i = new IntroductionCM();i.niveis();break;
                     default:break;
                 }
             }else if(jogo==2){
                 jdv.dispose();
                 
                 switch(n){
-                    case 1:TelaJDV tjdv = new TelaJDV(jdv.getJog1(), jdv.getJog2());break;
+                    case 1:TelaJDV tjdv = new TelaJDV(jdv.getAss(), jdv.getJog1(), jdv.getJog2());break;
                     case 2:MultiGameTela mgt = new MultiGameTela(2);break;
-                    case 3:IntroductionJDV i = new IntroductionJDV(600,600);break;
+                    case 3:IntroductionJDV i = new IntroductionJDV();break;
                     default:break;
                 }
             }

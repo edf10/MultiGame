@@ -82,8 +82,8 @@ public class MultiGameTela extends JFrame{
         public BtnJogo(int n){this.n = n;}
         public void actionPerformed(ActionEvent e) {
             dispose();
-            if(n==1){IntroductionCM j1 = new IntroductionCM(700, 700);
-            }else if(n==2){IntroductionJDV j2 = new IntroductionJDV(600, 600);}
+            if(n==1){IntroductionCM j1 = new IntroductionCM();
+            }else if(n==2){IntroductionJDV j2 = new IntroductionJDV();}
         }
     }
 }
