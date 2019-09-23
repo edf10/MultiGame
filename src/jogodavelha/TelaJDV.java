@@ -118,17 +118,20 @@ public class TelaJDV extends Frame{
             }
         }
         private boolean press = false;
+        
         private class Troca implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent ae) {
-                if(!press){
+                if(!press&&!clickBtn){
                     answer = true;
+                    clickBtn = true;
                     Perguntas p = new Perguntas(ass, x, y);
                 }
             }
         }
     }
     private boolean answer = false;
+    private boolean clickBtn = false;
     private class Perguntas extends Frame{
         private final ReadQuestions rq = new ReadQuestions();
         private final Random escPer = new Random();
@@ -142,6 +145,7 @@ public class TelaJDV extends Frame{
             if(ass==1){
                 tabuada();
             }
+            
             tela();
             setVisible(true);
         }
@@ -191,6 +195,7 @@ public class TelaJDV extends Frame{
                     if(s==5){
                         Perguntas.this.dispose();
                         answer = false; vez();
+                        clickBtn = false;
                         this.stop();
                     }
                 }
@@ -199,6 +204,7 @@ public class TelaJDV extends Frame{
         private class Enter implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent ae) {
+                clickBtn = false;
                 ct.stop();
                 Perguntas.this.dispose();
                 answer = false;
