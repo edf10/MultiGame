@@ -28,13 +28,12 @@ public class Criptografar {
         return null;
     }
     
-    public String descriptar(){
+    public byte[] descriptar(){
         try{
             cp = Cipher.getInstance("AES");
             cp.init(Cipher.DECRYPT_MODE, key);
             tdencrip = cp.doFinal(tencrip);
-            texto = new String(tdencrip);
-            return texto;
+            return tdencrip;
         }catch(Exception e){}
         return null;
     }

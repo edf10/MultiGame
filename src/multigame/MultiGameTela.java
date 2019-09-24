@@ -14,7 +14,7 @@ import campominado.IntroductionCM;
 import componentes.Txt;
 import javax.swing.border.Border;
 import jogodavelha.IntroductionJDV;
-import user.Login;
+import user.Conta;
 
 public class MultiGameTela extends Frame{
     private Pn pnIniciar;
@@ -112,7 +112,9 @@ public class MultiGameTela extends Frame{
     public class Logar implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent ae) {
-            Login l = new Login(txtUserName.getText(), txtPassword.getText());
+            dispose();
+            Conta c = new Conta("password-user000", txtUserName.getText(), txtPassword.getText());
+            c.Login();
         }
     }
 }
