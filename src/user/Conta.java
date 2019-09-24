@@ -35,7 +35,6 @@ public class Conta {
             BufferedReader b = new BufferedReader(i);
             if(b.readLine().equals(Arrays.toString(c.encriptar()))&&!logado){
                 if(username!=null&&password!=null){
-                    MultiGameTela m = new MultiGameTela(2);
                     System.out.println("Logado");
                     logado = true;
                 }
@@ -51,7 +50,7 @@ public class Conta {
     
     public void gravar(){
         try{
-            if(username!=null&&password!=null){
+            if(username.length()>0&&password.length()>0){
                 FileOutputStream f = new FileOutputStream("users/"+username+".txt");
                 PrintWriter pr = new PrintWriter(f);
                 pr.println(Arrays.toString(c.encriptar()));

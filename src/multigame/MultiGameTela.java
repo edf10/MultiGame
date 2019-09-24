@@ -16,7 +16,7 @@ import componentes.Txt;
 import javax.swing.JPasswordField;
 import javax.swing.border.Border;
 import jogodavelha.IntroductionJDV;
-import testes.Cadastro;
+import user.Cadastro;
 import user.Conta;
 
 public class MultiGameTela extends Frame{
@@ -90,27 +90,35 @@ public class MultiGameTela extends Frame{
     private Pn pnLogin;
     private Txt txtUserName;
     private Pass txtPassword;
-    private ImageIcon imLog = new ImageIcon(getClass().getResource("imagens/login.jpg"));
+    private final ImageIcon imLog = new ImageIcon(getClass().getResource("imagens/login.jpg"));
+    private final ImageIcon imUser = new ImageIcon(getClass().getResource("imagens/user.png"));
+    private final ImageIcon imPass = new ImageIcon(getClass().getResource("imagens/pass.png"));
     public void login_user(){
         pnIniciar.setVisible(false);
-        int txtUser[] = {200,200,400,50}; int txtpass[] = {200,270,400,50}; 
-        int btnLogar[] = {250,380,300,50}; int lblogar[] = {250,90,300,60};
-        int btnRes[] = {250,440,300,50}; int lbIm[] = {0,0,800,600};
+        Color fundo = new Color(0,255,85);
+        getContentPane().setBackground(fundo);
+        int txtUser[] = {90,205,270,40}; int txtpass[] = {90,275,270,40}; 
+        int btnLogar[] = {85,380,250,50}; int lblogar[] = {55,90,300,60};
+        int btnRes[] = {55,440,300,50}; int lbIm[] = {0,0,400,600};
+        int lbUser[] = {35,200,50,50}; int lbPass[] = {35,270,50,50};
+        
         Font f = new Font("Arial", Font.PLAIN, 20);
         Font d = new Font("Arial", Font.PLAIN, 30);
         Font t = new Font("Arial", Font.PLAIN, 15);
         Border b = BorderFactory.createLineBorder(Color.black, 3);
-        txtUserName = new Txt(txtUser, f, Color.red, b);
-        txtPassword = new Pass(txtpass, f, Color.red, b);
+        txtUserName = new Txt(txtUser, f, Color.black, b);
+        txtPassword = new Pass(txtpass, f, Color.black, b);
         Component cp[] = {
-            new Lb("Logar Usuário", d, lblogar, Color.red, b),
+            new Lb("Logar Usuário", d, lblogar, Color.green, b),
             txtUserName,
             txtPassword,
-            new Btn("Login", d, Color.black, Color.red, btnLogar, b, true, false, new Logar()),
+            new Lb(imUser, lbUser),
+            new Lb(imPass, lbPass),
+            new Btn("Login", d, Color.black, Color.green, btnLogar, b, true, false, new Logar()),
             new Btn("Não tem conta? Registre-se", t, null, Color.blue,btnRes, null, false, false, new Register()),
             new Lb(imLog, lbIm)
         };
-        int pnLoginP[] = {0,0,800,600};
+        int pnLoginP[] = {200,0,400,600};
         pnLogin = new Pn(pnLoginP, cp);
         add(pnLogin);
     }

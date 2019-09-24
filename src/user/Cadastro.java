@@ -1,4 +1,4 @@
-package testes;
+package user;
 import componentes.Btn;
 import componentes.Frame;
 import componentes.Lb;
@@ -11,37 +11,45 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.border.Border;
 import multigame.MultiGameTela;
 import user.Conta;
 
 public class Cadastro extends Frame{
     public Cadastro(){
-        super(600,400);
+        super(800,600);
         tela();
         setVisible(true);
     }
     private Pn pnCadastro;
     private Txt txtName;
     private Pass txtPass;
+    private final ImageIcon imUser = new ImageIcon(getClass().getResource("imagens/user.png"));
+    private final ImageIcon imPass = new ImageIcon(getClass().getResource("imagens/pass.png"));
+    private final ImageIcon imFundo = new ImageIcon(getClass().getResource("imagens/register.jpg"));
     public void tela(){
-        int lbName[] = {80,140,100,50}; int txtNameP[] = {190,145,300,40};
-        int lbPass[] = {80,200,100,50}; int txtPassP[] = {190,205,300,40};
-        int btnRer[] = {400,275,150,50}; int lbtitle[] = {100,20,400,80};
+        Color back = new Color(145,135,125);
+        getContentPane().setBackground(Color.black);
+        int lbName[] = {35,200,50,50}; int txtNameP[] = {90,205,270,40};
+        int lbPass[] = {35,270,50,50}; int txtPassP[] = {90,275,270,40};
+        int btnRer[] = {125,360,150,50}; int lbtitle[] = {55,90,300,60};
+        int lbfundo[] = {0,0,400,600};
         Font f = new Font("Arial", Font.PLAIN, 30);
         Font d = new Font("Arial", Font.PLAIN, 20);
         Border b = BorderFactory.createLineBorder(Color.black, 3);            
-        txtName = new Txt(txtNameP, f, Color.red, b);
-        txtPass = new Pass(txtPassP, f, Color.red, b);
+        txtName = new Txt(txtNameP, f, Color.black, b);
+        txtPass = new Pass(txtPassP, f, Color.black, b);
 
         Component cp[] = {
             txtName, txtPass,
-            new Lb("CADASTRAR", f, lbtitle, Color.white, b),
-            new Lb("Username:", d, lbName, Color.black, null),
-            new Lb("Password:", d, lbPass, Color.black, null),
-            new Btn("Cadastrar", f, Color.black, Color.white, btnRer, b, true, false, new Register())
+            new Lb("Cadastrar", f, lbtitle, Color.white, b),
+            new Lb(imUser, lbName),
+            new Lb(imPass, lbPass),
+            new Btn("Cadastrar", f, Color.black, Color.white, btnRer, b, true, false, new Register()),
+            new Lb(imFundo, lbfundo)
         };
-        int pnC[] = {0,0,600,400};
+        int pnC[] = {200,0,400,600};
         pnCadastro = new Pn(pnC, cp);
         add(pnCadastro);
     }
