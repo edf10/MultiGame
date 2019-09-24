@@ -28,7 +28,6 @@ public class TelaCM extends Frame{
     private Pn painelCampo; private Pn painelTempo; //Paineis
     private Lb lbsegundos; private Lb lbminutos; private Lb lbdoispontos; //Labels
     //ImageIcons
-    private final ImageIcon imFundo = new ImageIcon(getClass().getResource("fundoNiveis.jpg"));
     private static int nivel;
     public void redeclaracoes(int nil){
         //Redeclaração. Por causa da atualização de valores.
@@ -75,13 +74,13 @@ public class TelaCM extends Frame{
             lbminutos.setBounds(175, 5, 100, 100);lbsegundos.setBounds(508, 5, 100, 100);
             lbdoispontos.setBounds(341, 1, 100, 100);painelCampo.setBounds(0, 101, 784, 560);
             painelTempo.setBounds(0, 0, 800, 101);btn = new Font("Arial", Font.PLAIN, 20);
-            minas = "minasM.png"; marcador = "flagM.png"; r.sortMinas(25);
+            minas = "imagens/minasM.png"; marcador = "imagens/flagM.png"; r.sortMinas(25);
         }else if(nivel==3){
             setSize(1006, 732);
             lbminutos.setBounds(611, 5, 100, 100); lbsegundos.setBounds(278, 5, 100, 100);
             lbdoispontos.setBounds(444, 1, 100, 100); btn = new Font("Arial", Font.PLAIN, 17);
             painelTempo.setBounds(0, 0, 1006, 99); painelCampo.setBounds(0, 99, 990, 594);
-            minas = "minasD.png"; marcador = "flagD.png";r.sortMinas(30);
+            minas = "imagens/minasD.png"; marcador = "imagens/flagD.png";r.sortMinas(30);
         }
         /* -------------------------------------- */
         r.orgNumeros();
@@ -196,7 +195,7 @@ public class TelaCM extends Frame{
     /* Variáveis Auxiliares */
     public boolean press = false; public boolean GO = false; public boolean win = false;
     public int iniciarJogo = 0; public int marc[][]; public int[][] m4;
-    public String minas = "minasF.png"; public String marcador = "flagF.png";
+    public String minas = "imagens/minasF.png"; public String marcador = "imagens/flagF.png";
     public Font btn = new Font("Arial", Font.PLAIN, 40);
     
     private class Button extends Btn{

@@ -21,7 +21,7 @@ public class IntroductionCM extends IntroductionGame{
     }
     
     private Pn pnNiveis;
-    private final ImageIcon imFundo = new ImageIcon(getClass().getResource("fundoNiveis.jpg"));
+    private final ImageIcon imFundo = new ImageIcon(getClass().getResource("imagens/fundoNiveis.jpg"));
     public void niveis() {
         pnIntro.setVisible(false);
         Font nivel = new Font("Arial", Font.PLAIN, 30);
@@ -44,7 +44,7 @@ public class IntroductionCM extends IntroductionGame{
     }
     
     private Pn pnIntro;
-    private final ImageIcon imIntro = new ImageIcon(getClass().getResource("introCM.jpg"));
+    private final ImageIcon imIntro = new ImageIcon(getClass().getResource("imagens/introCM.jpg"));
     @Override
     public void intro(){
         int lbIntroP[] = {0,0,700,700}; int pnIntroP[] = {0,0,684,700};

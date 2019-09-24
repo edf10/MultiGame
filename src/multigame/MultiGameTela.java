@@ -1,5 +1,4 @@
 package multigame;
-import javax.swing.JFrame;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.Font;
@@ -10,22 +9,19 @@ import componentes.Lb;
 import componentes.Btn;
 import java.awt.Component;
 import componentes.Pn;
+import componentes.Frame;
 import campominado.IntroductionCM;
+import componentes.Txt;
+import javax.swing.border.Border;
 import jogodavelha.IntroductionJDV;
+import user.Login;
 
-public class MultiGameTela extends JFrame{
-    //Painel
+public class MultiGameTela extends Frame{
     private Pn pnIniciar;
-    //ImageIcons
-    private final ImageIcon gifArq = new ImageIcon(getClass().getResource("01.gif"));
-    private final ImageIcon btnImageArq = new ImageIcon(getClass().getResource("btn1.png"));
+    private final ImageIcon gifArq = new ImageIcon(getClass().getResource("imagens/01.gif"));
+    private final ImageIcon btnImageArq = new ImageIcon(getClass().getResource("imagens/btn1.png"));
     public MultiGameTela(int i) {
-        /* Configurações padrão da tela */
-        setSize(800, 600);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setLayout(null);
-        /* ---------------------------- */
+        super(800, 600);
         if(i==1){
             /* Configurando lbs - PainelInicial */
             Font titulo = new Font("Arial", Font.PLAIN, 40);//Fonte
@@ -48,14 +44,15 @@ public class MultiGameTela extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             pnIniciar.setVisible(false);
-            Jogos();
+            login_user();
+            //Jogos();
         }
     }
     private Pn pnJogos; //Painel
     //ImageIcons
-    private final ImageIcon imCM = new ImageIcon(getClass().getResource("campominado.png"));
-    private final ImageIcon imJDV = new ImageIcon(getClass().getResource("jogodavelha.png"));
-    private final ImageIcon fundoArq = new ImageIcon(getClass().getResource("02.gif"));
+    private final ImageIcon imCM = new ImageIcon(getClass().getResource("imagens/campominado.png"));
+    private final ImageIcon imJDV = new ImageIcon(getClass().getResource("imagens/jogodavelha.png"));
+    private final ImageIcon fundoArq = new ImageIcon(getClass().getResource("imagens/02.gif"));
     private void Jogos() { //Painel de exibição dos jogos
         /* Configurando lbs - PainelJogos */
         Font jogos = new Font("Tahoma", Font.PLAIN, 24);
@@ -84,6 +81,38 @@ public class MultiGameTela extends JFrame{
             dispose();
             if(n==1){IntroductionCM j1 = new IntroductionCM();
             }else if(n==2){IntroductionJDV j2 = new IntroductionJDV();}
+        }
+    }
+    
+    private Pn pnLogin;
+    private Txt txtUserName;
+    private Txt txtPassword;
+    public void login_user(){
+        pnIniciar.setVisible(false);
+        int txtUser[] = {200,200,400,50}; int txtpass[] = {200,270,400,50}; 
+        int btnLogar[] = {250,380,300,50}; int lblogar[] = {250,90,300,60};
+        Font f = new Font("Arial", Font.PLAIN, 20);
+        Font d = new Font("Arial", Font.PLAIN, 30);
+        Border b = BorderFactory.createLineBorder(Color.black, 3);
+        txtUserName = new Txt(txtUser, f, Color.red, b);
+        txtUserName.setText("Username");
+        txtPassword = new Txt(txtpass, f, Color.red, b);
+        txtPassword.setText("Password");
+        Component cp[] = {
+            new Lb("Logar Usuário", d, lblogar, Color.red, b),
+            txtUserName,
+            txtPassword,
+            new Btn("Login", d, Color.black, Color.red, btnLogar, b, true, false, new Logar())
+        };
+        int pnLoginP[] = {0,0,800,600};
+        pnLogin = new Pn(pnLoginP, cp);
+        
+        add(pnLogin);
+    }
+    public class Logar implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            Login l = new Login(txtUserName.getText(), txtPassword.getText());
         }
     }
 }

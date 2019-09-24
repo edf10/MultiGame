@@ -26,7 +26,7 @@ public class IntroductionJDV extends IntroductionGame{
     private Pn pnEsc;
     private Txt jog1;
     private Txt jog2;
-    private ImageIcon imBtn = new ImageIcon(getClass().getResource("start.png"));
+    private ImageIcon imBtn = new ImageIcon(getClass().getResource("imagens/start.png"));
     public void escJog(int ass){
         pnAss.setVisible(false);
         Font txt = new Font("Arial", Font.PLAIN, 20);
@@ -58,7 +58,7 @@ public class IntroductionJDV extends IntroductionGame{
     }
     
     private Pn pnIntro;
-    private final ImageIcon imFundo = new ImageIcon(getClass().getResource("fundo.png"));
+    private final ImageIcon imFundo = new ImageIcon(getClass().getResource("imagens/fundo.png"));
     @Override
     public void intro(){
         int btnClassicP[] = {175,200,250,80}; int btnPersoP[] = {175,290,250,80}; int btnTutP[] = {175,380,250,80};
