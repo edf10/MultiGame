@@ -1,29 +1,58 @@
 package testes;
-import java.io.FileNotFoundException; //Erro: não encontrar o arquivo.
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
+import componentes.Btn;
 import componentes.Frame;
-import java.util.Arrays;
-import user.Criptografar;
+import componentes.Lb;
+import componentes.Pass;
+import componentes.Pn;
+import componentes.Txt;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+import multigame.MultiGameTela;
+import user.Conta;
+
 public class Cadastro extends Frame{
-    private Criptografar c;
     public Cadastro(){
-        super(800,600);
+        super(600,400);
+        tela();
+        setVisible(true);
+    }
+    private Pn pnCadastro;
+    private Txt txtName;
+    private Pass txtPass;
+    public void tela(){
+        int lbName[] = {80,140,100,50}; int txtNameP[] = {190,145,300,40};
+        int lbPass[] = {80,200,100,50}; int txtPassP[] = {190,205,300,40};
+        int btnRer[] = {400,275,150,50}; int lbtitle[] = {100,20,400,80};
+        Font f = new Font("Arial", Font.PLAIN, 30);
+        Font d = new Font("Arial", Font.PLAIN, 20);
+        Border b = BorderFactory.createLineBorder(Color.black, 3);            
+        txtName = new Txt(txtNameP, f, Color.red, b);
+        txtPass = new Pass(txtPassP, f, Color.red, b);
+
+        Component cp[] = {
+            txtName, txtPass,
+            new Lb("CADASTRAR", f, lbtitle, Color.white, b),
+            new Lb("Username:", d, lbName, Color.black, null),
+            new Lb("Password:", d, lbPass, Color.black, null),
+            new Btn("Cadastrar", f, Color.black, Color.white, btnRer, b, true, false, new Register())
+        };
+        int pnC[] = {0,0,600,400};
+        pnCadastro = new Pn(pnC, cp);
+        add(pnCadastro);
     }
     
-    public void gravar(String username, String password){
-        try{
-            FileOutputStream f = new FileOutputStream("users/"+username+".txt");
-            PrintWriter pr = new PrintWriter(f);
-            c = new Criptografar("password-user000", password);
-            pr.println(Arrays.toString(c.encriptar()));
-            System.out.println(Arrays.toString(c.encriptar()));
-            pr.close();
-            f.close();
-        }catch(FileNotFoundException e){
-            
-        }catch(IOException e){}
+    public class Register implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            dispose();
+            Conta c = new Conta(txtName.getText(), txtPass.getText());
+            c.gravar();
+            MultiGameTela m = new MultiGameTela(1);
+        }
     }
-    
 }
