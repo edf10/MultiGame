@@ -13,7 +13,7 @@ public class ReadQuestions {
     private HashMap<Integer,String> resT;
     public ReadQuestions(){
         try{
-            tabuada = new FileInputStream("tabuada.txt");
+            tabuada = new FileInputStream("questions/tabuada.txt");
             ist = new InputStreamReader(tabuada);
             br = new BufferedReader(ist);
         }catch(FileNotFoundException e){}

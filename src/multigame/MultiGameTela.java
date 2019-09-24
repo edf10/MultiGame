@@ -11,7 +11,10 @@ import java.awt.Component;
 import componentes.Pn;
 import componentes.Frame;
 import campominado.IntroductionCM;
+import componentes.Txt;
+import javax.swing.border.Border;
 import jogodavelha.IntroductionJDV;
+import user.Login;
 
 public class MultiGameTela extends Frame{
     private Pn pnIniciar;
@@ -41,7 +44,8 @@ public class MultiGameTela extends Frame{
         @Override
         public void actionPerformed(ActionEvent e) {
             pnIniciar.setVisible(false);
-            Jogos();
+            login_user();
+            //Jogos();
         }
     }
     private Pn pnJogos; //Painel
@@ -77,6 +81,38 @@ public class MultiGameTela extends Frame{
             dispose();
             if(n==1){IntroductionCM j1 = new IntroductionCM();
             }else if(n==2){IntroductionJDV j2 = new IntroductionJDV();}
+        }
+    }
+    
+    private Pn pnLogin;
+    private Txt txtUserName;
+    private Txt txtPassword;
+    public void login_user(){
+        pnIniciar.setVisible(false);
+        int txtUser[] = {200,200,400,50}; int txtpass[] = {200,270,400,50}; 
+        int btnLogar[] = {250,380,300,50}; int lblogar[] = {250,90,300,60};
+        Font f = new Font("Arial", Font.PLAIN, 20);
+        Font d = new Font("Arial", Font.PLAIN, 30);
+        Border b = BorderFactory.createLineBorder(Color.black, 3);
+        txtUserName = new Txt(txtUser, f, Color.red, b);
+        txtUserName.setText("Username");
+        txtPassword = new Txt(txtpass, f, Color.red, b);
+        txtPassword.setText("Password");
+        Component cp[] = {
+            new Lb("Logar Usuário", d, lblogar, Color.red, b),
+            txtUserName,
+            txtPassword,
+            new Btn("Login", d, Color.black, Color.red, btnLogar, b, true, false, new Logar())
+        };
+        int pnLoginP[] = {0,0,800,600};
+        pnLogin = new Pn(pnLoginP, cp);
+        
+        add(pnLogin);
+    }
+    public class Logar implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            Login l = new Login(txtUserName.getText(), txtPassword.getText());
         }
     }
 }
