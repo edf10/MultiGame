@@ -94,8 +94,8 @@ public class TelaJDV extends Frame{
     }
     private int vez; //Determina de qual jogador é a vez.
     private class Button extends Btn{
-        private final ImageIcon imX = new ImageIcon(getClass().getResource("x.png"));
-        private final ImageIcon imO = new ImageIcon(getClass().getResource("o.png"));
+        private final ImageIcon imX = new ImageIcon(getClass().getResource("imagens/x.png"));
+        private final ImageIcon imO = new ImageIcon(getClass().getResource("imagens/o.png"));
         private final int x;
         private final int y;
         public Button(int x, int y){

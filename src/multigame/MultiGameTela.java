@@ -1,5 +1,4 @@
 package multigame;
-import javax.swing.JFrame;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.Font;
@@ -10,22 +9,16 @@ import componentes.Lb;
 import componentes.Btn;
 import java.awt.Component;
 import componentes.Pn;
+import componentes.Frame;
 import campominado.IntroductionCM;
 import jogodavelha.IntroductionJDV;
 
-public class MultiGameTela extends JFrame{
-    //Painel
+public class MultiGameTela extends Frame{
     private Pn pnIniciar;
-    //ImageIcons
-    private final ImageIcon gifArq = new ImageIcon(getClass().getResource("01.gif"));
-    private final ImageIcon btnImageArq = new ImageIcon(getClass().getResource("btn1.png"));
+    private final ImageIcon gifArq = new ImageIcon(getClass().getResource("imagens/01.gif"));
+    private final ImageIcon btnImageArq = new ImageIcon(getClass().getResource("imagens/btn1.png"));
     public MultiGameTela(int i) {
-        /* Configurações padrão da tela */
-        setSize(800, 600);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setLayout(null);
-        /* ---------------------------- */
+        super(800, 600);
         if(i==1){
             /* Configurando lbs - PainelInicial */
             Font titulo = new Font("Arial", Font.PLAIN, 40);//Fonte
@@ -53,9 +46,9 @@ public class MultiGameTela extends JFrame{
     }
     private Pn pnJogos; //Painel
     //ImageIcons
-    private final ImageIcon imCM = new ImageIcon(getClass().getResource("campominado.png"));
-    private final ImageIcon imJDV = new ImageIcon(getClass().getResource("jogodavelha.png"));
-    private final ImageIcon fundoArq = new ImageIcon(getClass().getResource("02.gif"));
+    private final ImageIcon imCM = new ImageIcon(getClass().getResource("imagens/campominado.png"));
+    private final ImageIcon imJDV = new ImageIcon(getClass().getResource("imagens/jogodavelha.png"));
+    private final ImageIcon fundoArq = new ImageIcon(getClass().getResource("imagens/02.gif"));
     private void Jogos() { //Painel de exibição dos jogos
         /* Configurando lbs - PainelJogos */
         Font jogos = new Font("Tahoma", Font.PLAIN, 24);
