@@ -2,7 +2,6 @@ package campominado;
 import componentes.Pn;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
-import user.User;
 
 public class Recordes extends AbstractTableModel{
 
