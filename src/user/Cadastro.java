@@ -38,8 +38,8 @@ public class Cadastro extends Frame{
         Font f = new Font("Arial", Font.PLAIN, 30);
         Font d = new Font("Arial", Font.PLAIN, 20);
         Border b = BorderFactory.createLineBorder(Color.black, 3);            
-        txtName = new Txt(txtNameP, f, Color.black, b);
-        txtPass = new Pass(txtPassP, f, Color.black, b);
+        txtName = new Txt(txtNameP, d, Color.black, b);
+        txtPass = new Pass(txtPassP, d, Color.black, b);
 
         Component cp[] = {
             txtName, txtPass,

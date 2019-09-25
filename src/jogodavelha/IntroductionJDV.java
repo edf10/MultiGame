@@ -58,20 +58,21 @@ public class IntroductionJDV extends IntroductionGame{
     }
     
     private Pn pnIntro;
-    private final ImageIcon imFundo = new ImageIcon(getClass().getResource("imagens/fundo.png"));
+    private final ImageIcon imFundo = new ImageIcon(getClass().getResource("imagens/assuntos.png"));
     @Override
     public void intro(){
-        int btnClassicP[] = {175,200,250,80}; int btnPersoP[] = {175,290,250,80}; int btnTutP[] = {175,380,250,80};
-        int lbFundoP[] = {0,0,600,551}; int lbtitleP[] = {125,20,350,80};
+        int btnClassicP[] = {175,200,250,60}; int btnPersoP[] = {175,270,250,60}; int btnTutP[] = {175,340,250,60};
+        int lbFundoP[] = {0,0,600,600}; int lbtitleP[] = {125,30,350,80};
         Font lb = new Font("Arial", Font.PLAIN, 40);
         Font btn = new Font("Arial", Font.PLAIN, 35);
         Border b = BorderFactory.createLineBorder(Color.black, 3);
+        Border a = BorderFactory.createLineBorder(Color.white, 3);
         Btns b1 = new Btns(1); Btns b2 = new Btns(2); Btns b3 = new Btns(3);
         Component cp[] = {
-            new Lb("JOGO DA VELHA", lb, lbtitleP, Color.white, b),
-            new Btn("Classic", btn, Color.green, Color.black, btnClassicP, b, true, false, b1),
-            new Btn("Personalizado", btn, Color.green, Color.black, btnPersoP, b, true, false, b2),
-            new Btn("Tutorial", btn, Color.green, Color.black, btnTutP, b, true, false, b3),
+            new Lb("JOGO DA VELHA", lb, lbtitleP, Color.white, a),
+            new Btn("Classic", btn, Color.white, Color.black, btnClassicP, b, true, false, b1),
+            new Btn("Personalizado", btn, Color.white, Color.black, btnPersoP, b, true, false, b2),
+            new Btn("Tutorial", btn, Color.white, Color.black, btnTutP, b, true, false, b3),
             new Lb(imFundo, lbFundoP)
         };
         int pnIntroP[] = {0,0,600,600};
@@ -81,7 +82,7 @@ public class IntroductionJDV extends IntroductionGame{
     }
     
     private Pn pnAss;
-    private final ImageIcon imBack = new ImageIcon(getClass().getResource(""));
+    private final ImageIcon imBack = new ImageIcon(getClass().getResource("imagens/jdv.jpg"));
     public void assunto(){
         pnIntro.setVisible(false);
         int lbFundo[] = {0,0,600,600}; int btn1[] = {175,200,250,80}; 
