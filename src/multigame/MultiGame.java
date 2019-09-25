@@ -1,10 +1,10 @@
 package multigame;
 
-import jogodavelha.IntroductionJDV;
+import jogodavelha.WriteQuestions;
 
 public class MultiGame {
     public static void main(String []args) {
-        MultiGameTela mg = new MultiGameTela(1);
-        //IntroductionJDV j = new IntroductionJDV();
+        //MultiGameTela mg = new MultiGameTela(1);
+        WriteQuestions w = new WriteQuestions(2);
     }
 }
