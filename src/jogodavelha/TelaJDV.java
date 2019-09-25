@@ -173,9 +173,7 @@ public class TelaJDV extends Frame{
             Border b = BorderFactory.createLineBorder(Color.black, 3);
             txtRes = new Txt(txtResP, f, Color.black, b);
             txtRes.addActionListener(e);
-            Component cp[] = {
-                lbsegundos,
-            };
+            Component cp[] = {lbsegundos};
             int pnTemP[] = {0,0,400,100};
             pnTempo = new Pn(pnTemP, cp, Color.DARK_GRAY);
             add(pnTempo);

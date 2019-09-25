@@ -85,15 +85,18 @@ public class IntroductionJDV extends IntroductionGame{
     private final ImageIcon imBack = new ImageIcon(getClass().getResource("imagens/jdv.jpg"));
     public void assunto(){
         pnIntro.setVisible(false);
-        int lbFundo[] = {0,0,600,600}; int btn1[] = {175,200,250,80}; 
-        int btn2[] = {175,290,250,80}; int btn3[] = {175,380,250,80}; int lbtitle[] = {125,20,350,80};
+        int lbFundo[] = {0,0,600,600}; int btn1[] = {175,180,250,50}; int btn4[] = {175,370,250,50};
+        int btn2[] = {175,250,250,50}; int btn3[] = {175,310,250,50}; int lbtitle[] = {125,20,350,80};
         Font f = new Font("Arial", Font.PLAIN, 30);
-        Border b = BorderFactory.createLineBorder(Color.black, 3);
+        Border b = BorderFactory.createLineBorder(Color.white, 3);
+        Border a = BorderFactory.createLineBorder(Color.black, 3);
+        Font d = new Font("Arial", Font.PLAIN, 40);
         Component cp[] = {
-            new Lb("Assuntos", f, lbtitle, Color.red, b),
-            new Btn("Tabuada", f, Color.green, Color.black, btn1, b, true, false, new Esc(1)),
-            new Btn("Equação 1ºGrau", f, Color.green, Color.black, btn2, b, true, false, new Esc(2)),
-            new Btn("Equação 2ºGrau", f, Color.green, Color.black, btn3, b, true, false, new Esc(3)),
+            new Lb("Assuntos", d, lbtitle, Color.black, a),
+            new Btn("Multiplicação", f, Color.black, Color.white, btn1, b, true, false, new Esc(1)),
+            new Btn("Divisão", f, Color.black, Color.white, btn2, b, true, false, new Esc(2)),
+            new Btn("Soma", f, Color.black, Color.white, btn3, b, true, false, new Esc(3)),
+            new Btn("Subtração", f, Color.black, Color.white, btn4, b, true, false, new Esc(4)),
             new Lb(imBack, lbFundo)
         };
         int pnAssP[] = {0,0,600,600};
@@ -132,7 +135,6 @@ public class IntroductionJDV extends IntroductionGame{
         public void actionPerformed(ActionEvent ae) {
             dispose();
             TelaJDV tjdv = new TelaJDV(ass, jog1.getText(), jog2.getText());
-    }
-        
+        }
     }
 }
