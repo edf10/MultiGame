@@ -13,7 +13,6 @@ import componentes.Frame;
 import campominado.IntroductionCM;
 import componentes.Pass;
 import componentes.Txt;
-import javax.swing.JPasswordField;
 import javax.swing.border.Border;
 import jogodavelha.IntroductionJDV;
 import user.Cadastro;

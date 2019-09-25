@@ -16,15 +16,8 @@ public class Jogo {
     private TelaJDV jdv;
     public Jogo(TelaJDV jdv){this.jdv = jdv;}
 
-    public void setJog1(String jog1) {
-        this.jog1 = jog1;
-    }
-
-    public void setJog2(String jog2) {
-        this.jog2 = jog2;
-    }
-
-    
+    public void setJog1(String jog1) {this.jog1 = jog1;}
+    public void setJog2(String jog2) {this.jog2 = jog2;}
     public boolean isIcJog1(){return icJog1;}
     public void setIcJog1(boolean icJog1){this.icJog1 = icJog1;}
     public boolean isIcJog2(){return icJog2;}
