@@ -9,7 +9,6 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import multigame.MultiGameTela;
 
 public class Conta {
     private SecretKey key;
