@@ -1,113 +1,55 @@
 package campominado;
-import javax.swing.JFrame;
 import java.awt.GridLayout;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import java.awt.Color;
-import javax.swing.JPanel;
 import java.lang.Thread;
-import javax.swing.JOptionPane;
-import finalizacao.TelaGameOver;
+import finalizacao.TelaGOWin;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import componentes.Lb; 
 import componentes.Pn;
 import componentes.Btn;
+import componentes.Frame;
 import java.awt.Component;
 
-public class TelaCM extends JFrame{
-    private IntroductionCM intro;
-    public TelaCM(int nivel, int x, int y, IntroductionCM intro) {
-        /* Definições Padrão da TELA */
-        setSize(700, 700);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setLayout(null);
+public class TelaCM extends Frame{
+    public TelaCM(int nivel, int x, int y) {
+        super(700,700);
         //setUndecorated(win);
-        this.intro = intro;
-        /* ------------------------- */
-        redeclaracoes(nivel, x, y);
+        this.x = x; this.y = y;
+        redeclaracoes(nivel);
         setVisible(true);
     }
-    private int x; 
-    private int y;
-
-    public IntroductionCM getIntro() {
-        return intro;
-    }
-    
-    //Campo do jogo
-    private Campo r;
-    
-    //Vetor de btns
-    private Button vet[][]; 
-    
-    //Variáveis testes
-    private int[][] m3;
-    private int[][] m;
-    private int[] posxM;
-    private int[] posyM;
-
-    //Paineis
-    private JPanel painelCampo;
-    private Pn painelTempo;
-    private JPanel painelNiveis;
-   
-    //Labels
-    private Lb lbsegundos;
-    private Lb lbminutos;
-    private Lb lbdoispontos;
-    
+    private int x; private int y; //Tamanho do campo
+    private Campo r; private Button vet[][]; //Campo e vetor de btns
+    private int[][] m3; private int[][] m; private int[] posxM; private int[] posyM; //Variáveis teste
+    private Pn painelCampo; private Pn painelTempo; //Paineis
+    private Lb lbsegundos; private Lb lbminutos; private Lb lbdoispontos; //Labels
     //ImageIcons
-    private final ImageIcon imFundo = new ImageIcon(getClass().getResource("fundoNiveis.jpg"));
-    
     private static int nivel;
-    
-    public void redeclaracoes(int nil, int x, int y){
+    public void redeclaracoes(int nil){
         //Redeclaração. Por causa da atualização de valores.
-        this.x = x;
-        this.y = y;
         r = new Campo(x, y);
-        vet = new Button[r.getX()][r.getY()];
-        m4 = new int[r.getX()][r.getY()];
-        marc = new int[r.getX()][r.getY()];
-        for(int i = 0; i<r.getX(); i++){
-            for(int j = 0; j<r.getY(); j++){
+        vet = new Button[x][y];
+        m4 = new int[x][y];
+        marc = new int[x][y];
+        for(int i = 0; i<x; i++){
+            for(int j = 0; j<y; j++){
                 marc[i][j] = 0;
             }
         }
         nivel = nil;
-        CM(nivel, x, y);
+        CM();
     }
     
     public int getN(){
         return nivel;
     }
     
-    public void newCM(int n){
-        if(n==1){
-            x = y = 12;
-        }else if(n==2){
-            x = y = 16;
-        }else{
-            x = y = 18;
-        }
-        r = new Campo(x, y);
-        vet = new Button[r.getX()][r.getY()];
-        m4 = new int[r.getX()][r.getY()];
-        marc = new int[r.getX()][r.getY()];
-        for(int i = 0; i<r.getX(); i++){
-            for(int j = 0; j<r.getY(); j++){
-                marc[i][j] = 0;
-            }
-        }
-        painelNiveis.setVisible(false);
-        CM(nivel, x, y);
-    }
-    
     //Jogo
-    public void CM(int n, int x, int y) {
+    public void CM() {
         /* Painel Tempo */
         Font tempo = new Font("Arial", Font.PLAIN, 60);
         int lbSegundosP[] = {460,15,100,100};
@@ -121,80 +63,49 @@ public class TelaCM extends JFrame{
         painelTempo = new Pn(pnTempoP, cp, Color.black);
         /* ------------------------------------------------------ */
         /* Definindo painel e gridlayout do campo */
-        painelCampo = new JPanel();
+        int pnCampoP[] = {0,109,684,552};
         GridLayout mx = new GridLayout(x,y);//Matriz
-        painelCampo.setLayout(mx);
+        painelCampo = new Pn(pnCampoP, mx);
         r.declararVars();//Configurações iniciais do campo
-        if(n==1){
-            painelCampo.setBounds(0, 109, 684, 552);   
+        if(nivel==1){
             r.sortMinas(20);//Input das minas
-        }else if(n==2){
+        }else if(nivel==2){
             setSize(800, 700);
-            lbminutos.setBounds(175, 5, 100, 100);
-            lbsegundos.setBounds(508, 5, 100, 100);
-            lbdoispontos.setBounds(341, 1, 100, 100);
-            painelCampo.setBounds(0, 101, 784, 560);
-            painelTempo.setBounds(0, 0, 800, 101);
-            btn = new Font("Arial", Font.PLAIN, 20);
-            minas = "minasM.png";
-            marcador = "flagM.png";
-            r.sortMinas(25);
-        }else if(n==3){
+            lbminutos.setBounds(175, 5, 100, 100);lbsegundos.setBounds(508, 5, 100, 100);
+            lbdoispontos.setBounds(341, 1, 100, 100);painelCampo.setBounds(0, 101, 784, 560);
+            painelTempo.setBounds(0, 0, 800, 101);btn = new Font("Arial", Font.PLAIN, 20);
+            minas = "imagens/minasM.png"; marcador = "imagens/flagM.png"; r.sortMinas(25);
+        }else if(nivel==3){
             setSize(1006, 732);
-            lbminutos.setBounds(611, 5, 100, 100);
-            lbsegundos.setBounds(278, 5, 100, 100);
-            lbdoispontos.setBounds(444, 1, 100, 100);
-            minas = "minasD.png";
-            marcador = "flagD.png";
-            btn = new Font("Arial", Font.PLAIN, 17);
-            painelTempo.setBounds(0, 0, 1006, 99);
-            painelCampo.setBounds(0, 99, 990, 594);
-            r.sortMinas(30);
+            lbminutos.setBounds(611, 5, 100, 100); lbsegundos.setBounds(278, 5, 100, 100);
+            lbdoispontos.setBounds(444, 1, 100, 100); btn = new Font("Arial", Font.PLAIN, 17);
+            painelTempo.setBounds(0, 0, 1006, 99); painelCampo.setBounds(0, 99, 990, 594);
+            minas = "imagens/minasD.png"; marcador = "imagens/flagD.png";r.sortMinas(30);
         }
-        setLocationRelativeTo(null);
         /* -------------------------------------- */
         r.orgNumeros();
+        setLocationRelativeTo(null);
         /* Variáveis de teste */
-        m = r.getM();
-        m3 = r.getM3();
-        posxM = r.getPosxM();
-        posyM = r.getPosyM();
-        /* ------------------ */
+        m = r.getM(); m3 = r.getM3(); posxM = r.getPosxM(); posyM = r.getPosyM();
         /* Adicionar btns no vetor */
-        for(int i = 0; i<r.getX(); i++) {
-            for(int j = 0; j<r.getY(); j++){
+        for(int i = 0; i<x; i++) {
+            for(int j = 0; j<y; j++){
+                m3[i][j] = 0;//Zerando a matriz m3.
                 String s = r.Click();
                 vet[i][j] = new Button(s, i, j);
+                painelCampo.add(vet[i][j]);//Adicionando vetor de btns no painelCampo
             }
         }
-        /* ------------------------ */
-        //Zerando a matriz m3.
-        for(int i = 0; i<r.getX(); i++){
-            for(int j = 0; j<r.getY(); j++){
-                m3[i][j] = 0;
-            }
-        }
-        /* Adicionando vetor de btns no painelCampo */
-        for(int i = 0; i<r.getX(); i++){
-            for(int j = 0; j<r.getY(); j++){
-                painelCampo.add(vet[i][j]);
-            }
-        }
-        /* ---------------------------------------- */
         /* Adicionando paineis na tela */
-        add(painelTempo);
-        add(painelCampo);
-        /* ---------------------------------------- */
+        add(painelTempo); add(painelCampo);
     }
     /* Contadores do tempo */
-    private int minutosP = 0;
-    private int segundosP = 0;
+    private int minutosP = 0; private int segundosP = 0;
     /* ------------------- */
     public class contarTempo extends Thread{
         @Override
         public void run(){
-            int s = 0;
-            int m = 0;
+            int s = 0; int m = 0;
             while(true){
                 try{Thread.sleep(1000);}catch(Exception e){};
                 s++;
@@ -223,20 +134,13 @@ public class TelaCM extends JFrame{
         //Verificação ao redor de uma certa posição
         int m2[][] = {{l+1,c-1},{l+1,c},{l+1,c+1},{l,c-1},{l,c+1},{l-1,c-1},{l-1,c},{l-1,c+1}};//Par ordenado
         for(int i = 0; i<8 ; i++){
-            for(int j = 1; j<2;j++){
-                if(m2[i][0]<r.getX() && m2[i][0]>-1 && m2[i][j]>-1 && m2[i][j]<r.getX()){
-                    if(marc[m2[i][0]][m2[i][1]]!=1){
-                        marc[m2[i][0]][m2[i][1]] = 2;
-                    }
-                    if(r.posNumero(m2[i][0], m2[i][1])){
-                        posAlt(m2[i][0], m2[i][1]);
-                    }else{
-                        posAlt(m2[i][0], m2[i][j]);
-                        m3[m2[i][0]][m2[i][j]]++;
-                        if(m3[m2[i][0]][m2[i][j]] < 2){
-                            abrir(m2[i][0], m2[i][j]);
-                        }					
-                    }
+            if(m2[i][0]<r.getX() && m2[i][0]>-1 && m2[i][1]>-1 && m2[i][1]<r.getX()){
+                if(marc[m2[i][0]][m2[i][1]]!=1){marc[m2[i][0]][m2[i][1]] = 2;}
+                if(r.posNumero(m2[i][0], m2[i][1])){posAlt(m2[i][0], m2[i][1]);
+                }else{
+                    posAlt(m2[i][0], m2[i][1]);
+                    m3[m2[i][0]][m2[i][1]]++;
+                    if(m3[m2[i][0]][m2[i][1]] < 2){abrir(m2[i][0], m2[i][1]);}					
                 }
             }
         }
@@ -259,74 +163,54 @@ public class TelaCM extends JFrame{
             }
         }
         ct.stop();//Para o cronômetro.
-        TelaGameOver tgo = new TelaGameOver(minutosP+":"+segundosP, this, r, intro);
+        TelaGOWin tgo = new TelaGOWin(minutosP+":"+segundosP, this, r, false);
     }
     private int abertos = 0;
-    public void Ganhar(int x, int y){
+    public void Ganhar(){
         //A intenção com esta variável é que ela permaneça com o valor inicial ao final das verificações.
         //Isso significa que nem uma mina foi acionada.
         int minasAbertas = 0;
         for(int k = 0; k<r.getBombs(); k++){
-            if(m4[posxM[k]][posyM[k]]==1){
-                minasAbertas++;
-            }
+            if(m4[posxM[k]][posyM[k]]==1){minasAbertas++;}
         }
         for(int i = 0; i<x; i++){
             for(int j = 0; j<y; j++){
-                if(m4[i][j]==1){
-                    abertos+=1;
-                }
+                if(m4[i][j]==1){abertos+=1;}
             }
         }
         //Para o caso de dar GameOver e a variável ter o valor do total de botões da matriz, 
         //que esta menos total de bombas é igual a o total de btns no campo. Sendo que o usuário perdeu.
-        if(abertos==x*y-r.getBombs()){
-            if(abertos-minasAbertas==x*y-r.getBombs()){
-                win = true;
-                for(int i = 0; i<r.getBombs(); i++){
-                    marc[posxM[i]][posyM[i]] = 2;
-                    posAlt(posxM[i], posyM[i]);
-                }
-                ct.stop();//Para o cronômetro
-                JOptionPane.showMessageDialog(null, minutosP+":"+segundosP);
+        if(abertos==x*y-r.getBombs()&&abertos-minasAbertas==x*y-r.getBombs()){
+            win = true;
+            for(int i = 0; i<r.getBombs(); i++){
+                marc[posxM[i]][posyM[i]] = 2;
+                posAlt(posxM[i], posyM[i]);
             }
+            ct.stop();//Para o cronômetro
+            TelaGOWin tgo = new TelaGOWin(minutosP+":"+segundosP, this, r, true);
         }
         abertos = 0;
     }
     
     /* Variáveis Auxiliares */
-    public boolean press = false;
-    public boolean GO = false;
-    public int[][] m4;
-    public int iniciarJogo = 0;
-    public boolean win = false;
-    public int marc[][];
-    public String minas = "minasF.png";
-    public String marcador = "flagF.png";
+    public boolean press = false; public boolean GO = false; public boolean win = false;
+    public int iniciarJogo = 0; public int marc[][]; public int[][] m4;
+    public String minas = "imagens/minasF.png"; public String marcador = "imagens/flagF.png";
     public Font btn = new Font("Arial", Font.PLAIN, 40);
-    /* ------------------- */
     
     private class Button extends Btn{
-        private ImageIcon imBtn;
-        private ImageIcon imMar;
-        private String s;
-        //Posição do botão em relação a matriz do campo.
-        private int x;
-        private int y;
-        private Troca t = new Troca(s);
-        //Contruct
+        private ImageIcon imBtn; private ImageIcon imMar;
+        private String s; private int x; private int y;
+        private Troca t = new Troca();
+        
         public Button(String s, int x, int y) {
             super();
-            /* Variaveis */
+            setBackground(Color.darkGray);
             this.s = s; //Evento do botão (tipo)
-            this.x = x; //Posição x
-            this.y = y; //Posição y
-            /* --------- */
+            this.x = x; this.y = y;//Posição do btn em relação a matriz
             addMouseListener(t);
         }
-        public String getS(){
-            return s;
-        }
+        public String getS(){return s;}
         public void btnsAbertos(String s) {
             /*Se press==false, significa que nem uma mina foi clicada, caso contrário, ela foi acionada. Mas quando essa variável assume
               o valor true, não se consegue mais entrar nos ifs após a condição inicial, então quando o método GameOver for chamado, não
@@ -355,46 +239,27 @@ public class TelaCM extends JFrame{
                     }
                     m4[x][y] = 1;
                 }
-                Ganhar(r.getX(), r.getY());//Faz-se uma verificação a cada botão clicado.
+                Ganhar();//Faz-se uma verificação a cada botão clicado.
             }
         }
         public class Troca implements MouseListener{
-            private String status = "0"; //Status do btn, se -1->Mina, se > 0->número, se 0 - vazio.
-            public Troca(String s) {
-                status = s; 
-            }
             @Override
             public void mouseClicked(MouseEvent me) {
-                iniciarJogo += 1;
-                if(iniciarJogo==1){
-                    ct.start();
-                }
+                iniciarJogo += 1;//Essa variável, iniciarJogo, faz com que o cronômetro seja iniciado um vez apenas.
+                if(iniciarJogo==1){ct.start();}
                 switch(me.getModifiers()){
                     case InputEvent.BUTTON1_MASK:
-                        if(marc[x][y]==0){
-                            marc[x][y] = 2;
-                        }
+                        if(marc[x][y]==0){marc[x][y] = 2;}
                         if(marc[x][y]==2){
-                            //Iniciar o cronômetro quando um btn for clicado.
-                            //Essa variável, iniciarJogo, faz com que o cronômetro seja iniciado um vez apenas.
-                            if(r.posNumero(x, y)){
-                                posAlt(x,y);//Caso seja número, abrir só essa posição.
-                            }else{
-                                abrir(x,y);//Caso seja vazio, abre-se até os números através deste método.
-                            }
+                            //Caso seja número, abrir só essa posição. //Caso seja vazio, abre-se até os números através deste método.
+                            if(r.posNumero(x, y)){posAlt(x,y);}else{abrir(x,y);}
                         }
                         break;
                     case InputEvent.BUTTON3_MASK:
-                        if(marc[x][y]==1){
-                            setIcon(null);
-                            marc[x][y] = 0;
-                        }else if(marc[x][y]==0){
-                            marc[x][y] = 1;
-                            posAlt(x, y);
-                        }
+                        if(marc[x][y]==1){setIcon(null);marc[x][y] = 0;
+                        }else if(marc[x][y]==0){marc[x][y] = 1;posAlt(x, y);}
                         break;
-                    default:
-                        break;
+                    default:break;
                     }
                 }
                 @Override

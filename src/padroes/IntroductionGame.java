@@ -7,7 +7,6 @@ public abstract class IntroductionGame extends JFrame{
         setLocationRelativeTo(null);
         setLayout(null);
     }
-    public abstract void niveis();
     public abstract void tutorial();
     public abstract void intro();
     

@@ -1,6 +1,7 @@
 package componentes;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.LayoutManager;
 import javax.swing.JPanel;
 public class Pn extends JPanel{
     public Pn(int pos[], Component cp[]){
@@ -18,5 +19,9 @@ public class Pn extends JPanel{
         for(Component c : cp){
             this.add(c);
         }
+    }
+    public Pn(int pos[], LayoutManager lm){
+        setLayout(lm);
+        setBounds(pos[0], pos[1], pos[2], pos[3]);
     }
 }
