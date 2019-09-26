@@ -1,4 +1,4 @@
-package jogodavelha;
+package user;
 import java.io.FileNotFoundException; //Erro: não encontrar o arquivo.
 import java.io.FileOutputStream;
 import java.io.IOException;

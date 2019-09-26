@@ -1,4 +1,5 @@
 package jogodavelha;
+import user.ReadQuestions;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;

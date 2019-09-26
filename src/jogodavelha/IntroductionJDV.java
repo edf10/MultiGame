@@ -58,11 +58,11 @@ public class IntroductionJDV extends IntroductionGame{
     }
     
     private Pn pnIntro;
-    private final ImageIcon imFundo = new ImageIcon(getClass().getResource("imagens/assuntos.png"));
+    private final ImageIcon imFundo = new ImageIcon(getClass().getResource("imagens/intro.png"));
     @Override
     public void intro(){
         int btnClassicP[] = {175,200,250,60}; int btnPersoP[] = {175,270,250,60}; int btnTutP[] = {175,340,250,60};
-        int lbFundoP[] = {0,0,600,600}; int lbtitleP[] = {125,30,350,80};
+        int lbFundoP[] = {0,-30,600,600}; int lbtitleP[] = {125,30,350,80};
         Font lb = new Font("Arial", Font.PLAIN, 40);
         Font btn = new Font("Arial", Font.PLAIN, 35);
         Border b = BorderFactory.createLineBorder(Color.black, 3);
@@ -76,27 +76,26 @@ public class IntroductionJDV extends IntroductionGame{
             new Lb(imFundo, lbFundoP)
         };
         int pnIntroP[] = {0,0,600,600};
-        pnIntro = new Pn(pnIntroP, cp, Color.lightGray);
-        
+        pnIntro = new Pn(pnIntroP, cp, Color.black);
         add(pnIntro);
     }
     
     private Pn pnAss;
-    private final ImageIcon imBack = new ImageIcon(getClass().getResource("imagens/jdv.jpg"));
+    private final ImageIcon imBack = new ImageIcon(getClass().getResource("imagens/assuntos.jpg"));
     public void assunto(){
         pnIntro.setVisible(false);
         int lbFundo[] = {0,0,600,600}; int btn1[] = {175,180,250,50}; int btn4[] = {175,370,250,50};
         int btn2[] = {175,250,250,50}; int btn3[] = {175,310,250,50}; int lbtitle[] = {125,20,350,80};
         Font f = new Font("Arial", Font.PLAIN, 30);
-        Border b = BorderFactory.createLineBorder(Color.white, 3);
+        Border b = BorderFactory.createLineBorder(Color.white, 1);
         Border a = BorderFactory.createLineBorder(Color.black, 3);
         Font d = new Font("Arial", Font.PLAIN, 40);
         Component cp[] = {
             new Lb("Assuntos", d, lbtitle, Color.black, a),
-            new Btn("Multiplicação", f, Color.black, Color.white, btn1, b, true, false, new Esc(1)),
-            new Btn("Divisão", f, Color.black, Color.white, btn2, b, true, false, new Esc(2)),
-            new Btn("Soma", f, Color.black, Color.white, btn3, b, true, false, new Esc(3)),
-            new Btn("Subtração", f, Color.black, Color.white, btn4, b, true, false, new Esc(4)),
+            new Btn("Multiplicação", f, null, Color.white, btn1, b, false, false, new Esc(1)),
+            new Btn("Divisão", f, null, Color.white, btn2, b, false, false, new Esc(2)),
+            new Btn("Soma", f, null, Color.white, btn3, b, false, false, new Esc(3)),
+            new Btn("Subtração", f, null, Color.white, btn4, b, false, false, new Esc(4)),
             new Lb(imBack, lbFundo)
         };
         int pnAssP[] = {0,0,600,600};
