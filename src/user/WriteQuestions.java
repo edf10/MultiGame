@@ -9,6 +9,7 @@ public class WriteQuestions {
     private FileOutputStream arquivo;
     private int n;
     private DecimalFormat d = new DecimalFormat("0.0");
+    private DecimalFormat i = new DecimalFormat("0");
     public WriteQuestions(int n){
         this.n = n;
         switch(n){
@@ -27,7 +28,7 @@ public class WriteQuestions {
                 for(int j = 1; j<11; j++){
                     switch(n){
                         case 1: pwt.println(i+" "+operacao+" "+j+" ="+i*j);break;
-                        case 2: pwt.println(i+" "+operacao+" "+j+" ="+d.format((float)i/j));break;
+                        case 2: pwt.println(i+" "+operacao+" "+j+" ="+format(i,j));break;
                         case 3: pwt.println(i+" "+operacao+" "+j+" ="+(i+j));break;
                         case 4: pwt.println(i+" "+operacao+" "+j+" ="+(i-j));break;
                         default: break;
@@ -38,6 +39,15 @@ public class WriteQuestions {
             pwt.close();
             arquivo.close();
         }catch(FileNotFoundException e){}catch(IOException e){}
-        
+    }
+    
+    public String format(int i, int j){
+        float v = (float)i/j;
+        System.out.println(v);
+        if(i%j==0){
+            return ""+(i/j);
+        }else{
+            return d.format(v);
+        }
     }
 }

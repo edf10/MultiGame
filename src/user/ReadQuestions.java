@@ -6,44 +6,51 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 public class ReadQuestions {
-    private FileInputStream tabuada;
+    private FileInputStream arquivo;
     private InputStreamReader ist;
     private BufferedReader br;
     private HashMap<Integer,String> perT;
     private HashMap<Integer,String> resT;
-    public ReadQuestions(){
+    private int n;
+    public ReadQuestions(String arquivo){
+        this.n = n;
+        esc(arquivo);
+    }
+    
+    public void esc(String arquivo){
         try{
-            tabuada = new FileInputStream("questions/multiplicacao.txt");
-            ist = new InputStreamReader(tabuada);
+            this.arquivo = new FileInputStream("questions/"+arquivo+".txt");
+            ist = new InputStreamReader(this.arquivo);
             br = new BufferedReader(ist);
         }catch(FileNotFoundException e){}
     }
-    private int linesNumberPerTabuada;
-    public void readTabuada(){
+    
+    private int linesNumberPer;
+    public void read(){
         String line;
-        linesNumberPerTabuada = 0;
+        linesNumberPer = 0;
         perT = new HashMap<>();
         resT = new HashMap<>();
         try{
             while((line = br.readLine())!=null){
                 String per[] = line.split("=");
-                perT.put(linesNumberPerTabuada, per[0]+" =");
-                resT.put(linesNumberPerTabuada, per[1]);
-                linesNumberPerTabuada++;
+                perT.put(linesNumberPer, per[0]+" =");
+                resT.put(linesNumberPer, per[1]);
+                linesNumberPer++;
             }
             br.close();
-            tabuada.close();
-            System.out.println(linesNumberPerTabuada);
+            arquivo.close();
+            System.out.println(linesNumberPer);
         }catch(IOException e){}
     }
     
-    public String getQuestionTabuada(int question){
+    public String getQuestion(int question){
         return perT.get(question);
     }
-    public String getAnswerTabuada(int question){
+    public String getAnswer(int question){
         return resT.get(question);
     }
-    public int getLengthHashTabuada(){
-        return linesNumberPerTabuada;
+    public int getLengthHash(){
+        return linesNumberPer;
     }
 }

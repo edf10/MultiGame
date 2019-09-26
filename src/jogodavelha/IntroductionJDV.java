@@ -27,7 +27,7 @@ public class IntroductionJDV extends IntroductionGame{
     private Txt jog1;
     private Txt jog2;
     private ImageIcon imBtn = new ImageIcon(getClass().getResource("imagens/start.png"));
-    public void escJog(int ass){
+    public void escJog(String ass){
         pnAss.setVisible(false);
         Font txt = new Font("Arial", Font.PLAIN, 20);
         Border b = BorderFactory.createLineBorder(Color.black, 3);
@@ -92,10 +92,10 @@ public class IntroductionJDV extends IntroductionGame{
         Font d = new Font("Arial", Font.PLAIN, 40);
         Component cp[] = {
             new Lb("Assuntos", d, lbtitle, Color.black, a),
-            new Btn("Multiplicação", f, null, Color.white, btn1, b, false, false, new Esc(1)),
-            new Btn("Divisão", f, null, Color.white, btn2, b, false, false, new Esc(2)),
-            new Btn("Soma", f, null, Color.white, btn3, b, false, false, new Esc(3)),
-            new Btn("Subtração", f, null, Color.white, btn4, b, false, false, new Esc(4)),
+            new Btn("Multiplicação", f, null, Color.white, btn1, b, false, false, new Esc("multiplicacao")),
+            new Btn("Divisão", f, null, Color.white, btn2, b, false, false, new Esc("divisao")),
+            new Btn("Soma", f, null, Color.white, btn3, b, false, false, new Esc("adicao")),
+            new Btn("Subtração", f, null, Color.white, btn4, b, false, false, new Esc("subtracao")),
             new Lb(imBack, lbFundo)
         };
         int pnAssP[] = {0,0,600,600};
@@ -117,8 +117,8 @@ public class IntroductionJDV extends IntroductionGame{
         }
     }
     private class Esc implements ActionListener{
-        private int ass;
-        public Esc(int ass){
+        private String ass;
+        public Esc(String ass){
             this.ass = ass;
         }
         @Override
@@ -128,8 +128,8 @@ public class IntroductionJDV extends IntroductionGame{
     }
         
     private class Start implements ActionListener{
-        private int ass;
-        public Start(int ass){this.ass = ass;}
+        private String ass;
+        public Start(String ass){this.ass = ass;}
         @Override
         public void actionPerformed(ActionEvent ae) {
             dispose();
