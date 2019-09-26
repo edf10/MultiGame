@@ -27,7 +27,7 @@ public class IntroductionJDV extends IntroductionGame{
     private Txt jog1;
     private Txt jog2;
     private ImageIcon imBtn = new ImageIcon(getClass().getResource("imagens/start.png"));
-    public void escJog(int ass){
+    public void escJog(String ass){
         pnAss.setVisible(false);
         Font txt = new Font("Arial", Font.PLAIN, 20);
         Border b = BorderFactory.createLineBorder(Color.black, 3);
@@ -58,11 +58,11 @@ public class IntroductionJDV extends IntroductionGame{
     }
     
     private Pn pnIntro;
-    private final ImageIcon imFundo = new ImageIcon(getClass().getResource("imagens/assuntos.png"));
+    private final ImageIcon imFundo = new ImageIcon(getClass().getResource("imagens/intro.png"));
     @Override
     public void intro(){
         int btnClassicP[] = {175,200,250,60}; int btnPersoP[] = {175,270,250,60}; int btnTutP[] = {175,340,250,60};
-        int lbFundoP[] = {0,0,600,600}; int lbtitleP[] = {125,30,350,80};
+        int lbFundoP[] = {0,-30,600,600}; int lbtitleP[] = {125,30,350,80};
         Font lb = new Font("Arial", Font.PLAIN, 40);
         Font btn = new Font("Arial", Font.PLAIN, 35);
         Border b = BorderFactory.createLineBorder(Color.black, 3);
@@ -76,24 +76,26 @@ public class IntroductionJDV extends IntroductionGame{
             new Lb(imFundo, lbFundoP)
         };
         int pnIntroP[] = {0,0,600,600};
-        pnIntro = new Pn(pnIntroP, cp, Color.lightGray);
-        
+        pnIntro = new Pn(pnIntroP, cp, Color.black);
         add(pnIntro);
     }
     
     private Pn pnAss;
-    private final ImageIcon imBack = new ImageIcon(getClass().getResource("imagens/jdv.jpg"));
+    private final ImageIcon imBack = new ImageIcon(getClass().getResource("imagens/assuntos.jpg"));
     public void assunto(){
         pnIntro.setVisible(false);
-        int lbFundo[] = {0,0,600,600}; int btn1[] = {175,200,250,80}; 
-        int btn2[] = {175,290,250,80}; int btn3[] = {175,380,250,80}; int lbtitle[] = {125,20,350,80};
+        int lbFundo[] = {0,0,600,600}; int btn1[] = {175,180,250,50}; int btn4[] = {175,370,250,50};
+        int btn2[] = {175,250,250,50}; int btn3[] = {175,310,250,50}; int lbtitle[] = {125,20,350,80};
         Font f = new Font("Arial", Font.PLAIN, 30);
-        Border b = BorderFactory.createLineBorder(Color.black, 3);
+        Border b = BorderFactory.createLineBorder(Color.white, 1);
+        Border a = BorderFactory.createLineBorder(Color.black, 3);
+        Font d = new Font("Arial", Font.PLAIN, 40);
         Component cp[] = {
-            new Lb("Assuntos", f, lbtitle, Color.red, b),
-            new Btn("Tabuada", f, Color.green, Color.black, btn1, b, true, false, new Esc(1)),
-            new Btn("Equação 1ºGrau", f, Color.green, Color.black, btn2, b, true, false, new Esc(2)),
-            new Btn("Equação 2ºGrau", f, Color.green, Color.black, btn3, b, true, false, new Esc(3)),
+            new Lb("Assuntos", d, lbtitle, Color.black, a),
+            new Btn("Multiplicação", f, null, Color.white, btn1, b, false, false, new Esc("multiplicacao")),
+            new Btn("Divisão", f, null, Color.white, btn2, b, false, false, new Esc("divisao")),
+            new Btn("Soma", f, null, Color.white, btn3, b, false, false, new Esc("adicao")),
+            new Btn("Subtração", f, null, Color.white, btn4, b, false, false, new Esc("subtracao")),
             new Lb(imBack, lbFundo)
         };
         int pnAssP[] = {0,0,600,600};
@@ -115,8 +117,8 @@ public class IntroductionJDV extends IntroductionGame{
         }
     }
     private class Esc implements ActionListener{
-        private int ass;
-        public Esc(int ass){
+        private String ass;
+        public Esc(String ass){
             this.ass = ass;
         }
         @Override
@@ -126,13 +128,12 @@ public class IntroductionJDV extends IntroductionGame{
     }
         
     private class Start implements ActionListener{
-        private int ass;
-        public Start(int ass){this.ass = ass;}
+        private String ass;
+        public Start(String ass){this.ass = ass;}
         @Override
         public void actionPerformed(ActionEvent ae) {
             dispose();
             TelaJDV tjdv = new TelaJDV(ass, jog1.getText(), jog2.getText());
-    }
-        
+        }
     }
 }

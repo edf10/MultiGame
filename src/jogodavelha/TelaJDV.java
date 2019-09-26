@@ -1,4 +1,5 @@
 package jogodavelha;
+import user.ReadQuestions;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -16,7 +17,7 @@ import javax.swing.border.Border;
 import componentes.Frame;
 
 public class TelaJDV extends Frame{
-    public TelaJDV(int ass, String jog1, String jog2){
+    public TelaJDV(String ass, String jog1, String jog2){
         super(700,700);
         this.jog1 = jog1;
         this.jog2 = jog2;
@@ -30,12 +31,12 @@ public class TelaJDV extends Frame{
     //Tamanho da matriz
     private int x;
     private int y;
-    private int ass;
+    private String ass;
     private String jog1;
     private String jog2;
     public String getJog1() {return jog1;}
     public String getJog2() {return jog2;}
-    public int getAss(){return ass;}
+    public String getAss(){return ass;}
     private Button vet[][];
     private final Jogo j = new Jogo(this);
     
@@ -133,30 +134,28 @@ public class TelaJDV extends Frame{
     private boolean answer = false;
     private boolean clickBtn = false;
     private class Perguntas extends Frame{
-        private final ReadQuestions rq = new ReadQuestions();
+        private final ReadQuestions rq;
         private final Random escPer = new Random();
         private final contarTempo ct = new contarTempo();
         private int xb; private int yb;
         private int question = 0;
-        public Perguntas(int ass, int xb, int yb){
+        public Perguntas(String ass, int xb, int yb){
             super(400,300);
             this.xb = xb;
             this.yb = yb;
-            if(ass==1){
-                tabuada();
-            }
-            
+            rq = new ReadQuestions(ass);
+            question();
             tela();
             setVisible(true);
         }
         
-        public void tabuada(){
-            rq.readTabuada();
+        public void question(){
+            rq.read();
             while(question==0){
-                question = escPer.nextInt(rq.getLengthHashTabuada());
+                question = escPer.nextInt(rq.getLengthHash());
             }
-            quest = rq.getQuestionTabuada(question);
-            res = rq.getAnswerTabuada(question);
+            quest = rq.getQuestion(question);
+            res = rq.getAnswer(question);
         }
         
         private Pn pnTempo;
@@ -173,9 +172,7 @@ public class TelaJDV extends Frame{
             Border b = BorderFactory.createLineBorder(Color.black, 3);
             txtRes = new Txt(txtResP, f, Color.black, b);
             txtRes.addActionListener(e);
-            Component cp[] = {
-                lbsegundos,
-            };
+            Component cp[] = {lbsegundos};
             int pnTemP[] = {0,0,400,100};
             pnTempo = new Pn(pnTemP, cp, Color.DARK_GRAY);
             add(pnTempo);
