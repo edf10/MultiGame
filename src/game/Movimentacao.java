@@ -29,7 +29,17 @@ public class Movimentacao extends Frame{
             }
             @Override
             public void keyPressed(KeyEvent e) {
-                System.out.println("OK");
+                //Up=38;Back=40;Left=37;Right=39
+                
+                switch(e.getKeyCode()){
+                    case 38:break;
+                    case 40:break;
+                    case 37:break;
+                    case 39:break;
+                    default:break;
+                }
+                
+                System.out.println(e.getKeyCode());
             }
             @Override
             public void keyReleased(KeyEvent e) {
