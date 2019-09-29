@@ -16,7 +16,7 @@ public class Movimentacao extends Frame{
     private Lb lbdeath;
     private JLabel lbfundo;
     
-    private int posX = 81;
+    private int posX = 84;
     private int posY = 300;
     private int imTroca = 0;
     private Dimension d = new Dimension(800,600);
@@ -54,7 +54,7 @@ public class Movimentacao extends Frame{
                 }
                 //System.out.println(d.height+" "+d.width);
                 System.out.println(posX+" "+posY);
-                if(posX>80&&posX<720){
+                if(posX-4>80||posX+4<720){
                     switch(e.getKeyCode()){
                         case 38:posY-=4;break;
                         case 40:posY+=4;break;

@@ -13,7 +13,6 @@ public class ReadQuestions {
     private HashMap<Integer,String> resT;
     private int n;
     public ReadQuestions(String arquivo){
-        this.n = n;
         esc(arquivo);
     }
     
