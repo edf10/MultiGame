@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/eduar/OneDrive/Documentos/GitHub/MultiGame/src/multigame/MultiGame.java</file>
+            <file>file:/C:/Users/eduar/OneDrive/Documentos/GitHub/MultiGame/src/campominado/IntroductionCM.java</file>
+            <file>file:/C:/Users/eduar/OneDrive/Documentos/GitHub/MultiGame/src/damas/IntroductionDama.java</file>
+            <file>file:/C:/Users/eduar/OneDrive/Documentos/GitHub/MultiGame/src/componentes/Pn.java</file>
+            <file>file:/C:/Users/eduar/OneDrive/Documentos/GitHub/MultiGame/src/damas/Tabuleiro.java</file>
+            <file>file:/C:/Users/eduar/OneDrive/Documentos/GitHub/MultiGame/src/damas/TelaDama.java</file>
+            <file>file:/C:/Users/eduar/OneDrive/Documentos/GitHub/MultiGame/src/multigame/MultiGameTela.java</file>
+        </group>
     </open-files>
 </project-private>
