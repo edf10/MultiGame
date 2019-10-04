@@ -5,6 +5,9 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.border.Border;
 public class Lb extends JLabel{
+    public Lb(){
+        
+    }
     public Lb(String t, Font f, int pos[], Color c, Border b){
         setText(t);
         setLayout(null);
