@@ -13,7 +13,6 @@ import componentes.Frame;
 import campominado.IntroductionCM;
 import componentes.Pass;
 import componentes.Txt;
-import damas.IntroductionDama;
 import javax.swing.border.Border;
 import jogodavelha.IntroductionJDV;
 import user.Cadastro;
@@ -56,12 +55,10 @@ public class MultiGameTela extends Frame{
     private final ImageIcon imCM = new ImageIcon(getClass().getResource("imagens/campominado.png"));
     private final ImageIcon imJDV = new ImageIcon(getClass().getResource("imagens/jogodavelha.png"));
     private final ImageIcon fundoArq = new ImageIcon(getClass().getResource("imagens/02.gif"));
-    private final ImageIcon imDama = new ImageIcon(getClass().getResource("imagens/dama.png"));
     private void Jogos() { //Painel de exibição dos jogos
         /* Configurando lbs - PainelJogos */
         Font jogos = new Font("Tahoma", Font.PLAIN, 24);
         int lbCMP[] = {20,230,200,20}; int lbFundoP[] = {0,0,800,600};int lbJDVP[] = {230,230,200,20};
-        int lbDP[] = {440,230,200,20};
         /* Configurando btns */
         BtnJogo cm = new BtnJogo(1);BtnJogo jdv = new BtnJogo(2); BtnJogo dama = new BtnJogo(3);
         int btnCMP[] = {20,20,200,200}; int btnJDVP[] = {230,20,200,200}; int btnDP[] = {440,20,200,200};
@@ -70,10 +67,8 @@ public class MultiGameTela extends Frame{
         Component cp[] = {
             new Lb("CAMPO MINADO", jogos, lbCMP, Color.black, null),
             new Lb("JOGO DA VELHA", jogos, lbJDVP, Color.black, null),
-            new Lb("DAMAS", jogos, lbDP, Color.black, null),
             new Btn(imCM, null, null, btnCMP, null, false, cm),
             new Btn(imJDV, null, null, btnJDVP, null, false, jdv),
-            new Btn(imDama, null, null, btnDP, null, false, dama),
             new Lb(fundoArq, lbFundoP)
         };
         int pnJogosP[] = {0,0,800,600}; pnJogos = new Pn(pnJogosP, cp);
@@ -86,8 +81,7 @@ public class MultiGameTela extends Frame{
         public void actionPerformed(ActionEvent e) {
             dispose();
             if(n==1){IntroductionCM j1 = new IntroductionCM();
-            }else if(n==2){IntroductionJDV j2 = new IntroductionJDV();
-            }else if(n==3){IntroductionDama j3 = new IntroductionDama();}
+            }else if(n==2){IntroductionJDV j2 = new IntroductionJDV();}
         }
     }
     
