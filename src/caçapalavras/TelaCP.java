@@ -35,8 +35,8 @@ public class TelaCP extends Frame{
     
     public class Letra extends Btn{
         private int x, y;
-        private char l;
-        public Letra(char l, int x, int y){
+        private String l;
+        public Letra(String l, int x, int y){
             this.l = l;
             setText(""+l);
             this.x = x; this.y = y;
