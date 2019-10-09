@@ -1,6 +1,8 @@
 Campo
 Vida
-Estranho
 Mar
-Horizonte
-Poço
+Luzes
+VulcÃ£o
+Planeta
+Carta
+Tomate

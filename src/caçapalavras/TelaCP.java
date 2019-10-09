@@ -15,12 +15,12 @@ public class TelaCP extends Frame{
         setVisible(true);
     }
     private int x; private int y;
-    private Palavras p = new Palavras();
+    private Palavras p = new Palavras(1);
     private Pn pnWords;
     private Letra[][] letras;
     public void CP(){
         GridLayout campo = new GridLayout(8,8);
-        int pnWordsP[] = {0,0,784,549};
+        int pnWordsP[] = {0,0,784,580};
         pnWords = new Pn(pnWordsP, campo);
         letras = new Letra[8][8];
         for(int i = 0; i<8 ; i++){
@@ -42,12 +42,13 @@ public class TelaCP extends Frame{
             this.x = x; this.y = y;
             setBackground(Color.black);
             setForeground(Color.white);
+            addActionListener(new Evento());
         }
         
         public class Evento implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent ae) {
-                setBackground(Color.yellow);
+                setBackground(Color.blue);
             }
         }
         
