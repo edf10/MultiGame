@@ -77,7 +77,7 @@ public class TelaCM extends Frame{
             minas = "imagens/minasM.png"; marcador = "imagens/flagM.png"; r.sortMinas(25);
         }else if(nivel==3){
             setSize(1006, 732);
-            lbminutos.setBounds(611, 5, 100, 100); lbsegundos.setBounds(278, 5, 100, 100);
+            lbminutos.setBounds(278, 5, 100, 100); lbsegundos.setBounds(611, 5, 100, 100);
             lbdoispontos.setBounds(444, 1, 100, 100); btn = new Font("Arial", Font.PLAIN, 17);
             painelTempo.setBounds(0, 0, 1006, 99); painelCampo.setBounds(0, 99, 990, 594);
             minas = "imagens/minasD.png"; marcador = "imagens/flagD.png";r.sortMinas(30);
