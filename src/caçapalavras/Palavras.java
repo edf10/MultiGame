@@ -11,6 +11,7 @@ public class Palavras {
     private final ArrayList<String[]> words = new ArrayList<String[]>(); //Pavras do arquivo txt
     private final String[] alfabeto = {"A","B","C","D","E","F","G","H","I","J","K","L","M",
                                  "N","O","P","Q","R","S","T","U","V","W","X","Y","Z",};
+    private ArrayList<String[]> mapawords = new ArrayList<String[]>(); //Mapear palavras na tela, para que não sejam repetidas.
     private int x, y;
     private String[][] m; //Matriz de letras
     private int[][] m2; //Mapear palavras
@@ -19,18 +20,20 @@ public class Palavras {
         niveis(n);
         m = new String[x][y];
         m2 = new int[x][y];
-        letras();
-        colocarWord(1, 1, words.get(0));
-        colocarWord(2, 2, words.get(1));
-        colocarWord(1, 2, words.get(2));
-        colocarWord(1, 2, words.get(3));
-        colocarWord(2, 1, words.get(4));
-        colocarWord(1, 1, words.get(5));
+        //letras(); 
+        sortWords();
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 System.out.print(m2[i][j]);
             }
             System.out.println();
+        }
+    }
+    
+    public void sortWords(){
+        int quantwords = 2;
+        for(int i = 0; i<quantwords; i++){
+            colocarWord(2, 1, sortWord());
         }
     }
     
@@ -93,7 +96,6 @@ public class Palavras {
                     if(cont==palavra.length){
                         stop = true;
                     }
-                    
                 }
             }
             tamWord = (ordem==1) ? 0:palavra.length-1; inverter = (ordem != 1);
@@ -107,12 +109,16 @@ public class Palavras {
     }
     
     public int sortLC(int tamWord){ //sortear linha ou coluna ou os dois
-        int pos;
+        int pos; boolean repetida = false;
         while(true){
             int sorteado = sortear.nextInt(x);
-            if(sorteado+tamWord<x){pos = sorteado;break;}
+            for(int i = 0; i<mapawords.size(); i++){
+                if(mapawords.get(i)==words.get(sorteado)){
+                    repetida = true;
+                }
+            }
+            if(sorteado+tamWord<x&&!repetida){mapawords.add(words.get(sortear.nextInt(words.size())));pos = sorteado;return pos;}
         }
-        return pos;
     }
 
     public String[] sortWord(){
