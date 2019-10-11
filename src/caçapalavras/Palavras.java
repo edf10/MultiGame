@@ -21,11 +21,11 @@ public class Palavras {
         m2 = new int[x][y];
         letras();
         colocarWord(1, 1, words.get(0));
-        colocarWord(2, 2, words.get(1));
-        colocarWord(1, 2, words.get(2));
-        colocarWord(1, 2, words.get(3));
-        colocarWord(2, 1, words.get(4));
-        colocarWord(1, 1, words.get(5));
+        //colocarWord(2, 2, words.get(1));
+        //colocarWord(1, 2, words.get(2));
+        //colocarWord(1, 2, words.get(3));
+        //colocarWord(2, 1, words.get(4));
+        //colocarWord(3, 1, words.get(1));
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 System.out.print(m2[i][j]);
@@ -61,6 +61,8 @@ public class Palavras {
     public void colocarWord(int orientacao, int ordem, String[] palavra){
         int linha = 0,coluna = 0, tamWord, cont = 0;
         boolean inverter; boolean stop = false;
+        tamWord = (ordem==1) ? 0:palavra.length-1; inverter = (ordem != 1);
+        System.out.println(tamWord);
         if(orientacao==1){ //Horizontais
             while(!stop){
                 cont = 0;
@@ -75,7 +77,6 @@ public class Palavras {
                     }
                 }
             }
-            tamWord = (ordem==1) ? 0:palavra.length-1; inverter = (ordem != 1);
             for(int j = coluna; j<coluna+palavra.length; j++){
                 m2[linha][j] = 1;
                 m[linha][j] = palavra[tamWord].toUpperCase();
@@ -96,11 +97,36 @@ public class Palavras {
                     
                 }
             }
-            tamWord = (ordem==1) ? 0:palavra.length-1; inverter = (ordem != 1);
             for(int j = linha; j<linha+palavra.length; j++){
                 m2[j][coluna] = 1;
                 m[j][coluna] = palavra[tamWord].toUpperCase();
                 if(!inverter){tamWord++;}else{tamWord--;}
+            }
+        }else if(orientacao==3){
+            while(!stop){
+                cont = 0;
+                linha = sortLC(palavra.length);
+                coluna = sortLC(palavra.length);
+                for(int i = linha; i<linha+palavra.length; i++){
+                    for(int j = coluna; j<coluna+palavra.length; j++){
+                        if(m2[i][j]!=1){
+                            cont++;
+                        }
+                        if(cont==palavra.length){
+                            stop = true;
+                        }
+                    }
+                }
+            }
+            System.out.println(palavra.length);
+            for(int j = linha; j<linha+palavra.length; j++){
+                for(int k = coluna; k<coluna+palavra.length; k++){
+                    System.out.println(j+" "+k);
+                    m2[j][k] = 1;
+                    m[j][k] = palavra[tamWord].toUpperCase();
+                    if(!inverter){tamWord++;}else{tamWord--;}
+                    System.out.println("00 "+tamWord);
+                }
             }
         }
         
