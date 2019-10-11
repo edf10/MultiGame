@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 public class Palavras {
     private final Random sortear = new Random();
@@ -31,9 +32,9 @@ public class Palavras {
     }
     
     public void sortWords(){
-        int quantwords = 2;
+        int quantwords = 5;
         for(int i = 0; i<quantwords; i++){
-            colocarWord(2, 1, sortWord());
+            colocarWord(2, 1, words.get(i));
         }
     }
     
@@ -109,20 +110,27 @@ public class Palavras {
     }
     
     public int sortLC(int tamWord){ //sortear linha ou coluna ou os dois
-        int pos; boolean repetida = false;
+        int pos;
         while(true){
             int sorteado = sortear.nextInt(x);
-            for(int i = 0; i<mapawords.size(); i++){
-                if(mapawords.get(i)==words.get(sorteado)){
-                    repetida = true;
-                }
-            }
-            if(sorteado+tamWord<x&&!repetida){mapawords.add(words.get(sortear.nextInt(words.size())));pos = sorteado;return pos;}
+            if(sorteado+tamWord<x){pos = sorteado;return pos;}
         }
     }
 
     public String[] sortWord(){
-        return words.get(sortear.nextInt(words.size()));
+        boolean repetida = false;
+        while(true){
+            String[] word =  words.get(sortear.nextInt(words.size()));
+            for(int i = 0 ; i<mapawords.size(); i++){
+                if(mapawords.get(i)==word){
+                    repetida = true;
+                }
+            }
+            if(repetida==false){
+                mapawords.add(word);
+                return word;
+            }
+        }
     }
     
     public void letras(){
