@@ -5,12 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 public class Palavras {
     private final Random sortear = new Random();
     private final ArrayList<String[]> words = new ArrayList<String[]>(); //Pavras do arquivo txt
     private final String[] alfabeto = {"A","B","C","D","E","F","G","H","I","J","K","L","M",
                                  "N","O","P","Q","R","S","T","U","V","W","X","Y","Z",};
+    private ArrayList<String[]> mapawords = new ArrayList<String[]>(); //Mapear palavras na tela, para que não sejam repetidas.
     private int x, y;
     private String[][] m; //Matriz de letras
     private int[][] m2; //Mapear palavras
@@ -31,6 +33,13 @@ public class Palavras {
                 System.out.print(m2[i][j]);
             }
             System.out.println();
+        }
+    }
+    
+    public void sortWords(){
+        int quantwords = 5;
+        for(int i = 0; i<quantwords; i++){
+            colocarWord(2, 1, words.get(i));
         }
     }
     
@@ -94,7 +103,6 @@ public class Palavras {
                     if(cont==palavra.length){
                         stop = true;
                     }
-                    
                 }
             }
             for(int j = linha; j<linha+palavra.length; j++){
@@ -136,13 +144,24 @@ public class Palavras {
         int pos;
         while(true){
             int sorteado = sortear.nextInt(x);
-            if(sorteado+tamWord<x){pos = sorteado;break;}
+            if(sorteado+tamWord<x){pos = sorteado;return pos;}
         }
-        return pos;
     }
 
     public String[] sortWord(){
-        return words.get(sortear.nextInt(words.size()));
+        boolean repetida = false;
+        while(true){
+            String[] word =  words.get(sortear.nextInt(words.size()));
+            for(int i = 0 ; i<mapawords.size(); i++){
+                if(mapawords.get(i)==word){
+                    repetida = true;
+                }
+            }
+            if(repetida==false){
+                mapawords.add(word);
+                return word;
+            }
+        }
     }
     
     public void letras(){
