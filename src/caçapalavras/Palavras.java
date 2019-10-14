@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 public class Palavras {
     private final Random sortear = new Random();
@@ -21,25 +20,55 @@ public class Palavras {
         niveis(n);
         m = new String[x][y];
         m2 = new int[x][y];
-        letras();
-        colocarWord(1, 1, words.get(0));
-        //colocarWord(2, 2, words.get(1));
-        //colocarWord(1, 2, words.get(2));
-        //colocarWord(1, 2, words.get(3));
-        //colocarWord(2, 1, words.get(4));
-        //colocarWord(3, 1, words.get(1));
+        //letras();
+        addWord(3, 2, words.get(0));        /*
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 System.out.print(m2[i][j]);
             }
             System.out.println();
+        }*/
+    }
+    
+    public void addWord(int orientacao, int invertida, String[] palavra){
+        int cont = (invertida==1)?0:palavra.length-1; 
+        int tamWord = palavra.length;
+        int linha = 0, coluna = 0;
+        if(orientacao==1){
+            linha = sortear.nextInt(x);
+            coluna = lineAndColumn(tamWord);
+            for(int i = coluna; i<coluna+palavra.length; i++){
+                m2[linha][i] = 1;
+                m[linha][i] = palavra[cont].toUpperCase();
+                if(invertida==1){cont++;}else{cont--;}
+            }
+        }else if(orientacao==2){
+            linha = lineAndColumn(tamWord);
+            coluna = sortear.nextInt(x);
+            for(int i = linha; i<linha+palavra.length; i++){
+                m2[i][coluna] = 1;
+                m[i][coluna] = palavra[cont].toUpperCase();
+                if(invertida==1){cont++;}else{cont--;}
+            }
+        }else if(orientacao==3){
+            linha = coluna = lineAndColumn(tamWord);
+            for(int i = linha; i<linha+palavra.length; i++){
+                m2[i][i] = 1;
+                m[i][i] = palavra[cont].toUpperCase();
+                if(invertida==1){cont++;}else{cont--;}
+            }
+        }else if(orientacao==4){
+            linha = lineAndColumn(tamWord);
+            
         }
     }
     
-    public void sortWords(){
-        int quantwords = 5;
-        for(int i = 0; i<quantwords; i++){
-            colocarWord(2, 1, words.get(i));
+    public int lineAndColumn(int tamWord){
+        while(true){
+            int sorteado = sortear.nextInt(x);
+            if(sorteado+tamWord<x){
+                return sorteado;
+            }
         }
     }
     
@@ -67,103 +96,6 @@ public class Palavras {
             f.close();
         }catch(FileNotFoundException e){}catch(IOException e){}
     }
-    public void colocarWord(int orientacao, int ordem, String[] palavra){
-        int linha = 0,coluna = 0, tamWord, cont = 0;
-        boolean inverter; boolean stop = false;
-        tamWord = (ordem==1) ? 0:palavra.length-1; inverter = (ordem != 1);
-        System.out.println(tamWord);
-        if(orientacao==1){ //Horizontais
-            while(!stop){
-                cont = 0;
-                linha = sortear.nextInt(x);
-                coluna = sortLC(palavra.length);
-                for(int i = coluna; i<coluna+palavra.length; i++){
-                    if(m2[linha][i]!=1){
-                        cont++;
-                    }
-                    if(cont==palavra.length){
-                        stop = true;
-                    }
-                }
-            }
-            for(int j = coluna; j<coluna+palavra.length; j++){
-                m2[linha][j] = 1;
-                m[linha][j] = palavra[tamWord].toUpperCase();
-                if(!inverter){tamWord++;}else{tamWord--;}
-            }
-        }else if(orientacao==2){ //Verticais
-            while(!stop){
-                cont = 0;
-                coluna = sortear.nextInt(x);
-                linha = sortLC(palavra.length);
-                for(int i = linha; i<linha+palavra.length; i++){
-                    if(m2[i][coluna]!=1){
-                        cont++;
-                    }
-                    if(cont==palavra.length){
-                        stop = true;
-                    }
-                }
-            }
-            for(int j = linha; j<linha+palavra.length; j++){
-                m2[j][coluna] = 1;
-                m[j][coluna] = palavra[tamWord].toUpperCase();
-                if(!inverter){tamWord++;}else{tamWord--;}
-            }
-        }else if(orientacao==3){
-            while(!stop){
-                cont = 0;
-                linha = sortLC(palavra.length);
-                coluna = sortLC(palavra.length);
-                for(int i = linha; i<linha+palavra.length; i++){
-                    for(int j = coluna; j<coluna+palavra.length; j++){
-                        if(m2[i][j]!=1){
-                            cont++;
-                        }
-                        if(cont==palavra.length){
-                            stop = true;
-                        }
-                    }
-                }
-            }
-            System.out.println(palavra.length);
-            for(int j = linha; j<linha+palavra.length; j++){
-                for(int k = coluna; k<coluna+palavra.length; k++){
-                    System.out.println(j+" "+k);
-                    m2[j][k] = 1;
-                    m[j][k] = palavra[tamWord].toUpperCase();
-                    if(!inverter){tamWord++;}else{tamWord--;}
-                    System.out.println("00 "+tamWord);
-                }
-            }
-        }
-        
-    }
-    
-    public int sortLC(int tamWord){ //sortear linha ou coluna ou os dois
-        int pos;
-        while(true){
-            int sorteado = sortear.nextInt(x);
-            if(sorteado+tamWord<x){pos = sorteado;return pos;}
-        }
-    }
-
-    public String[] sortWord(){
-        boolean repetida = false;
-        while(true){
-            String[] word =  words.get(sortear.nextInt(words.size()));
-            for(int i = 0 ; i<mapawords.size(); i++){
-                if(mapawords.get(i)==word){
-                    repetida = true;
-                }
-            }
-            if(repetida==false){
-                mapawords.add(word);
-                return word;
-            }
-        }
-    }
-    
     public void letras(){
         for(int i = 0; i<x ; i++){
             for(int j = 0; j<y; j++){
