@@ -10,7 +10,7 @@ public class TelaCP extends Frame{
     
     public TelaCP(){
         super(800,600);
-        x = y = 8;
+        x = y = p.getX();
         CP();
         setVisible(true);
     }
@@ -19,12 +19,12 @@ public class TelaCP extends Frame{
     private Pn pnWords;
     private Letra[][] letras;
     public void CP(){
-        GridLayout campo = new GridLayout(8,8);
+        GridLayout campo = new GridLayout(x,y);
         int pnWordsP[] = {0,0,784,580};
         pnWords = new Pn(pnWordsP, campo);
-        letras = new Letra[8][8];
-        for(int i = 0; i<8 ; i++){
-            for(int j = 0; j<8 ; j++){
+        letras = new Letra[x][y];
+        for(int i = 0; i<x ; i++){
+            for(int j = 0; j<y ; j++){
                 letras[i][j] = new Letra(p.getM(i, j),i,j);
                 pnWords.add(letras[i][j]);
             }

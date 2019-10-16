@@ -5,40 +5,81 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 public class Palavras {
     private final Random sortear = new Random();
     private final ArrayList<String[]> words = new ArrayList<String[]>(); //Pavras do arquivo txt
     private final String[] alfabeto = {"A","B","C","D","E","F","G","H","I","J","K","L","M",
-                                 "N","O","P","Q","R","S","T","U","V","W","X","Y","Z",};
+                                       "N","O","P","Q","R","S","T","U","V","W","X","Y","Z",};
     private ArrayList<String[]> mapawords = new ArrayList<String[]>(); //Mapear palavras na tela, para que não sejam repetidas.
     private int x, y;
     private String[][] m; //Matriz de letras
-    private int[][] m2; //Mapear palavras
+    private String[][] m2; //Mapear palavras
+    
+    public String[] codificarLetras(String[] palavra){
+        String codificados[] = new String[palavra.length];
+        for(int i = 0; i<palavra.length; i++){
+            codificados[i] = palavra[i];
+        }
+        return codificados;
+    }
     
     public Palavras(int n){
         niveis(n);
         m = new String[x][y];
-        m2 = new int[x][y];
+        m2 = new String[x][y];
         //letras();
-        addWord(3, 2, words.get(0));        /*
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                System.out.print(m2[i][j]);
+        addWord(4, 1, words.get(0)); 
+        addWord(2, 1, words.get(1));
+        for (int i = 0; i < x; i++) {
+            for (int j = 0; j < y; j++) {
+                System.out.print("|"+m2[i][j]+"|");
             }
             System.out.println();
-        }*/
+        }
+        for(int i = 0; i<mapawords.size(); i++){
+            System.out.println(Arrays.toString(mapawords.get(i)));
+        }
+    }
+    
+    public boolean manterWordsInteiras(int l[], int c[], String[] word){ //Lógica de cruzar palavras.
+        int allWords = 0; int tamWord = 0;
+        while(allWords<mapawords.size()){
+            for(int i = l[0]; i<l.length; i++){
+                tamWord = 0;
+                for(int j = c[0]; j<c.length; j++){
+                    if(m[i][j].equals(word[tamWord])){
+                        String v = m[i][j];
+                        if((m[i][j] = word[tamWord]).equals(v)){
+                            return true;
+                        }else{
+                            m[i][j] = v;
+                        }
+                    }
+                    tamWord++;
+                }
+            }
+            allWords++;
+        }
+        return false;
     }
     
     public void addWord(int orientacao, int invertida, String[] palavra){
         int cont = (invertida==1)?0:palavra.length-1; 
         int tamWord = palavra.length;
         int linha = 0, coluna = 0;
+        String codLetras[] = codificarLetras(palavra);
+        System.out.println("");
+        for(int i = 0; i<palavra.length; i++){
+            System.out.println(codLetras[i]);
+        }
         if(orientacao==1){
             linha = sortear.nextInt(x);
             coluna = lineAndColumn(tamWord);
+            
             for(int i = coluna; i<coluna+palavra.length; i++){
-                m2[linha][i] = 1;
+                m2[linha][i] = codLetras[cont].toUpperCase();
                 m[linha][i] = palavra[cont].toUpperCase();
                 if(invertida==1){cont++;}else{cont--;}
             }
@@ -46,21 +87,33 @@ public class Palavras {
             linha = lineAndColumn(tamWord);
             coluna = sortear.nextInt(x);
             for(int i = linha; i<linha+palavra.length; i++){
-                m2[i][coluna] = 1;
+                m2[i][coluna] = codLetras[cont].toUpperCase();
                 m[i][coluna] = palavra[cont].toUpperCase();
                 if(invertida==1){cont++;}else{cont--;}
             }
         }else if(orientacao==3){
-            linha = coluna = lineAndColumn(tamWord);
-            for(int i = linha; i<linha+palavra.length; i++){
-                m2[i][i] = 1;
-                m[i][i] = palavra[cont].toUpperCase();
+            linha = lineAndColumn(tamWord);
+            coluna = lineAndColumn(tamWord);
+            int i = linha;int j = coluna;
+            while(i<linha+tamWord){
+                m2[i][j] = codLetras[cont].toUpperCase();
+                m[i][j] = palavra[cont].toUpperCase();
                 if(invertida==1){cont++;}else{cont--;}
+                i++;j++;
             }
         }else if(orientacao==4){
             linha = lineAndColumn(tamWord);
-            
+            coluna = linha+tamWord;
+            int i = linha;
+            int j = coluna;
+            while(i<linha+tamWord){
+                m2[i][j] = codLetras[cont].toUpperCase();
+                m[i][j] = palavra[cont].toUpperCase();
+                if(invertida==1){cont++;}else{cont--;}
+                i++;j--;
+            }
         }
+        mapawords.add(palavra);
     }
     
     public int lineAndColumn(int tamWord){
@@ -71,7 +124,6 @@ public class Palavras {
             }
         }
     }
-    
     private void niveis(int n){
         switch(n){
             case 1: x = y = 8; break;
@@ -81,7 +133,6 @@ public class Palavras {
         }
         arqGet();
     }
-    
     public void arqGet(){ //Pegar palavras do arquivo txt.
         try{
             FileInputStream f = new FileInputStream("questions/caçapalavras/words.txt");
@@ -105,5 +156,11 @@ public class Palavras {
     }
     public String getM(int i, int j) {
         return m[i][j];
+    }
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
     }
 }
