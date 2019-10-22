@@ -16,14 +16,7 @@ public class Palavras {
     private int x, y;
     private String[][] m; //Matriz de letras
     private String[][] m2; //Mapear palavras
-    
-    public String[] codificarLetras(String[] palavra){
-        String codificados[] = new String[palavra.length];
-        for(int i = 0; i<palavra.length; i++){
-            codificados[i] = palavra[i];
-        }
-        return codificados;
-    }
+    private int[][] m3; //Posições onde a String não pode ser alterada.
     
     public Palavras(int n){
         niveis(n);
@@ -43,43 +36,16 @@ public class Palavras {
         }
     }
     
-    public boolean manterWordsInteiras(int l[], int c[], String[] word){ //Lógica de cruzar palavras.
-        int allWords = 0; int tamWord = 0;
-        while(allWords<mapawords.size()){
-            for(int i = l[0]; i<l.length; i++){
-                tamWord = 0;
-                for(int j = c[0]; j<c.length; j++){
-                    if(m[i][j].equals(word[tamWord])){
-                        String v = m[i][j];
-                        if((m[i][j] = word[tamWord]).equals(v)){
-                            return true;
-                        }else{
-                            m[i][j] = v;
-                        }
-                    }
-                    tamWord++;
-                }
-            }
-            allWords++;
-        }
-        return false;
-    }
-    
     public void addWord(int orientacao, int invertida, String[] palavra){
         int cont = (invertida==1)?0:palavra.length-1; 
         int tamWord = palavra.length;
         int linha = 0, coluna = 0;
-        String codLetras[] = codificarLetras(palavra);
-        System.out.println("");
-        for(int i = 0; i<palavra.length; i++){
-            System.out.println(codLetras[i]);
-        }
         if(orientacao==1){
             linha = sortear.nextInt(x);
             coluna = lineAndColumn(tamWord);
             
             for(int i = coluna; i<coluna+palavra.length; i++){
-                m2[linha][i] = codLetras[cont].toUpperCase();
+                m2[linha][i] = palavra[cont].toUpperCase();
                 m[linha][i] = palavra[cont].toUpperCase();
                 if(invertida==1){cont++;}else{cont--;}
             }
@@ -87,7 +53,7 @@ public class Palavras {
             linha = lineAndColumn(tamWord);
             coluna = sortear.nextInt(x);
             for(int i = linha; i<linha+palavra.length; i++){
-                m2[i][coluna] = codLetras[cont].toUpperCase();
+                m2[i][coluna] = palavra[cont].toUpperCase();
                 m[i][coluna] = palavra[cont].toUpperCase();
                 if(invertida==1){cont++;}else{cont--;}
             }
@@ -96,7 +62,7 @@ public class Palavras {
             coluna = lineAndColumn(tamWord);
             int i = linha;int j = coluna;
             while(i<linha+tamWord){
-                m2[i][j] = codLetras[cont].toUpperCase();
+                m2[i][j] = palavra[cont].toUpperCase();
                 m[i][j] = palavra[cont].toUpperCase();
                 if(invertida==1){cont++;}else{cont--;}
                 i++;j++;
@@ -107,7 +73,7 @@ public class Palavras {
             int i = linha;
             int j = coluna;
             while(i<linha+tamWord){
-                m2[i][j] = codLetras[cont].toUpperCase();
+                m2[i][j] = palavra[cont].toUpperCase();
                 m[i][j] = palavra[cont].toUpperCase();
                 if(invertida==1){cont++;}else{cont--;}
                 i++;j--;

@@ -12,3 +12,4 @@ Ideias:
 		# Desafio: Pode ser uma partida de resta 01 ou uma pergunta sobre geometria e outros;
 - Em todos os jogos com perguntas, criar uma Jframe ou JPanel para o usuário personalizar ou escolher as perguntas no jogo;
 - Gráfico de desempenho do usuário;
+- Easter egg Campo Minado: Versão clássica do jogo.
