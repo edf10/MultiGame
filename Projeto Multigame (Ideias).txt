@@ -1,0 +1,15 @@
+====Project Poo, Math and Eletronic====
+
+Ideias:
+- Gráfico da tabela de recordes;
+- Experiência do Usuário: 
+	* Pontuação e Pemiação: Troféus, Títulos e Moedas (Para comprar items para personalizar jogos).
+- Criar um Jframe "loja";
+- Jogo de Plataforma:
+	* Moedas espalhadas pelo ambiente percorrida pelo personagem.
+	* Inimigos espalhados:
+		# Quando colidir com um inimigo haverá um desafio a ser completado (caso não, perde-se uma vida);
+		# Desafio: Pode ser uma partida de resta 01 ou uma pergunta sobre geometria e outros;
+- Em todos os jogos com perguntas, criar uma Jframe ou JPanel para o usuário personalizar ou escolher as perguntas no jogo;
+- Gráfico de desempenho do usuário;
+- Easter egg Campo Minado: Versão clássica do jogo.
