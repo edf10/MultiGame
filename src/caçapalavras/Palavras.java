@@ -39,15 +39,14 @@ public class Palavras {
     
     public void escWords(){
         while(mapawords.size()<quantWords){
-            System.out.println(mapawords.size());
             int orien = sortear.nextInt(4)+1;
             int invertida = sortear.nextInt(2)+1;
             int w = sortear.nextInt(words.size());
-            System.out.println();
-            if(mapawords.contains(words.get(w))==false){
-                boolean conf = addWord(orien, invertida, words.get(w));
-                System.out.println(conf);
-                if(conf){mapawords.add(words.get(w));}
+            if(words.get(w).length<x){
+                if(mapawords.contains(words.get(w))==false){
+                    boolean conf = addWord(orien, invertida, words.get(w));
+                    if(conf){mapawords.add(words.get(w));}
+                }
             }
         }
     }
@@ -140,8 +139,8 @@ public class Palavras {
     private void niveis(int n){
         switch(n){
             case 1: x = y = 10; quantWords = 6; break;
-            case 2: x = y = 10; quantWords = 8; break;
-            case 3: x = y = 12; quantWords = 10; break;
+            case 2: x = y = 14; quantWords = 8; break;
+            case 3: x = y = 16; quantWords = 10; break;
             default: break;
         }
         arqGet();
@@ -175,5 +174,8 @@ public class Palavras {
     }
     public int getY() {
         return y;
+    }
+    public String[][] getM2() {
+        return m2;
     }
 }
