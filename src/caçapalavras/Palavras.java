@@ -14,6 +14,7 @@ public class Palavras {
                                        "N","O","P","Q","R","S","T","U","V","W","X","Y","Z",};
     private ArrayList<String[]> mapawords = new ArrayList<String[]>(); //Mapear palavras na tela, para que não sejam repetidas.
     private int x, y;
+    private int quantWords;
     private String[][] m; //Matriz de letras
     private String[][] m2; //Mapear palavras
     private int[][] m3; //Posições onde a String não pode ser alterada.
@@ -22,9 +23,9 @@ public class Palavras {
         niveis(n);
         m = new String[x][y];
         m2 = new String[x][y];
+        //addWord(4, 1, words.get(2));
+        escWords();
         //letras();
-        addWord(4, 1, words.get(0)); 
-        addWord(2, 1, words.get(1));
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 System.out.print("|"+m2[i][j]+"|");
@@ -36,65 +37,110 @@ public class Palavras {
         }
     }
     
-    public void addWord(int orientacao, int invertida, String[] palavra){
-        int cont = (invertida==1)?0:palavra.length-1; 
+    public void escWords(){
+        while(mapawords.size()<quantWords){
+            int orien = sortear.nextInt(4)+1;
+            int invertida = sortear.nextInt(2)+1;
+            int w = sortear.nextInt(words.size());
+            if(words.get(w).length<x){
+                if(mapawords.contains(words.get(w))==false){
+                    boolean conf = addWord(orien, invertida, words.get(w));
+                    if(conf){mapawords.add(words.get(w));}
+                }
+            }
+        }
+    }
+    
+    public boolean addWord(int orientacao, int invertida, String[] palavra){
         int tamWord = palavra.length;
         int linha = 0, coluna = 0;
+        boolean ok = true;
+        int cont = (invertida==1)?0:palavra.length-1; 
+        ok = true; int contWordCr = 0; boolean tudocerto = false;
         if(orientacao==1){
             linha = sortear.nextInt(x);
             coluna = lineAndColumn(tamWord);
-            
-            for(int i = coluna; i<coluna+palavra.length; i++){
-                m2[linha][i] = palavra[cont].toUpperCase();
-                m[linha][i] = palavra[cont].toUpperCase();
-                if(invertida==1){cont++;}else{cont--;}
+            int i = linha; int j = coluna;
+            while(ok==true){
+                if(j==coluna+palavra.length){break;}
+                if(m[i][j]==null||m[i][j].equals(palavra[cont].toUpperCase())){
+                    contWordCr++;
+                }else{ok = false;}
+                if(contWordCr==tamWord){tudocerto = true; j = coluna; continue;}
+                if(tudocerto==true){
+                    m2[i][j] = palavra[cont].toUpperCase();
+                    m[i][j] = palavra[cont].toUpperCase();
+                    if(invertida==1){cont++;}else{cont--;}
+                }
+                j++;
             }
         }else if(orientacao==2){
             linha = lineAndColumn(tamWord);
             coluna = sortear.nextInt(x);
-            for(int i = linha; i<linha+palavra.length; i++){
-                m2[i][coluna] = palavra[cont].toUpperCase();
-                m[i][coluna] = palavra[cont].toUpperCase();
-                if(invertida==1){cont++;}else{cont--;}
+            int i = linha; int j = coluna;
+            while(ok==true){
+                if(i==linha+palavra.length){break;}
+                if(m[i][j]==null||m[i][j].equals(palavra[cont].toUpperCase())){
+                    contWordCr++;
+                }else{ok = false;}
+                if(contWordCr==tamWord){tudocerto = true; i = linha; continue;}
+                if(tudocerto==true){
+                    m2[i][coluna] = palavra[cont].toUpperCase();
+                    m[i][coluna] = palavra[cont].toUpperCase();
+                    if(invertida==1){cont++;}else{cont--;}
+                }
+                i++;
             }
         }else if(orientacao==3){
             linha = lineAndColumn(tamWord);
             coluna = lineAndColumn(tamWord);
             int i = linha;int j = coluna;
-            while(i<linha+tamWord){
-                m2[i][j] = palavra[cont].toUpperCase();
-                m[i][j] = palavra[cont].toUpperCase();
-                if(invertida==1){cont++;}else{cont--;}
+            while(ok==true){
+                if(i==linha+tamWord){break;}
+                if(m[i][j]==null||m[i][j].equals(palavra[cont].toUpperCase())){
+                    contWordCr++;
+                }else{ok = false;}
+                if(contWordCr==tamWord){tudocerto = true; i = linha; j = coluna; continue;}
+                if(tudocerto==true){
+                    m2[i][j] = palavra[cont].toUpperCase();
+                    m[i][j] = palavra[cont].toUpperCase();
+                    if(invertida==1){cont++;}else{cont--;}
+                }
                 i++;j++;
             }
         }else if(orientacao==4){
-            linha = lineAndColumn(tamWord);
-            coluna = linha+tamWord;
-            int i = linha;
-            int j = coluna;
-            while(i<linha+tamWord){
-                m2[i][j] = palavra[cont].toUpperCase();
-                m[i][j] = palavra[cont].toUpperCase();
-                if(invertida==1){cont++;}else{cont--;}
+            linha = lineAndColumn(tamWord);coluna = linha+tamWord-1;
+            int i = linha; int j = coluna;
+            while(ok==true){
+                if(i==linha+tamWord){break;}
+                if(m[i][j]==null||m[i][j].equals(palavra[cont].toUpperCase())){
+                   contWordCr++;
+                }else{ok = false;}
+                if(contWordCr==tamWord){tudocerto = true; i = linha; j = coluna; continue;}
+                if(tudocerto==true){
+                    m2[i][j] = palavra[cont].toUpperCase();
+                    m[i][j] = palavra[cont].toUpperCase();
+                    if(invertida==1){cont++;}else{cont--;}
+                }
                 i++;j--;
             }
         }
-        mapawords.add(palavra);
+        if(ok){return true;}else{return false;}
     }
     
     public int lineAndColumn(int tamWord){
         while(true){
             int sorteado = sortear.nextInt(x);
-            if(sorteado+tamWord<x){
+            if(sorteado+tamWord-1<x){
                 return sorteado;
             }
         }
     }
     private void niveis(int n){
         switch(n){
-            case 1: x = y = 8; break;
-            case 2: x = y = 10; break;
-            case 3: x = y = 12; break;
+            case 1: x = y = 10; quantWords = 6; break;
+            case 2: x = y = 14; quantWords = 8; break;
+            case 3: x = y = 16; quantWords = 10; break;
             default: break;
         }
         arqGet();
@@ -116,7 +162,7 @@ public class Palavras {
     public void letras(){
         for(int i = 0; i<x ; i++){
             for(int j = 0; j<y; j++){
-                m[i][j] = alfabeto[sortear.nextInt(8)];
+                if(m[i][j]==null){m[i][j] = alfabeto[sortear.nextInt(8)];}
             }
         }
     }
@@ -128,5 +174,8 @@ public class Palavras {
     }
     public int getY() {
         return y;
+    }
+    public String[][] getM2() {
+        return m2;
     }
 }

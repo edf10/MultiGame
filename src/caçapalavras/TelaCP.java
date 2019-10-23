@@ -3,24 +3,34 @@ import componentes.Btn;
 import componentes.Frame;
 import componentes.Pn;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 public class TelaCP extends Frame{
-    
-    public TelaCP(){
-        super(800,600);
+    private boolean[][] mWords;
+    private int nivel;
+    public TelaCP(int n){
+        super(800,700);
+        p = new Palavras(n);
+        nivel = n;
         x = y = p.getX();
+        mWords = new boolean[x][y];
+        for (int i = 0; i < x; i++) {
+            for (int j = 0; j < y; j++) {
+                mWords[i][j] = false;
+            }
+        }
         CP();
         setVisible(true);
     }
     private int x; private int y;
-    private Palavras p = new Palavras(1);
+    private Palavras p;
     private Pn pnWords;
     private Letra[][] letras;
     public void CP(){
         GridLayout campo = new GridLayout(x,y);
-        int pnWordsP[] = {0,0,784,580};
+        int pnWordsP[] = {0,0,784,700};
         pnWords = new Pn(pnWordsP, campo);
         letras = new Letra[x][y];
         for(int i = 0; i<x ; i++){
@@ -29,19 +39,42 @@ public class TelaCP extends Frame{
                 pnWords.add(letras[i][j]);
             }
         }
-        
         add(pnWords);
+    }
+    
+    public void ganhar(){
+        int cont = 0;
+        for(int i = 0; i<x; i++){
+            for(int j = 0; j<y; j++){
+                if(mWords[i][j]){cont++;}
+            }
+        }
+        if(cont==quantCWords()){
+            System.out.println("Ganhou");
+        }
+    }
+    
+    public int quantCWords(){
+        String[][] m2 = p.getM2();
+        int quantCaracWords = 0;
+        for(int i = 0; i<x; i++){
+            for(int j = 0; j<y; j++){
+                if(m2[i][j]!=null){
+                    quantCaracWords++;
+                }
+            }
+        }
+        return quantCaracWords;
     }
     
     public class Letra extends Btn{
         private int x, y;
-        private String l;
         public Letra(String l, int x, int y){
-            this.l = l;
-            setText(""+l);
+            setText(l);
             this.x = x; this.y = y;
             setBackground(Color.black);
             setForeground(Color.white);
+            setFont(new Font("Arial", Font.PLAIN, 9));
             addActionListener(new Evento());
         }
         
@@ -49,9 +82,10 @@ public class TelaCP extends Frame{
             @Override
             public void actionPerformed(ActionEvent ae) {
                 setBackground(Color.blue);
+                mWords[x][y] = true;
+                ganhar();
             }
         }
-        
     }
     
 }

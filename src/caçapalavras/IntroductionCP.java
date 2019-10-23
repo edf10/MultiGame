@@ -43,9 +43,35 @@ public class IntroductionCP extends IntroductionGame{
     public class Start implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent ae) {
-            dispose();
-            TelaCP tcp = new TelaCP();
+            pnIntro.setVisible(false);
+            niveis();
         }
     }
     
+    private Pn pnNiveis;
+    private final ImageIcon imF = new ImageIcon("");
+    public void niveis(){
+        int pnNiveisP[] = {0,0,800,600}; int lbfundoP[] = {0,0,800,600};
+        int btnFP[] = {300,100,200,100}; int btnMP[] = {300,210,200,100}; int btnDP[] = {300,320,200,100};
+        Font f = new Font("Arial", Font.PLAIN, 40);
+        Component cp[] = {
+            new Btn("Fácil", f, Color.darkGray, Color.BLACK, btnFP, null, true, false, new Niveis(1)),
+            new Btn("Médio", f, Color.darkGray, Color.BLACK, btnMP, null, true, false, new Niveis(2)),
+            new Btn("Difícil", f, Color.darkGray, Color.BLACK, btnDP, null, true, false, new Niveis(3)),
+            new Lb(imF, lbfundoP)
+        };
+        
+        pnNiveis = new Pn(pnNiveisP, cp);
+        add(pnNiveis);
+    }
+    
+    public class Niveis implements ActionListener{
+        private int nivel;
+        public Niveis(int n){nivel = n;}
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            dispose();
+            TelaCP tcp = new TelaCP(nivel);
+        }
+    }
 }
