@@ -21,20 +21,25 @@ import user.Conta;
 
 public class MultiGameTela extends Frame{
     private Pn pnIniciar;
-    private final ImageIcon gifArq = new ImageIcon(getClass().getResource("imagens/01.gif"));
-    private final ImageIcon btnImageArq = new ImageIcon(getClass().getResource("imagens/btn1.png"));
+    private final ImageIcon imBack = new ImageIcon(getClass().getResource("imagens/logo_430x100.png"));
+    private final ImageIcon gifArq = new ImageIcon(getClass().getResource("imagens/background_800x600.jpg"));
+    private final ImageIcon btnImageArq1 = new ImageIcon(getClass().getResource("imagens/btnStart_180x180.png"));
+    private final ImageIcon btnImageArq2 = new ImageIcon(getClass().getResource("imagens/btnStart_200x200.png"));
+    private final ImageIcon imSom = new ImageIcon(getClass().getResource("imagens/som_40x29.png"));
     public MultiGameTela(int i) {
         super(800, 600);
         if(i==1){
             /* Configurando lbs - PainelInicial */
             Font titulo = new Font("Arial", Font.PLAIN, 40);//Fonte
-            int lbtituloP[] = {250,40,300,60}; int lbgifP[] = {0,0,800,600};
+            int lbtituloP[] = {185,40,430,100}; int lbgifP[] = {0,0,800,600};
+            int btnSomP[] = {20,20,40,29};
             /* Configurando BtnStart */
-            int btnStartP[] = {300,200,200,200}; BtnStart evento = new BtnStart();
+            int btnStartP[] = {310,230,180,180}; BtnStart evento = new BtnStart();
             /* Painel Iniciar */
             Component cp[] = {
-                new Btn(btnImageArq, null, null, btnStartP, null, false, evento),
-                new Lb("MULTIGAME", titulo, lbtituloP, Color.WHITE, BorderFactory.createLineBorder(Color.WHITE)),
+                new Btn(btnImageArq1, null, null, btnStartP, null, false, evento),
+                new Lb(imBack, lbtituloP),
+                new Btn(imSom, null, null, btnSomP, null, false, null),
                 new Lb(gifArq, lbgifP)
             };
             int pnIniciarP[] = {0,0,800,600}; pnIniciar = new Pn(pnIniciarP, cp);
