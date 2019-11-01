@@ -26,15 +26,17 @@ public class MultiGameTela extends Frame{
     private final ImageIcon imLogo = new ImageIcon(getClass().getResource("imagens/title_multigame.png"));
     private final ImageIcon imBack = new ImageIcon(getClass().getResource("imagens/back_initial_multigame.jpg"));
     private final ImageIcon imPlay = new ImageIcon(getClass().getResource("imagens/btn_play.png"));
+    private final ImageIcon imPlayT = new ImageIcon(getClass().getResource("imagens/btn_play_t.png"));
+    private final ImageIcon imPlayP = new ImageIcon(getClass().getResource("imagens/btn_play_p.png"));
     private final ItemsTela it = new ItemsTela();
     private Dimension tamTela;
     public MultiGameTela(int i) {
         if(i==1){
-            Font titulo = new Font("Arial", Font.PLAIN, 40);//Fonte
+            ImageIcon btn_play[] = {imPlay, imPlayT, imPlayP};
             int titlePos[] = {280,40,639,155}; int backPos[] = {0,0,1200,700};
             int playPos[] = {488,290,224,224};
             Component cp[] = {
-                new Btn(imPlay, playPos, new EventBtnPlay()),
+                new Btn(btn_play, playPos, new EventBtnPlay()),
                 new Lb(imLogo, titlePos),
                 it.btnSom(),
                 it.btnClose(),
@@ -94,36 +96,46 @@ public class MultiGameTela extends Frame{
     private Pn pnLogin;
     private Txt txtUserName;
     private Pass txtPassword;
-    private final ImageIcon imLog = new ImageIcon(getClass().getResource("imagens/login.jpg"));
-    private final ImageIcon imUser = new ImageIcon(getClass().getResource("imagens/user.png"));
-    private final ImageIcon imPass = new ImageIcon(getClass().getResource("imagens/pass.png"));
+    private final ImageIcon imTitleLog = new ImageIcon(getClass().getResource("imagens/title_login.png"));
+    private final ImageIcon imQuadro = new ImageIcon(getClass().getResource("imagens/left_quadro.gif"));
+    private final ImageIcon imBarra = new ImageIcon(getClass().getResource("imagens/barra.png"));
+    private final ImageIcon imUserIcon = new ImageIcon(getClass().getResource("imagens/user_icon.png"));
+    private final ImageIcon imPassIcon = new ImageIcon(getClass().getResource("imagens/password_icon.png"));
+    private final ImageIcon imLogar = new ImageIcon(getClass().getResource("imagens/btn_logar.png"));
+    private final ImageIcon imLogarT = new ImageIcon(getClass().getResource("imagens/btn_logar_t.png"));
+    private final ImageIcon imLogarP = new ImageIcon(getClass().getResource("imagens/btn_logar_p.png"));
+    private final ImageIcon imCadastro = new ImageIcon(getClass().getResource("imagens/btn_cadastro.png"));
+    private final ImageIcon imCadastroT = new ImageIcon(getClass().getResource("imagens/btn_cadastro_t.png"));
     public void login_user(){
         pnIniciar.setVisible(false);
-        Color fundo = new Color(0,255,85);
-        getContentPane().setBackground(fundo);
-        int txtUser[] = {90,205,270,40}; int txtpass[] = {90,275,270,40}; 
-        int btnLogar[] = {85,380,250,50}; int lblogar[] = {55,90,300,60};
-        int btnRes[] = {55,440,300,50}; int lbIm[] = {0,0,400,600};
-        int lbUser[] = {35,200,50,50}; int lbPass[] = {35,270,50,50};
-        
+        int txtUser[] = {733,250,369,68}; int txtpass[] = {733,350,369,68}; 
+        int titlePos[] = {692,66,420,83}; int quadroPos[] = {0,0,588,700};
+        int barraPos[] = {589,0,5,700}; int userIconPos[] = {676,265,40,46};
+        int passIconPos[] = {676,358,38,44}; int logarPos[] = {822,457,190,62};
+        int cadastroPos[] = {748,569,328,42};
         Font f = new Font("Arial", Font.PLAIN, 20);
-        Font d = new Font("Arial", Font.PLAIN, 30);
-        Font t = new Font("Arial", Font.PLAIN, 15);
-        Border b = BorderFactory.createLineBorder(Color.black, 3);
+        
+        Border b = BorderFactory.createLineBorder(new Color(52,103,77), 3);
         txtUserName = new Txt(txtUser, f, Color.black, b);
         txtPassword = new Pass(txtpass, f, Color.black, b);
+        ImageIcon btn_logar[] = {imLogar, imLogarT, imLogarP};
+        ImageIcon btn_cadastro[] = {imCadastro, imCadastroT};
         Component cp[] = {
-            new Lb("Logar Usuário", d, lblogar, Color.green, b),
+            new Lb(imTitleLog, titlePos),
             txtUserName,
             txtPassword,
-            new Lb(imUser, lbUser),
-            new Lb(imPass, lbPass),
-            new Btn("Login", d, Color.black, Color.green, btnLogar, b, true, false, new Logar()),
-            new Btn("Não tem conta? Registre-se", t, null, Color.blue,btnRes, null, false, false, new Register()),
-            new Lb(imLog, lbIm)
+            new Lb(imQuadro, quadroPos),
+            new Lb(imBarra, barraPos),
+            new Lb(imUserIcon, userIconPos),
+            new Lb(imPassIcon, passIconPos),
+            new Btn(btn_logar, logarPos, new Logar()),
+            new Btn(btn_cadastro, cadastroPos, new Register()),
+            it.btnClose(),
+            it.btnSomOutro()
         };
-        int pnLoginP[] = {200,0,400,600};
+        int pnLoginP[] = {0,0,1200,700};
         pnLogin = new Pn(pnLoginP, cp);
+        pnLogin.setBackground(Color.black);
         add(pnLogin);
     }
     
