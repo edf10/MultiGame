@@ -18,7 +18,6 @@ import componentes.Frame;
 
 public class TelaJDV extends Frame{
     public TelaJDV(String ass, String jog1, String jog2){
-        super(700,700);
         this.jog1 = jog1;
         this.jog2 = jog2;
         this.ass = ass;
@@ -140,7 +139,6 @@ public class TelaJDV extends Frame{
         private int xb; private int yb;
         private int question = 0;
         public Perguntas(String ass, int xb, int yb){
-            super(400,300);
             this.xb = xb;
             this.yb = yb;
             rq = new ReadQuestions(ass);

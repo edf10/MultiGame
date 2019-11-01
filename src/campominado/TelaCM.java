@@ -16,7 +16,6 @@ import java.awt.Component;
 
 public class TelaCM extends Frame{
     public TelaCM(int nivel, int x, int y) {
-        super(700,700);
         //setUndecorated(win);
         this.x = x; this.y = y;
         redeclaracoes(nivel);

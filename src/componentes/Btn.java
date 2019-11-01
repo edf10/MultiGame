@@ -6,6 +6,30 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import javax.swing.border.Border;
 public class Btn extends JButton{
+    
+    public void configBase(){
+        setLayout(null);
+    }
+    
+    public Btn(ImageIcon im, int pos[], ActionListener ac, ImageIcon troca){
+        setLayout(null);
+        setIcon(im);
+        setContentAreaFilled(false);
+        setBorder(null);
+        setBounds(pos[0], pos[1], pos[2], pos[3]);
+        addActionListener(ac);
+        setRolloverIcon(troca);
+    }
+    
+    public Btn(ImageIcon im, int pos[], ActionListener ac){
+        setLayout(null);
+        setIcon(im);
+        setBorder(null);
+        setBounds(pos[0], pos[1], pos[2], pos[3]);
+        setContentAreaFilled(false);
+        addActionListener(ac);
+    }
+    
     public Btn(ImageIcon im, Font f, Color c, int pos[], Border b, boolean area, ActionListener ac){
         setLayout(null);
         setIcon(im);

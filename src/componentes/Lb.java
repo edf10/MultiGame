@@ -4,33 +4,25 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.border.Border;
-public class Lb extends JLabel{
-    public Lb(){
-        
+public final class Lb extends JLabel{
+    public void configBase(){
+        setLayout(null);
+        setHorizontalAlignment((int)CENTER_ALIGNMENT);
     }
     public Lb(String t, Font f, int pos[], Color c, Border b){
-        setText(t);
-        setLayout(null);
-        setFont(f);
-        setHorizontalAlignment((int)CENTER_ALIGNMENT);
+        configBase();setText(t);setFont(f);setForeground(c);setBorder(b);
         setBounds(pos[0], pos[1], pos[2], pos[3]);
-        setForeground(c);
-        setBorder(b);
     }
     public Lb(ImageIcon im, int pos[]){
-        setIcon(im);
+        configBase();setIcon(im);
         setBounds(pos[0], pos[1], pos[2], pos[3]);
-        setHorizontalAlignment((int)CENTER_ALIGNMENT);
     }
     public Lb(Color c, int pos[]){
-        setBackground(c);
+        configBase();setBackground(c);
         setBounds(pos[0], pos[1], pos[2], pos[3]);
     }
     public Lb(String t, Font f, int pos[], Color c){
-        setText(t);
-        setLayout(null);
-        setFont(f);
+        configBase();setText(t);setFont(f);setForeground(c);
         setBounds(pos[0], pos[1], pos[2], pos[3]);
-        setForeground(c);
     }
 }
