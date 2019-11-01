@@ -25,7 +25,6 @@ public class TelaGOWin extends Frame{
     private Campo c;
     
     public TelaGOWin(String tempoCM, TelaCM cm, Campo c, boolean t){
-        super(400,300);
         this.c = c; CM = cm;
         String tempo = "Tempo: "+tempoCM;
         goWinCMJDV(1, tempo, t);
@@ -37,7 +36,6 @@ public class TelaGOWin extends Frame{
     private String ganh;
     private TelaJDV jdv;
     public TelaGOWin(String ganh, TelaJDV jdv){
-        super(400,300);
         this.ganh = ganh;
         this.jdv = jdv;
         goWinCMJDV(2, "", true);

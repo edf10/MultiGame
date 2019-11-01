@@ -1,5 +1,6 @@
 package caçapalavras;
 import componentes.Btn;
+import componentes.Frame;
 import componentes.Lb;
 import componentes.Pn;
 import java.awt.Color;
@@ -8,22 +9,18 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
-import padroes.IntroductionGame;
-public class IntroductionCP extends IntroductionGame{
+public class IntroductionCP extends Frame{
     public IntroductionCP(){
-        super(800,600);
         intro();
-        setVisible(true);
+        show();
     }
 
-    @Override
     public void tutorial() {
     }
     
     private Pn pnIntro;
     private ImageIcon imIntro = new ImageIcon(getClass().getResource(""));
     private ImageIcon imTitle = new ImageIcon(getClass().getResource("imagens/title.png"));
-    @Override
     public void intro() {
         int lbFundo[] = {0,0,800,600}; int lbtitle[] = {150,20,500,128};
         int btnStart[] = {300,270,200,80};

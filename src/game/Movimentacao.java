@@ -22,7 +22,6 @@ public class Movimentacao extends Frame{
     private Dimension d = new Dimension(800,600);
     
     public Movimentacao(){
-        super(800,600);
         lbfundo = new JLabel();
         lbfundo.setBounds(0, 0, 800, 600);
         lbfundo.setOpaque(true);

@@ -2,7 +2,6 @@ package campominado;
 import componentes.Btn;
 import componentes.Pn;
 import java.awt.Color;
-import padroes.IntroductionGame;
 import java.awt.Component;
 import java.awt.Font;
 import javax.swing.BorderFactory;
@@ -11,13 +10,12 @@ import componentes.Lb;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
-public class IntroductionCM extends IntroductionGame{
+import componentes.Frame;
+public class IntroductionCM extends Frame{
     private TelaCM tcm;
     public IntroductionCM() {
-        super(700,700);
-        //niveis();
         intro();
-        setVisible(true);
+        show();
     }
     
     private Pn pnNiveis;
@@ -39,13 +37,11 @@ public class IntroductionCM extends IntroductionGame{
         pnNiveis = new Pn(pnNiveisP, cp);
         add(pnNiveis);
     }
-    @Override
     public void tutorial(){
     }
     
     private Pn pnIntro;
     private final ImageIcon imIntro = new ImageIcon(getClass().getResource("imagens/introCM.jpg"));
-    @Override
     public void intro(){
         int lbIntroP[] = {0,0,700,700}; int pnIntroP[] = {0,0,684,700};
         int btnJogarP[] = {200,220,300,80}; int lbtitle[] = {125,20,450,100};

@@ -14,45 +14,45 @@ import campominado.IntroductionCM;
 import caçapalavras.IntroductionCP;
 import componentes.Pass;
 import componentes.Txt;
+import java.awt.Dimension;
 import javax.swing.border.Border;
 import jogodavelha.IntroductionJDV;
+import padroes.ItemsTela;
 import user.Cadastro;
 import user.Conta;
 
 public class MultiGameTela extends Frame{
     private Pn pnIniciar;
-    private final ImageIcon gifArq = new ImageIcon(getClass().getResource("imagens/01.gif"));
-    private final ImageIcon btnImageArq = new ImageIcon(getClass().getResource("imagens/btn1.png"));
+    private final ImageIcon imLogo = new ImageIcon(getClass().getResource("imagens/title_multigame.png"));
+    private final ImageIcon imBack = new ImageIcon(getClass().getResource("imagens/back_initial_multigame.jpg"));
+    private final ImageIcon imPlay = new ImageIcon(getClass().getResource("imagens/btn_play.png"));
+    private final ItemsTela it = new ItemsTela();
+    private Dimension tamTela;
     public MultiGameTela(int i) {
-        super(800, 600);
         if(i==1){
-            /* Configurando lbs - PainelInicial */
             Font titulo = new Font("Arial", Font.PLAIN, 40);//Fonte
-            int lbtituloP[] = {250,40,300,60}; int lbgifP[] = {0,0,800,600};
-            /* Configurando BtnStart */
-            int btnStartP[] = {300,200,200,200}; BtnStart evento = new BtnStart();
-            /* Painel Iniciar */
+            int titlePos[] = {280,40,639,155}; int backPos[] = {0,0,1200,700};
+            int playPos[] = {488,290,224,224};
             Component cp[] = {
-                new Btn(btnImageArq, null, null, btnStartP, null, false, evento),
-                new Lb("MULTIGAME", titulo, lbtituloP, Color.WHITE, BorderFactory.createLineBorder(Color.WHITE)),
-                new Lb(gifArq, lbgifP)
+                new Btn(imPlay, playPos, new EventBtnPlay()),
+                new Lb(imLogo, titlePos),
+                it.btnSom(),
+                it.btnClose(),
+                new Lb(imBack, backPos)
             };
-            int pnIniciarP[] = {0,0,800,600}; pnIniciar = new Pn(pnIniciarP, cp);
+            int pnInitialPos[] = {0,0,1200,700}; pnIniciar = new Pn(pnInitialPos, cp);
             add(pnIniciar);
-            /* -------------- */
         }else{Jogos();}
-        setVisible(true);
+        show();
     }
-    private class BtnStart implements ActionListener{
+    private class EventBtnPlay implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
             pnIniciar.setVisible(false);
             login_user();
-            //Jogos();
         }
     }
-    private Pn pnJogos; //Painel
-    //ImageIcons
+    private Pn pnJogos; 
     private final ImageIcon imCM = new ImageIcon(getClass().getResource("imagens/campominado.png"));
     private final ImageIcon imJDV = new ImageIcon(getClass().getResource("imagens/jogodavelha.png"));
     private final ImageIcon fundoArq = new ImageIcon(getClass().getResource("imagens/02.gif"));

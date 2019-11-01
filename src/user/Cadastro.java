@@ -18,7 +18,6 @@ import user.Conta;
 
 public class Cadastro extends Frame{
     public Cadastro(){
-        super(800,600);
         tela();
         setVisible(true);
     }

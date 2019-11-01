@@ -25,7 +25,7 @@ public class Palavras {
         m2 = new String[x][y];
         //addWord(4, 1, words.get(2));
         escWords();
-        //letras();
+        letras();
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 System.out.print("|"+m2[i][j]+"|");

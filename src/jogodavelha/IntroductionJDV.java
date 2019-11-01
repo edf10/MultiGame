@@ -1,5 +1,4 @@
 package jogodavelha;
-import padroes.IntroductionGame;
 import componentes.Btn;
 import componentes.Lb;
 import componentes.Pn;
@@ -12,14 +11,13 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.border.Border;
-public class IntroductionJDV extends IntroductionGame{
+import componentes.Frame;
+public class IntroductionJDV extends Frame{
 
     public IntroductionJDV() {
-        super(600,600);
         intro();
-        setVisible(true);
+        show();
     }
-    @Override
     public void tutorial() {
     }
 
@@ -59,7 +57,6 @@ public class IntroductionJDV extends IntroductionGame{
     
     private Pn pnIntro;
     private final ImageIcon imFundo = new ImageIcon(getClass().getResource("imagens/intro.png"));
-    @Override
     public void intro(){
         int btnClassicP[] = {175,200,250,60}; int btnPersoP[] = {175,270,250,60}; int btnTutP[] = {175,340,250,60};
         int lbFundoP[] = {0,-30,600,600}; int lbtitleP[] = {125,30,350,80};
