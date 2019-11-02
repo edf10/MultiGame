@@ -62,11 +62,11 @@ public class IntroductionCM extends Frame{
         ImageIcon btn_play_cm[] = {imPlayCM,imPlayCMP,imPlayCMT};
         ImageIcon btn_ranking_cm[] = {imRankingCM,imRankingCMP,imRankingCMT};
         ImageIcon btn_tutorial_cm[] = {imTutorialCM,imTutorialCMP,imTutorialCMT};
-        Btn menu[] = it.menuOp(this);
+        Btn menu[] = it.menuOpGames(this);
         Component cp[] = {
             it.btnClose(),
             it.btnSomOutro(),
-            menu[0],menu[1],menu[2],menu[3],
+            menu[0],menu[1],menu[2],menu[3],menu[4], menu[5],
             new Lb(imTitleCM, titlePos),
             new Btn(btn_play_cm, btnPlayPos, new EventBtnsIntro(1)),
             new Btn(btn_ranking_cm, btnRankingPos, new EventBtnsIntro(2)),

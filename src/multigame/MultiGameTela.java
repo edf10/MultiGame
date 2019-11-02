@@ -119,7 +119,6 @@ public class MultiGameTela extends Frame{
     private final ImageIcon imCadastro = new ImageIcon(getClass().getResource("imagens/btn_cadastro.png"));
     private final ImageIcon imCadastroT = new ImageIcon(getClass().getResource("imagens/btn_cadastro_t.png"));
     public void login_user(){
-        pnIniciar.setVisible(false);
         int txtUser[] = {733,250,369,68}; int txtpass[] = {733,350,369,68}; 
         int titlePos[] = {692,66,420,83}; int quadroPos[] = {0,0,588,700};
         int barraPos[] = {589,0,5,700}; int userIconPos[] = {676,265,40,46};
@@ -160,7 +159,8 @@ public class MultiGameTela extends Frame{
                 Jogos();
                 c.setLogado(true);
             }else{
-                pnIniciar.setVisible(true);
+                dispose();
+                MultiGameTela mg = new MultiGameTela(1);
             }
         }
     }
