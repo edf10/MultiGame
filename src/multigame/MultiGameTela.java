@@ -11,10 +11,9 @@ import java.awt.Component;
 import componentes.Pn;
 import componentes.Frame;
 import campominado.IntroductionCM;
-import caçapalavras.IntroductionCP;
+import wordpuzzle.IntroductionWP;
 import componentes.Pass;
 import componentes.Txt;
-import java.awt.Dimension;
 import javax.swing.border.Border;
 import jogodavelha.IntroductionJDV;
 import padroes.ItemsTela;
@@ -26,15 +25,16 @@ public class MultiGameTela extends Frame{
     private final ImageIcon imLogo = new ImageIcon(getClass().getResource("imagens/title_multigame.png"));
     private final ImageIcon imBack = new ImageIcon(getClass().getResource("imagens/back_initial_multigame.jpg"));
     private final ImageIcon imPlay = new ImageIcon(getClass().getResource("imagens/btn_play.png"));
+    private final ImageIcon imPlayT = new ImageIcon(getClass().getResource("imagens/btn_play_t.png"));
+    private final ImageIcon imPlayP = new ImageIcon(getClass().getResource("imagens/btn_play_p.png"));
     private final ItemsTela it = new ItemsTela();
-    private Dimension tamTela;
     public MultiGameTela(int i) {
         if(i==1){
-            Font titulo = new Font("Arial", Font.PLAIN, 40);//Fonte
+            ImageIcon btn_play[] = {imPlay, imPlayT, imPlayP};
             int titlePos[] = {280,40,639,155}; int backPos[] = {0,0,1200,700};
             int playPos[] = {488,290,224,224};
             Component cp[] = {
-                new Btn(imPlay, playPos, new EventBtnPlay()),
+                new Btn(btn_play, playPos, new EventBtnPlay()),
                 new Lb(imLogo, titlePos),
                 it.btnSom(),
                 it.btnClose(),
@@ -42,7 +42,7 @@ public class MultiGameTela extends Frame{
             };
             int pnInitialPos[] = {0,0,1200,700}; pnIniciar = new Pn(pnInitialPos, cp);
             add(pnIniciar);
-        }else{Jogos();}
+        }else if(i==2){Jogos();}else{login_user();}
         show();
     }
     private class EventBtnPlay implements ActionListener{
@@ -53,40 +53,54 @@ public class MultiGameTela extends Frame{
         }
     }
     private Pn pnJogos; 
-    private final ImageIcon imCM = new ImageIcon(getClass().getResource("imagens/campominado.png"));
-    private final ImageIcon imJDV = new ImageIcon(getClass().getResource("imagens/jogodavelha.png"));
-    private final ImageIcon fundoArq = new ImageIcon(getClass().getResource("imagens/02.gif"));
-    private final ImageIcon imCP = new ImageIcon(getClass().getResource("imagens/caçalogo.png"));
-    private void Jogos() { //Painel de exibição dos jogos
-        /* Configurando lbs - PainelJogos */
-        Font jogos = new Font("Tahoma", Font.PLAIN, 24);
-        int lbCMP[] = {20,230,200,20}; int lbFundoP[] = {0,0,800,600};int lbJDVP[] = {230,230,200,20}; int lbCPP[] = {440,230,200,20};
-        /* Configurando btns */
-        BtnJogo cm = new BtnJogo(1);BtnJogo jdv = new BtnJogo(2); BtnJogo caça = new BtnJogo(3);
-        int btnCMP[] = {20,20,200,200}; int btnJDVP[] = {230,20,200,200}; int btnSolP[] = {440,20,200,200};
-        
-        /* Painel Jogos */
+    private final ImageIcon imBackGames = new ImageIcon(getClass().getResource("imagens/back_games.png"));
+    private final ImageIcon imTitleGames = new ImageIcon(getClass().getResource("imagens/title_games.png"));
+    private final ImageIcon imCapaCM = new ImageIcon(getClass().getResource("imagens/back_capa_cm.png"));
+    private final ImageIcon imCapaJDV = new ImageIcon(getClass().getResource("imagens/back_capa_jdv.png"));
+    private final ImageIcon imCapaCP = new ImageIcon(getClass().getResource("imagens/back_capa_cp.png"));
+    private final ImageIcon imCM = new ImageIcon(getClass().getResource("imagens/btn_cm.png"));
+    private final ImageIcon imCMT = new ImageIcon(getClass().getResource("imagens/btn_cm_t.png"));
+    private final ImageIcon imCMP = new ImageIcon(getClass().getResource("imagens/btn_cm_p.png"));
+    private final ImageIcon imJDV = new ImageIcon(getClass().getResource("imagens/btn_jdv.png"));
+    private final ImageIcon imJDVT = new ImageIcon(getClass().getResource("imagens/btn_jdv_t.png"));
+    private final ImageIcon imJDVP = new ImageIcon(getClass().getResource("imagens/btn_jdv_p.png"));
+    private final ImageIcon imCP = new ImageIcon(getClass().getResource("imagens/btn_cp.png"));
+    private final ImageIcon imCPT = new ImageIcon(getClass().getResource("imagens/btn_cp_t.png"));
+    private final ImageIcon imCPP = new ImageIcon(getClass().getResource("imagens/btn_cp_p.png"));
+    private void Jogos() { 
+        int backPos[] = {0,0,1200,700}; int titlePos[] = {381,75,453,134};
+        int capaCMPos[] = {100,303,222,247}; int capaJDVPos[] = {343,303,222,247};
+        int capaCPPos[] = {605,303,222,247}; int btnCMPos[] = {132,375,167,156};
+        int btnJDVPos[] = {376,375,167,156}; int btnCPPos[] = {636,375,167,156};
+        ImageIcon btn_cm[] = {imCM,imCMT,imCMP}; ImageIcon btn_jdv[] = {imJDV,imJDVT,imJDVP};
+        ImageIcon btn_cp[] = {imCP,imCPT,imCPP}; Btn menu[] = it.menuOp(this);
         Component cp[] = {
-            new Lb("CAMPO MINADO", jogos, lbCMP, Color.black, null),
-            new Lb("JOGO DA VELHA", jogos, lbJDVP, Color.black, null),
-            new Lb("CAÇA-PALAVRAS", jogos, lbCPP, Color.black, null),
-            new Btn(imCM, null, null, btnCMP, null, false, cm),
-            new Btn(imJDV, null, null, btnJDVP, null, false, jdv),
-            new Btn(imCP, null, null, btnSolP, null, false, caça),
-            new Lb(fundoArq, lbFundoP)
+            new Lb(imTitleGames,titlePos),
+            new Btn(btn_cm, btnCMPos, new EventInitialGame(1)),
+            new Btn(btn_jdv, btnJDVPos, new EventInitialGame(2)),
+            new Btn(btn_cp, btnCPPos, new EventInitialGame(3)),
+            menu[0],
+            menu[1],
+            menu[2],
+            menu[3],
+            new Lb(imCapaCM,capaCMPos),
+            new Lb(imCapaJDV, capaJDVPos),
+            new Lb(imCapaCP, capaCPPos),
+            it.btnClose(),
+            it.btnSomOutro(),
+            new Lb(imBackGames, backPos)
         };
-        int pnJogosP[] = {0,0,800,600}; pnJogos = new Pn(pnJogosP, cp);
+        int pnJogosP[] = {0,0,1200,700}; pnJogos = new Pn(pnJogosP, cp);
         add(pnJogos);
-        /* ----------- */
     }
-    private class BtnJogo implements ActionListener{ //Evento dos btns de jogo
+    private class EventInitialGame implements ActionListener{ //Evento dos btns de jogo
         private int n;
-        public BtnJogo(int n){this.n = n;}
+        public EventInitialGame(int n){this.n = n;}
         public void actionPerformed(ActionEvent e) {
             dispose();
             if(n==1){IntroductionCM j1 = new IntroductionCM();
             }else if(n==2){IntroductionJDV j2 = new IntroductionJDV();
-            }else if(n==3){IntroductionCP j3 = new IntroductionCP();}
+            }else if(n==3){IntroductionWP j3 = new IntroductionWP();}
             
         }
     }
@@ -94,36 +108,45 @@ public class MultiGameTela extends Frame{
     private Pn pnLogin;
     private Txt txtUserName;
     private Pass txtPassword;
-    private final ImageIcon imLog = new ImageIcon(getClass().getResource("imagens/login.jpg"));
-    private final ImageIcon imUser = new ImageIcon(getClass().getResource("imagens/user.png"));
-    private final ImageIcon imPass = new ImageIcon(getClass().getResource("imagens/pass.png"));
+    private final ImageIcon imTitleLog = new ImageIcon(getClass().getResource("imagens/title_login.png"));
+    private final ImageIcon imQuadro = new ImageIcon(getClass().getResource("imagens/left_quadro.gif"));
+    private final ImageIcon imBarra = new ImageIcon(getClass().getResource("imagens/barra.png"));
+    private final ImageIcon imUserIcon = new ImageIcon(getClass().getResource("imagens/user_icon.png"));
+    private final ImageIcon imPassIcon = new ImageIcon(getClass().getResource("imagens/password_icon.png"));
+    private final ImageIcon imLogar = new ImageIcon(getClass().getResource("imagens/btn_logar.png"));
+    private final ImageIcon imLogarT = new ImageIcon(getClass().getResource("imagens/btn_logar_t.png"));
+    private final ImageIcon imLogarP = new ImageIcon(getClass().getResource("imagens/btn_logar_p.png"));
+    private final ImageIcon imCadastro = new ImageIcon(getClass().getResource("imagens/btn_cadastro.png"));
+    private final ImageIcon imCadastroT = new ImageIcon(getClass().getResource("imagens/btn_cadastro_t.png"));
     public void login_user(){
         pnIniciar.setVisible(false);
-        Color fundo = new Color(0,255,85);
-        getContentPane().setBackground(fundo);
-        int txtUser[] = {90,205,270,40}; int txtpass[] = {90,275,270,40}; 
-        int btnLogar[] = {85,380,250,50}; int lblogar[] = {55,90,300,60};
-        int btnRes[] = {55,440,300,50}; int lbIm[] = {0,0,400,600};
-        int lbUser[] = {35,200,50,50}; int lbPass[] = {35,270,50,50};
-        
+        int txtUser[] = {733,250,369,68}; int txtpass[] = {733,350,369,68}; 
+        int titlePos[] = {692,66,420,83}; int quadroPos[] = {0,0,588,700};
+        int barraPos[] = {589,0,5,700}; int userIconPos[] = {676,265,40,46};
+        int passIconPos[] = {676,358,38,44}; int logarPos[] = {822,457,190,62};
+        int cadastroPos[] = {748,569,328,42};
         Font f = new Font("Arial", Font.PLAIN, 20);
-        Font d = new Font("Arial", Font.PLAIN, 30);
-        Font t = new Font("Arial", Font.PLAIN, 15);
-        Border b = BorderFactory.createLineBorder(Color.black, 3);
+        
+        Border b = BorderFactory.createLineBorder(new Color(52,103,77), 3);
         txtUserName = new Txt(txtUser, f, Color.black, b);
         txtPassword = new Pass(txtpass, f, Color.black, b);
+        ImageIcon btn_logar[] = {imLogar, imLogarT, imLogarP};
+        ImageIcon btn_cadastro[] = {imCadastro, imCadastroT};
         Component cp[] = {
-            new Lb("Logar Usuário", d, lblogar, Color.green, b),
+            new Lb(imTitleLog, titlePos),
             txtUserName,
             txtPassword,
-            new Lb(imUser, lbUser),
-            new Lb(imPass, lbPass),
-            new Btn("Login", d, Color.black, Color.green, btnLogar, b, true, false, new Logar()),
-            new Btn("Não tem conta? Registre-se", t, null, Color.blue,btnRes, null, false, false, new Register()),
-            new Lb(imLog, lbIm)
+            new Lb(imQuadro, quadroPos),
+            new Lb(imBarra, barraPos),
+            new Lb(imUserIcon, userIconPos),
+            new Lb(imPassIcon, passIconPos),
+            new Btn(btn_logar, logarPos, new Logar()),
+            new Btn(btn_cadastro, cadastroPos, new Register()),
+            it.btnClose(),
+            it.btnSomOutro()
         };
-        int pnLoginP[] = {200,0,400,600};
-        pnLogin = new Pn(pnLoginP, cp);
+        int pnLoginP[] = {0,0,1200,700};
+        pnLogin = new Pn(pnLoginP, cp, Color.black);
         add(pnLogin);
     }
     

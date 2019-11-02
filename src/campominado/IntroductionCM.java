@@ -11,8 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import componentes.Frame;
+import padroes.ItemsTela;
 public class IntroductionCM extends Frame{
     private TelaCM tcm;
+    private ItemsTela it = new ItemsTela();
     public IntroductionCM() {
         intro();
         show();
@@ -41,24 +43,38 @@ public class IntroductionCM extends Frame{
     }
     
     private Pn pnIntro;
-    private final ImageIcon imIntro = new ImageIcon(getClass().getResource("imagens/introCM.jpg"));
+    private final ImageIcon imBackIntro = new ImageIcon(getClass().getResource("imagens/back_intro_cm.png"));
+    private final ImageIcon imTitleCM = new ImageIcon(getClass().getResource("imagens/title_cm.png"));
+    private final ImageIcon imPlayCM = new ImageIcon(getClass().getResource("imagens/btn_play_cm.png"));
+    private final ImageIcon imPlayCMT = new ImageIcon(getClass().getResource("imagens/btn_play_cm_t.png"));
+    private final ImageIcon imPlayCMP = new ImageIcon(getClass().getResource("imagens/btn_play_cm_p.png"));
+    private final ImageIcon imRankingCM = new ImageIcon(getClass().getResource("imagens/btn_ranking_cm.png"));
+    private final ImageIcon imRankingCMT = new ImageIcon(getClass().getResource("imagens/btn_ranking_cm_t.png"));
+    private final ImageIcon imRankingCMP = new ImageIcon(getClass().getResource("imagens/btn_ranking_cm_p.png"));
+    private final ImageIcon imTutorialCM = new ImageIcon(getClass().getResource("imagens/btn_tutorial_cm.png"));
+    private final ImageIcon imTutorialCMT = new ImageIcon(getClass().getResource("imagens/btn_tutorial_cm_t.png"));
+    private final ImageIcon imTutorialCMP = new ImageIcon(getClass().getResource("imagens/btn_tutorial_cm_p.png"));
+    
     public void intro(){
-        int lbIntroP[] = {0,0,700,700}; int pnIntroP[] = {0,0,684,700};
-        int btnJogarP[] = {200,220,300,80}; int lbtitle[] = {125,20,450,100};
-        int btnTurorialP[] = {200,310,300,80}; int btnRecordesP[] = {200,400,300,80};
-        Font btn = new Font("Arial", Font.PLAIN, 55);
-        Font title = new Font("Arial", Font.PLAIN, 50);
-        Border b = BorderFactory.createLineBorder(Color.black, 3);
-        Border t = BorderFactory.createLineBorder(Color.black, 3);
-        Btns b1 = new Btns(1); Btns b2 = new Btns(2); Btns b3 = new Btns(3);
+        int backCMPos[] = {0,0,1200,700}; int titlePos[] = {250,52,805,100};
+        int btnPlayPos[] = {526,273,185,71}; int btnRankingPos[] = {467,381,304,79};
+        int btnTutorialPos[] = {464,497,346,79};
+        ImageIcon btn_play_cm[] = {imPlayCM,imPlayCMP,imPlayCMT};
+        ImageIcon btn_ranking_cm[] = {imRankingCM,imRankingCMP,imRankingCMT};
+        ImageIcon btn_tutorial_cm[] = {imTutorialCM,imTutorialCMP,imTutorialCMT};
+        Btn menu[] = it.menuOp(this);
         Component cp[] = {
-            new Btn("Jogar", btn, Color.white, Color.black, btnJogarP, b, true, false, b1),
-            new Btn("Tutorial", btn, Color.white, Color.black, btnTurorialP, b, true, false, b2),
-            new Btn("Recordes", btn, Color.white, Color.black, btnRecordesP, b, true, false, b3),
-            new Lb("CAMPO MINADO", title, lbtitle, Color.yellow, t),
-            new Lb(imIntro, lbIntroP),
+            it.btnClose(),
+            it.btnSomOutro(),
+            menu[0],menu[1],menu[2],menu[3],
+            new Lb(imTitleCM, titlePos),
+            new Btn(btn_play_cm, btnPlayPos, new EventBtnsIntro(1)),
+            new Btn(btn_ranking_cm, btnRankingPos, new EventBtnsIntro(2)),
+            new Btn(btn_tutorial_cm,btnTutorialPos, new EventBtnsIntro(3)),
+            new Lb(imBackIntro, backCMPos),
         };
-        pnIntro = new Pn(pnIntroP, cp);
+        int pnIntroPos[] = {0,0,1200,700};
+        pnIntro = new Pn(pnIntroPos, cp);
         add(pnIntro);
     }
     public void recordes(){
@@ -80,9 +96,9 @@ public class IntroductionCM extends Frame{
             tcm = new TelaCM(nil, x, y);
         }
     }
-    private class Btns implements ActionListener{
+    private class EventBtnsIntro implements ActionListener{
         private int n;
-        public Btns(int n) {this.n = n;}
+        public EventBtnsIntro(int n) {this.n = n;}
         @Override
         public void actionPerformed(ActionEvent ae) {
             switch (n) {

@@ -1,5 +1,5 @@
 package multigame;
-import caçapalavras.IntroductionCP;
+import wordpuzzle.IntroductionWP;
 public class MultiGame {
     public static void main(String []args){
         MultiGameTela mg = new MultiGameTela(1);
