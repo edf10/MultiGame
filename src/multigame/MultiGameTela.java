@@ -11,7 +11,7 @@ import java.awt.Component;
 import componentes.Pn;
 import componentes.Frame;
 import campominado.IntroductionCM;
-import caçapalavras.IntroductionCP;
+import wordpuzzle.IntroductionWP;
 import componentes.Pass;
 import componentes.Txt;
 import javax.swing.border.Border;
@@ -100,7 +100,7 @@ public class MultiGameTela extends Frame{
             dispose();
             if(n==1){IntroductionCM j1 = new IntroductionCM();
             }else if(n==2){IntroductionJDV j2 = new IntroductionJDV();
-            }else if(n==3){IntroductionCP j3 = new IntroductionCP();}
+            }else if(n==3){IntroductionWP j3 = new IntroductionWP();}
             
         }
     }
@@ -146,8 +146,7 @@ public class MultiGameTela extends Frame{
             it.btnSomOutro()
         };
         int pnLoginP[] = {0,0,1200,700};
-        pnLogin = new Pn(pnLoginP, cp);
-        pnLogin.setBackground(Color.black);
+        pnLogin = new Pn(pnLoginP, cp, Color.black);
         add(pnLogin);
     }
     

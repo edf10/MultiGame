@@ -12,8 +12,9 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.border.Border;
 import componentes.Frame;
+import padroes.ItemsTela;
 public class IntroductionJDV extends Frame{
-
+    private ItemsTela it = new ItemsTela();
     public IntroductionJDV() {
         intro();
         show();
@@ -56,23 +57,42 @@ public class IntroductionJDV extends Frame{
     }
     
     private Pn pnIntro;
-    private final ImageIcon imFundo = new ImageIcon(getClass().getResource("imagens/intro.png"));
+    private final ImageIcon imBackJDV = new ImageIcon(getClass().getResource("imagens/back_intro_jdv.png"));
+    private final ImageIcon imTitleJDV = new ImageIcon(getClass().getResource("imagens/title_jdv.png"));
+    private final ImageIcon imVsComp = new ImageIcon(getClass().getResource("imagens/btn_vscomputer_jdv.png"));
+    private final ImageIcon imVsCompT = new ImageIcon(getClass().getResource("imagens/btn_vscomputer_jdv_t.png"));
+    private final ImageIcon imVsCompP = new ImageIcon(getClass().getResource("imagens/btn_vscomputer_jdv_p.png"));
+    private final ImageIcon imMult = new ImageIcon(getClass().getResource("imagens/btn_multiplayer_jdv.png"));
+    private final ImageIcon imMultT = new ImageIcon(getClass().getResource("imagens/btn_multiplayer_jdv_t.png"));
+    private final ImageIcon imMultP = new ImageIcon(getClass().getResource("imagens/btn_multiplayer_jdv_p.png"));
+    private final ImageIcon imTutorial = new ImageIcon(getClass().getResource("imagens/btn_tutorial_jdv.png"));
+    private final ImageIcon imTutorialT = new ImageIcon(getClass().getResource("imagens/btn_tutorial_jdv_t.png"));
+    private final ImageIcon imTutorialP = new ImageIcon(getClass().getResource("imagens/btn_tutorial_jdv_p.png"));
+    private final ImageIcon imHistoric = new ImageIcon(getClass().getResource("imagens/btn_historic_jdv.png"));
+    private final ImageIcon imHistoricT = new ImageIcon(getClass().getResource("imagens/btn_historic_jdv_t.png"));
+    private final ImageIcon imHistoricP = new ImageIcon(getClass().getResource("imagens/btn_historic_jdv_p.png"));
+    
     public void intro(){
-        int btnClassicP[] = {175,200,250,60}; int btnPersoP[] = {175,270,250,60}; int btnTutP[] = {175,340,250,60};
-        int lbFundoP[] = {0,-30,600,600}; int lbtitleP[] = {125,30,350,80};
-        Font lb = new Font("Arial", Font.PLAIN, 40);
-        Font btn = new Font("Arial", Font.PLAIN, 35);
-        Border b = BorderFactory.createLineBorder(Color.black, 3);
-        Border a = BorderFactory.createLineBorder(Color.white, 3);
-        Btns b1 = new Btns(1); Btns b2 = new Btns(2); Btns b3 = new Btns(3);
+        int backPos[] = {0,0,1200,700}; int vsCompPos[] = {430,262,398,63};
+        int titlePos[] = {254,70,752,109}; int multPos[] = {435,351,386,62};
+        int tutorialPos[] = {496,440,266,63}; int histPos[] = {503,526,252,62};
+        Btn menu[] = it.menuOp(this);
+        ImageIcon btn_vscomputer[] = {imVsComp,imVsCompT,imVsCompP};
+        ImageIcon btn_multi[] = {imMult,imMultT,imMultP};
+        ImageIcon btn_tutorial[] = {imTutorial,imTutorialT,imTutorialP};
+        ImageIcon btn_hist[] = {imHistoric,imHistoricT,imHistoricP};
         Component cp[] = {
-            new Lb("JOGO DA VELHA", lb, lbtitleP, Color.white, a),
-            new Btn("Classic", btn, Color.white, Color.black, btnClassicP, b, true, false, b1),
-            new Btn("Personalizado", btn, Color.white, Color.black, btnPersoP, b, true, false, b2),
-            new Btn("Tutorial", btn, Color.white, Color.black, btnTutP, b, true, false, b3),
-            new Lb(imFundo, lbFundoP)
+            it.btnClose(),
+            it.btnSomOutro(),
+            menu[0],menu[1],menu[2],menu[3],
+            new Lb(imTitleJDV, titlePos),
+            new Btn(btn_vscomputer, vsCompPos, new EventBtnsIntro(1)),
+            new Btn(btn_multi, multPos, new EventBtnsIntro(2)),
+            new Btn(btn_tutorial, tutorialPos, new EventBtnsIntro(3)),
+            new Btn(btn_hist, histPos, new EventBtnsIntro(4)),
+            new Lb(imBackJDV, backPos)
         };
-        int pnIntroP[] = {0,0,600,600};
+        int pnIntroP[] = {0,0,1200,700};
         pnIntro = new Pn(pnIntroP, cp, Color.black);
         add(pnIntro);
     }
@@ -100,15 +120,16 @@ public class IntroductionJDV extends Frame{
         add(pnAss);
     }
     
-    private class Btns implements ActionListener{
+    private class EventBtnsIntro implements ActionListener{
         private int n;
-        public Btns(int n) {this.n = n;}
+        public EventBtnsIntro(int n) {this.n = n;}
         @Override
         public void actionPerformed(ActionEvent ae) {
             switch (n) {
                 case 1:assunto();break;
                 case 2:assunto();break;
                 case 3:tutorial();break;
+                case 4:tutorial();break;
                 default:break;
             }
         }
