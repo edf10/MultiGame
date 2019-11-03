@@ -26,15 +26,17 @@ public class ItemsTela {
     private Btn som;
     public Btn btnSom(){
         int somPos[] = {20,20,42,35};
-        som = new Btn(imSom, somPos, new EventSom());
+        ImageIcon imDaVez = (vez==1) ? imSom:imMute;
+        som = new Btn(imDaVez, somPos, new EventSom());
         return som;
     }
     public Btn btnSomOutro(){
         int somPos[] = {1129,642,42,35};
-        som = new Btn(imSom, somPos, new EventSom());
+        ImageIcon imDaVez = (vez==1) ? imSom:imMute;
+        som = new Btn(imDaVez, somPos, new EventSom());
         return som;
     }
-    private int vez = 1;
+    private static int vez = 1;
     public class EventSom implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){

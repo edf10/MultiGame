@@ -1,11 +1,7 @@
 package campominado;
 import componentes.Btn;
 import componentes.Pn;
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Font;
-import javax.swing.BorderFactory;
-import javax.swing.border.Border;
 import componentes.Lb;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,28 +11,39 @@ import padroes.ItemsTela;
 public class IntroductionCM extends Frame{
     private TelaCM tcm;
     private ItemsTela it = new ItemsTela();
+    private Btn menu[] = it.menuOpGames(this);
     public IntroductionCM() {
         intro();
         show();
     }
     
     private Pn pnNiveis;
-    private final ImageIcon imFundo = new ImageIcon(getClass().getResource("imagens/fundoNiveis.jpg"));
+    private final ImageIcon imEasy = new ImageIcon(getClass().getResource("imagens/btn_easy_cm.png"));
+    private final ImageIcon imEasyT = new ImageIcon(getClass().getResource("imagens/btn_easy_cm_t.png"));
+    private final ImageIcon imEasyP = new ImageIcon(getClass().getResource("imagens/btn_easy_cm_p.png"));
+    private final ImageIcon imMedium = new ImageIcon(getClass().getResource("imagens/btn_medium_cm.png"));
+    private final ImageIcon imMediumT = new ImageIcon(getClass().getResource("imagens/btn_medium_cm_t.png"));
+    private final ImageIcon imMediumP = new ImageIcon(getClass().getResource("imagens/btn_medium_cm_p.png"));
+    private final ImageIcon imHard = new ImageIcon(getClass().getResource("imagens/btn_hard_cm.png"));
+    private final ImageIcon imHardT = new ImageIcon(getClass().getResource("imagens/btn_hard_cm_t.png"));
+    private final ImageIcon imHardP = new ImageIcon(getClass().getResource("imagens/btn_hard_cm_p.png"));
     public void niveis() {
-        pnIntro.setVisible(false);
-        Font nivel = new Font("Arial", Font.PLAIN, 30);
-        Color c = new Color(231, 218, 87);
-        Nivel e1 = new Nivel(1); Nivel e2 = new Nivel(2); Nivel e3 = new Nivel(3);
-        int posF[] = {240,270,220,50}; int posM[] = {240,340,220,50}; int posD[] = {240,410,220,50};
-        int lbFundoP[] = {0,0,700,700}; int pnNiveisP[] = {0,0,700,700};
-        Border b = BorderFactory.createLineBorder(Color.black, 3);
+        int backNiveisPos[] = {0,0,1200,700}; int btnEasyPos[] = {496,174,189,71};
+        int btnMediumPos[] = {439,311,304,71}; int btnHardPos[] = {502,445,189,79};
+        ImageIcon btn_easy[] = {imEasy,imEasyT,imEasyP};
+        ImageIcon btn_medium[] = {imMedium,imMediumT,imMediumP};
+        ImageIcon btn_hard[] = {imHard,imHardT,imHardP};
         Component cp[] = {
-            new Btn("FÁCIL", nivel, c, Color.black, posF, b, false, false, e1),
-            new Btn("MÉDIO", nivel, c, Color.black, posM, b, false, false, e2),
-            new Btn("DIFÍCIL", nivel, c, Color.black, posD, b, false, false, e3),
-            new Lb(imFundo, lbFundoP)
+            it.btnClose(),
+            it.btnSomOutro(),
+            menu[0],menu[1],menu[2],menu[3],menu[4],menu[5],
+            new Btn(btn_easy, btnEasyPos, new EventBtnsNiveis(1)),
+            new Btn(btn_medium, btnMediumPos, new EventBtnsNiveis(2)),
+            new Btn(btn_hard, btnHardPos, new EventBtnsNiveis(3)),
+            new Lb(imBackIntro, backNiveisPos)
         };
-        pnNiveis = new Pn(pnNiveisP, cp);
+        int pnNiveisPos[] = {0,0,1200,700};
+        pnNiveis = new Pn(pnNiveisPos, cp);
         add(pnNiveis);
     }
     public void tutorial(){
@@ -62,7 +69,6 @@ public class IntroductionCM extends Frame{
         ImageIcon btn_play_cm[] = {imPlayCM,imPlayCMP,imPlayCMT};
         ImageIcon btn_ranking_cm[] = {imRankingCM,imRankingCMP,imRankingCMT};
         ImageIcon btn_tutorial_cm[] = {imTutorialCM,imTutorialCMP,imTutorialCMT};
-        Btn menu[] = it.menuOpGames(this);
         Component cp[] = {
             it.btnClose(),
             it.btnSomOutro(),
@@ -77,12 +83,9 @@ public class IntroductionCM extends Frame{
         pnIntro = new Pn(pnIntroPos, cp);
         add(pnIntro);
     }
-    public void recordes(){
-        
-    }
-    private class Nivel implements ActionListener{
+    private class EventBtnsNiveis implements ActionListener{
         private int nil; private int x; private int y;
-        private Nivel(int nil){this.nil = nil;}
+        private EventBtnsNiveis(int nil){this.nil = nil;}
         @Override
         public void actionPerformed(ActionEvent e){
             pnNiveis.setVisible(false);
@@ -101,13 +104,13 @@ public class IntroductionCM extends Frame{
         public EventBtnsIntro(int n) {this.n = n;}
         @Override
         public void actionPerformed(ActionEvent ae) {
+            pnIntro.setVisible(false);
             switch (n) {
                 case 1:niveis();break;
                 case 2:tutorial();break;
-                default:recordes();break;
+                default:break;
             }
         }
         
     }
-    
 }

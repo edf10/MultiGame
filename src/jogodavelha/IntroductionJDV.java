@@ -15,6 +15,7 @@ import componentes.Frame;
 import padroes.ItemsTela;
 public class IntroductionJDV extends Frame{
     private ItemsTela it = new ItemsTela();
+    private Btn menu[] = it.menuOpGames(this);
     public IntroductionJDV() {
         intro();
         show();
@@ -76,7 +77,6 @@ public class IntroductionJDV extends Frame{
         int backPos[] = {0,0,1200,700}; int vsCompPos[] = {430,262,398,63};
         int titlePos[] = {254,70,752,109}; int multPos[] = {435,351,386,62};
         int tutorialPos[] = {496,440,266,63}; int histPos[] = {503,526,252,62};
-        Btn menu[] = it.menuOp(this);
         ImageIcon btn_vscomputer[] = {imVsComp,imVsCompT,imVsCompP};
         ImageIcon btn_multi[] = {imMult,imMultT,imMultP};
         ImageIcon btn_tutorial[] = {imTutorial,imTutorialT,imTutorialP};
@@ -84,7 +84,7 @@ public class IntroductionJDV extends Frame{
         Component cp[] = {
             it.btnClose(),
             it.btnSomOutro(),
-            menu[0],menu[1],menu[2],menu[3],
+            menu[0],menu[1],menu[2],menu[3],menu[4],menu[5],
             new Lb(imTitleJDV, titlePos),
             new Btn(btn_vscomputer, vsCompPos, new EventBtnsIntro(1)),
             new Btn(btn_multi, multPos, new EventBtnsIntro(2)),
@@ -98,24 +98,37 @@ public class IntroductionJDV extends Frame{
     }
     
     private Pn pnAss;
-    private final ImageIcon imBack = new ImageIcon(getClass().getResource("imagens/assuntos.jpg"));
+    private final ImageIcon imAddtion = new ImageIcon(getClass().getResource("imagens/btn_addition_jdv.png"));
+    private final ImageIcon imAddtionT = new ImageIcon(getClass().getResource("imagens/btn_addition_jdv_t.png"));
+    private final ImageIcon imAddtionP = new ImageIcon(getClass().getResource("imagens/btn_addition_jdv_p.png"));
+    private final ImageIcon imDivision = new ImageIcon(getClass().getResource("imagens/btn_division_jdv.png"));
+    private final ImageIcon imDivisionT = new ImageIcon(getClass().getResource("imagens/btn_division_jdv_t.png"));
+    private final ImageIcon imDivisionP = new ImageIcon(getClass().getResource("imagens/btn_division_jdv_p.png"));
+    private final ImageIcon imSubtraction = new ImageIcon(getClass().getResource("imagens/btn_subtraction_jdv.png"));
+    private final ImageIcon imSubtractionT = new ImageIcon(getClass().getResource("imagens/btn_subtraction_jdv_t.png"));
+    private final ImageIcon imSubtractionP = new ImageIcon(getClass().getResource("imagens/btn_subtraction_jdv_p.png"));
+    private final ImageIcon imMultiplication = new ImageIcon(getClass().getResource("imagens/btn_multiplication_jdv.png"));
+    private final ImageIcon imMultiplicationT = new ImageIcon(getClass().getResource("imagens/btn_multiplication_jdv_t.png"));
+    private final ImageIcon imMultiplicationP = new ImageIcon(getClass().getResource("imagens/btn_multiplication_jdv_p.png"));
     public void assunto(){
-        pnIntro.setVisible(false);
-        int lbFundo[] = {0,0,600,600}; int btn1[] = {175,180,250,50}; int btn4[] = {175,370,250,50};
-        int btn2[] = {175,250,250,50}; int btn3[] = {175,310,250,50}; int lbtitle[] = {125,20,350,80};
-        Font f = new Font("Arial", Font.PLAIN, 30);
-        Border b = BorderFactory.createLineBorder(Color.white, 1);
-        Border a = BorderFactory.createLineBorder(Color.black, 3);
-        Font d = new Font("Arial", Font.PLAIN, 40);
+        int backPos[] = {0,0,1200,700}; int btnAddtionPos[] = {473,190,252,57};
+        int btnDivisionPos[] = {482,291,234,57}; int btnSubtractionPos[] = {412,391,374,63};
+        int btnMultiplicationPos[] = {371,490,456,57};
+        ImageIcon btn_addtion[] = {imAddtion,imAddtionT,imAddtionP};
+        ImageIcon btn_division[] = {imDivision,imDivisionT,imDivisionP};
+        ImageIcon btn_subtraction[] = {imSubtraction,imSubtractionT,imSubtractionP};
+        ImageIcon btn_multiplication[] = {imMultiplication,imMultiplicationT,imMultiplicationP};
         Component cp[] = {
-            new Lb("Assuntos", d, lbtitle, Color.black, a),
-            new Btn("Multiplicação", f, null, Color.white, btn1, b, false, false, new Esc("multiplicacao")),
-            new Btn("Divisão", f, null, Color.white, btn2, b, false, false, new Esc("divisao")),
-            new Btn("Soma", f, null, Color.white, btn3, b, false, false, new Esc("adicao")),
-            new Btn("Subtração", f, null, Color.white, btn4, b, false, false, new Esc("subtracao")),
-            new Lb(imBack, lbFundo)
+            it.btnClose(),
+            it.btnSomOutro(),
+            menu[0],menu[1],menu[2],menu[3],menu[4],menu[5],
+            new Btn(btn_addtion, btnAddtionPos, new EventBtnsAss("adicao")),
+            new Btn(btn_division, btnDivisionPos, new EventBtnsAss("divisao")),
+            new Btn(btn_subtraction, btnSubtractionPos, new EventBtnsAss("subtracao")),
+            new Btn(btn_multiplication, btnMultiplicationPos, new EventBtnsAss("multiplicacao")),
+            new Lb(imBackJDV, backPos),
         };
-        int pnAssP[] = {0,0,600,600};
+        int pnAssP[] = {0,0,1200,700};
         pnAss = new Pn(pnAssP, cp);
         add(pnAss);
     }
@@ -125,6 +138,7 @@ public class IntroductionJDV extends Frame{
         public EventBtnsIntro(int n) {this.n = n;}
         @Override
         public void actionPerformed(ActionEvent ae) {
+            pnIntro.setVisible(false);
             switch (n) {
                 case 1:assunto();break;
                 case 2:assunto();break;
@@ -134,9 +148,9 @@ public class IntroductionJDV extends Frame{
             }
         }
     }
-    private class Esc implements ActionListener{
+    private class EventBtnsAss implements ActionListener{
         private String ass;
-        public Esc(String ass){
+        public EventBtnsAss(String ass){
             this.ass = ass;
         }
         @Override
