@@ -16,6 +16,7 @@ import componentes.Pass;
 import componentes.Txt;
 import javax.swing.border.Border;
 import jogodavelha.IntroductionJDV;
+import padroes.Fonts;
 import padroes.ItemsTela;
 import user.Cadastro;
 import user.Conta;
@@ -43,6 +44,7 @@ public class MultiGameTela extends Frame{
             int pnInitialPos[] = {0,0,1200,700}; pnIniciar = new Pn(pnInitialPos, cp);
             add(pnIniciar);
         }else if(i==2){Jogos();}else{login_user();}
+        it.setTelaAnt(this);
         show();
     }
     private class EventBtnPlay implements ActionListener{
@@ -98,7 +100,7 @@ public class MultiGameTela extends Frame{
         public EventInitialGame(int n){this.n = n;}
         public void actionPerformed(ActionEvent e) {
             dispose();
-            if(n==1){IntroductionCM j1 = new IntroductionCM();
+            if(n==1){IntroductionCM j1 = new IntroductionCM(1);
             }else if(n==2){IntroductionJDV j2 = new IntroductionJDV();
             }else if(n==3){IntroductionWP j3 = new IntroductionWP();}
             
@@ -124,8 +126,8 @@ public class MultiGameTela extends Frame{
         int barraPos[] = {589,0,5,700}; int userIconPos[] = {676,265,40,46};
         int passIconPos[] = {676,358,38,44}; int logarPos[] = {822,457,190,62};
         int cadastroPos[] = {748,569,328,42};
-        Font f = new Font("Arial", Font.PLAIN, 20);
-        
+        Fonts fonte = new Fonts(); 
+        Font f = fonte.addNewFont("DS-DIGIT", 40);
         Border b = BorderFactory.createLineBorder(new Color(52,103,77), 3);
         txtUserName = new Txt(txtUser, f, Color.black, b);
         txtPassword = new Pass(txtpass, f, Color.black, b);

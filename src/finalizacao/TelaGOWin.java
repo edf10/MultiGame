@@ -90,7 +90,7 @@ public class TelaGOWin extends Frame{
                 switch(n){
                     case 1:TelaCM tc = new TelaCM(CM.getN(), c.getX(), c.getY());break;
                     case 2:MultiGameTela mgt = new MultiGameTela(2);break;
-                    case 3:IntroductionCM i = new IntroductionCM();i.niveis();break;
+                    case 3:IntroductionCM i = new IntroductionCM(2);break;
                     default:break;
                 }
             }else if(jogo==2){

@@ -69,8 +69,8 @@ public class ItemsTela {
         ImageIcon btn_user[] = {imUserIcon,imUserIconT}; ImageIcon btn_setting[] = {imSettingIcon,imSettingIconT};
         ImageIcon btn_return[] = {imReturnIcon,imReturnIconT}; ImageIcon btn_logout[] = {imLogoutIcon,imLogoutIconT};
         btnSetting = new Btn(btn_setting, settingPos, null);
-        btnReturn = new Btn(btn_return, returnPos, null);
-        btnLogout = new Btn(btn_logout, logoutPos, new EventOps(3, telaAtual));
+        btnReturn = new Btn(btn_return, returnPos, new EventBtnReturn());
+        btnLogout = new Btn(btn_logout, logoutPos, new EventOps(3));
         btnSetting.setVisible(false);
         btnReturn.setVisible(false);
         btnLogout.setVisible(false);
@@ -83,6 +83,7 @@ public class ItemsTela {
         return btns;
     }
     public Btn[] menuOpGames(Frame telaAtual){
+        this.telaAtual = telaAtual;
         int userPos[] = {21,20,99,39}; int settingPos[] = {21,81,140,37};
         int returnPos[] = {21,143,125,30}; int logoutPos[] = {25,303,124,37};
         int homePos[] = {21,195,105,33}; int storePos[] = {21,248,117,33};
@@ -90,9 +91,9 @@ public class ItemsTela {
         ImageIcon btn_return[] = {imReturnIcon,imReturnIconT}; ImageIcon btn_logout[] = {imLogoutIcon,imLogoutIconT};
         ImageIcon btn_home[] = {imHomeIcon,imHomeIconT}; ImageIcon btn_store[] = {imStoreIcon,imStoreIconT};
         btnSetting = new Btn(btn_setting, settingPos, null);
-        btnReturn = new Btn(btn_return, returnPos, null);
-        btnLogout = new Btn(btn_logout, logoutPos, new EventOps(3, telaAtual));
-        btnHome = new Btn(btn_home, homePos, new EventOps(2, telaAtual));
+        btnReturn = new Btn(btn_return, returnPos, new EventBtnReturn());
+        btnLogout = new Btn(btn_logout, logoutPos, new EventOps(3));
+        btnHome = new Btn(btn_home, homePos, new EventOps(2));
         btnStore = new Btn(btn_store, storePos, null);
         btnSetting.setVisible(false);
         btnReturn.setVisible(false);
@@ -129,9 +130,9 @@ public class ItemsTela {
     }
     
     public class EventOps implements ActionListener{
-        private int esc; private Frame telaAtual;
-        public EventOps(int esc, Frame telaAtual){
-            this.esc = esc; this.telaAtual = telaAtual;
+        private int esc;
+        public EventOps(int esc){
+            this.esc = esc;
         }
         @Override
         public void actionPerformed(ActionEvent e){
@@ -141,6 +142,26 @@ public class ItemsTela {
                 case 3: telaAtual.dispose(); MultiGameTela mg1 = new MultiGameTela(3);break;
                 default: break;
             }
+        }
+    }
+    
+    public Btn returnGames(){
+        int returnPos[] = {21,20,99,39}; ImageIcon btn_return[] = {imReturnIcon,imReturnIconT};
+        return new Btn(btn_return, returnPos, new EventBtnReturn());
+    }
+    private Frame telaAnt;
+    private Frame telaAtual = new Frame();
+
+    public Frame getTelaAnt() {
+        return telaAnt;
+    }
+    public void setTelaAnt(Frame telaNext) {
+        this.telaAnt = telaNext;
+    }
+    public class EventBtnReturn implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            telaAtual.dispose(); telaAnt.show();
         }
     }
     

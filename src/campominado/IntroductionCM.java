@@ -12,8 +12,8 @@ public class IntroductionCM extends Frame{
     private TelaCM tcm;
     private ItemsTela it = new ItemsTela();
     private Btn menu[] = it.menuOpGames(this);
-    public IntroductionCM() {
-        intro();
+    public IntroductionCM(int esc) {
+        if(esc==1){intro();}else{niveis();}
         show();
     }
     
@@ -90,7 +90,7 @@ public class IntroductionCM extends Frame{
         public void actionPerformed(ActionEvent e){
             pnNiveis.setVisible(false);
             switch(nil){
-                case 1:x = y = 12;break;
+                case 1:x = y = 14;break;
                 case 2:x = y = 16;break;
                 case 3:x = y = 18;break;
                 default:break;
