@@ -23,7 +23,6 @@ import user.Conta;
 
 public class MultiGameTela extends Frame{
     private Pn pnIniciar;
-    private final ImageIcon imBack = new ImageIcon(getClass().getResource("imagens/back_initial_multigame.jpg"));
     private final ItemsTela it = new ItemsTela();
     public MultiGameTela(){}
     public void intro(){
@@ -35,7 +34,7 @@ public class MultiGameTela extends Frame{
             new Lb(im.addImagem("title_multigame"), titlePos),
             it.btnSom(),
             it.btnClose(),
-            new Lb(imBack, backPos)
+            new Lb(im.addImagem("back_initial_multigame"), backPos)
         };
         int pnInitialPos[] = {0,0,1200,700}; pnIniciar = new Pn(pnInitialPos, cp);
         add(pnIniciar);

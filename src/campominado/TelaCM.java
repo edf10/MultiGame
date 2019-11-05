@@ -12,8 +12,6 @@ import componentes.Lb;
 import componentes.Pn;
 import componentes.Btn;
 import componentes.Frame;
-import javax.swing.BorderFactory;
-import javax.swing.border.Border;
 import padroes.Fonts;
 import padroes.ItemsTela;
 
@@ -29,15 +27,10 @@ public class TelaCM extends Frame{
         for(int i = 0; i<x; i++){
             for(int j = 0; j<y; j++){
                 marc[i][j] = 0;
+                m3[i][j] = 0;
             }
         }
         m = r.getM();
-        for(int i = 0; i<x; i++){
-            for(int j = 0; j<y; j++){
-                System.out.print(m[i][j]);
-            }
-            System.out.println();
-        }
         CM();
     }
     private int x; private int y; //Tamanho do campo
@@ -46,11 +39,10 @@ public class TelaCM extends Frame{
     private Pn painelCampo; private Pn pnBorda;//Paineis
     private Lb lbsegundos; private Lb lbminutos; private Lb lbdoispontos; //Labels
     private ItemsTela it = new ItemsTela();
-    private final ImageIcon backCampo = new ImageIcon(getClass().getResource("imagens/pn_back_campo.png"));
     private Fonts f = new Fonts(); 
     public void CM() {
         int lbBackCampoPos[] = {128,114,938,633};
-        pnBorda = new Pn(); pnBorda.add(new Lb(backCampo, lbBackCampoPos));
+        pnBorda = new Pn(); pnBorda.add(new Lb(im.addImagem("pn_back_campo"), lbBackCampoPos));
         pnBorda.setBounds(128, 114, 938, 633);
         Font tempo = f.addNewFont("DS-DIGIT", 40);
         int lbSegundosP[] = {460,15,100,100};
@@ -60,12 +52,11 @@ public class TelaCM extends Frame{
         lbminutos = new Lb("00", tempo, lbMinutosP, Color.white, null);
         lbdoispontos = new Lb(":", tempo, lbdoispontosP, Color.white, null);
         int pnCampoP[] = {145,130,908,573};
-        GridLayout mx = new GridLayout(x,y);//Matriz
+        GridLayout mx = new GridLayout(x,y);
         painelCampo = new Pn(pnCampoP, mx);
         for(int i = 0; i<x; i++) {
             for(int j = 0; j<y; j++){
-                m3[i][j] = 0;//Zerando a matriz m3.
-                String s = r.Click();
+                String s = ""+m[i][j];
                 vet[i][j] = new Button(s, i, j);
                 painelCampo.add(vet[i][j]);//Adicionando vetor de btns no painelCampo
             }
@@ -142,8 +133,8 @@ public class TelaCM extends Frame{
         ct.stop();//Para o cronômetro.
         TelaGOWin tgo = new TelaGOWin(minutosP+":"+segundosP, this, r, false);
     }
-    private int abertos = 0;
     public void Ganhar(){
+        int abertos = 0;
         //A intenção com esta variável é que ela permaneça com o valor inicial ao final das verificações.
         //Isso significa que nem uma mina foi acionada.
         int minasAbertas = 0;
@@ -171,7 +162,8 @@ public class TelaCM extends Frame{
     
     public boolean press = false; public boolean GO = false; public boolean win = false;
     public int iniciarJogo = 0; public int marc[][]; public int[][] m4;
-    public String minas = "imagens/minasF.png"; public String marcador = "imagens/flagF.png";
+    public String minas = "minasF"; public String marcador = "flagF";
+    public String botao = "btn_cm_easy";
     public Font btn = f.addNewFont("DS-DIGIT", 20);
     
     private class Button extends Btn{
@@ -181,13 +173,9 @@ public class TelaCM extends Frame{
         
         public Button(String s, int x, int y) {
             super();
-            imBtn = new ImageIcon(getClass().getResource("imagens/btn_cm_easy.png"));
+            imBtn = im.addImagem(botao);
             setIcon(imBtn);
-            imBtn = new ImageIcon(getClass().getResource("imagens/btn_cm_easy_t.png"));
-            setRolloverIcon(imBtn);
-            imBtn = new ImageIcon(getClass().getResource("imagens/btn_cm_easy_p.png"));
-            setPressedIcon(imBtn);
-            setBackground(Color.black);
+            setBackground(Color.black);setFont(btn);
             this.s = s; //Evento do botão (tipo)
             this.x = x; this.y = y;//Posição do btn em relação a matriz
             addMouseListener(t);
@@ -201,27 +189,19 @@ public class TelaCM extends Frame{
               o método btnsAbertos seja possível abrir o campo.*/
             if(press==false||GO==true){
                 if(marc[x][y]==1){
-                    imMar  = new ImageIcon(getClass().getResource(marcador));
-                    setIcon(imMar);
+                    imMar  = im.addImagem(marcador);setIcon(imMar);
                 }else if(marc[x][y]==2){
                     if("-1".equals(s)) {
-                        imBtn = new ImageIcon(getClass().getResource(minas));
+                        imBtn = im.addImagem(minas);
                         setIcon(imBtn);
-                        Border b = BorderFactory.createLineBorder(Color.black, 3);
-                        setBorder(b);
                         //Se win fosse true, sem essa condição, o código consideraria que o usuário perdeu e ganhou o jogo.
                         if(GO==false&&win==false){ //Caso win seja falso, significa que não ganhou-se o jogo.
-                            press = true;
-                            GameOver();
+                            press = true;GameOver();
                         }
                     }else if("0".equals(s)) {
                         setIcon(null);
-                        setBackground(Color.BLACK);
                     }else {
-                        setIcon(null);
-                        setForeground(Color.white);
-                        setText(s);
-                        setFont(btn);
+                        setIcon(null);setForeground(Color.white);setText(s);
                     }
                     m4[x][y] = 1;
                 }

@@ -16,20 +16,14 @@ public class Campo {
         m3 = new int[x][y];
         for(int i = 0; i<x; i++) {
             for(int j = 0; j<y; j++) {
-                m[i][j] = 0;
+                m[i][j] = 0;m3[i][j] = 0;
             }
         }
-        for(int i = 0; i<x; i++) {
-            for(int j = 0; j<y; j++) {
-                m3[i][j] = 0;
-            }
-        }
-        if(x==14){
-            sortMinas(20);
-        }else if(x==16){
-            sortMinas(25);
-        }else if(x==18){
-            sortMinas(30);
+        switch (x) {
+            case 14:sortMinas(20);break;
+            case 16:sortMinas(25);break;
+            case 18:sortMinas(30);break;
+            default:break;
         }
         orgNumeros();
     }
@@ -42,25 +36,6 @@ public class Campo {
     public int[] getPosyM(){return posyM;}
     public int getBombs(){return bombs;}
     
-    //Retorna cada posição da matriz do campo, com um controle para não repetir posições.
-    protected String Click() {
-        String s = "";
-        for(int i = 0; i<x; i++) {
-            for(int j = 0; j<y; j++) {
-                if(m3[i][j]!=-2) {
-                    if(m[i][j]==-1) {
-                        m3[i][j] = -2;s = "-1";return s;
-                    }else if(m[i][j]>0) {
-                        m3[i][j] = -2;s = ""+m[i][j];return s;
-                    }else {
-                        m3[i][j] = -2;s = "0";return s;
-                    }
-                }
-            }
-        }
-        return "";
-    }
-
     /* Sorteia as minas, tomando cuidado para não repetir posições e ao final adicionando estes pares ordenados, o x em um vetor e o y em outro */
     public void sortMinas(int quant) {
         Random posM = new Random();

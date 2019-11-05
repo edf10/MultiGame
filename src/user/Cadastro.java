@@ -35,7 +35,7 @@ public class Cadastro extends Frame{
             txtName, txtPass,
             it.btnClose(),
             it.btnSomOutro(),
-            new Lb(im.addImagem("barra_im"), barraPos),
+            new Lb(im.addImagem("barra"), barraPos),
             new Lb(im.addImagem("title_singup"), titlePos),
             new Lb(im.addImagem("avatar_icon"), userIconPos),
             new Lb(im.addImagem("pass_icon"), passIconPos),
