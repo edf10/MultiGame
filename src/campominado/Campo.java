@@ -8,26 +8,10 @@ public class Campo {
     private int[] posxM;
     private int[] posyM;
     private int[][] m3;
-    private int[][] m4;
-    private int[][] marc;
     private int bombs;
     boolean minas[][];
-    
-    //Construct
     public Campo(int x, int y) {
         this.x = x; this.y = y;
-    }
-    
-    public int getX(){return x;}
-    public int getY(){return y;}
-    public int[][] getM(){return m;}
-    public int[][] getM3(){return m3;}
-    public int[] getPosxM(){return posxM;}
-    public int[] getPosyM(){return posyM;}
-    public int getBombs(){return bombs;}
-    
-    //Zerar e configurar váriaveis
-    protected void declararVars() {
         m = new int[x][y];
         m3 = new int[x][y];
         for(int i = 0; i<x; i++) {
@@ -40,7 +24,23 @@ public class Campo {
                 m3[i][j] = 0;
             }
         }
+        if(x==14){
+            sortMinas(20);
+        }else if(x==16){
+            sortMinas(25);
+        }else if(x==18){
+            sortMinas(30);
+        }
+        orgNumeros();
     }
+    
+    public int getX(){return x;}
+    public int getY(){return y;}
+    public int[][] getM(){return m;}
+    public int[][] getM3(){return m3;}
+    public int[] getPosxM(){return posxM;}
+    public int[] getPosyM(){return posyM;}
+    public int getBombs(){return bombs;}
     
     //Retorna cada posição da matriz do campo, com um controle para não repetir posições.
     protected String Click() {

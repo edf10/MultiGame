@@ -12,51 +12,46 @@ import componentes.Lb;
 import componentes.Pn;
 import componentes.Btn;
 import componentes.Frame;
-import java.awt.Component;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import padroes.Fonts;
 import padroes.ItemsTela;
 
 public class TelaCM extends Frame{
-    public TelaCM(int nivel, int x, int y) {
-        this.x = x; this.y = y;
-        redeclaracoes(nivel);
-        setVisible(true);
-    }
-    private int x; private int y; //Tamanho do campo
-    private Campo r; private Button vet[][]; //Campo e vetor de btns
-    private int[][] m3; private int[][] m; private int[] posxM; private int[] posyM; //Variáveis teste
-    private Pn painelCampo; private Pn painelTempo; private Pn pnBorda;//Paineis
-    private Lb lbsegundos; private Lb lbminutos; private Lb lbdoispontos; //Labels
-    private ItemsTela it = new ItemsTela();
-    private static int nivel;
-    public void redeclaracoes(int nil){
-        //Redeclaração. Por causa da atualização de valores.
-        r = new Campo(x, y);
+    private Campo r;
+    public TelaCM(Campo c) {
+        r = c;
+        x = r.getX(); y = r.getY();
         vet = new Button[x][y];
         m4 = new int[x][y];
+        m3 = r.getM3(); posxM = r.getPosxM(); posyM = r.getPosyM();
         marc = new int[x][y];
         for(int i = 0; i<x; i++){
             for(int j = 0; j<y; j++){
                 marc[i][j] = 0;
             }
         }
-        nivel = nil;
+        m = r.getM();
+        for(int i = 0; i<x; i++){
+            for(int j = 0; j<y; j++){
+                System.out.print(m[i][j]);
+            }
+            System.out.println();
+        }
         CM();
     }
-    
-    public int getN(){
-        return nivel;
-    }
-    
+    private int x; private int y; //Tamanho do campo
+    private Button vet[][]; //Campo e vetor de btns
+    private int[][] m3; private int[][] m; private int[] posxM; private int[] posyM; //Variáveis teste
+    private Pn painelCampo; private Pn pnBorda;//Paineis
+    private Lb lbsegundos; private Lb lbminutos; private Lb lbdoispontos; //Labels
+    private ItemsTela it = new ItemsTela();
     private final ImageIcon backCampo = new ImageIcon(getClass().getResource("imagens/pn_back_campo.png"));
     private Fonts f = new Fonts(); 
     public void CM() {
         int lbBackCampoPos[] = {128,114,938,633};
         pnBorda = new Pn(); pnBorda.add(new Lb(backCampo, lbBackCampoPos));
         pnBorda.setBounds(128, 114, 938, 633);
-        /* Painel Tempo */
         Font tempo = f.addNewFont("DS-DIGIT", 40);
         int lbSegundosP[] = {460,15,100,100};
         int lbMinutosP[] = {130,15,100,100};
@@ -64,26 +59,9 @@ public class TelaCM extends Frame{
         lbsegundos = new Lb("00", tempo,lbSegundosP, Color.white, null);
         lbminutos = new Lb("00", tempo, lbMinutosP, Color.white, null);
         lbdoispontos = new Lb(":", tempo, lbdoispontosP, Color.white, null);
-        Component cp[] = {lbsegundos, lbminutos, lbdoispontos};
-        int pnTempoP[] = {0,0,700,109};
-        painelTempo = new Pn(pnTempoP, cp, Color.black);
-        /* ------------------------------------------------------ */
-        /* Definindo painel e gridlayout do campo */
         int pnCampoP[] = {145,130,908,573};
         GridLayout mx = new GridLayout(x,y);//Matriz
         painelCampo = new Pn(pnCampoP, mx);
-        r.declararVars();//Configurações iniciais do campo
-        if(nivel==1){
-            r.sortMinas(20);//Input das minas
-        }else if(nivel==2){
-            minas = "imagens/minasM.png"; marcador = "imagens/flagM.png"; r.sortMinas(25);
-        }else if(nivel==3){
-            minas = "imagens/minasD.png"; marcador = "imagens/flagD.png";r.sortMinas(30);
-        }
-        /* -------------------------------------- */
-        r.orgNumeros();
-        setLocationRelativeTo(null);
-        m = r.getM(); m3 = r.getM3(); posxM = r.getPosxM(); posyM = r.getPosyM();
         for(int i = 0; i<x; i++) {
             for(int j = 0; j<y; j++){
                 m3[i][j] = 0;//Zerando a matriz m3.
@@ -92,7 +70,6 @@ public class TelaCM extends Frame{
                 painelCampo.add(vet[i][j]);//Adicionando vetor de btns no painelCampo
             }
         }
-        //add(painelTempo); 
         painelCampo.setBackground(Color.black);
         add(painelCampo); 
         pnBorda.setBackground(new Color(45,39,39));
@@ -192,7 +169,6 @@ public class TelaCM extends Frame{
         abertos = 0;
     }
     
-    /* Variáveis Auxiliares */
     public boolean press = false; public boolean GO = false; public boolean win = false;
     public int iniciarJogo = 0; public int marc[][]; public int[][] m4;
     public String minas = "imagens/minasF.png"; public String marcador = "imagens/flagF.png";
