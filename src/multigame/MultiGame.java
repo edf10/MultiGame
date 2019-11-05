@@ -1,11 +1,11 @@
 package multigame;
-import campominado.IntroductionCM;
+import jogodavelha.IntroductionJDV;
 public class MultiGame {
     public static void main(String []args){
         /*MultiGameTela mg = new MultiGameTela();
         mg.intro();
         mg.show();*/
-        IntroductionCM i = new IntroductionCM();
+        IntroductionJDV i = new IntroductionJDV();
         i.intro(); i.show();
         //TestePaineis t = new TestePaineis();
     }

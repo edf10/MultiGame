@@ -1,5 +1,4 @@
 package jogodavelha;
-import user.ReadQuestions;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -11,17 +10,20 @@ import componentes.Pn;
 import componentes.Txt;
 import java.awt.Component;
 import java.awt.Font;
-import java.util.Random;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import componentes.Frame;
 
 public class TelaJDV extends Frame{
-    public TelaJDV(String ass, String jog1, String jog2){
-        this.jog1 = jog1;
-        this.jog2 = jog2;
+    public TelaJDV(int ass){
+        j.jdvClassic();
+        x = j.getX();
+        y = j.getY();
+        j.setJog1(jog1);
+        j.setJog2(jog2);
+        j.defIc(true, false);
+        vez = j.sortVez();
         this.ass = ass;
-        redeclaracoes();
         getContentPane().setBackground(Color.darkGray);
         JDV();
         
@@ -30,28 +32,17 @@ public class TelaJDV extends Frame{
     //Tamanho da matriz
     private int x;
     private int y;
-    private String ass;
+    private int ass;
     private String jog1;
     private String jog2;
     public String getJog1() {return jog1;}
     public String getJog2() {return jog2;}
-    public String getAss(){return ass;}
     private Button vet[][];
-    private final Jogo j = new Jogo(this);
+    private final Jogo j = new Jogo();
     
     private Pn pnCC;
     private Pn pnVez;
     private Lb lbJog;
-    
-    public void redeclaracoes(){
-        j.jdvClassic();
-        x = j.getX();
-        y = j.getY();
-        j.setJog1(jog1);
-        j.setJog2(jog2);
-        j.defIc(true, false);
-        vez = j.sortVez();
-    }
     
     private void JDV(){
         int lbVezP[] = {0,10,150,140};
@@ -125,7 +116,7 @@ public class TelaJDV extends Frame{
                 if(!press&&!clickBtn){
                     answer = true;
                     clickBtn = true;
-                    Perguntas p = new Perguntas(ass, x, y);
+                    Perguntas p = new Perguntas(x, y);
                 }
             }
         }
@@ -133,27 +124,32 @@ public class TelaJDV extends Frame{
     private boolean answer = false;
     private boolean clickBtn = false;
     private class Perguntas extends Frame{
-        private final ReadQuestions rq;
-        private final Random escPer = new Random();
         private final contarTempo ct = new contarTempo();
         private int xb; private int yb;
-        private int question = 0;
-        public Perguntas(String ass, int xb, int yb){
+        public Perguntas(int xb, int yb){
             this.xb = xb;
             this.yb = yb;
-            rq = new ReadQuestions(ass);
             question();
             tela();
             setVisible(true);
         }
         
         public void question(){
-            rq.read();
-            while(question==0){
-                question = escPer.nextInt(rq.getLengthHash());
+            int nums[] = j.addQuestion();
+            if(ass==1){
+                quest = nums[0]+" + "+nums[1]+" = ";
+                res = j.addAnswer(nums[0],nums[1], 1)+"";
+            }else if(ass==2){
+                nums = j.addDivision();
+                quest = nums[0]+" / "+nums[1]+" = ";
+                res = j.addAnswer(nums[0],nums[1], 2)+"";
+            }else if(ass==3){
+                quest = nums[0]+" - "+nums[1]+" = ";
+                res = j.addAnswer(nums[0],nums[1], 3)+"";
+            }else if(ass==4){
+                quest = nums[0]+" x "+nums[1]+" = ";
+                res = j.addAnswer(nums[0],nums[1], 4)+"";
             }
-            quest = rq.getQuestion(question);
-            res = rq.getAnswer(question);
         }
         
         private Pn pnTempo;

@@ -97,7 +97,7 @@ public class TelaGOWin extends Frame{
                 jdv.dispose();
                 
                 switch(n){
-                    case 1:TelaJDV tjdv = new TelaJDV(jdv.getAss(), jdv.getJog1(), jdv.getJog2());break;
+                    case 1:TelaJDV tjdv = new TelaJDV(1);break;
                     case 2:MultiGameTela mgt = new MultiGameTela(); mgt.Jogos(); mgt.show();break;
                     case 3:IntroductionJDV i = new IntroductionJDV();break;
                     default:break;

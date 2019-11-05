@@ -3,7 +3,6 @@ import java.awt.GridLayout;
 import java.awt.Font;
 import java.awt.Color;
 import java.lang.Thread;
-import finalizacao.TelaGOWin;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -81,6 +80,7 @@ public class TelaCM extends Frame{
         add(lbminutos);
         add(lbsegundos);
         add(lbdoispontos);
+        add(it.returnGames());
     }
     public class contarTempo extends Thread{
         @Override
