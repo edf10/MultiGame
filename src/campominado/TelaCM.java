@@ -33,9 +33,11 @@ public class TelaCM extends Frame{
         if(x==16){
             botao = "btn_cm_medium";
             botao_p = "btn_cm_medium_p";
+            marcador = "flagM";
         }else if(x==18){
             botao = "btn_cm_hard";
             botao_p = "btn_cm_hard_p";
+            marcador = "flagD";
         }
         CM();
     }
@@ -50,10 +52,10 @@ public class TelaCM extends Frame{
         int lbBackCampoPos[] = {128,114,938,633};
         pnBorda = new Pn(); pnBorda.add(new Lb(im.addImagem("pn_back_campo"), lbBackCampoPos));
         pnBorda.setBounds(128, 114, 938, 633);
-        Font tempo = f.addNewFont("DS-DIGIT", 40);
-        int lbSegundosP[] = {460,15,100,100};
-        int lbMinutosP[] = {130,15,100,100};
-        int lbdoispontosP[] = {295,11,100,100};
+        Font tempo = f.addNewFont("DS-DIGIT", 80);
+        int lbSegundosP[] = {727,20,100,100};
+        int lbMinutosP[] = {373,20,100,100};
+        int lbdoispontosP[] = {555,18,100,100};
         lbsegundos = new Lb("00", tempo,lbSegundosP, Color.white, null);
         lbminutos = new Lb("00", tempo, lbMinutosP, Color.white, null);
         lbdoispontos = new Lb(":", tempo, lbdoispontosP, Color.white, null);
@@ -74,25 +76,25 @@ public class TelaCM extends Frame{
         getContentPane().setBackground(new Color(45,39,39));
         add(it.btnClose());
         add(it.btnSomOutro());
+        add(lbminutos);
+        add(lbsegundos);
+        add(lbdoispontos);
     }
-    private int minutosP = 0; private int segundosP = 0;
     public class contarTempo extends Thread{
         @Override
         public void run(){
-            int s = 0; int m = 0;
+            int s = 0; int m = 0; int so = 0; int mo = 0;
             while(true){
                 try{Thread.sleep(1000);}catch(Exception e){};
                 s++;
-                segundosP = s;
-                if(s<60){
-                    lbsegundos.setText(s+"");
-                }else{
-                    m++;
-                    lbminutos.setText(m+"");
+                if(s==10){so++; s = 0;}
+                if(so==6&&s==0){
+                    so = 0;m++;
+                    if(m==10){mo++; m = 0;}
+                    lbminutos.setText(mo+""+m+"");
                     s = 0;
-                    lbsegundos.setText(s+"");
-                    minutosP = m;
-                }
+                    lbsegundos.setText(so+""+s+"");
+                }else{lbsegundos.setText(so+""+s+"");}
                 
             }
         }
@@ -137,7 +139,7 @@ public class TelaCM extends Frame{
             }
         }
         ct.stop();//Para o cronômetro.
-        TelaGOWin tgo = new TelaGOWin(minutosP+":"+segundosP, this, r, false);
+        TelaGOWin tgo = new TelaGOWin(lbminutos.getText()+":"+lbsegundos.getText(), this, r, false);
     }
     public void Ganhar(){
         int abertos = 0;
@@ -161,7 +163,7 @@ public class TelaCM extends Frame{
                 posAlt(posxM[i], posyM[i]);
             }
             ct.stop();//Para o cronômetro
-            TelaGOWin tgo = new TelaGOWin(minutosP+":"+segundosP, this, r, true);
+            TelaGOWin tgo = new TelaGOWin(lbminutos.getText()+":"+lbsegundos.getText(), this, r, true);
         }
         abertos = 0;
     }
