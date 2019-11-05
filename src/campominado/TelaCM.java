@@ -1,7 +1,6 @@
 package campominado;
 import java.awt.GridLayout;
 import java.awt.Font;
-import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.lang.Thread;
 import finalizacao.TelaGOWin;
@@ -31,6 +30,13 @@ public class TelaCM extends Frame{
             }
         }
         m = r.getM();
+        if(x==16){
+            botao = "btn_cm_medium";
+            botao_p = "btn_cm_medium_p";
+        }else if(x==18){
+            botao = "btn_cm_hard";
+            botao_p = "btn_cm_hard_p";
+        }
         CM();
     }
     private int x; private int y; //Tamanho do campo
@@ -163,18 +169,18 @@ public class TelaCM extends Frame{
     public boolean press = false; public boolean GO = false; public boolean win = false;
     public int iniciarJogo = 0; public int marc[][]; public int[][] m4;
     public String minas = "minasF"; public String marcador = "flagF";
-    public String botao = "btn_cm_easy";
+    public String botao = "btn_cm_easy"; 
+    public String botao_p = "btn_cm_easy_p";
     public Font btn = f.addNewFont("DS-DIGIT", 20);
     
     private class Button extends Btn{
-        private ImageIcon imBtn; private ImageIcon imMar;
         private String s; private int x; private int y;
         private Troca t = new Troca();
         
         public Button(String s, int x, int y) {
             super();
-            imBtn = im.addImagem(botao);
-            setIcon(imBtn);
+            setIcon(im.addImagem(botao));
+            setPressedIcon(im.addImagem(botao_p));
             setBackground(Color.black);setFont(btn);
             this.s = s; //Evento do botão (tipo)
             this.x = x; this.y = y;//Posição do btn em relação a matriz
@@ -188,12 +194,12 @@ public class TelaCM extends Frame{
               é acionada e chama o método GameOver, este atribui o valor true para a variável GO, fazendo com que quando este método chamar
               o método btnsAbertos seja possível abrir o campo.*/
             if(press==false||GO==true){
+                setPressedIcon(null);
                 if(marc[x][y]==1){
-                    imMar  = im.addImagem(marcador);setIcon(imMar);
+                    setIcon(im.addImagem(marcador));
                 }else if(marc[x][y]==2){
                     if("-1".equals(s)) {
-                        imBtn = im.addImagem(minas);
-                        setIcon(imBtn);
+                        setIcon(im.addImagem(minas));
                         //Se win fosse true, sem essa condição, o código consideraria que o usuário perdeu e ganhou o jogo.
                         if(GO==false&&win==false){ //Caso win seja falso, significa que não ganhou-se o jogo.
                             press = true;GameOver();
@@ -222,7 +228,7 @@ public class TelaCM extends Frame{
                         }
                         break;
                     case InputEvent.BUTTON3_MASK:
-                        if(marc[x][y]==1){setIcon(null);marc[x][y] = 0;
+                        if(marc[x][y]==1){setIcon(null);marc[x][y] = 0;setPressedIcon(im.addImagem(botao_p));setIcon(im.addImagem(botao));
                         }else if(marc[x][y]==0){marc[x][y] = 1;posAlt(x, y);}
                         break;
                     default:break;
