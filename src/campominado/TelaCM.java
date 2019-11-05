@@ -12,95 +12,64 @@ import componentes.Lb;
 import componentes.Pn;
 import componentes.Btn;
 import componentes.Frame;
-import java.awt.Component;
+import padroes.Fonts;
+import padroes.ItemsTela;
 
 public class TelaCM extends Frame{
-    public TelaCM(int nivel, int x, int y) {
-        //setUndecorated(win);
-        this.x = x; this.y = y;
-        redeclaracoes(nivel);
-        setVisible(true);
-    }
-    private int x; private int y; //Tamanho do campo
-    private Campo r; private Button vet[][]; //Campo e vetor de btns
-    private int[][] m3; private int[][] m; private int[] posxM; private int[] posyM; //Variáveis teste
-    private Pn painelCampo; private Pn painelTempo; //Paineis
-    private Lb lbsegundos; private Lb lbminutos; private Lb lbdoispontos; //Labels
-    //ImageIcons
-    private static int nivel;
-    public void redeclaracoes(int nil){
-        //Redeclaração. Por causa da atualização de valores.
-        r = new Campo(x, y);
+    private Campo r;
+    public TelaCM(Campo c) {
+        r = c;
+        x = r.getX(); y = r.getY();
         vet = new Button[x][y];
         m4 = new int[x][y];
+        m3 = r.getM3(); posxM = r.getPosxM(); posyM = r.getPosyM();
         marc = new int[x][y];
         for(int i = 0; i<x; i++){
             for(int j = 0; j<y; j++){
                 marc[i][j] = 0;
+                m3[i][j] = 0;
             }
         }
-        nivel = nil;
+        m = r.getM();
         CM();
     }
-    
-    public int getN(){
-        return nivel;
-    }
-    
-    //Jogo
+    private int x; private int y; //Tamanho do campo
+    private Button vet[][]; //Campo e vetor de btns
+    private int[][] m3; private int[][] m; private int[] posxM; private int[] posyM; //Variáveis teste
+    private Pn painelCampo; private Pn pnBorda;//Paineis
+    private Lb lbsegundos; private Lb lbminutos; private Lb lbdoispontos; //Labels
+    private ItemsTela it = new ItemsTela();
+    private Fonts f = new Fonts(); 
     public void CM() {
-        /* Painel Tempo */
-        Font tempo = new Font("Arial", Font.PLAIN, 60);
+        int lbBackCampoPos[] = {128,114,938,633};
+        pnBorda = new Pn(); pnBorda.add(new Lb(im.addImagem("pn_back_campo"), lbBackCampoPos));
+        pnBorda.setBounds(128, 114, 938, 633);
+        Font tempo = f.addNewFont("DS-DIGIT", 40);
         int lbSegundosP[] = {460,15,100,100};
         int lbMinutosP[] = {130,15,100,100};
         int lbdoispontosP[] = {295,11,100,100};
         lbsegundos = new Lb("00", tempo,lbSegundosP, Color.white, null);
         lbminutos = new Lb("00", tempo, lbMinutosP, Color.white, null);
         lbdoispontos = new Lb(":", tempo, lbdoispontosP, Color.white, null);
-        Component cp[] = {lbsegundos, lbminutos, lbdoispontos};
-        int pnTempoP[] = {0,0,700,109};
-        painelTempo = new Pn(pnTempoP, cp, Color.black);
-        /* ------------------------------------------------------ */
-        /* Definindo painel e gridlayout do campo */
-        int pnCampoP[] = {0,109,684,552};
-        GridLayout mx = new GridLayout(x,y);//Matriz
+        int pnCampoP[] = {145,130,908,573};
+        GridLayout mx = new GridLayout(x,y);
         painelCampo = new Pn(pnCampoP, mx);
-        r.declararVars();//Configurações iniciais do campo
-        if(nivel==1){
-            r.sortMinas(20);//Input das minas
-        }else if(nivel==2){
-            setSize(800, 700);
-            lbminutos.setBounds(175, 5, 100, 100);lbsegundos.setBounds(508, 5, 100, 100);
-            lbdoispontos.setBounds(341, 1, 100, 100);painelCampo.setBounds(0, 101, 784, 560);
-            painelTempo.setBounds(0, 0, 800, 101);btn = new Font("Arial", Font.PLAIN, 20);
-            minas = "imagens/minasM.png"; marcador = "imagens/flagM.png"; r.sortMinas(25);
-        }else if(nivel==3){
-            setSize(1006, 732);
-            lbminutos.setBounds(278, 5, 100, 100); lbsegundos.setBounds(611, 5, 100, 100);
-            lbdoispontos.setBounds(444, 1, 100, 100); btn = new Font("Arial", Font.PLAIN, 17);
-            painelTempo.setBounds(0, 0, 1006, 99); painelCampo.setBounds(0, 99, 990, 594);
-            minas = "imagens/minasD.png"; marcador = "imagens/flagD.png";r.sortMinas(30);
-        }
-        /* -------------------------------------- */
-        r.orgNumeros();
-        setLocationRelativeTo(null);
-        /* Variáveis de teste */
-        m = r.getM(); m3 = r.getM3(); posxM = r.getPosxM(); posyM = r.getPosyM();
-        /* Adicionar btns no vetor */
         for(int i = 0; i<x; i++) {
             for(int j = 0; j<y; j++){
-                m3[i][j] = 0;//Zerando a matriz m3.
-                String s = r.Click();
+                String s = ""+m[i][j];
                 vet[i][j] = new Button(s, i, j);
                 painelCampo.add(vet[i][j]);//Adicionando vetor de btns no painelCampo
             }
         }
-        /* Adicionando paineis na tela */
-        add(painelTempo); add(painelCampo);
+        painelCampo.setBackground(Color.black);
+        add(painelCampo); 
+        pnBorda.setBackground(new Color(45,39,39));
+        add(pnBorda);
+        getContentPane().setBackground(new Color(45,39,39));
+        add(it.btnClose());
+        add(it.btnSomOutro());
     }
-    /* Contadores do tempo */
     private int minutosP = 0; private int segundosP = 0;
-    /* ------------------- */
     public class contarTempo extends Thread{
         @Override
         public void run(){
@@ -164,8 +133,8 @@ public class TelaCM extends Frame{
         ct.stop();//Para o cronômetro.
         TelaGOWin tgo = new TelaGOWin(minutosP+":"+segundosP, this, r, false);
     }
-    private int abertos = 0;
     public void Ganhar(){
+        int abertos = 0;
         //A intenção com esta variável é que ela permaneça com o valor inicial ao final das verificações.
         //Isso significa que nem uma mina foi acionada.
         int minasAbertas = 0;
@@ -191,11 +160,11 @@ public class TelaCM extends Frame{
         abertos = 0;
     }
     
-    /* Variáveis Auxiliares */
     public boolean press = false; public boolean GO = false; public boolean win = false;
     public int iniciarJogo = 0; public int marc[][]; public int[][] m4;
-    public String minas = "imagens/minasF.png"; public String marcador = "imagens/flagF.png";
-    public Font btn = new Font("Arial", Font.PLAIN, 40);
+    public String minas = "minasF"; public String marcador = "flagF";
+    public String botao = "btn_cm_easy";
+    public Font btn = f.addNewFont("DS-DIGIT", 20);
     
     private class Button extends Btn{
         private ImageIcon imBtn; private ImageIcon imMar;
@@ -204,7 +173,9 @@ public class TelaCM extends Frame{
         
         public Button(String s, int x, int y) {
             super();
-            setBackground(Color.darkGray);
+            imBtn = im.addImagem(botao);
+            setIcon(imBtn);
+            setBackground(Color.black);setFont(btn);
             this.s = s; //Evento do botão (tipo)
             this.x = x; this.y = y;//Posição do btn em relação a matriz
             addMouseListener(t);
@@ -218,23 +189,19 @@ public class TelaCM extends Frame{
               o método btnsAbertos seja possível abrir o campo.*/
             if(press==false||GO==true){
                 if(marc[x][y]==1){
-                    imMar  = new ImageIcon(getClass().getResource(marcador));
-                    setIcon(imMar);
+                    imMar  = im.addImagem(marcador);setIcon(imMar);
                 }else if(marc[x][y]==2){
                     if("-1".equals(s)) {
-                        imBtn = new ImageIcon(getClass().getResource(minas));
+                        imBtn = im.addImagem(minas);
                         setIcon(imBtn);
                         //Se win fosse true, sem essa condição, o código consideraria que o usuário perdeu e ganhou o jogo.
                         if(GO==false&&win==false){ //Caso win seja falso, significa que não ganhou-se o jogo.
-                            press = true;
-                            GameOver();
+                            press = true;GameOver();
                         }
                     }else if("0".equals(s)) {
-                        setBackground(Color.BLACK);
+                        setIcon(null);
                     }else {
-                        setForeground(Color.white);
-                        setText(s);
-                        setFont(btn);
+                        setIcon(null);setForeground(Color.white);setText(s);
                     }
                     m4[x][y] = 1;
                 }

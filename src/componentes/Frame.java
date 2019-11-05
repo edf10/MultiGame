@@ -1,9 +1,8 @@
 package componentes;
-import java.awt.event.ActionListener;
+import imagens.Im;
 import javax.swing.JFrame;
 public class Frame extends JFrame{
-    private int x;
-    private int y;
+    public Im im = new Im();
     public Frame(){
         setSize(1200,700);
         setLayout(null);

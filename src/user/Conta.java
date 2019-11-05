@@ -34,19 +34,13 @@ public class Conta {
             BufferedReader b = new BufferedReader(i);
             if(b.readLine().equals(Arrays.toString(c.encriptar()))&&!logado){
                 if(username!=null&&password!=null){
-                    System.out.println("Logado");
                     logado = true;
                 }
             }
             b.close();
             f.close();
-        }catch(FileNotFoundException e){
-            
-        }catch(IOException e){
-            
-        }
+        }catch(FileNotFoundException e){}catch(IOException e){}
     }
-    
     public void gravar(){
         try{
             if(username.length()>0&&password.length()>0){
@@ -56,10 +50,6 @@ public class Conta {
                 pr.close();
                 f.close();
             }
-        }catch(FileNotFoundException e){
-            
-        }catch(IOException e){}
+        }catch(FileNotFoundException e){}catch(IOException e){}
     }
-    
-    
 }

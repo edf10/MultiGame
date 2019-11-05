@@ -19,7 +19,6 @@ public class Login {
             System.out.println(Arrays.toString(c.descriptar()));
             if(b.readLine().equals(Arrays.toString(c.descriptar()))){
                 System.out.println("Logado");
-                MultiGameTela m = new MultiGameTela(2);
             }
             b.close();
             f.close();

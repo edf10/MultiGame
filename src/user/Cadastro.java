@@ -21,14 +21,6 @@ public class Cadastro extends Frame{
     private Txt txtName;
     private Pass txtPass;
     private ItemsTela it = new ItemsTela();
-    private final ImageIcon imBackQuadro = new ImageIcon(getClass().getResource("imagens/back_quadro_naves.gif"));
-    private final ImageIcon imBarra = new ImageIcon(getClass().getResource("imagens/barra_im.png"));
-    private final ImageIcon imTitleC = new ImageIcon(getClass().getResource("imagens/title_singup.png"));
-    private final ImageIcon imUserIcon = new ImageIcon(getClass().getResource("imagens/avatar_icon.png"));
-    private final ImageIcon imPassIcon = new ImageIcon(getClass().getResource("imagens/pass_icon.png"));
-    private final ImageIcon imRegisterBtn = new ImageIcon(getClass().getResource("imagens/btn_register.png"));
-    private final ImageIcon imRegisterBtnT = new ImageIcon(getClass().getResource("imagens/btn_register_t.png"));
-    private final ImageIcon imRegisterBtnP = new ImageIcon(getClass().getResource("imagens/btn_register_p.png"));
     public Cadastro(){
         int txtUserPos[] = {725,253,369,68}; int txtPassPos[] = {725,350,369,68};
         int backQuadroPos[] = {0,0,587,700}; int barraPos[] = {587,0,5,700};
@@ -38,17 +30,17 @@ public class Cadastro extends Frame{
         Border b = BorderFactory.createLineBorder(new Color(52,103,77), 3);            
         txtName = new Txt(txtUserPos, f, Color.black, b);
         txtPass = new Pass(txtPassPos, f, Color.black, b);
-        ImageIcon btn_register[] = {imRegisterBtn,imRegisterBtnT,imRegisterBtnP};
+        ImageIcon btn_register[] = {im.addImagem("btn_register"),im.addImagem("btn_register_t"),im.addImagem("btn_register_p")};
         Component cp[] = {
             txtName, txtPass,
             it.btnClose(),
             it.btnSomOutro(),
-            new Lb(imBarra, barraPos),
-            new Lb(imTitleC, titlePos),
-            new Lb(imUserIcon, userIconPos),
-            new Lb(imPassIcon, passIconPos),
+            new Lb(im.addImagem("barra"), barraPos),
+            new Lb(im.addImagem("title_singup"), titlePos),
+            new Lb(im.addImagem("avatar_icon"), userIconPos),
+            new Lb(im.addImagem("pass_icon"), passIconPos),
             new Btn(btn_register, btnRegisterPos, new Register()),
-            new Lb(imBackQuadro, backQuadroPos)
+            new Lb(im.addGif("back_quadro_naves"), backQuadroPos)
         };
         int pnC[] = {0,0,1200,700};
         pnCadastro = new Pn(pnC, cp, Color.black);
@@ -61,7 +53,7 @@ public class Cadastro extends Frame{
             dispose();
             Conta c = new Conta(txtName.getText(), txtPass.getText());
             c.gravar();
-            MultiGameTela m = new MultiGameTela(1);
+            MultiGameTela m = new MultiGameTela(); m.intro();m.show();
         }
     }
 }

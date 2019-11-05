@@ -2,16 +2,16 @@ package padroes;
 
 import componentes.Btn;
 import componentes.Frame;
+import imagens.Im;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import multigame.MultiGameTela;
 
 public class ItemsTela {
-    private final ImageIcon imClose = new ImageIcon(getClass().getResource("imagens/btn_close.png"));
-    private final ImageIcon imCloseT = new ImageIcon(getClass().getResource("imagens/btn_close_t.png"));
+    private Im im = new Im();
     public Btn btnClose(){
-        int closePos[] = {1161,15,19,19}; ImageIcon btn_close[] = {imClose,imCloseT};
+        int closePos[] = {1161,15,19,19}; ImageIcon btn_close[] = {im.addImagem("btn_close"),im.addImagem("btn_close_t")};
         return new Btn(btn_close, closePos, new EventClose());
     }
     private class EventClose implements ActionListener{
@@ -21,20 +21,22 @@ public class ItemsTela {
         }
     }
     
-    private final ImageIcon imSom = new ImageIcon(getClass().getResource("imagens/btn_som.png"));
-    private final ImageIcon imMute = new ImageIcon(getClass().getResource("imagens/btn_mute.png"));
+    private final ImageIcon imSom = im.addImagem("btn_som");
+    private final ImageIcon imMute = im.addImagem("btn_mute");
     private Btn som;
     public Btn btnSom(){
         int somPos[] = {20,20,42,35};
-        som = new Btn(imSom, somPos, new EventSom());
+        ImageIcon imDaVez = (vez==1) ? imSom:imMute;
+        som = new Btn(imDaVez, somPos, new EventSom());
         return som;
     }
     public Btn btnSomOutro(){
         int somPos[] = {1129,642,42,35};
-        som = new Btn(imSom, somPos, new EventSom());
+        ImageIcon imDaVez = (vez==1) ? imSom:imMute;
+        som = new Btn(imDaVez, somPos, new EventSom());
         return som;
     }
-    private int vez = 1;
+    private static int vez = 1;
     public class EventSom implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -42,34 +44,57 @@ public class ItemsTela {
         }
     }
     
-    private final ImageIcon imUserIcon = new ImageIcon(getClass().getResource("imagens/btn_user.png"));
-    private final ImageIcon imUserIconT = new ImageIcon(getClass().getResource("imagens/btn_user_t.png"));
-    private final ImageIcon imSettingIcon = new ImageIcon(getClass().getResource("imagens/btn_setting.png"));
-    private final ImageIcon imSettingIconT = new ImageIcon(getClass().getResource("imagens/btn_setting_t.png"));
-    private final ImageIcon imReturnIcon = new ImageIcon(getClass().getResource("imagens/btn_return.png"));
-    private final ImageIcon imReturnIconT = new ImageIcon(getClass().getResource("imagens/btn_return_t.png"));
-    private final ImageIcon imLogoutIcon = new ImageIcon(getClass().getResource("imagens/btn_logout.png"));
-    private final ImageIcon imLogoutIconT = new ImageIcon(getClass().getResource("imagens/btn_logout_t.png"));
-    
     private Btn btnSetting;
     private Btn btnReturn;
     private Btn btnLogout;
+    private Btn btnHome;
+    private Btn btnStore;
     
+    private final ImageIcon btn_user[] = {im.addImagem("btn_user"),im.addImagem("btn_user_t")}; 
+    private final ImageIcon btn_setting[] = {im.addImagem("btn_setting"),im.addImagem("btn_setting_t")};
+    private final ImageIcon btn_return[] = {im.addImagem("btn_return"),im.addImagem("btn_return_t")}; 
+    private final ImageIcon btn_logout[] = {im.addImagem("btn_logout"),im.addImagem("btn_logout_t")};
+    private final ImageIcon btn_home[] = {im.addImagem("btn_home"),im.addImagem("btn_home_t")}; 
+    private final ImageIcon btn_store[] = {im.addImagem("btn_store"),im.addImagem("btn_store_t")};
     public Btn[] menuOp(Frame telaAtual){
+        this.telaAtual = telaAtual;
         int userPos[] = {21,20,99,39}; int settingPos[] = {21,81,140,37};
-        int returnPos[] = {21,143,125,30}; int logoutPos[] = {21,199,127,34};
-        ImageIcon btn_user[] = {imUserIcon,imUserIconT}; ImageIcon btn_setting[] = {imSettingIcon,imSettingIconT};
-        ImageIcon btn_return[] = {imReturnIcon,imReturnIconT}; ImageIcon btn_logout[] = {imLogoutIcon,imLogoutIconT};
+        int returnPos[] = {21,143,125,30}; int logoutPos[] = {25,200,124,37};
         btnSetting = new Btn(btn_setting, settingPos, null);
-        btnReturn = new Btn(btn_return, returnPos, new EventOps(2, telaAtual));
-        btnLogout = new Btn(btn_logout, logoutPos, new EventOps(3, telaAtual));
+        btnReturn = new Btn(btn_return, returnPos, new EventBtnReturn());
+        btnLogout = new Btn(btn_logout, logoutPos, new EventOps(3));
         btnSetting.setVisible(false);
         btnReturn.setVisible(false);
         btnLogout.setVisible(false);
         Btn btns[] = {
-            new Btn(btn_user, userPos, new EventMenuOp()),
+            new Btn(btn_user, userPos, new EventMenuOp(1)),
             btnSetting,
             btnReturn,
+            btnLogout
+        };
+        return btns;
+    }
+    public Btn[] menuOpGames(Frame telaAtual){
+        this.telaAtual = telaAtual;
+        int userPos[] = {21,20,99,39}; int settingPos[] = {21,81,140,37};
+        int returnPos[] = {21,143,125,30}; int logoutPos[] = {25,303,124,37};
+        int homePos[] = {21,195,105,33}; int storePos[] = {21,248,117,33};
+        btnSetting = new Btn(btn_setting, settingPos, null);
+        btnReturn = new Btn(btn_return, returnPos, new EventBtnReturn());
+        btnLogout = new Btn(btn_logout, logoutPos, new EventOps(3));
+        btnHome = new Btn(btn_home, homePos, new EventOps(2));
+        btnStore = new Btn(btn_store, storePos, null);
+        btnSetting.setVisible(false);
+        btnReturn.setVisible(false);
+        btnLogout.setVisible(false);
+        btnHome.setVisible(false);
+        btnStore.setVisible(false);
+        Btn btns[] = {
+            new Btn(btn_user, userPos, new EventMenuOp(2)),
+            btnSetting,
+            btnReturn,
+            btnHome,
+            btnStore,
             btnLogout
         };
         return btns;
@@ -77,29 +102,55 @@ public class ItemsTela {
     
     private boolean descer = false;
     public class EventMenuOp implements ActionListener{
+        private int esc;
+        public EventMenuOp(int esc){
+            this.esc = esc;
+        }
         @Override
         public void actionPerformed(ActionEvent e){
             if(descer==false){
                 btnSetting.setVisible(true);btnReturn.setVisible(true);btnLogout.setVisible(true);descer = true;
+                if(esc==2){btnHome.setVisible(true);btnStore.setVisible(true);}
             }else{
                 btnSetting.setVisible(false);btnReturn.setVisible(false);btnLogout.setVisible(false);descer = false;
+                if(esc==2){btnHome.setVisible(false);btnStore.setVisible(false);}
             }
         }
     }
     
     public class EventOps implements ActionListener{
-        private int esc; private Frame telaAtual;
-        public EventOps(int esc, Frame telaAtual){
-            this.esc = esc; this.telaAtual = telaAtual;
+        private int esc;
+        public EventOps(int esc){
+            this.esc = esc;
         }
         @Override
         public void actionPerformed(ActionEvent e){
             switch(esc){
                 case 1: break;
-                case 2: telaAtual.dispose(); MultiGameTela mg = new MultiGameTela(2);break;
-                case 3: telaAtual.dispose(); MultiGameTela mg1 = new MultiGameTela(1);break;
+                case 2: telaAtual.dispose(); MultiGameTela mg = new MultiGameTela(); mg.Jogos(); mg.show();break;
+                case 3: telaAtual.dispose(); MultiGameTela mg1 = new MultiGameTela(); mg1.login_user(); mg1.show();break;
                 default: break;
             }
+        }
+    }
+    
+    public Btn returnGames(){
+        int returnPos[] = {21,20,99,39};
+        return new Btn(btn_return, returnPos, new EventBtnReturn());
+    }
+    private Frame telaAnt;
+    private Frame telaAtual = new Frame();
+
+    public Frame getTelaAnt() {
+        return telaAnt;
+    }
+    public void setTelaAnt(Frame telaNext) {
+        this.telaAnt = telaNext;
+    }
+    public class EventBtnReturn implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            telaAtual.dispose(); telaAnt.show();
         }
     }
     
