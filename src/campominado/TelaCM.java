@@ -34,10 +34,12 @@ public class TelaCM extends Frame{
             botao = "btn_cm_medium";
             botao_p = "btn_cm_medium_p";
             marcador = "flagM";
+            minas = "bomb_cm_medium";
         }else if(x==18){
             botao = "btn_cm_hard";
             botao_p = "btn_cm_hard_p";
             marcador = "flagD";
+            minas = "bomb_cm_hard";
         }
         CM();
     }
@@ -139,7 +141,7 @@ public class TelaCM extends Frame{
             }
         }
         ct.stop();//Para o cronômetro.
-        TelaGOWin tgo = new TelaGOWin(lbminutos.getText()+":"+lbsegundos.getText(), this, r, false);
+        //TelaGOWin tgo = new TelaGOWin(lbminutos.getText()+":"+lbsegundos.getText(), this, r, false);
     }
     public void Ganhar(){
         int abertos = 0;
@@ -163,14 +165,14 @@ public class TelaCM extends Frame{
                 posAlt(posxM[i], posyM[i]);
             }
             ct.stop();//Para o cronômetro
-            TelaGOWin tgo = new TelaGOWin(lbminutos.getText()+":"+lbsegundos.getText(), this, r, true);
+            //TelaGOWin tgo = new TelaGOWin(lbminutos.getText()+":"+lbsegundos.getText(), this, r, true);
         }
         abertos = 0;
     }
     
     public boolean press = false; public boolean GO = false; public boolean win = false;
     public int iniciarJogo = 0; public int marc[][]; public int[][] m4;
-    public String minas = "minasF"; public String marcador = "flagF";
+    public String minas = "bomb_cm_easy"; public String marcador = "flagF";
     public String botao = "btn_cm_easy"; 
     public String botao_p = "btn_cm_easy_p";
     public Font btn = f.addNewFont("DS-DIGIT", 20);
