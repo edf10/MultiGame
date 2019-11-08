@@ -69,7 +69,7 @@ public class IntroductionCM extends Frame{
                 default:break;
             }
             dispose();
-            TelaCM tcm = new TelaCM(new Campo(x,y)); tcm.show();
+            TelaCM tcm = new TelaCM(new Campo(x,y)); tcm.show(); 
         }
     }
     private class EventBtnsIntro implements ActionListener{

@@ -12,6 +12,8 @@ import padroes.ItemsTela;
 public class IntroductionJDV extends Frame{
     private ItemsTela it = new ItemsTela();
     private Btn menu[] = it.menuOpGames(this);
+    private int ass;
+    
     public void tutorial() {
     }
 
@@ -80,12 +82,12 @@ public class IntroductionJDV extends Frame{
         }
     }
     private class EventBtnsAss implements ActionListener{
-        private int ass;
-        public EventBtnsAss(int ass){
-            this.ass = ass;
+        public EventBtnsAss(int as){
+            ass = as;
         }
         @Override
         public void actionPerformed(ActionEvent ae) {
+            pnAss.setVisible(false);
             dispose();
             TelaJDV tjdv = new TelaJDV(ass);
         }

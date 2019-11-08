@@ -13,18 +13,21 @@ import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import componentes.Frame;
+import padroes.Fonts;
+import padroes.ItemsTela;
 
 public class TelaJDV extends Frame{
     public TelaJDV(int ass){
         j.jdvClassic();
         x = j.getX();
         y = j.getY();
+        jog1 = "User";
+        jog2 = "User";
         j.setJog1(jog1);
         j.setJog2(jog2);
         j.defIc(true, false);
         vez = j.sortVez();
         this.ass = ass;
-        getContentPane().setBackground(Color.darkGray);
         JDV();
         
         setVisible(true);
@@ -39,41 +42,42 @@ public class TelaJDV extends Frame{
     public String getJog2() {return jog2;}
     private Button vet[][];
     private final Jogo j = new Jogo();
+    private ItemsTela it = new ItemsTela();
     
     private Pn pnCC;
-    private Pn pnVez;
     private Lb lbJog;
+    private Pn pnGame;
     
     private void JDV(){
-        int lbVezP[] = {0,10,150,140};
-        Font f = new Font("Arial", Font.PLAIN, 50);
+        Fonts fs = new Fonts();
+        Font f = fs.addNewFont("DIMITRI_", 80);
         String s = (vez==1)? jog1:jog2;
-        int lbJogP[] = {110,10,250,140};
-        lbJog = new Lb(s, f, lbJogP, Color.yellow);
-        Component cp[] = {
-            new Lb("Vez:", f, lbVezP, Color.yellow),
-            lbJog
-        };
-        int pnVezP[] = {100,10,500,140};
-        pnVez = new Pn(pnVezP, cp, Color.darkGray);
+        int lbJogP[] = {238,25,700,140};
+        lbJog = new Lb(s, f, lbJogP, Color.white);
         
         GridLayout mz = new GridLayout(x, y);
-        int pnCCP[] = {100,162,500,500};
+        int pnCCP[] = {248,166,703,534};
         pnCC = new Pn(pnCCP, mz);
         
         vet = new Button[x][y];
         for(int i = 0; i<x; i++){
             for(int j = 0; j<y ; j++){
                 vet[i][j] = new Button(i, j);
-            }
-        }
-        for(int i = 0; i<x; i++){
-            for(int j = 0; j<y ; j++){
                 pnCC.add(vet[i][j]);
             }
         }
-        add(pnVez);
-        add(pnCC);
+        int backPos[] = {0,0,1200,700};
+        int backTabPos[] = {240,158,719,541};
+        int backBackPos[] = {228,147,750,561};
+        Component cp[] = {
+            pnCC,lbJog,
+            it.btnClose(),it.returnGames(),it.btnSomOutro(),
+            new Lb(im.addImagem("back_tab_jdv"), backTabPos),
+            new Lb(im.addImagem("back_back_jdv"), backBackPos),
+            new Lb(im.addImagem("back_game_jdv"), backPos)
+        };
+        pnGame = new Pn(backPos, cp);
+        add(pnGame);
     }
     public void vez(){
         vez = (vez==1)? 2:1;
@@ -93,6 +97,7 @@ public class TelaJDV extends Frame{
             super();
             this.x = x;
             this.y = y;
+            setIcon(im.addImagem("btn_jdv_game"));
             setBackground(Color.gray);
             addActionListener(new Troca());
         }
