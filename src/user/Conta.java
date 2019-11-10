@@ -46,6 +46,7 @@ public class Conta {
             if(username.length()>0&&password.length()>0){
                 FileOutputStream f = new FileOutputStream("users/"+username+".txt");
                 PrintWriter pr = new PrintWriter(f);
+                pr.println(username);
                 pr.println(Arrays.toString(c.encriptar()));
                 pr.close();
                 f.close();

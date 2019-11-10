@@ -9,5 +9,6 @@ public class Pass extends JPasswordField{
         setForeground(c);
         setBorder(b);
         setBounds(pos[0], pos[1], pos[2], pos[3]);
+        setHorizontalAlignment((int)CENTER_ALIGNMENT);
     }
 }

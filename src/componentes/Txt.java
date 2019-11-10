@@ -10,5 +10,6 @@ public class Txt extends JTextField{
         setFont(f);
         setForeground(c);
         setBorder(b);
+        setHorizontalAlignment((int)CENTER_ALIGNMENT);
     }
 }

@@ -12,7 +12,7 @@ import padroes.ItemsTela;
 public class IntroductionJDV extends Frame{
     private ItemsTela it = new ItemsTela();
     private Btn menu[] = it.menuOpGames(this);
-    private int ass;
+    private TelaJDV tjdv = new TelaJDV();
     
     public void tutorial() {
     }
@@ -73,7 +73,7 @@ public class IntroductionJDV extends Frame{
         public void actionPerformed(ActionEvent ae) {
             pnIntro.setVisible(false);
             switch (n) {
-                case 1:assunto();break;
+                case 1:assunto();tjdv.setJog1("User"); tjdv.setJog2("Computer");break;
                 case 2:assunto();break;
                 case 3:tutorial();break;
                 case 4:tutorial();break;
@@ -82,14 +82,17 @@ public class IntroductionJDV extends Frame{
         }
     }
     private class EventBtnsAss implements ActionListener{
-        public EventBtnsAss(int as){
-            ass = as;
+        private int assunto;
+        public EventBtnsAss(int assunto){
+            this.assunto = assunto;
         }
         @Override
         public void actionPerformed(ActionEvent ae) {
             pnAss.setVisible(false);
             dispose();
-            TelaJDV tjdv = new TelaJDV(ass);
+            tjdv.setAss(assunto);
+            tjdv.start();
+            tjdv.show();
         }
     }
 }

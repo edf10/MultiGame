@@ -12,6 +12,11 @@ public class Jogo {
     private String jog1;
     private String jog2;
     
+    public Jogo(){
+        x = y = 3;
+        this.m = new int[x][y];
+    }
+    
     public void setJog1(String jog1) {this.jog1 = jog1;}
     public void setJog2(String jog2) {this.jog2 = jog2;}
     public boolean isIcJog1(){return icJog1;}
@@ -69,11 +74,6 @@ public class Jogo {
             velha = true;
             //TelaGOWin tgw = new TelaGOWin("Velha",jdv);
         }
-    }
-    
-    public void jdvClassic(){
-        x = y = 3;
-        this.m = new int[x][y];
     }
     
     public int[] addQuestion(){
