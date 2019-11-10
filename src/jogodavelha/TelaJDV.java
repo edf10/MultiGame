@@ -1,88 +1,76 @@
 package jogodavelha;
-import user.ReadQuestions;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.ImageIcon;
 import componentes.Btn;
 import componentes.Lb;
 import componentes.Pn;
 import componentes.Txt;
 import java.awt.Component;
 import java.awt.Font;
-import java.util.Random;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import componentes.Frame;
+import padroes.Fonts;
+import padroes.ItemsTela;
 
 public class TelaJDV extends Frame{
-    public TelaJDV(String ass, String jog1, String jog2){
-        this.jog1 = jog1;
-        this.jog2 = jog2;
-        this.ass = ass;
-        redeclaracoes();
-        getContentPane().setBackground(Color.darkGray);
+    public void start(){
+        x = j.getX();
+        y = j.getY();
+        j.defIc(true, false);
+        vez = j.sortVez();
         JDV();
-        
-        setVisible(true);
     }
     //Tamanho da matriz
     private int x;
     private int y;
-    private String ass;
+    private int ass;
     private String jog1;
     private String jog2;
-    public String getJog1() {return jog1;}
-    public String getJog2() {return jog2;}
-    public String getAss(){return ass;}
     private Button vet[][];
-    private final Jogo j = new Jogo(this);
+    private final Jogo j = new Jogo();
+    private ItemsTela it = new ItemsTela();
+
+    public void setJog1(String jog1) {this.jog1 = jog1;}
+    public void setJog2(String jog2) {this.jog2 = jog2;}
+    public void setAss(int ass) {this.ass = ass;}
     
     private Pn pnCC;
-    private Pn pnVez;
     private Lb lbJog;
-    
-    public void redeclaracoes(){
-        j.jdvClassic();
-        x = j.getX();
-        y = j.getY();
-        j.setJog1(jog1);
-        j.setJog2(jog2);
-        j.defIc(true, false);
-        vez = j.sortVez();
-    }
+    private Pn pnGame;
     
     private void JDV(){
-        int lbVezP[] = {0,10,150,140};
-        Font f = new Font("Arial", Font.PLAIN, 50);
+        Fonts fs = new Fonts();
+        Font f = fs.addNewFont("DIMITRI_", 80);
         String s = (vez==1)? jog1:jog2;
-        int lbJogP[] = {110,10,250,140};
-        lbJog = new Lb(s, f, lbJogP, Color.yellow);
-        Component cp[] = {
-            new Lb("Vez:", f, lbVezP, Color.yellow),
-            lbJog
-        };
-        int pnVezP[] = {100,10,500,140};
-        pnVez = new Pn(pnVezP, cp, Color.darkGray);
+        int lbJogP[] = {238,25,700,140};
+        lbJog = new Lb(s , f, lbJogP, Color.white);
         
         GridLayout mz = new GridLayout(x, y);
-        int pnCCP[] = {100,162,500,500};
+        int pnCCP[] = {248,166,703,534};
         pnCC = new Pn(pnCCP, mz);
         
         vet = new Button[x][y];
         for(int i = 0; i<x; i++){
             for(int j = 0; j<y ; j++){
                 vet[i][j] = new Button(i, j);
-            }
-        }
-        for(int i = 0; i<x; i++){
-            for(int j = 0; j<y ; j++){
                 pnCC.add(vet[i][j]);
             }
         }
-        add(pnVez);
-        add(pnCC);
+        int backPos[] = {0,0,1200,700};
+        int backTabPos[] = {240,158,719,541};
+        int backBackPos[] = {228,147,750,561};
+        Component cp[] = {
+            pnCC,lbJog,
+            it.btnClose(),it.returnGames(),it.btnSomOutro(),
+            new Lb(im.addImagem("back_tab_jdv"), backTabPos),
+            new Lb(im.addImagem("back_back_jdv"), backBackPos),
+            new Lb(im.addImagem("back_game_jdv"), backPos)
+        };
+        pnGame = new Pn(backPos, cp);
+        add(pnGame);
     }
     public void vez(){
         vez = (vez==1)? 2:1;
@@ -94,23 +82,22 @@ public class TelaJDV extends Frame{
     }
     private int vez; //Determina de qual jogador é a vez.
     private class Button extends Btn{
-        private final ImageIcon imX = new ImageIcon(getClass().getResource("imagens/x.png"));
-        private final ImageIcon imO = new ImageIcon(getClass().getResource("imagens/o.png"));
         private final int x;
         private final int y;
         public Button(int x, int y){
             super();
             this.x = x;
             this.y = y;
-            setBackground(Color.gray);
+            setIcon(im.addImagem("btn_jdv_game"));
+            setBackground(Color.black);
             addActionListener(new Troca());
         }
         public void altBtn(){
             if(!press&&!answer){
                 if(vez==1){
-                    setIcon(imX);
+                    setIcon(im.addImagem("icone_x_jdv"));
                 }else if(vez==2){
-                    setIcon(imO);
+                    setIcon(im.addImagem("icone_o_jdv"));
                 }
                 press = true;
                 j.addPress(x, y, vez);
@@ -125,7 +112,7 @@ public class TelaJDV extends Frame{
                 if(!press&&!clickBtn){
                     answer = true;
                     clickBtn = true;
-                    Perguntas p = new Perguntas(ass, x, y);
+                    Perguntas p = new Perguntas(x, y);
                 }
             }
         }
@@ -133,52 +120,56 @@ public class TelaJDV extends Frame{
     private boolean answer = false;
     private boolean clickBtn = false;
     private class Perguntas extends Frame{
-        private final ReadQuestions rq;
-        private final Random escPer = new Random();
         private final contarTempo ct = new contarTempo();
         private int xb; private int yb;
-        private int question = 0;
-        public Perguntas(String ass, int xb, int yb){
+        public Perguntas(int xb, int yb){
+            setSize(500,300);
             this.xb = xb;
             this.yb = yb;
-            rq = new ReadQuestions(ass);
             question();
             tela();
+            setLocationRelativeTo(null);
             setVisible(true);
         }
         
         public void question(){
-            rq.read();
-            while(question==0){
-                question = escPer.nextInt(rq.getLengthHash());
+            int nums[] = j.addQuestion();
+            if(ass==1){
+                quest = nums[0]+" + "+nums[1]+" = ";
+                res = j.addAnswer(nums[0],nums[1], 1)+"";
+            }else if(ass==2){
+                nums = j.addDivision();
+                quest = nums[0]+" / "+nums[1]+" = ";
+                res = j.addAnswer(nums[0],nums[1], 2)+"";
+            }else if(ass==3){
+                quest = nums[0]+" - "+nums[1]+" = ";
+                res = j.addAnswer(nums[0],nums[1], 3)+"";
+            }else if(ass==4){
+                quest = nums[0]+" x "+nums[1]+" = ";
+                res = j.addAnswer(nums[0],nums[1], 4)+"";
             }
-            quest = rq.getQuestion(question);
-            res = rq.getAnswer(question);
         }
         
-        private Pn pnTempo;
+        private Lb lbsegundos;
         private Txt txtRes;
         private String quest;
         private String res;
         private final Enter e = new Enter();
         public void tela(){
-            int lbper[] = {50,120,200,100}; int txtResP[] = {250,145,60,50};
-            int lbseg[] = {145,0,100,100};
-            Font ms = new Font("Arial", Font.PLAIN, 70);
-            lbsegundos = new Lb("0", ms, lbseg, Color.blue, null);
-            Font f = new Font("Arial", Font.PLAIN, 40);
+            Fonts fs = new Fonts();
+            Font f = fs.addNewFont("airstrip", 50); Font q = fs.addNewFont("airstrip", 70); Font r = fs.addNewFont("airstrip", 55);
             Border b = BorderFactory.createLineBorder(Color.black, 3);
-            txtRes = new Txt(txtResP, f, Color.black, b);
-            txtRes.addActionListener(e);
-            Component cp[] = {lbsegundos};
-            int pnTemP[] = {0,0,400,100};
-            pnTempo = new Pn(pnTemP, cp, Color.DARK_GRAY);
-            add(pnTempo);
-            add(new Lb(quest, f, lbper, Color.black, null));
+            int lbSegundosPos[] = {225,35,66,45}; int backPos[] = {0,0,500,300};
+            int questPos[] = {55,140,300,100}; int resPos[] = {345,157,100,65};
+            lbsegundos = new Lb("00", f, lbSegundosPos, Color.white);
+            txtRes = new Txt(resPos, r, Color.black, b);
+            txtRes.addActionListener(e); 
+            add(lbsegundos);
             add(txtRes);
+            add(new Lb(quest, q, questPos, new Color(113,215,149)));
+            add(new Lb(im.addImagem("back_pergunta_jdv"), backPos));
             ct.start();
         }
-        private Lb lbsegundos;
         public class contarTempo extends Thread{
             @Override
             public void run(){
@@ -186,8 +177,8 @@ public class TelaJDV extends Frame{
                 while(true){
                     try{Thread.sleep(1000);}catch(Exception e){};
                     s++;
-                    lbsegundos.setText(""+s);
-                    if(s==5){
+                    lbsegundos.setText("0"+s);
+                    if(s==6){
                         Perguntas.this.dispose();
                         answer = false; vez();
                         clickBtn = false;
@@ -210,5 +201,4 @@ public class TelaJDV extends Frame{
             }
         }
     }
-    
 }
