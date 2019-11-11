@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import componentes.Frame;
+import java.util.Random;
 import padroes.ItemsTela;
 public class IntroductionJDV extends Frame{
     private ItemsTela it = new ItemsTela();
@@ -66,6 +67,14 @@ public class IntroductionJDV extends Frame{
         add(pnAss);
     }
     
+    public void jogadores(String jogador01, String jogador02){
+        Random sortear = new Random();
+        int jog1 = sortear.nextInt(2); int jog2 = (jog1==1) ? 0:1;
+        String names[] = {jogador01,jogador02};
+        tjdv.setJog1(names[jog1]);
+        tjdv.setJog2(names[jog2]);
+    }
+    
     private class EventBtnsIntro implements ActionListener{
         private int n;
         public EventBtnsIntro(int n) {this.n = n;}
@@ -73,7 +82,7 @@ public class IntroductionJDV extends Frame{
         public void actionPerformed(ActionEvent ae) {
             pnIntro.setVisible(false);
             switch (n) {
-                case 1:assunto();tjdv.setJog1("User"); tjdv.setJog2("Computer");break;
+                case 1:assunto();jogadores("User", "Computer");break;
                 case 2:assunto();break;
                 case 3:tutorial();break;
                 case 4:tutorial();break;
