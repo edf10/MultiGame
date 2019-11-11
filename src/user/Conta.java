@@ -13,27 +13,22 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class Conta {
-    private SecretKey key;
     private final String chave = "password-user000";
     private Criptografar c;
     private String username;
     private String password;
     public Conta(User user){
-        key = new SecretKeySpec(chave.getBytes(), "AES");
-        c = new Criptografar(chave, password);
         username = user.getUsername();
         password = user.getPassword();
+        c = new Criptografar(chave, password);
     }
     private boolean logado = false;
-
     public boolean isLogado() {return logado;}
     public void setLogado(boolean logado) {this.logado = logado;}
    
     public void login(){
-        
         JSONObject objectArquivo;
         JSONParser parser = new JSONParser();
-        
         try{
             objectArquivo = (JSONObject) parser.parse(new FileReader("users/"+username+".json"));
             if(objectArquivo.get("password").equals(Arrays.toString(c.encriptar()))&&!logado){
