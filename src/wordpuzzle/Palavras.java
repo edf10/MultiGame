@@ -17,7 +17,6 @@ public class Palavras {
     private int quantWords;
     private String[][] m; //Matriz de letras
     private String[][] m2; //Mapear palavras
-    private int[][] m3; //Posições onde a String não pode ser alterada.
     
     public Palavras(int n){
         niveis(n);
@@ -25,7 +24,6 @@ public class Palavras {
         m2 = new String[x][y];
         //addWord(4, 1, words.get(2));
         escWords();
-        letras();
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 System.out.print("|"+m2[i][j]+"|");
@@ -49,6 +47,7 @@ public class Palavras {
                 }
             }
         }
+        
     }
     
     public boolean addWord(int orientacao, int invertida, String[] palavra){
@@ -57,16 +56,22 @@ public class Palavras {
         boolean ok = true;
         int cont = (invertida==1)?0:palavra.length-1; 
         ok = true; int contWordCr = 0; boolean tudocerto = false;
+        /*
+        Escrever um loop/função para verificar as posições cruzadas, por que a verificação atual tem certos bugs, devido sua
+        verificação ficar com apenas uma letra da palavra sendo verificada com as posições sorteadas.
+        
+        *E também é bom dar uma lida nesta função pra ver uma forma de refatorar.
+        */
         if(orientacao==1){
             linha = sortear.nextInt(x);
             coluna = lineAndColumn(tamWord);
             int i = linha; int j = coluna;
             while(ok==true){
-                if(j==coluna+palavra.length){break;}
+                if(j==coluna+tamWord){break;}
                 if(m[i][j]==null||m[i][j].equals(palavra[cont].toUpperCase())){
                     contWordCr++;
                 }else{ok = false;}
-                if(contWordCr==tamWord){tudocerto = true; j = coluna; continue;}
+                if(contWordCr==tamWord){tudocerto = true; j = coluna;}
                 if(tudocerto==true){
                     m2[i][j] = palavra[cont].toUpperCase();
                     m[i][j] = palavra[cont].toUpperCase();
@@ -79,11 +84,11 @@ public class Palavras {
             coluna = sortear.nextInt(x);
             int i = linha; int j = coluna;
             while(ok==true){
-                if(i==linha+palavra.length){break;}
+                if(i==linha+tamWord){break;}
                 if(m[i][j]==null||m[i][j].equals(palavra[cont].toUpperCase())){
                     contWordCr++;
                 }else{ok = false;}
-                if(contWordCr==tamWord){tudocerto = true; i = linha; continue;}
+                if(contWordCr==tamWord){tudocerto = true; i = linha;}
                 if(tudocerto==true){
                     m2[i][coluna] = palavra[cont].toUpperCase();
                     m[i][coluna] = palavra[cont].toUpperCase();
@@ -100,7 +105,7 @@ public class Palavras {
                 if(m[i][j]==null||m[i][j].equals(palavra[cont].toUpperCase())){
                     contWordCr++;
                 }else{ok = false;}
-                if(contWordCr==tamWord){tudocerto = true; i = linha; j = coluna; continue;}
+                if(contWordCr==tamWord){tudocerto = true; i = linha; j = coluna;}
                 if(tudocerto==true){
                     m2[i][j] = palavra[cont].toUpperCase();
                     m[i][j] = palavra[cont].toUpperCase();
@@ -114,9 +119,10 @@ public class Palavras {
             while(ok==true){
                 if(i==linha+tamWord){break;}
                 if(m[i][j]==null||m[i][j].equals(palavra[cont].toUpperCase())){
-                   contWordCr++;
+                    System.out.println(m[i][j]);
+                    contWordCr++;
                 }else{ok = false;}
-                if(contWordCr==tamWord){tudocerto = true; i = linha; j = coluna; continue;}
+                if(contWordCr==tamWord){tudocerto = true; i = linha; j = coluna;}
                 if(tudocerto==true){
                     m2[i][j] = palavra[cont].toUpperCase();
                     m[i][j] = palavra[cont].toUpperCase();

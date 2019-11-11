@@ -12,10 +12,6 @@ import padroes.ItemsTela;
 public class IntroductionWP extends Frame{
     private ItemsTela it = new ItemsTela();
     private Btn menu[] = it.menuOpGames(this);
-    public IntroductionWP(){
-        intro();
-        show();
-    }
 
     public void tutorial() {
     }

@@ -12,17 +12,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 public class TelaWP extends Frame{
     private boolean[][] mWords;
-    private int nivel;
     public TelaWP(int n){
         p = new Palavras(n);
-        nivel = n;
         x = y = p.getX();
         mWords = new boolean[x][y];
-        for (int i = 0; i < x; i++) {
-            for (int j = 0; j < y; j++) {
-                mWords[i][j] = false;
-            }
-        }
         CP();
         cont.start();
         setVisible(true);
