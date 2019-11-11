@@ -20,6 +20,7 @@ import padroes.Fonts;
 import padroes.ItemsTela;
 import user.Cadastro;
 import user.Conta;
+import user.User;
 
 public class MultiGameTela extends Frame{
     private Pn pnIniciar;
@@ -127,7 +128,7 @@ public class MultiGameTela extends Frame{
     public class Logar implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent ae) {
-            Conta c = new Conta(txtUserName.getText(), txtPassword.getText());
+            Conta c = new Conta(new User(txtUserName.getText(),txtPassword.getText()));
             c.login();
             pnLogin.setVisible(false);
             if(c.isLogado()){

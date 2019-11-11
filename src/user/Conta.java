@@ -1,14 +1,16 @@
 package user;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class Conta {
     private SecretKey key;
@@ -16,11 +18,11 @@ public class Conta {
     private Criptografar c;
     private String username;
     private String password;
-    public Conta(String username, String password){
-        this.username = username;
-        this.password = password;
+    public Conta(User user){
         key = new SecretKeySpec(chave.getBytes(), "AES");
         c = new Criptografar(chave, password);
+        username = user.getUsername();
+        password = user.getPassword();
     }
     private boolean logado = false;
 
@@ -28,29 +30,29 @@ public class Conta {
     public void setLogado(boolean logado) {this.logado = logado;}
    
     public void login(){
+        
+        JSONObject objectArquivo;
+        JSONParser parser = new JSONParser();
+        
         try{
-            FileInputStream f = new FileInputStream("users/"+username+".txt");
-            InputStreamReader i = new InputStreamReader(f);
-            BufferedReader b = new BufferedReader(i);
-            if(b.readLine().equals(Arrays.toString(c.encriptar()))&&!logado){
+            objectArquivo = (JSONObject) parser.parse(new FileReader("users/"+username+".json"));
+            if(objectArquivo.get("password").equals(Arrays.toString(c.encriptar()))&&!logado){
                 if(username!=null&&password!=null){
                     logado = true;
                 }
             }
-            b.close();
-            f.close();
-        }catch(FileNotFoundException e){}catch(IOException e){}
+        }catch(FileNotFoundException e){}catch(IOException e){} catch (ParseException ex) {}
     }
     public void gravar(){
+        JSONObject objectArquivo = new JSONObject();
+        if(username.length()>0&&password.length()>0){
+            objectArquivo.put("username", username);
+            objectArquivo.put("password", Arrays.toString(c.encriptar()));
+        }
         try{
-            if(username.length()>0&&password.length()>0){
-                FileOutputStream f = new FileOutputStream("users/"+username+".txt");
-                PrintWriter pr = new PrintWriter(f);
-                pr.println(username);
-                pr.println(Arrays.toString(c.encriptar()));
-                pr.close();
-                f.close();
-            }
+            FileWriter arquivo = new FileWriter("users/"+username+".json");
+            arquivo.write(objectArquivo.toJSONString());
+            arquivo.close();
         }catch(FileNotFoundException e){}catch(IOException e){}
     }
 }
