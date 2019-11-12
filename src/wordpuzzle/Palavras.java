@@ -24,6 +24,7 @@ public class Palavras {
         m2 = new String[x][y];
         //addWord(4, 1, words.get(2));
         escWords();
+        letras();
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 System.out.print("|"+m2[i][j]+"|");
@@ -42,7 +43,7 @@ public class Palavras {
             int w = sortear.nextInt(words.size());
             if(words.get(w).length<x){
                 if(mapawords.contains(words.get(w))==false){
-                    boolean conf = addWord(orien, invertida, words.get(w));
+                    boolean conf = addW(orien, invertida, words.get(w));
                     if(conf){mapawords.add(words.get(w));}
                 }
             }
@@ -50,88 +51,46 @@ public class Palavras {
         
     }
     
-    public boolean addWord(int orientacao, int invertida, String[] palavra){
-        int tamWord = palavra.length;
-        int linha = 0, coluna = 0;
-        boolean ok = true;
-        int cont = (invertida==1)?0:palavra.length-1; 
-        ok = true; int contWordCr = 0; boolean tudocerto = false;
-        /*
-        Escrever um loop/função para verificar as posições cruzadas, por que a verificação atual tem certos bugs, devido sua
-        verificação ficar com apenas uma letra da palavra sendo verificada com as posições sorteadas.
+    public boolean addW(int orientacao, int invertida, String[] palavra){
+        int linha = 0; int coluna = 0; 
+        int cont = (invertida==1)?0:palavra.length-1;
+        int contWordCr = 0; boolean tudocerto = false;
+        switch(orientacao){
+            case 1: linha = sortear.nextInt(x); coluna = lineAndColumn(palavra.length); break;
+            case 2: linha = lineAndColumn(palavra.length); coluna = sortear.nextInt(x); break;
+            case 3: linha = lineAndColumn(palavra.length); coluna = lineAndColumn(palavra.length); break;
+            case 4: linha = lineAndColumn(palavra.length);coluna = linha+palavra.length-1; break;
+            default: break;
+        }
+        int i = linha; int j = coluna;
         
-        *E também é bom dar uma lida nesta função pra ver uma forma de refatorar.
-        */
-        if(orientacao==1){
-            linha = sortear.nextInt(x);
-            coluna = lineAndColumn(tamWord);
-            int i = linha; int j = coluna;
-            while(ok==true){
-                if(j==coluna+tamWord){break;}
-                if(m[i][j]==null||m[i][j].equals(palavra[cont].toUpperCase())){
-                    contWordCr++;
-                }else{ok = false;}
-                if(contWordCr==tamWord){tudocerto = true; j = coluna;}
-                if(tudocerto==true){
-                    m2[i][j] = palavra[cont].toUpperCase();
-                    m[i][j] = palavra[cont].toUpperCase();
-                    if(invertida==1){cont++;}else{cont--;}
-                }
-                j++;
+        while(true){
+            if(orientacao==1){if(j==coluna+palavra.length&&tudocerto){break;}}else{if(i==linha+palavra.length&&tudocerto){break;}}
+            if(i==linha+palavra.length||j==coluna+palavra.length&&tudocerto==false){
+                i = linha; j = coluna;
+                if(cont==palavra.length){cont = (invertida==1)?0:palavra.length-1;}
+                if(invertida==1){cont++;}else{cont--;}
             }
-        }else if(orientacao==2){
-            linha = lineAndColumn(tamWord);
-            coluna = sortear.nextInt(x);
-            int i = linha; int j = coluna;
-            while(ok==true){
-                if(i==linha+tamWord){break;}
-                if(m[i][j]==null||m[i][j].equals(palavra[cont].toUpperCase())){
-                    contWordCr++;
-                }else{ok = false;}
-                if(contWordCr==tamWord){tudocerto = true; i = linha;}
-                if(tudocerto==true){
-                    m2[i][coluna] = palavra[cont].toUpperCase();
-                    m[i][coluna] = palavra[cont].toUpperCase();
-                    if(invertida==1){cont++;}else{cont--;}
-                }
-                i++;
+            if(m[i][j]==null||m[i][j].equals(palavra[cont].toUpperCase())){
+                contWordCr++;
+            }else{return false;}
+            
+            if(contWordCr==palavra.length*palavra.length){tudocerto = true; i = linha; j = coluna; cont = (invertida==1)?0:palavra.length-1;}
+            if(tudocerto==true){
+                m2[i][j] = palavra[cont].toUpperCase();
+                m[i][j] = palavra[cont].toUpperCase();
+                if(invertida==1){cont++;}else{cont--;}
             }
-        }else if(orientacao==3){
-            linha = lineAndColumn(tamWord);
-            coluna = lineAndColumn(tamWord);
-            int i = linha;int j = coluna;
-            while(ok==true){
-                if(i==linha+tamWord){break;}
-                if(m[i][j]==null||m[i][j].equals(palavra[cont].toUpperCase())){
-                    contWordCr++;
-                }else{ok = false;}
-                if(contWordCr==tamWord){tudocerto = true; i = linha; j = coluna;}
-                if(tudocerto==true){
-                    m2[i][j] = palavra[cont].toUpperCase();
-                    m[i][j] = palavra[cont].toUpperCase();
-                    if(invertida==1){cont++;}else{cont--;}
-                }
-                i++;j++;
-            }
-        }else if(orientacao==4){
-            linha = lineAndColumn(tamWord);coluna = linha+tamWord-1;
-            int i = linha; int j = coluna;
-            while(ok==true){
-                if(i==linha+tamWord){break;}
-                if(m[i][j]==null||m[i][j].equals(palavra[cont].toUpperCase())){
-                    System.out.println(m[i][j]);
-                    contWordCr++;
-                }else{ok = false;}
-                if(contWordCr==tamWord){tudocerto = true; i = linha; j = coluna;}
-                if(tudocerto==true){
-                    m2[i][j] = palavra[cont].toUpperCase();
-                    m[i][j] = palavra[cont].toUpperCase();
-                    if(invertida==1){cont++;}else{cont--;}
-                }
-                i++;j--;
+            switch(orientacao){
+                case 1: j++; break;
+                case 2: i++; break;
+                case 3: i++;j++; break;
+                case 4: i++;j--; break;
+                default: break;
             }
         }
-        if(ok){return true;}else{return false;}
+        
+        return true;
     }
     
     public int lineAndColumn(int tamWord){
@@ -144,9 +103,9 @@ public class Palavras {
     }
     private void niveis(int n){
         switch(n){
-            case 1: x = y = 10; quantWords = 6; break;
-            case 2: x = y = 14; quantWords = 8; break;
-            case 3: x = y = 16; quantWords = 10; break;
+            case 1: x = y = 10; quantWords = 8; break;
+            case 2: x = y = 14; quantWords = 10; break;
+            case 3: x = y = 16; quantWords = 12; break;
             default: break;
         }
         arqGet();
