@@ -14,6 +14,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.border.Border;
 import multigame.MultiGameTela;
+import padroes.Fonts;
 import padroes.ItemsTela;
 
 public class Cadastro extends Frame{
@@ -26,7 +27,8 @@ public class Cadastro extends Frame{
         int backQuadroPos[] = {0,0,587,700}; int barraPos[] = {587,0,5,700};
         int titlePos[] = {765,87,286,84}; int userIconPos[] = {666,264,40,46};
         int passIconPos[] = {666,362,38,44}; int btnRegisterPos[] = {814,463,190,62};
-        Font f = new Font("Arial", Font.PLAIN, 20);
+        Fonts fs = new Fonts();
+        Font f = fs.addNewFont("DS-DIGIT", 40);
         Border b = BorderFactory.createLineBorder(new Color(52,103,77), 3);            
         txtName = new Txt(txtUserPos, f, Color.black, b);
         txtPass = new Pass(txtPassPos, f, Color.black, b);
@@ -51,7 +53,7 @@ public class Cadastro extends Frame{
         @Override
         public void actionPerformed(ActionEvent ae) {
             dispose();
-            Conta c = new Conta(txtName.getText(), txtPass.getText());
+            Conta c = new Conta(new User(txtName.getText(), txtPass.getText()));
             c.gravar();
             MultiGameTela m = new MultiGameTela(); m.intro();m.show();
         }

@@ -19,7 +19,6 @@ public class TelaJDV extends Frame{
     public void start(){
         x = j.getX();
         y = j.getY();
-        j.defIc(true, false);
         vez = j.sortVez();
         JDV();
     }

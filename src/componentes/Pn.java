@@ -4,10 +4,7 @@ import java.awt.Component;
 import java.awt.LayoutManager;
 import javax.swing.JPanel;
 public class Pn extends JPanel{
-    public Pn(){
-        
-    }
-    
+    public Pn(){};
     public Pn(int pos[], Component cp[]){
         setLayout(null);
         setBounds(pos[0], pos[1], pos[2], pos[3]);

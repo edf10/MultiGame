@@ -70,9 +70,9 @@ public class TelaGOWin extends Frame{
         Component lis[] = {
             new Lb(tempoCM, lbT, lbtempoP, Color.blue, null),
             new Lb(goWin, lbGO, lbtitleP, Color.black, null),
-            new Btn(imJogarMesmo, jogarMesmoP, null, false, e1),
-            new Btn(imJogarOutro, jogarOutroP, null, false, e3),
-            new Btn(imMenuJogos, menuJogosP, null, false, e2)
+            new Btn(imJogarMesmo, jogarMesmoP, e1),
+            new Btn(imJogarOutro, jogarOutroP, e3),
+            new Btn(imMenuJogos, menuJogosP, e2)
         };
         int pnGOP[] = {0,0,400,300}; pnGO = new Pn(pnGOP, lis, null);
         add(pnGO);

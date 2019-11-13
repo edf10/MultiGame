@@ -1,12 +1,11 @@
 package multigame;
-import jogodavelha.IntroductionJDV;
+import wordpuzzle.IntroductionWP;
 public class MultiGame {
     public static void main(String []args){
         MultiGameTela mg = new MultiGameTela();
         mg.intro();
         mg.show();
-        //IntroductionJDV i = new IntroductionJDV();
+        //IntroductionWP i = new IntroductionWP();
         //i.intro(); i.show();
-        //TestePaineis t = new TestePaineis();
     }
 }

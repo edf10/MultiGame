@@ -30,15 +30,11 @@ public class TelaCM extends Frame{
         }
         m = r.getM();
         if(x==16){
-            botao = "btn_cm_medium";
-            botao_p = "btn_cm_medium_p";
-            marcador = "flagM";
-            minas = "bomb_cm_medium";
+            botao = "btn_cm_medium";botao_p = "btn_cm_medium_p";botao_t = "btn_cm_medium_t";
+            marcador = "flagM";minas = "bomb_cm_medium";
         }else if(x==18){
-            botao = "btn_cm_hard";
-            botao_p = "btn_cm_hard_p";
-            marcador = "flagD";
-            minas = "bomb_cm_hard";
+            botao = "btn_cm_hard";botao_p = "btn_cm_hard_p";botao_t = "btn_cm_hard_t";
+            marcador = "flagD";minas = "bomb_cm_hard";
         }
         CM();
     }
@@ -51,7 +47,7 @@ public class TelaCM extends Frame{
     private Fonts f = new Fonts(); 
     public void CM() {
         int lbBackCampoPos[] = {128,114,938,633};
-        pnBorda = new Pn(); pnBorda.add(new Lb(im.addImagem("pn_back_campo"), lbBackCampoPos));
+        pnBorda = new Pn(); pnBorda.add(new Lb(im.addImagem("pn_back_campo_cm"), lbBackCampoPos));
         pnBorda.setBounds(128, 114, 938, 633);
         Font tempo = f.addNewFont("DS-DIGIT", 80);
         int lbSegundosP[] = {727,20,100,100};
@@ -71,7 +67,7 @@ public class TelaCM extends Frame{
             }
         }
         painelCampo.setBackground(Color.black);
-        add(painelCampo); 
+        add(painelCampo);
         pnBorda.setBackground(new Color(45,39,39));
         add(pnBorda);
         getContentPane().setBackground(new Color(45,39,39));
@@ -175,6 +171,7 @@ public class TelaCM extends Frame{
     public String minas = "bomb_cm_easy"; public String marcador = "flagF";
     public String botao = "btn_cm_easy"; 
     public String botao_p = "btn_cm_easy_p";
+    public String botao_t = "btn_cm_easy_t";
     public Font btn = f.addNewFont("DS-DIGIT", 20);
     
     private class Button extends Btn{
@@ -185,6 +182,7 @@ public class TelaCM extends Frame{
             super();
             setIcon(im.addImagem(botao));
             setPressedIcon(im.addImagem(botao_p));
+            setRolloverIcon(im.addImagem(botao_t));
             setBackground(Color.black);setFont(btn);
             this.s = s; //Evento do botão (tipo)
             this.x = x; this.y = y;//Posição do btn em relação a matriz
@@ -198,7 +196,7 @@ public class TelaCM extends Frame{
               é acionada e chama o método GameOver, este atribui o valor true para a variável GO, fazendo com que quando este método chamar
               o método btnsAbertos seja possível abrir o campo.*/
             if(press==false||GO==true){
-                setPressedIcon(null);
+                setPressedIcon(null); setRolloverIcon(null);
                 if(marc[x][y]==1){
                     setIcon(im.addImagem(marcador));
                 }else if(marc[x][y]==2){
@@ -232,7 +230,7 @@ public class TelaCM extends Frame{
                         }
                         break;
                     case InputEvent.BUTTON3_MASK:
-                        if(marc[x][y]==1){setIcon(null);marc[x][y] = 0;setPressedIcon(im.addImagem(botao_p));setIcon(im.addImagem(botao));
+                        if(marc[x][y]==1){setIcon(null);marc[x][y] = 0;setPressedIcon(im.addImagem(botao_p));setIcon(im.addImagem(botao));setRolloverIcon(im.addImagem(botao_t));
                         }else if(marc[x][y]==0){marc[x][y] = 1;posAlt(x, y);}
                         break;
                     default:break;
