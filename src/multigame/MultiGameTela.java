@@ -55,13 +55,13 @@ public class MultiGameTela extends Frame{
         int btnJDVPos[] = {376,375,167,156}; int btnCPPos[] = {636,375,167,156};
         ImageIcon btn_cm[] = {im.addImagem("btn_cm"),im.addImagem("btn_cm_t"),im.addImagem("btn_cm_p")};
         ImageIcon btn_jdv[] = {im.addImagem("btn_jdv"),im.addImagem("btn_jdv_t"),im.addImagem("btn_jdv_p")};
-        ImageIcon btn_cp[] = {im.addImagem("btn_wp"),im.addImagem("btn_wp_t"),im.addImagem("btn_wp_p")}; 
+        ImageIcon btn_wp[] = {im.addImagem("btn_wp"),im.addImagem("btn_wp_t"),im.addImagem("btn_wp_p")}; 
         Btn menu[] = it.menuOp(this); it.setTelaAnt(new MultiGameTela());
         Component cp[] = {
             new Lb(im.addImagem("title_games"),titlePos),
             new Btn(btn_cm, btnCMPos, new EventInitialGame(1)),
             new Btn(btn_jdv, btnJDVPos, new EventInitialGame(2)),
-            new Btn(btn_cp, btnCPPos, new EventInitialGame(3)),
+            new Btn(btn_wp, btnCPPos, new EventInitialGame(3)),
             menu[0],
             menu[1],
             menu[2],
@@ -84,7 +84,7 @@ public class MultiGameTela extends Frame{
             switch (n) {
                 case 1:IntroductionCM cm = new IntroductionCM(); cm.intro(); cm.show();break;
                 case 2:IntroductionJDV jdv = new IntroductionJDV(); jdv.intro(); jdv.show();break;
-                case 3:IntroductionWP wp = new IntroductionWP();break;
+                case 3:IntroductionWP wp = new IntroductionWP(); wp.intro(); wp.show(); break;
                 default:break;
             }
             

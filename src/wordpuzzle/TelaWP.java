@@ -4,27 +4,27 @@ import componentes.Frame;
 import componentes.Lb;
 import componentes.Pn;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import padroes.Fonts;
+import padroes.ItemsTela;
 public class TelaWP extends Frame{
     private boolean[][] mWords;
+    private ItemsTela it = new ItemsTela();
     public TelaWP(int n){
         p = new Palavras(n);
         x = y = p.getX();
         mWords = new boolean[x][y];
         CP();
         cont.start();
-        setVisible(true);
+        show();
     }
     private int x; private int y;
     private Palavras p;
     private Pn pnWords;
-    private Pn pnCont;
     private Letra[][] letras;
     private String wordsLetras[][];
     private Contador cont = new Contador();
@@ -36,11 +36,8 @@ public class TelaWP extends Frame{
         wordsLetras = p.getM2();
         for(int i = 0; i<x ; i++){
             for(int j = 0; j<y ; j++){
-                if(wordsLetras[i][j]!=null){
-                    letras[i][j] = new Letra(p.getM(i, j),i,j,true);
-                }else{
-                    letras[i][j] = new Letra(p.getM(i, j),i,j,false);
-                }
+                if(wordsLetras[i][j]!=null){letras[i][j] = new Letra(p.getM(i, j),i,j,true);
+                }else{letras[i][j] = new Letra(p.getM(i, j),i,j,false);}
                 pnWords.add(letras[i][j]);
             }
         }
@@ -49,18 +46,16 @@ public class TelaWP extends Frame{
         add(new Lb(Color.black, lbBlackPos));
         int lbBackCampoPos[] = {128,114,944,639};
         add(new Lb(im.addImagem("pn_back_campo_wp"), lbBackCampoPos));
-        Font f = new Font("Arial", Font.PLAIN, 60);
-        int pnContP[] = {0,0,800,100}; int lbminP[] = {200,10,100,80}; 
-        int lbpontos[] = {290,10,100,80}; int lbseg[] = {380,10,100,80};
-        
-        Component cp[] = {
-            lbminutos = new Lb("00", f, lbminP, Color.white),
-            new Lb(":", f, lbpontos, Color.white),
-            lbsegundos = new Lb("00", f, lbseg, Color.white)
-        };
-        pnCont = new Pn(pnContP, cp,Color.black);
-        add(pnCont);
+        Fonts fs = new Fonts();
+        Font f = fs.addNewFont("DS-DIGIT", 80);
+        int lbminP[] = {373,15,100,100}; int lbpontos[] = {555,13,100,100}; int lbseg[] = {727,15,100,100};
+        lbminutos = new Lb("00", f, lbminP, Color.white); lbsegundos = new Lb("00", f, lbseg, Color.white);
+        lbdoispontos = new Lb(":", f, lbpontos, Color.white);
         getContentPane().setBackground(new Color(54,54,58));
+        add(lbminutos);
+        add(lbdoispontos);
+        add(lbsegundos);
+        add(it.btnClose()); add(it.returnGames());
     }
     
     public void ganhar(){
@@ -99,8 +94,7 @@ public class TelaWP extends Frame{
             this.x = x; this.y = y;
             setBackground(Color.black);
             setForeground(Color.white);
-            Fonts fs = new Fonts();
-            setFont(fs.addNewFont("DIMIS___", 18));
+            setFont(new Font("Arial", Font.PLAIN, 18));
             addActionListener(new Evento());
         }
         
@@ -116,6 +110,7 @@ public class TelaWP extends Frame{
     
     private Lb lbminutos;
     private Lb lbsegundos;
+    private Lb lbdoispontos;
     
     public class Contador extends Thread{
         @Override
