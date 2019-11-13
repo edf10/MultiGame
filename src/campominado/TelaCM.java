@@ -47,7 +47,7 @@ public class TelaCM extends Frame{
     private Fonts f = new Fonts(); 
     public void CM() {
         int lbBackCampoPos[] = {128,114,938,633};
-        pnBorda = new Pn(); pnBorda.add(new Lb(im.addImagem("pn_back_campo"), lbBackCampoPos));
+        pnBorda = new Pn(); pnBorda.add(new Lb(im.addImagem("pn_back_campo_cm"), lbBackCampoPos));
         pnBorda.setBounds(128, 114, 938, 633);
         Font tempo = f.addNewFont("DS-DIGIT", 80);
         int lbSegundosP[] = {727,20,100,100};
@@ -67,7 +67,7 @@ public class TelaCM extends Frame{
             }
         }
         painelCampo.setBackground(Color.black);
-        add(painelCampo); 
+        add(painelCampo);
         pnBorda.setBackground(new Color(45,39,39));
         add(pnBorda);
         getContentPane().setBackground(new Color(45,39,39));
