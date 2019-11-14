@@ -15,6 +15,7 @@ import padroes.ItemsTela;
 
 public class TelaCM extends Frame{
     private Campo r;
+    private int m5[][]; //1=posOpen 3=marcadores 2=minas abertas
     public TelaCM(Campo c) {
         r = c;
         x = r.getX(); y = r.getY();
@@ -22,12 +23,15 @@ public class TelaCM extends Frame{
         m4 = new int[x][y];
         m3 = r.getM3(); posxM = r.getPosxM(); posyM = r.getPosyM();
         marc = new int[x][y];
+        m5 = new int[x][y];
         for(int i = 0; i<x; i++){
             for(int j = 0; j<y; j++){
                 marc[i][j] = 0;
                 m3[i][j] = 0;
+                m5[i][j] = 0;
             }
         }
+        
         m = r.getM();
         if(x==16){
             botao = "btn_cm_medium";botao_p = "btn_cm_medium_p";botao_t = "btn_cm_medium_t";
@@ -37,7 +41,9 @@ public class TelaCM extends Frame{
             marcador = "flagD";minas = "bomb_cm_hard";
         }
         CM();
+        
     }
+    
     private int x; private int y; //Tamanho do campo
     private Button vet[][]; //Campo e vetor de btns
     private int[][] m3; private int[][] m; private int[] posxM; private int[] posyM; //Variáveis teste
@@ -161,9 +167,39 @@ public class TelaCM extends Frame{
                 posAlt(posxM[i], posyM[i]);
             }
             ct.stop();//Para o cronômetro
-            //TelaGOWin tgo = new TelaGOWin(lbminutos.getText()+":"+lbsegundos.getText(), this, r, true);
+            
+            int r[] = calcScore();
+            Score sc = new Score(r[0],r[1],r[2]);
         }
         abertos = 0;
+        System.out.println("");
+        System.out.println("");
+        System.out.println("------------------------------------------");
+        for(int i = 0; i<x; i++){
+            for(int j = 0; j<y; j++){
+                System.out.print(m5[i][j]);
+            }
+            System.out.println("");
+        }
+        System.out.println("------------------------------------------");
+        System.out.println("");
+        System.out.println("");
+    }
+    
+    public int[] calcScore(){
+        int p = 0; int m = 0;
+        for(int i = 0; i<x; i++){
+            for(int j = 0; j<y; j++){
+                switch(m5[i][j]){
+                    case 1: p++; break;
+                    case 3: m++; break;
+                    default: break;
+                }
+            }
+        }
+        int t = Integer.parseInt(lbminutos.getText())*60+Integer.parseInt(lbsegundos.getText());
+        int r[] = {p,t,m};
+        return r;
     }
     
     public boolean press = false; public boolean GO = false; public boolean win = false;
@@ -199,17 +235,21 @@ public class TelaCM extends Frame{
                 setPressedIcon(null); setRolloverIcon(null);
                 if(marc[x][y]==1){
                     setIcon(im.addImagem(marcador));
+                    m5[x][y] = (GO==false)?3:0;
                 }else if(marc[x][y]==2){
                     if("-1".equals(s)) {
                         setIcon(im.addImagem(minas));
+                        m5[x][y] = (GO==false)?2:0;
                         //Se win fosse true, sem essa condição, o código consideraria que o usuário perdeu e ganhou o jogo.
                         if(GO==false&&win==false){ //Caso win seja falso, significa que não ganhou-se o jogo.
                             press = true;GameOver();
                         }
                     }else if("0".equals(s)) {
                         setIcon(null);
+                        m5[x][y] = (GO==false)?1:0;
                     }else {
                         setIcon(null);setForeground(Color.white);setText(s);
+                        m5[x][y] = (GO==false)?1:0;
                     }
                     m4[x][y] = 1;
                 }
@@ -234,16 +274,16 @@ public class TelaCM extends Frame{
                         }else if(marc[x][y]==0){marc[x][y] = 1;posAlt(x, y);}
                         break;
                     default:break;
-                    }
                 }
-                @Override
-                public void mousePressed(MouseEvent me) {}
-                @Override
-                public void mouseReleased(MouseEvent me) {}
-                @Override
-                public void mouseEntered(MouseEvent me) {}
-                @Override
-                public void mouseExited(MouseEvent me) {}
+            }
+            @Override
+            public void mousePressed(MouseEvent me) {}
+            @Override
+            public void mouseReleased(MouseEvent me) {}
+            @Override
+            public void mouseEntered(MouseEvent me) {}
+            @Override
+            public void mouseExited(MouseEvent me) {}
         }	
     }
 }
