@@ -10,7 +10,6 @@ import componentes.Lb;
 import componentes.Pn;
 import componentes.Btn;
 import componentes.Frame;
-import java.util.Arrays;
 import padroes.Fonts;
 import padroes.ItemsTela;
 import user.Conta;
@@ -20,6 +19,7 @@ public class TelaCM extends Frame{
     private Campo r;
     private User user;
     private int m5[][]; //1=posOpen 3=marcadores 2=minas abertas
+    private String nivel;
     public TelaCM(Campo c, User user) {
         this.user = user;
         r = c;
@@ -64,9 +64,9 @@ public class TelaCM extends Frame{
         int lbSegundosP[] = {727,20,100,100};
         int lbMinutosP[] = {373,20,100,100};
         int lbdoispontosP[] = {555,18,100,100};
-        lbsegundos = new Lb("00", tempo,lbSegundosP, Color.white, null);
-        lbminutos = new Lb("00", tempo, lbMinutosP, Color.white, null);
-        lbdoispontos = new Lb(":", tempo, lbdoispontosP, Color.white, null);
+        lbsegundos = new Lb("00", tempo,lbSegundosP, Color.white);
+        lbminutos = new Lb("00", tempo, lbMinutosP, Color.white);
+        lbdoispontos = new Lb(":", tempo, lbdoispontosP, Color.white);
         int pnCampoP[] = {145,130,908,573};
         GridLayout mx = new GridLayout(x,y);
         painelCampo = new Pn(pnCampoP, mx);
@@ -148,11 +148,6 @@ public class TelaCM extends Frame{
             }
         }
         ct.stop();//Para o cronômetro.
-        int r[] = calcScore();
-        ScoreCM sc = new ScoreCM(r[0],r[1],r[2]);
-        user.setMoedas(sc.scoreMoedaCM());
-        Conta c = new Conta(user);
-        c.gravar();
     }
     public void Ganhar(){
         int abertos = 0;
@@ -176,10 +171,9 @@ public class TelaCM extends Frame{
                 posAlt(posxM[i], posyM[i]);
             }
             ct.stop();//Para o cronômetro
-            
-            int r[] = calcScore();
-            ScoreCM sc = new ScoreCM(r[0],r[1],r[2]);
-            user.addScoreCM(sc.scoreRankingCM());
+            if(x==14){nivel = "EASY";}else if(x==16){nivel = "MEDIUM";}else{nivel = "HARD";}
+            user.addScoreCM(sc.scoreRankingCM(), nivel);
+            user.setMoedas(sc.scoreMoedaCM());
             Conta c = new Conta(user);
             c.gravar();
         }
@@ -197,12 +191,14 @@ public class TelaCM extends Frame{
                 }
             }
         }
+        
         int t = Integer.parseInt(lbminutos.getText())*60+Integer.parseInt(lbsegundos.getText());
-        int r[] = {p,t,m};
-        System.out.println(Arrays.toString(r));
-        return r;
+        scoreFat[0] = p; scoreFat[1] = t; scoreFat[2] = m;
+        return scoreFat;
     }
     
+    public ScoreCM sc;
+    public int scoreFat[] = new int[3];
     public boolean press = false; public boolean GO = false; public boolean win = false;
     public int iniciarJogo = 0; public int marc[][]; public int[][] m4;
     public String minas = "bomb_cm_easy"; public String marcador = "flagF";
@@ -227,6 +223,8 @@ public class TelaCM extends Frame{
         }
         public String getS(){return s;}
         public void btnsAbertos(String s) {
+            scoreFat = calcScore();
+            sc = new ScoreCM(scoreFat[0],scoreFat[1],scoreFat[2]);
             /*Se press==false, significa que nem uma mina foi clicada, caso contrário, ela foi acionada. Mas quando essa variável assume
               o valor true, não se consegue mais entrar nos ifs após a condição inicial, então quando o método GameOver for chamado, não
               poderá abrir as outras posições devido esta condição inicial. Por isso é necessário esta variável GO, onde quando uma mina
@@ -236,21 +234,21 @@ public class TelaCM extends Frame{
                 setPressedIcon(null); setRolloverIcon(null);
                 if(marc[x][y]==1){
                     setIcon(im.addImagem(marcador));
-                    m5[x][y] = (GO==false)?3:0;
+                    if(GO==false)m5[x][y] = 3;
                 }else if(marc[x][y]==2){
                     if("-1".equals(s)) {
                         setIcon(im.addImagem(minas));
-                        m5[x][y] = (GO==false)?2:0;
+                        if(GO==false)m5[x][y] = 2;
                         //Se win fosse true, sem essa condição, o código consideraria que o usuário perdeu e ganhou o jogo.
                         if(GO==false&&win==false){ //Caso win seja falso, significa que não ganhou-se o jogo.
                             press = true;GameOver();
                         }
                     }else if("0".equals(s)) {
                         setIcon(null);
-                        m5[x][y] = (GO==false)?1:0;
+                        if(GO==false)m5[x][y] = 1;
                     }else {
                         setIcon(null);setForeground(Color.white);setText(s);
-                        m5[x][y] = (GO==false)?1:0;
+                        if(GO==false)m5[x][y] = 1;
                     }
                     m4[x][y] = 1;
                 }

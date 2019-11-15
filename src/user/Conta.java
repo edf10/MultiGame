@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.HashMap;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -30,6 +30,7 @@ public class Conta {
                     user.setUsername(objectArquivo.get("username").toString());
                     user.setPassword(objectArquivo.get("password").toString());
                     user.setDataRegistro(objectArquivo.get("data_register").toString());
+                    user.setHistoricCM((HashMap<Integer,String>) objectArquivo.get("historicCM"));
                     user.setMoedas(Integer.parseInt(objectArquivo.get("moedas").toString()));
                     return user;
                 }

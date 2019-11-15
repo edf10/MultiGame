@@ -1,6 +1,5 @@
 package user;
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 public class User {
@@ -8,7 +7,7 @@ public class User {
     private String password;
     private String dataRegistro;
     private int moedas;
-    private ArrayList<Integer> historicCM = new ArrayList<Integer>();
+    private HashMap<Integer,String> historicCM = new HashMap<Integer,String>();
     private HashMap<Integer,String> historicJDV;
     private HashMap<Integer,String> historicWP;
     
@@ -27,10 +26,10 @@ public class User {
         dataRegistro = numerosData[0]+" "+numerosData[1]+" "+numerosData[2];
     }
     
-    public void addScoreCM(int sc){
-        historicCM.add(sc);
+    public void addScoreCM(int sc, String nivel){
+        historicCM.put(sc, nivel);
     }
-    public ArrayList<Integer> getHistoricCM() {
+    public HashMap<Integer,String> getHistoricCM() {
         return historicCM;
     }
     public String getUsername() {
@@ -51,7 +50,7 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    public void setHistoricCM(ArrayList<Integer> historicCM) {
+    public void setHistoricCM(HashMap<Integer,String> historicCM) {
         this.historicCM = historicCM;
     }
     public int getMoedas() {
