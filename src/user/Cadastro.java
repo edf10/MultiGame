@@ -53,8 +53,10 @@ public class Cadastro extends Frame{
         @Override
         public void actionPerformed(ActionEvent ae) {
             dispose();
-            Conta c = new Conta(new User(txtName.getText(), txtPass.getText()));
-            c.gravar();
+            if(txtName.getText().length()>0&&txtPass.getText().length()>0){
+                Conta c = new Conta(new User(txtName.getText(), txtPass.getText()));
+                c.gravar();
+            }
             MultiGameTela m = new MultiGameTela(); m.intro();m.show();
         }
     }

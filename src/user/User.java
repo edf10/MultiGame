@@ -6,6 +6,7 @@ public class User {
     private final String username;
     private final String password;
     private final String dataRegistro;
+    private int moeda;
     private HashMap<Integer,String> historicCM;
     private HashMap<Integer,String> historicJDV;
     private HashMap<Integer,String> historicWP;
