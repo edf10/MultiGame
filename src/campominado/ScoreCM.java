@@ -1,11 +1,11 @@
 package campominado;
-public class Score {
+public class ScoreCM {
     private final int minasNivel;
     private final int posOpen; //campos diferentes de minas que estejam abertos
     private final int tempoSegundos;
     private int scoreCM;
     
-    public Score(int posOpen, int tempoSegundos, int minasNivel){
+    public ScoreCM(int posOpen, int tempoSegundos, int minasNivel){
         this.posOpen = posOpen;
         this.tempoSegundos = tempoSegundos;
         this.minasNivel = minasNivel;

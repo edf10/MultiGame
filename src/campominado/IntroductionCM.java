@@ -8,10 +8,15 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import componentes.Frame;
 import padroes.ItemsTela;
+import user.User;
 public class IntroductionCM extends Frame{
     private ItemsTela it = new ItemsTela();
     private Btn menu[] = it.menuOpGames(this);
+    private User user;
     private Pn pnNiveis;
+    public IntroductionCM(User user){
+        this.user = user;
+    }
     public void niveis() {
         int backNiveisPos[] = {0,0,1200,700}; int btnEasyPos[] = {496,174,189,71};
         int btnMediumPos[] = {439,311,304,71}; int btnHardPos[] = {502,445,189,79};
@@ -69,7 +74,7 @@ public class IntroductionCM extends Frame{
                 default:break;
             }
             dispose();
-            TelaCM tcm = new TelaCM(new Campo(x,y)); tcm.show(); 
+            TelaCM tcm = new TelaCM(new Campo(x,y), user); tcm.show(); 
         }
     }
     private class EventBtnsIntro implements ActionListener{

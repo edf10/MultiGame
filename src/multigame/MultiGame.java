@@ -1,5 +1,5 @@
 package multigame;
-import campominado.Score;
+import campominado.ScoreCM;
 public class MultiGame {
     public static void main(String []args){
         MultiGameTela mg = new MultiGameTela();

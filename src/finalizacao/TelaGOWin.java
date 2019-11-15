@@ -16,6 +16,7 @@ import componentes.Btn;
 import componentes.Frame;
 import jogodavelha.IntroductionJDV;
 import jogodavelha.TelaJDV;
+import user.User;
 
 public class TelaGOWin extends Frame{
     private final ImageIcon imJogarMesmo = new ImageIcon(getClass().getResource("return.png"));
@@ -88,9 +89,9 @@ public class TelaGOWin extends Frame{
             if(jogo==1){
                 CM.dispose();
                 switch(n){
-                    case 1:TelaCM tc = new TelaCM(new Campo(c.getX(), c.getY()));break;
+                    case 1:TelaCM tc = new TelaCM(new Campo(c.getX(), c.getY()), new User("dfsd", "fsdfs"));break;
                     case 2:MultiGameTela mgt = new MultiGameTela(); mgt.Jogos(); mgt.show();break;
-                    case 3:IntroductionCM i = new IntroductionCM(); i.niveis(); i.show();break;
+                    case 3:IntroductionCM i = new IntroductionCM(new User("gfgd","sfsdf")); i.niveis(); i.show();break;
                     default:break;
                 }
             }else if(jogo==2){

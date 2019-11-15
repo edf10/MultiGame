@@ -10,13 +10,18 @@ import componentes.Lb;
 import componentes.Pn;
 import componentes.Btn;
 import componentes.Frame;
+import java.util.Arrays;
 import padroes.Fonts;
 import padroes.ItemsTela;
+import user.Conta;
+import user.User;
 
 public class TelaCM extends Frame{
     private Campo r;
+    private User user;
     private int m5[][]; //1=posOpen 3=marcadores 2=minas abertas
-    public TelaCM(Campo c) {
+    public TelaCM(Campo c, User user) {
+        this.user = user;
         r = c;
         x = r.getX(); y = r.getY();
         vet = new Button[x][y];
@@ -143,7 +148,11 @@ public class TelaCM extends Frame{
             }
         }
         ct.stop();//Para o cronômetro.
-        //TelaGOWin tgo = new TelaGOWin(lbminutos.getText()+":"+lbsegundos.getText(), this, r, false);
+        int r[] = calcScore();
+        ScoreCM sc = new ScoreCM(r[0],r[1],r[2]);
+        user.setMoedas(sc.scoreMoedaCM());
+        Conta c = new Conta(user);
+        c.gravar();
     }
     public void Ganhar(){
         int abertos = 0;
@@ -169,21 +178,12 @@ public class TelaCM extends Frame{
             ct.stop();//Para o cronômetro
             
             int r[] = calcScore();
-            Score sc = new Score(r[0],r[1],r[2]);
+            ScoreCM sc = new ScoreCM(r[0],r[1],r[2]);
+            user.addScoreCM(sc.scoreRankingCM());
+            Conta c = new Conta(user);
+            c.gravar();
         }
         abertos = 0;
-        System.out.println("");
-        System.out.println("");
-        System.out.println("------------------------------------------");
-        for(int i = 0; i<x; i++){
-            for(int j = 0; j<y; j++){
-                System.out.print(m5[i][j]);
-            }
-            System.out.println("");
-        }
-        System.out.println("------------------------------------------");
-        System.out.println("");
-        System.out.println("");
     }
     
     public int[] calcScore(){
@@ -199,6 +199,7 @@ public class TelaCM extends Frame{
         }
         int t = Integer.parseInt(lbminutos.getText())*60+Integer.parseInt(lbsegundos.getText());
         int r[] = {p,t,m};
+        System.out.println(Arrays.toString(r));
         return r;
     }
     

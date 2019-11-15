@@ -54,7 +54,10 @@ public class Cadastro extends Frame{
         public void actionPerformed(ActionEvent ae) {
             dispose();
             if(txtName.getText().length()>0&&txtPass.getText().length()>0){
-                Conta c = new Conta(new User(txtName.getText(), txtPass.getText()));
+                User user = new User(txtName.getText(), txtPass.getText());
+                user.addDataRegister();
+                user.addDataRegister();
+                Conta c = new Conta(user);
                 c.gravar();
             }
             MultiGameTela m = new MultiGameTela(); m.intro();m.show();

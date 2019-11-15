@@ -17,6 +17,13 @@ public class Criptografar {
         key = new SecretKeySpec(this.chave.getBytes(), "AES");
         this.texto = texto;
     }
+
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
+    public String getTexto() {
+        return texto;
+    }
     
     public byte[] encriptar(){
         try{
