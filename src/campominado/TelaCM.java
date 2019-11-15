@@ -22,6 +22,7 @@ public class TelaCM extends Frame{
     private String nivel;
     public TelaCM(Campo c, User user) {
         this.user = user;
+        it.setTelaAntIntro(1);
         r = c;
         x = r.getX(); y = r.getY();
         vet = new Button[x][y];
@@ -87,7 +88,7 @@ public class TelaCM extends Frame{
         add(lbminutos);
         add(lbsegundos);
         add(lbdoispontos);
-        add(it.returnGames());
+        add(it.returnGames(this));
     }
     public class contarTempo extends Thread{
         @Override

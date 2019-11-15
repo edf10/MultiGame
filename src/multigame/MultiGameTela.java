@@ -57,7 +57,7 @@ public class MultiGameTela extends Frame{
         ImageIcon btn_cm[] = {im.addImagem("btn_cm"),im.addImagem("btn_cm_t"),im.addImagem("btn_cm_p")};
         ImageIcon btn_jdv[] = {im.addImagem("btn_jdv"),im.addImagem("btn_jdv_t"),im.addImagem("btn_jdv_p")};
         ImageIcon btn_wp[] = {im.addImagem("btn_wp"),im.addImagem("btn_wp_t"),im.addImagem("btn_wp_p")}; 
-        Btn menu[] = it.menuOp(this); it.setTelaAnt(new MultiGameTela());
+        Btn menu[] = it.menuOp(this);
         Component cp[] = {
             new Lb(im.addImagem("title_games"),titlePos),
             new Btn(btn_cm, btnCMPos, new EventInitialGame(1)),
@@ -66,7 +66,6 @@ public class MultiGameTela extends Frame{
             menu[0],
             menu[1],
             menu[2],
-            menu[3],
             new Lb(im.addImagem("back_capa_cm"),capaCMPos),
             new Lb(im.addImagem("back_capa_jdv"), capaJDVPos),
             new Lb(im.addImagem("back_capa_wp"), capaCPPos),

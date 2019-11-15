@@ -63,7 +63,7 @@ public class TelaJDV extends Frame{
         int backBackPos[] = {228,147,750,561};
         Component cp[] = {
             pnCC,lbJog,
-            it.btnClose(),it.returnGames(),it.btnSomOutro(),
+            it.btnClose(),it.returnGames(this),it.btnSomOutro(),
             new Lb(im.addImagem("back_tab_jdv"), backTabPos),
             new Lb(im.addImagem("back_back_jdv"), backBackPos),
             new Lb(im.addImagem("back_game_jdv"), backPos)

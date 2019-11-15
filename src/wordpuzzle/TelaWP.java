@@ -55,7 +55,7 @@ public class TelaWP extends Frame{
         add(lbminutos);
         add(lbdoispontos);
         add(lbsegundos);
-        add(it.btnClose()); add(it.returnGames());
+        add(it.btnClose()); add(it.returnGames(this)); add(it.btnSomOutro());
     }
     
     public void ganhar(){
@@ -87,6 +87,7 @@ public class TelaWP extends Frame{
     public class Letra extends Btn{
         private int x, y;
         private boolean caracterWord;
+        private int troca = 1;
         public Letra(String l, int x, int y, boolean conf){
             super();
             setText(l);
@@ -97,12 +98,11 @@ public class TelaWP extends Frame{
             setFont(new Font("Arial", Font.PLAIN, 18));
             addActionListener(new Evento());
         }
-        
         public class Evento implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent ae) {
-                setBackground(Color.blue);
-                mWords[x][y] = (caracterWord);
+                if(troca==1){setBackground(Color.blue); troca = 2; caracterWord = true;}else{setBackground(Color.black); troca = 1; caracterWord = false;}
+                mWords[x][y] = caracterWord;
                 ganhar();
             }
         }
