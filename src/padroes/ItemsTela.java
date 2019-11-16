@@ -1,5 +1,6 @@
 package padroes;
 
+import campominado.IntroductionCM;
 import componentes.Btn;
 import componentes.Frame;
 import imagens.Im;
@@ -7,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import multigame.MultiGameTela;
+import user.User;
 
 public class ItemsTela {
     private Im im = new Im();
@@ -59,21 +61,19 @@ public class ItemsTela {
     public Btn[] menuOp(Frame telaAtual){
         this.telaAtual = telaAtual;
         int userPos[] = {21,20,99,39}; int settingPos[] = {21,81,140,37};
-        int returnPos[] = {21,143,125,30}; int logoutPos[] = {25,200,124,37};
+        int logoutPos[] = {25,143,124,37};
         btnSetting = new Btn(btn_setting, settingPos, null);
-        btnReturn = new Btn(btn_return, returnPos, new EventBtnReturn());
         btnLogout = new Btn(btn_logout, logoutPos, new EventOps(3));
         btnSetting.setVisible(false);
-        btnReturn.setVisible(false);
         btnLogout.setVisible(false);
         Btn btns[] = {
             new Btn(btn_user, userPos, new EventMenuOp(1)),
             btnSetting,
-            btnReturn,
             btnLogout
         };
         return btns;
     }
+    
     public Btn[] menuOpGames(Frame telaAtual){
         this.telaAtual = telaAtual;
         int userPos[] = {21,20,99,39}; int settingPos[] = {21,81,140,37};
@@ -100,6 +100,29 @@ public class ItemsTela {
         return btns;
     }
     
+    public Btn[] menuOpGamesIntro(Frame telaAtual){
+        this.telaAtual = telaAtual;//20,81,143,195,248,303
+        int userPos[] = {21,20,99,39}; int settingPos[] = {21,81,140,37};
+        int logoutPos[] = {25,248,124,37};
+        int homePos[] = {21,143,105,33}; int storePos[] = {21,195,117,33};
+        btnSetting = new Btn(btn_setting, settingPos, null);
+        btnLogout = new Btn(btn_logout, logoutPos, new EventOps(3));
+        btnHome = new Btn(btn_home, homePos, new EventOps(2));
+        btnStore = new Btn(btn_store, storePos, null);
+        btnSetting.setVisible(false);
+        btnLogout.setVisible(false);
+        btnHome.setVisible(false);
+        btnStore.setVisible(false);
+        Btn btns[] = {
+            new Btn(btn_user, userPos, new EventMenuOp(3)),
+            btnSetting,
+            btnHome,
+            btnStore,
+            btnLogout
+        };
+        return btns;
+    }
+    
     private boolean descer = false;
     public class EventMenuOp implements ActionListener{
         private int esc;
@@ -109,11 +132,13 @@ public class ItemsTela {
         @Override
         public void actionPerformed(ActionEvent e){
             if(descer==false){
-                btnSetting.setVisible(true);btnReturn.setVisible(true);btnLogout.setVisible(true);descer = true;
-                if(esc==2){btnHome.setVisible(true);btnStore.setVisible(true);}
+                btnSetting.setVisible(true);btnLogout.setVisible(true);descer = true;
+                if(esc==2){btnHome.setVisible(true);btnStore.setVisible(true);btnReturn.setVisible(true);}
+                if(esc==3){btnHome.setVisible(true);btnStore.setVisible(true);}
             }else{
-                btnSetting.setVisible(false);btnReturn.setVisible(false);btnLogout.setVisible(false);descer = false;
-                if(esc==2){btnHome.setVisible(false);btnStore.setVisible(false);}
+                btnSetting.setVisible(false);btnLogout.setVisible(false);descer = false;
+                if(esc==2){btnHome.setVisible(false);btnStore.setVisible(false);btnReturn.setVisible(false);}
+                if(esc==3){btnHome.setVisible(false);btnStore.setVisible(false);}
             }
         }
     }
@@ -134,23 +159,31 @@ public class ItemsTela {
         }
     }
     
-    public Btn returnGames(){
+    public Btn returnGames(Frame telaAtual){
+        this.telaAtual = telaAtual;
         int returnPos[] = {21,20,125,30};
         return new Btn(btn_return, returnPos, new EventBtnReturn());
     }
-    private Frame telaAnt;
-    private Frame telaAtual = new Frame();
+    private int telaAntIntro;
+    private Frame telaAtual;
+    private User user;
 
-    public Frame getTelaAnt() {
-        return telaAnt;
+    public void setTelaAntIntro(int telaAntIntro) {
+        this.telaAntIntro = telaAntIntro;
     }
-    public void setTelaAnt(Frame telaNext) {
-        this.telaAnt = telaNext;
+    public void setUser(User user) {
+        this.user = user;
     }
+    
     public class EventBtnReturn implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            telaAtual.dispose(); telaAnt.show();
+            telaAtual.dispose();
+            if(telaAntIntro==1){
+                IntroductionCM icm = new IntroductionCM(user);icm.intro();icm.show();
+            }else if(telaAntIntro==2){
+                
+            }
         }
     }
     
