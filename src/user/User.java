@@ -1,5 +1,6 @@
 package user;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 public class User {
@@ -7,8 +8,8 @@ public class User {
     private String password;
     private String dataRegistro;
     private int moedas;
-    private HashMap<Integer,String> historicCM = new HashMap<Integer,String>();
-    private HashMap<Integer,String> historicJDV;
+    private HashMap<Integer,String> historicCM = new HashMap<>();
+    private ArrayList<ArrayList> historicJDV = new ArrayList<>();
     private HashMap<Integer,String> historicWP;
     
     public User(){}
@@ -29,6 +30,14 @@ public class User {
     public void addScoreCM(int sc, String nivel){
         historicCM.put(sc, nivel);
     }
+    
+    public void addPartidaJDV(String wOrgo, String oponente){
+        ArrayList<String> partida = new ArrayList<String>();
+        partida.add(wOrgo);
+        partida.add(oponente);
+        historicJDV.add(partida);
+    }
+    
     public HashMap<Integer,String> getHistoricCM() {
         return historicCM;
     }
@@ -58,6 +67,12 @@ public class User {
     }
     public void setMoedas(int moedas) {
         this.moedas += moedas;
+    }
+    public ArrayList<ArrayList> getHistoricJDV() {
+        return historicJDV;
+    }
+    public void setHistoricJDV(ArrayList<ArrayList> historicJDV) {
+        this.historicJDV = historicJDV;
     }
     
 }

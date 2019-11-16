@@ -1,5 +1,7 @@
 package jogodavelha;
 import java.util.Random;
+import user.Conta;
+import user.User;
 public class Jogo {
     
     private int m[][];
@@ -27,21 +29,25 @@ public class Jogo {
     public void addPress(int x, int y, int ic){
         m[x][y] = ic;
     }
-    public void ganhar(){
+    public void ganhar(User user1, User user2){
+        System.out.println("oi");
+        Conta c1 = new Conta(user1); Conta c2 = new Conta(user2); 
         int m2[][][] = {{{0,0},{1,0},{2,0}},{{0,0},{0,1},{0,2}},{{0,0},{1,1},{2,2}},{{0,1},{1,1},{2,1}},
                         {{1,0},{1,1},{1,2}},{{0,2},{1,1},{2,0}},{{0,2},{1,2},{2,2}},{{2,0},{2,1},{2,2}}};
         for(int i = 0; i<8; i++){
             if(m[m2[i][0][0]][m2[i][0][1]]==1&&m[m2[i][1][0]][m2[i][1][1]]==1&&m[m2[i][2][0]][m2[i][2][1]]==1){
-                System.out.println("Ganhou jog1");
+                user1.addPartidaJDV("Win", user2.getUsername()); user2.addPartidaJDV("GameOver", user1.getUsername());
+                c1.gravar(); c2.gravar();
             }
             if(m[m2[i][0][0]][m2[i][0][1]]==2&&m[m2[i][1][0]][m2[i][1][1]]==2&&m[m2[i][2][0]][m2[i][2][1]]==2){
-                System.out.println("Ganhou jog2");
+                user2.addPartidaJDV("Win", user1.getUsername()); user1.addPartidaJDV("GameOver", user2.getUsername());
+                c1.gravar(); c2.gravar();
             }
         }
-        velha();
+        velha(user1,user2);
     }
     
-    public void velha(){
+    public void velha(User user1, User user2){
         int cont = 0;
         for(int i = 0; i<x; i++){
             for(int j = 0; j<y; j++){
@@ -52,7 +58,9 @@ public class Jogo {
         }
         if(cont==x*y){
             velha = true;
-            //TelaGOWin tgw = new TelaGOWin("Velha",jdv);
+            user1.addPartidaJDV("Empate", user2.getUsername()); user2.addPartidaJDV("Empate", user1.getUsername());
+            Conta c1 = new Conta(user1); Conta c2 = new Conta(user2); 
+            c1.gravar(); c2.gravar();
         }
     }
     
