@@ -8,17 +8,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import componentes.Frame;
+import componentes.Pass;
+import componentes.Txt;
+import java.awt.Font;
 import java.util.Random;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+import padroes.Fonts;
 import padroes.ItemsTela;
+import user.Conta;
 import user.User;
 public class IntroductionJDV extends Frame{
     private ItemsTela it = new ItemsTela();
     private Btn menu[] = it.menuOpGames(this);
     private TelaJDV tjdv = new TelaJDV();
-    private User user;
+    private User user1;//user logado na conta do projeto
+    private User user2;//user que vai jogar contra pra salvar os dados em ambas as contas
     
     public IntroductionJDV(User user){
-        this.user = user;
+        this.user1 = user;
     }
     
     public void tutorial() {
@@ -27,8 +35,8 @@ public class IntroductionJDV extends Frame{
     private Pn pnIntro;
     public void intro(){//262,351,440,526
         int backPos[] = {0,0,1200,700}; 
-        int titlePos[] = {254,70,752,109}; int multPos[] = {435,262,386,62};
-        int tutorialPos[] = {496,351,266,63}; int histPos[] = {503,440,252,62};
+        int titlePos[] = {254,70,752,109}; int multPos[] = {435,262,404,71};
+        int tutorialPos[] = {496,364,284,71}; int histPos[] = {503,465,270,71};
         ImageIcon btn_multi[] = {im.addImagem("btn_multiplayer_jdv"),im.addImagem("btn_multiplayer_jdv_t"),im.addImagem("btn_multiplayer_jdv_p")};
         ImageIcon btn_tutorial[] = {im.addImagem("btn_tutorial_jdv"),im.addImagem("btn_tutorial_jdv_t"),im.addImagem("btn_tutorial_jdv_p")};
         ImageIcon btn_hist[] = {im.addImagem("btn_historic_jdv"),im.addImagem("btn_historic_jdv_t"),im.addImagem("btn_historic_jdv_p")};
@@ -70,13 +78,72 @@ public class IntroductionJDV extends Frame{
         pnAss = new Pn(pnAssP, cp);
         add(pnAss);
     }
-    
-    public void jogadores(String jogador01, String jogador02){
+    private String jogador01; private String jogador02;
+    public void jogadores(){
         Random sortear = new Random();
         int jog1 = sortear.nextInt(2); int jog2 = (jog1==1) ? 0:1;
         String names[] = {jogador01,jogador02};
         tjdv.setJog1(names[jog1]);
         tjdv.setJog2(names[jog2]);
+    }
+    
+    private Txt txtUsername;
+    private Pass txtPassword;
+    public class TelaOutroUser extends Frame{
+        public TelaOutroUser(){
+            setSize(600,500); setLocationRelativeTo(null); setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            int titlePos[] = {70,59,482,66}; int backPos[] = {0,0,600,500};
+            int txtUser[] = {162,180,340,64}; int txtpass[] = {162,262,340,64};
+            int userPos[] = {112,189,36,47}; int passPos[] = {110,271,37,48};
+            int btnLoginPos[] = {233,366,177,64};
+            Border d = BorderFactory.createLineBorder(new Color(52,103,77), 3);
+            Fonts fs = new Fonts(); Font f = fs.addNewFont("DS-DIGIT", 40);
+            txtUsername = new Txt(txtUser, f, Color.black, d);
+            txtPassword = new Pass(txtpass, f, Color.black, d);
+            ImageIcon btn_login[] = {im.addImagem("btn_logar_outro_user_jdv"),im.addImagem("btn_logar_outro_user_jdv_t"),im.addImagem("btn_logar_outro_user_jdv_p")};
+            Component cp[] = {
+                new Lb(im.addImagem("title_outro_user_jdv"), titlePos),
+                txtUsername,txtPassword,
+                new Lb(im.addImagem("avatar_jdv_outro_user"), userPos),
+                new Lb(im.addImagem("pass_jdv_outro_user"), passPos),
+                new Btn(btn_login, btnLoginPos, new EventLogar(this)),
+                btnClose(this)
+            };
+            Pn pnLogin = new Pn(backPos, cp);
+            pnLogin.setBackground(Color.black);
+            Border b = BorderFactory.createLineBorder(Color.white, 3);
+            pnLogin.setBorder(b);
+            add(pnLogin);
+            show();
+        }
+    }
+    private class EventLogar implements ActionListener{
+        private Frame f;
+        public EventLogar(Frame f){this.f = f;}
+        @Override
+        public void actionPerformed(ActionEvent e){
+            user2 = new User(txtUsername.getText(), txtPassword.getText());
+            Conta c = new Conta(user2);
+            user2 = c.login();
+            if(c.isLogado()&&user2.getUsername().equals(user1.getUsername())==false){
+                f.dispose(); pnIntro.setVisible(false); assunto();
+            }else{
+                txtUsername.setText("");
+                txtPassword.setText("");
+            }
+        }
+    }
+    public Btn btnClose(Frame f){
+        int closePos[] = {551,15,19,19}; ImageIcon btn_close[] = {im.addImagem("btn_close"),im.addImagem("btn_close_t")};
+        return new Btn(btn_close, closePos, new EventClose(f));
+    }
+    private class EventClose implements ActionListener{
+        private Frame f;
+        public EventClose(Frame f){this.f = f;}
+        @Override
+        public void actionPerformed(ActionEvent e){
+            f.dispose();
+        }
     }
     
     private class EventBtnsIntro implements ActionListener{
@@ -86,7 +153,7 @@ public class IntroductionJDV extends Frame{
         public void actionPerformed(ActionEvent ae) {
             pnIntro.setVisible(false);
             switch (n) {
-                case 1:assunto();jogadores(user.getUsername(), "Computer");break;
+                case 1:pnIntro.setVisible(true);new TelaOutroUser();break;
                 case 2:tutorial();break;
                 case 3:tutorial();break;
                 default:break;
