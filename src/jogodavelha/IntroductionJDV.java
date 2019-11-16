@@ -78,11 +78,10 @@ public class IntroductionJDV extends Frame{
         pnAss = new Pn(pnAssP, cp);
         add(pnAss);
     }
-    private String jogador01; private String jogador02;
-    public void jogadores(){
+    public void jogadores(String jogad1, String jogad2){
         Random sortear = new Random();
         int jog1 = sortear.nextInt(2); int jog2 = (jog1==1) ? 0:1;
-        String names[] = {jogador01,jogador02};
+        String names[] = {jogad1,jogad2};
         tjdv.setJog1(names[jog1]);
         tjdv.setJog2(names[jog2]);
     }
@@ -169,6 +168,8 @@ public class IntroductionJDV extends Frame{
         public void actionPerformed(ActionEvent ae) {
             pnAss.setVisible(false);
             dispose();
+            tjdv.setUser1(user1); tjdv.setUser2(user2);
+            jogadores(user1.getUsername(), user2.getUsername());
             tjdv.setAss(assunto);
             tjdv.start();
             tjdv.show();

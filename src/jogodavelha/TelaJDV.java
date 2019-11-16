@@ -14,8 +14,11 @@ import javax.swing.border.Border;
 import componentes.Frame;
 import padroes.Fonts;
 import padroes.ItemsTela;
+import user.User;
 
 public class TelaJDV extends Frame{
+    private User user1;
+    private User user2;
     public void start(){
         x = j.getX();
         y = j.getY();
@@ -34,6 +37,8 @@ public class TelaJDV extends Frame{
     public void setJog1(String jog1) {this.jog1 = jog1;}
     public void setJog2(String jog2) {this.jog2 = jog2;}
     public void setAss(int ass) {this.ass = ass;}
+    public void setUser1(User user1) {this.user1 = user1;}
+    public void setUser2(User user2) {this.user2 = user2;}
     
     private Pn pnCC;
     private Lb lbJog;
