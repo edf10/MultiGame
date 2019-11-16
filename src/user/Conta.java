@@ -10,7 +10,6 @@ import org.json.simple.parser.ParseException;
 
 public class Conta {
     private final String chave = "password-user000";
-    private Criptografar c;
     private User user;
     public Conta(User user){
         this.user = user;

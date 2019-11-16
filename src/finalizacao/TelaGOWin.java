@@ -100,7 +100,7 @@ public class TelaGOWin extends Frame{
                 switch(n){
                     case 1:TelaJDV tjdv = new TelaJDV();break;
                     case 2:MultiGameTela mgt = new MultiGameTela(); mgt.Jogos(); mgt.show();break;
-                    case 3:IntroductionJDV i = new IntroductionJDV();break;
+                    case 3:IntroductionJDV i = new IntroductionJDV(new User());break;
                     default:break;
                 }
             }

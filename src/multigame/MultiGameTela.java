@@ -83,7 +83,7 @@ public class MultiGameTela extends Frame{
             dispose();
             switch (n) {
                 case 1:IntroductionCM cm = new IntroductionCM(user); cm.intro(); cm.show();break;
-                case 2:IntroductionJDV jdv = new IntroductionJDV(); jdv.intro(); jdv.show();break;
+                case 2:IntroductionJDV jdv = new IntroductionJDV(user); jdv.intro(); jdv.show();break;
                 case 3:IntroductionWP wp = new IntroductionWP(); wp.intro(); wp.show(); break;
                 default:break;
             }

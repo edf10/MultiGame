@@ -182,6 +182,7 @@ public class ItemsTela {
             if(telaAntIntro==1){
                 IntroductionCM icm = new IntroductionCM(user);icm.intro();icm.show();
             }else if(telaAntIntro==2){
+                
             }
         }
     }

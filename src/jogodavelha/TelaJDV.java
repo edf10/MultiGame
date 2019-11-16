@@ -22,7 +22,6 @@ public class TelaJDV extends Frame{
         vez = j.sortVez();
         JDV();
     }
-    //Tamanho da matriz
     private int x;
     private int y;
     private int ass;
@@ -104,7 +103,6 @@ public class TelaJDV extends Frame{
             }
         }
         private boolean press = false;
-        
         private class Troca implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent ae) {

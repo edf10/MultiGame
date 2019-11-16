@@ -10,20 +10,25 @@ import javax.swing.ImageIcon;
 import componentes.Frame;
 import java.util.Random;
 import padroes.ItemsTela;
+import user.User;
 public class IntroductionJDV extends Frame{
     private ItemsTela it = new ItemsTela();
     private Btn menu[] = it.menuOpGames(this);
     private TelaJDV tjdv = new TelaJDV();
+    private User user;
+    
+    public IntroductionJDV(User user){
+        this.user = user;
+    }
     
     public void tutorial() {
     }
 
     private Pn pnIntro;
-    public void intro(){
-        int backPos[] = {0,0,1200,700}; int vsCompPos[] = {430,262,398,63};
-        int titlePos[] = {254,70,752,109}; int multPos[] = {435,351,386,62};
-        int tutorialPos[] = {496,440,266,63}; int histPos[] = {503,526,252,62};
-        ImageIcon btn_vscomputer[] = {im.addImagem("btn_vscomputer_jdv"),im.addImagem("btn_vscomputer_jdv_t"),im.addImagem("btn_vscomputer_jdv_p")};
+    public void intro(){//262,351,440,526
+        int backPos[] = {0,0,1200,700}; 
+        int titlePos[] = {254,70,752,109}; int multPos[] = {435,262,386,62};
+        int tutorialPos[] = {496,351,266,63}; int histPos[] = {503,440,252,62};
         ImageIcon btn_multi[] = {im.addImagem("btn_multiplayer_jdv"),im.addImagem("btn_multiplayer_jdv_t"),im.addImagem("btn_multiplayer_jdv_p")};
         ImageIcon btn_tutorial[] = {im.addImagem("btn_tutorial_jdv"),im.addImagem("btn_tutorial_jdv_t"),im.addImagem("btn_tutorial_jdv_p")};
         ImageIcon btn_hist[] = {im.addImagem("btn_historic_jdv"),im.addImagem("btn_historic_jdv_t"),im.addImagem("btn_historic_jdv_p")};
@@ -32,10 +37,9 @@ public class IntroductionJDV extends Frame{
             it.btnSomOutro(),
             menu[0],menu[1],menu[2],menu[3],menu[4],menu[5],
             new Lb(im.addImagem("title_jdv"), titlePos),
-            new Btn(btn_vscomputer, vsCompPos, new EventBtnsIntro(1)),
-            new Btn(btn_multi, multPos, new EventBtnsIntro(2)),
-            new Btn(btn_tutorial, tutorialPos, new EventBtnsIntro(3)),
-            new Btn(btn_hist, histPos, new EventBtnsIntro(4)),
+            new Btn(btn_multi, multPos, new EventBtnsIntro(1)),
+            new Btn(btn_tutorial, tutorialPos, new EventBtnsIntro(2)),
+            new Btn(btn_hist, histPos, new EventBtnsIntro(3)),
             new Lb(im.addImagem("back_intro_jdv"), backPos)
         };
         int pnIntroP[] = {0,0,1200,700};
@@ -82,10 +86,9 @@ public class IntroductionJDV extends Frame{
         public void actionPerformed(ActionEvent ae) {
             pnIntro.setVisible(false);
             switch (n) {
-                case 1:assunto();jogadores("User", "Computer");break;
-                case 2:assunto();break;
+                case 1:assunto();jogadores(user.getUsername(), "Computer");break;
+                case 2:tutorial();break;
                 case 3:tutorial();break;
-                case 4:tutorial();break;
                 default:break;
             }
         }
