@@ -31,10 +31,11 @@ public class User {
         historicCM.put(sc, nivel);
     }
     
-    public void addPartidaJDV(String wOrgo, String oponente){
+    public void addPartidaJDV(String wOrgo, String oponente, String assunto){
         ArrayList<String> partida = new ArrayList<String>();
         partida.add(wOrgo);
         partida.add(oponente);
+        partida.add(assunto);
         historicJDV.add(partida);
     }
     

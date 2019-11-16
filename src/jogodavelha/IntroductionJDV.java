@@ -68,10 +68,10 @@ public class IntroductionJDV extends Frame{
             it.btnClose(),
             it.btnSomOutro(),
             menu[0],menu[1],menu[2],menu[3],menu[4],menu[5],
-            new Btn(btn_addtion, btnAddtionPos, new EventBtnsAss(1)),
-            new Btn(btn_division, btnDivisionPos, new EventBtnsAss(2)),
-            new Btn(btn_subtraction, btnSubtractionPos, new EventBtnsAss(3)),
-            new Btn(btn_multiplication, btnMultiplicationPos, new EventBtnsAss(4)),
+            new Btn(btn_addtion, btnAddtionPos, new EventBtnsAss("Addtion")),
+            new Btn(btn_division, btnDivisionPos, new EventBtnsAss("Division")),
+            new Btn(btn_subtraction, btnSubtractionPos, new EventBtnsAss("Subtraction")),
+            new Btn(btn_multiplication, btnMultiplicationPos, new EventBtnsAss("Multiplication")),
             new Lb(im.addImagem("back_intro_jdv"), backPos),
         };
         int pnAssP[] = {0,0,1200,700};
@@ -160,8 +160,8 @@ public class IntroductionJDV extends Frame{
         }
     }
     private class EventBtnsAss implements ActionListener{
-        private int assunto;
-        public EventBtnsAss(int assunto){
+        private String assunto;
+        public EventBtnsAss(String assunto){
             this.assunto = assunto;
         }
         @Override

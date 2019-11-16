@@ -27,7 +27,7 @@ public class TelaJDV extends Frame{
     }
     private int x;
     private int y;
-    private int ass;
+    private String ass;
     private String jog1;
     private String jog2;
     private Button vet[][];
@@ -36,7 +36,7 @@ public class TelaJDV extends Frame{
 
     public void setJog1(String jog1) {this.jog1 = jog1;}
     public void setJog2(String jog2) {this.jog2 = jog2;}
-    public void setAss(int ass) {this.ass = ass;}
+    public void setAss(String ass) {this.ass = ass;}
     public void setUser1(User user1) {this.user1 = user1;}
     public void setUser2(User user2) {this.user2 = user2;}
     
@@ -104,7 +104,7 @@ public class TelaJDV extends Frame{
                 }
                 press = true;
                 j.addPress(x, y, vez);
-                j.ganhar(user1,user2);
+                j.ganhar(user1,user2,ass);
             }
         }
         private boolean press = false;
@@ -136,17 +136,17 @@ public class TelaJDV extends Frame{
         
         public void question(){
             int nums[] = j.addQuestion();
-            if(ass==1){
+            if("Addtion".equals(ass)){
                 quest = nums[0]+" + "+nums[1]+" = ";
                 res = j.addAnswer(nums[0],nums[1], 1)+"";
-            }else if(ass==2){
+            }else if("Division".equals(ass)){
                 nums = j.addDivision();
                 quest = nums[0]+" / "+nums[1]+" = ";
                 res = j.addAnswer(nums[0],nums[1], 2)+"";
-            }else if(ass==3){
+            }else if("Subtraction".equals(ass)){
                 quest = nums[0]+" - "+nums[1]+" = ";
                 res = j.addAnswer(nums[0],nums[1], 3)+"";
-            }else if(ass==4){
+            }else if("Multiplication".equals(ass)){
                 quest = nums[0]+" x "+nums[1]+" = ";
                 res = j.addAnswer(nums[0],nums[1], 4)+"";
             }

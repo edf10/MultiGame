@@ -29,25 +29,27 @@ public class Jogo {
     public void addPress(int x, int y, int ic){
         m[x][y] = ic;
     }
-    public void ganhar(User user1, User user2){
+    public void ganhar(User user1, User user2, String assunto){
         System.out.println("oi");
         Conta c1 = new Conta(user1); Conta c2 = new Conta(user2); 
         int m2[][][] = {{{0,0},{1,0},{2,0}},{{0,0},{0,1},{0,2}},{{0,0},{1,1},{2,2}},{{0,1},{1,1},{2,1}},
                         {{1,0},{1,1},{1,2}},{{0,2},{1,1},{2,0}},{{0,2},{1,2},{2,2}},{{2,0},{2,1},{2,2}}};
         for(int i = 0; i<8; i++){
             if(m[m2[i][0][0]][m2[i][0][1]]==1&&m[m2[i][1][0]][m2[i][1][1]]==1&&m[m2[i][2][0]][m2[i][2][1]]==1){
-                user1.addPartidaJDV("Win", user2.getUsername()); user2.addPartidaJDV("GameOver", user1.getUsername());
+                user1.addPartidaJDV("Win", user2.getUsername(), assunto); user2.addPartidaJDV("GameOver", user1.getUsername(), assunto);
+                user1.setMoedas(400); user2.setMoedas(100);
                 c1.gravar(); c2.gravar();
             }
             if(m[m2[i][0][0]][m2[i][0][1]]==2&&m[m2[i][1][0]][m2[i][1][1]]==2&&m[m2[i][2][0]][m2[i][2][1]]==2){
-                user2.addPartidaJDV("Win", user1.getUsername()); user1.addPartidaJDV("GameOver", user2.getUsername());
+                user2.addPartidaJDV("Win", user1.getUsername(), assunto); user1.addPartidaJDV("GameOver", user2.getUsername(), assunto);
+                user2.setMoedas(400); user1.setMoedas(100);
                 c1.gravar(); c2.gravar();
             }
         }
-        velha(user1,user2);
+        velha(user1,user2,assunto);
     }
     
-    public void velha(User user1, User user2){
+    public void velha(User user1, User user2, String assunto){
         int cont = 0;
         for(int i = 0; i<x; i++){
             for(int j = 0; j<y; j++){
@@ -58,8 +60,9 @@ public class Jogo {
         }
         if(cont==x*y){
             velha = true;
-            user1.addPartidaJDV("Empate", user2.getUsername()); user2.addPartidaJDV("Empate", user1.getUsername());
+            user1.addPartidaJDV("Empate", user2.getUsername(), assunto); user2.addPartidaJDV("Empate", user1.getUsername(), assunto);
             Conta c1 = new Conta(user1); Conta c2 = new Conta(user2); 
+            user1.setMoedas(200); user2.setMoedas(200);
             c1.gravar(); c2.gravar();
         }
     }
