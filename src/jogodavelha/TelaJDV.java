@@ -20,6 +20,7 @@ public class TelaJDV extends Frame{
     private User user1;
     private User user2;
     public void start(){
+        it.setTelaAntIntro(2);
         x = j.getX();
         y = j.getY();
         vez = j.sortVez();

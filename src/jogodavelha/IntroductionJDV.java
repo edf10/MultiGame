@@ -20,21 +20,21 @@ import user.Conta;
 import user.User;
 public class IntroductionJDV extends Frame{
     private ItemsTela it = new ItemsTela();
-    private Btn menu[] = it.menuOpGames(this);
+    private Btn menu[]; 
     private TelaJDV tjdv = new TelaJDV();
     private User user1;//user logado na conta do projeto
     private User user2;//user que vai jogar contra pra salvar os dados em ambas as contas
     
     public IntroductionJDV(User user){
-        this.user1 = user;
+        this.user1 = user; it.setUser(user);
     }
     
     public void tutorial() {
     }
 
     private Pn pnIntro;
-    public void intro(){//262,351,440,526
-        int backPos[] = {0,0,1200,700}; 
+    public void intro(){
+        int backPos[] = {0,0,1200,700}; menu = it.menuOpGamesIntro(this); 
         int titlePos[] = {254,70,752,109}; int multPos[] = {435,262,404,71};
         int tutorialPos[] = {496,364,284,71}; int histPos[] = {503,465,270,71};
         ImageIcon btn_multi[] = {im.addImagem("btn_multiplayer_jdv"),im.addImagem("btn_multiplayer_jdv_t"),im.addImagem("btn_multiplayer_jdv_p")};
@@ -43,7 +43,7 @@ public class IntroductionJDV extends Frame{
         Component cp[] = {
             it.btnClose(),
             it.btnSomOutro(),
-            menu[0],menu[1],menu[2],menu[3],menu[4],menu[5],
+            menu[0],menu[1],menu[2],menu[3],menu[4],
             new Lb(im.addImagem("title_jdv"), titlePos),
             new Btn(btn_multi, multPos, new EventBtnsIntro(1)),
             new Btn(btn_tutorial, tutorialPos, new EventBtnsIntro(2)),
@@ -59,11 +59,12 @@ public class IntroductionJDV extends Frame{
     public void assunto(){
         int backPos[] = {0,0,1200,700}; int btnAddtionPos[] = {473,190,252,57};
         int btnDivisionPos[] = {482,291,234,57}; int btnSubtractionPos[] = {412,391,374,63};
-        int btnMultiplicationPos[] = {371,490,456,57};
+        int btnMultiplicationPos[] = {371,490,456,57}; menu = it.menuOpGames(this);
         ImageIcon btn_addtion[] = {im.addImagem("btn_addition_jdv"),im.addImagem("btn_addition_jdv_t"),im.addImagem("btn_addition_jdv_p")};
         ImageIcon btn_division[] = {im.addImagem("btn_division_jdv"),im.addImagem("btn_division_jdv_t"),im.addImagem("btn_division_jdv_p")};
         ImageIcon btn_subtraction[] = {im.addImagem("btn_subtraction_jdv"),im.addImagem("btn_subtraction_jdv_t"),im.addImagem("btn_subtraction_jdv_p")};
         ImageIcon btn_multiplication[] = {im.addImagem("btn_multiplication_jdv"),im.addImagem("btn_multiplication_jdv_t"),im.addImagem("btn_multiplication_jdv_p")};
+        it.setTelaAntIntro(2);
         Component cp[] = {
             it.btnClose(),
             it.btnSomOutro(),

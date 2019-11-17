@@ -10,7 +10,7 @@ public class User {
     private int moedas;
     private HashMap<Integer,String> historicCM = new HashMap<>();
     private ArrayList<ArrayList> historicJDV = new ArrayList<>();
-    private HashMap<Integer,String> historicWP;
+    private HashMap<Integer,String> historicWP = new HashMap<>();
     
     public User(){}
     
@@ -26,7 +26,9 @@ public class User {
         String[] numerosData = dataRegistro.split("/");
         dataRegistro = numerosData[0]+" "+numerosData[1]+" "+numerosData[2];
     }
-    
+    public void addScoreWP(int sc, String nivel){
+        historicWP.put(sc, nivel);
+    }
     public void addScoreCM(int sc, String nivel){
         historicCM.put(sc, nivel);
     }
@@ -38,7 +40,12 @@ public class User {
         partida.add(assunto);
         historicJDV.add(partida);
     }
-    
+    public HashMap<Integer, String> getHistoricWP() {
+        return historicWP;
+    }
+    public void setHistoricWP(HashMap<Integer, String> historicWP) {
+        this.historicWP = historicWP;
+    }
     public HashMap<Integer,String> getHistoricCM() {
         return historicCM;
     }
