@@ -35,8 +35,8 @@ public class IntroductionJDV extends Frame{
     private Pn pnIntro;
     public void intro(){
         int backPos[] = {0,0,1200,700}; menu = it.menuOpGamesIntro(this); 
-        int titlePos[] = {254,70,752,109}; int multPos[] = {435,262,404,71};
-        int tutorialPos[] = {496,364,284,71}; int histPos[] = {503,465,270,71};
+        int titlePos[] = {254,70,752,109}; int multPos[] = {379,267,473,75};
+        int tutorialPos[] = {455,372,325,75}; int histPos[] = {465,491,307,75};
         ImageIcon btn_multi[] = {im.addImagem("btn_multiplayer_jdv"),im.addImagem("btn_multiplayer_jdv_t"),im.addImagem("btn_multiplayer_jdv_p")};
         ImageIcon btn_tutorial[] = {im.addImagem("btn_tutorial_jdv"),im.addImagem("btn_tutorial_jdv_t"),im.addImagem("btn_tutorial_jdv_p")};
         ImageIcon btn_hist[] = {im.addImagem("btn_historic_jdv"),im.addImagem("btn_historic_jdv_t"),im.addImagem("btn_historic_jdv_p")};
