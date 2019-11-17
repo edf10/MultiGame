@@ -10,11 +10,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.border.Border;
 import padroes.Fonts;
 import padroes.ItemsTela;
 public class TelaWP extends Frame{
@@ -24,6 +21,7 @@ public class TelaWP extends Frame{
         p = new Palavras(n);
         x = y = p.getX();
         mWords = new boolean[x][y];
+        words = p.getPalavras();
         CP();
         cont.start();
     }
@@ -65,17 +63,25 @@ public class TelaWP extends Frame{
     }
     
     private Lb lbWord;
-    private int palavraDaVez = 1;
+    private int palavraDaVez = 0;
+    private ArrayList<Palavra> words;
+    private Pn pnW;
     public void barraWords(){
-        int btnLeftPos[] = {870,45,21,37}; int btnRigthPos[] = {1103,45,21,37};
-        int lbWordPos[] = {870,45,254,37};
+        int btnLeftPos[] = {0,0,21,37}; int btnRigthPos[] = {233,0,21,37};
+        int lbWordPos[] = {0,0,254,37}; int pnPos[] = {870,45,254,37};
         Font f = new Font("Arial", Font.PLAIN, 25); 
         ImageIcon btn_arrow_left[] = {im.addImagem("arrow_left_wp"),im.addImagem("arrow_left_wp_t")};
         ImageIcon btn_arrow_rigth[] = {im.addImagem("arrow_rigth_wp"),im.addImagem("arrow_rigth_wp_t")};
-        lbWord = new Lb(p.getPalavras().get(0).getPalavra().toUpperCase(), f, lbWordPos, Color.white);
-        add(new Btn(btn_arrow_left, btnLeftPos, new EventSetas(2)));
-        add(new Btn(btn_arrow_rigth, btnRigthPos, new EventSetas(1)));
-        add(lbWord);
+        if(words.size()>0){lbWord = new Lb(words.get(0).getPalavra().toUpperCase(), f, lbWordPos, Color.white);}
+        else{lbWord = new Lb("--END--".toUpperCase(), f, lbWordPos, Color.white);}
+        Component cp[] = {
+            new Btn(btn_arrow_left, btnLeftPos, new EventSetas(2)),
+            new Btn(btn_arrow_rigth, btnRigthPos, new EventSetas(1)),
+            lbWord
+        };
+        pnW = new Pn(pnPos, cp);
+        pnW.setBackground(null);
+        add(pnW);
     }
     
     public class EventSetas implements ActionListener{
@@ -84,10 +90,9 @@ public class TelaWP extends Frame{
         @Override
         public void actionPerformed(ActionEvent ae) {
             if(direcao==1&&palavraDaVez+1<p.getPalavras().size()){//rigth
-                System.out.println(palavraDaVez);
-                palavraDaVez++;lbWord.setText(p.getPalavras().get(palavraDaVez).getPalavra().toUpperCase());
+                palavraDaVez++;lbWord.setText(words.get(palavraDaVez).getPalavra().toUpperCase());
             }else if(direcao==2&&palavraDaVez-1>=0){//left
-                palavraDaVez--;lbWord.setText(p.getPalavras().get(palavraDaVez).getPalavra().toUpperCase());
+                palavraDaVez--;lbWord.setText(words.get(palavraDaVez).getPalavra().toUpperCase());
             }
             
         }
@@ -124,10 +129,7 @@ public class TelaWP extends Frame{
                     }
                 }
             }
-            System.out.println("");
-            System.out.println(Arrays.toString(wordsEnc.toArray()));
-            System.out.println("");
-            if(cont==pos.size()){wordsEnc.add(true);System.out.println(Arrays.toString(palavras.get(i).getLetras()));}else{wordsEnc.add(false);}
+            if(cont==pos.size()){wordsEnc.add(true);words.remove(i);pnW.setVisible(false);barraWords();pnW.setVisible(true);}else{wordsEnc.add(false);}
             cont = 0;
         }
     }

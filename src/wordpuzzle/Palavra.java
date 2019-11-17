@@ -17,7 +17,6 @@ public class Palavra {
         for(int i = 0; i<letras.length; i++){
             p += letras[i];
         }
-        System.out.println(p);
         return p;
     }
     public int quantLetras(){
