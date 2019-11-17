@@ -17,11 +17,14 @@ import padroes.ItemsTela;
 public class TelaWP extends Frame{
     private boolean[][] mWords;
     private ItemsTela it = new ItemsTela();
-    public TelaWP(int n){
-        p = new Palavras(n);
+    private int nivel;
+    public void setNivel(int nivel) {this.nivel = nivel;}
+    public void configuracoes(){
+        p = new Palavras(nivel);
         x = y = p.getX();
         mWords = new boolean[x][y];
         words = p.getPalavras();
+        it.setTelaAntIntro(3);
         CP();
         cont.start();
     }

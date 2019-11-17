@@ -7,8 +7,10 @@ import imagens.Im;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
+import jogodavelha.IntroductionJDV;
 import multigame.MultiGameTela;
 import user.User;
+import wordpuzzle.IntroductionWP;
 
 public class ItemsTela {
     private Im im = new Im();
@@ -182,7 +184,9 @@ public class ItemsTela {
             if(telaAntIntro==1){
                 IntroductionCM icm = new IntroductionCM(user);icm.intro();icm.show();
             }else if(telaAntIntro==2){
-                
+                IntroductionJDV ijdv = new IntroductionJDV(user);ijdv.intro();ijdv.show();
+            }else if(telaAntIntro==3){
+                IntroductionWP iwp = new IntroductionWP(user);iwp.intro();iwp.show();
             }
         }
     }

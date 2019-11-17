@@ -17,13 +17,13 @@ import user.User;
 
 public class TelaCM extends Frame{
     private Campo r;
+    public void setR(Campo r) {this.r = r;}
     private User user;
+    public void setUser(User user) {this.user = user;}
     private int m5[][]; //1=posOpen 3=marcadores 2=minas abertas
     private String nivel;
-    public TelaCM(Campo c, User user) {
-        this.user = user;
+    public void configuracoes(){
         it.setTelaAntIntro(1);
-        r = c;
         x = r.getX(); y = r.getY();
         vet = new Button[x][y];
         m4 = new int[x][y];
@@ -37,7 +37,6 @@ public class TelaCM extends Frame{
                 m5[i][j] = 0;
             }
         }
-        
         m = r.getM();
         if(x==16){
             botao = "btn_cm_medium";botao_p = "btn_cm_medium_p";botao_t = "btn_cm_medium_t";
@@ -47,10 +46,11 @@ public class TelaCM extends Frame{
             marcador = "flagD";minas = "bomb_cm_hard";
         }
         CM();
-        
     }
     
     private int x; private int y; //Tamanho do campo
+    public void setX(int x) {this.x = x;}
+    public void setY(int y) {this.y = y;}
     private Button vet[][]; //Campo e vetor de btns
     private int[][] m3; private int[][] m; private int[] posxM; private int[] posyM; //Variáveis teste
     private Pn painelCampo; private Pn pnBorda;//Paineis

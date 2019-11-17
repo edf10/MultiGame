@@ -10,7 +10,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class Conta {
-    private final String chave = "password-user000";
     private User user;
     public Conta(User user){
         this.user = user;
@@ -24,8 +23,8 @@ public class Conta {
         JSONParser parser = new JSONParser();
         try{
             objectArquivo = (JSONObject) parser.parse(new FileReader("users/"+user.getUsername()+".json"));
-            if(objectArquivo.get("password").equals(user.getPassword())&&!logado){
-                if(user.getUsername()!=null&&user.getPassword()!=null){
+            if(objectArquivo.get("password").equals(user.getPassword())&&logado==false){
+                if(user.getUsername().length()>0&&user.getPassword().length()>0){
                     logado = true;
                     user.setUsername(objectArquivo.get("username").toString());
                     user.setPassword(objectArquivo.get("password").toString());

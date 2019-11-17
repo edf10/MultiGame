@@ -9,10 +9,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import padroes.ItemsTela;
+import user.User;
 public class IntroductionWP extends Frame{
     private ItemsTela it = new ItemsTela();
-    private Btn menu[] = it.menuOpGames(this);
-
+    private Btn menu[];
+    private User user;
+    public IntroductionWP(User user){
+        this.user = user; it.setUser(user);
+    }
+    
     public void tutorial() {
     }
     
@@ -25,12 +30,12 @@ public class IntroductionWP extends Frame{
         ImageIcon btn_custom[] = {im.addImagem("btn_custom_wp"),im.addImagem("btn_custom_wp_t"),im.addImagem("btn_custom_wp_p")};
         ImageIcon btn_rank[] = {im.addImagem("btn_ranking_wp"),im.addImagem("btn_ranking_wp_t"),im.addImagem("btn_ranking_wp_p")};
         ImageIcon btn_tuto[] = {im.addImagem("btn_tutorial_wp"),im.addImagem("btn_tutorial_wp_t"),im.addImagem("btn_tutorial_wp_p")};
-        
+        menu = it.menuOpGamesIntro(this);
         Component cp[] = {
             new Lb(im.addImagem("title_wp"), titlePos),
             it.btnClose(),
             it.btnSomOutro(),
-            menu[0],menu[1],menu[2],menu[3],menu[4],menu[5],
+            menu[0],menu[1],menu[2],menu[3],menu[4],
             new Btn(btn_classic, classicPos, new EventBtnsIntro()),
             new Btn(btn_custom, customPos, null),
             new Btn(btn_rank, rankPos, null),
@@ -54,11 +59,12 @@ public class IntroductionWP extends Frame{
     
     private Pn pnNiveis;
     public void niveis(){
-        int backPos[] = {0,0,1200,700}; int btnEasyPos[] = {526,172,189,72};
+        int backPos[] = {0,0,1200,700}; int btnEasyPos[] = {526,172,189,72}; menu = it.menuOpGames(this);
         int btnMediumPos[] = {468,300,304,72}; int btnHardPos[] = {532,430,189,80};
         ImageIcon btn_easy[] = {im.addImagem("btn_easy_wp"),im.addImagem("btn_easy_wp_t"),im.addImagem("btn_easy_wp_p")};
         ImageIcon btn_medium[] = {im.addImagem("btn_medium_wp"),im.addImagem("btn_medium_wp_t"),im.addImagem("btn_medium_wp_p")};
         ImageIcon btn_hard[] = {im.addImagem("btn_hard_wp"),im.addImagem("btn_hard_wp_t"),im.addImagem("btn_hard_wp_p")};
+        it.setTelaAntIntro(3);
         Component cp[] = {
             it.btnClose(),
             it.btnSomOutro(),
@@ -79,7 +85,7 @@ public class IntroductionWP extends Frame{
         @Override
         public void actionPerformed(ActionEvent ae) {
             dispose();
-            TelaWP tcp = new TelaWP(nivel); tcp.show();
+            TelaWP tcp = new TelaWP(); tcp.setNivel(nivel); tcp.configuracoes(); tcp.show();
         }
     }
 }
