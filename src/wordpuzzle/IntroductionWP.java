@@ -79,7 +79,7 @@ public class IntroductionWP extends Frame{
         @Override
         public void actionPerformed(ActionEvent ae) {
             dispose();
-            TelaWP tcp = new TelaWP(nivel);
+            TelaWP tcp = new TelaWP(nivel); tcp.show();
         }
     }
 }

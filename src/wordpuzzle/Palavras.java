@@ -17,15 +17,15 @@ public class Palavras {
     private int quantWords;
     private String[][] m; //Matriz de letras
     private String[][] m2; //Mapear palavras
+    private ArrayList<Palavra> palavras = new ArrayList<Palavra>();
     
     public Palavras(int n){
         niveis(n);
         m = new String[x][y];
         m2 = new String[x][y];
-        //addWord(4, 1, words.get(2));
         escWords();
         letras();
-        for (int i = 0; i < x; i++) {
+       /* for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 System.out.print("|"+m2[i][j]+"|");
             }
@@ -33,17 +33,17 @@ public class Palavras {
         }
         for(int i = 0; i<mapawords.size(); i++){
             System.out.println(Arrays.toString(mapawords.get(i)));
-        }
+        }*/
     }
     
     public void escWords(){
         while(mapawords.size()<quantWords){
             int orien = sortear.nextInt(4)+1;
-            int invertida = sortear.nextInt(2)+1;
+            boolean invertida = sortear.nextBoolean();
             int w = sortear.nextInt(words.size());
             if(words.get(w).length<x){
                 if(mapawords.contains(words.get(w))==false){
-                    boolean conf = addW(orien, invertida, words.get(w));
+                    boolean conf = addW(new Palavra(words.get(w), orien, invertida));
                     if(conf){mapawords.add(words.get(w));}
                 }
             }
@@ -51,37 +51,37 @@ public class Palavras {
         
     }
     
-    public boolean addW(int orientacao, int invertida, String[] palavra){
+    public boolean addW(Palavra p){
         int linha = 0; int coluna = 0; 
-        int cont = (invertida==1)?0:palavra.length-1;
+        int cont = (p.isInvertida())?0:p.quantLetras()-1;
         int contWordCr = 0; boolean tudocerto = false;
-        switch(orientacao){
-            case 1: linha = sortear.nextInt(x); coluna = lineAndColumn(palavra.length); break;
-            case 2: linha = lineAndColumn(palavra.length); coluna = sortear.nextInt(x); break;
-            case 3: linha = lineAndColumn(palavra.length); coluna = lineAndColumn(palavra.length); break;
-            case 4: linha = lineAndColumn(palavra.length);coluna = linha+palavra.length-1; break;
+        switch(p.getOrientacao()){
+            case 1: linha = sortear.nextInt(x); coluna = lineAndColumn(p.quantLetras()); break;
+            case 2: linha = lineAndColumn(p.quantLetras()); coluna = sortear.nextInt(x); break;
+            case 3: linha = lineAndColumn(p.quantLetras()); coluna = lineAndColumn(p.quantLetras()); break;
+            case 4: linha = lineAndColumn(p.quantLetras());coluna = linha+p.quantLetras()-1; break;
             default: break;
         }
         int i = linha; int j = coluna;
-        
         while(true){
-            if(orientacao==1){if(j==coluna+palavra.length&&tudocerto){break;}}else{if(i==linha+palavra.length&&tudocerto){break;}}
-            if(i==linha+palavra.length||j==coluna+palavra.length&&tudocerto==false){
+            if(p.getOrientacao()==1){if(j==coluna+p.quantLetras()&&tudocerto){break;}}else{if(i==linha+p.quantLetras()&&tudocerto){break;}}
+            if(i==linha+p.quantLetras()||j==coluna+p.quantLetras()&&tudocerto==false){
                 i = linha; j = coluna;
-                if(cont==palavra.length){cont = (invertida==1)?0:palavra.length-1;}
-                if(invertida==1){cont++;}else{cont--;}
+                if(cont==p.quantLetras()){cont = (p.isInvertida())?0:p.quantLetras()-1;}
+                if(p.isInvertida()){cont++;}else{cont--;}
             }
-            if(m[i][j]==null||m[i][j].equals(palavra[cont].toUpperCase())){
+            if(m[i][j]==null||m[i][j].equals(p.getLetras()[cont].toUpperCase())){
                 contWordCr++;
             }else{return false;}
             
-            if(contWordCr==palavra.length*palavra.length){tudocerto = true; i = linha; j = coluna; cont = (invertida==1)?0:palavra.length-1;}
+            if(contWordCr==p.quantLetras()*p.quantLetras()){tudocerto = true; i = linha; j = coluna; cont = (p.isInvertida())?0:p.quantLetras()-1;}
             if(tudocerto==true){
-                m2[i][j] = palavra[cont].toUpperCase();
-                m[i][j] = palavra[cont].toUpperCase();
-                if(invertida==1){cont++;}else{cont--;}
+                m2[i][j] = p.getLetras()[cont].toUpperCase();
+                m[i][j] = p.getLetras()[cont].toUpperCase();
+                p.addPosLetra(i, j);
+                if(p.isInvertida()){cont++;}else{cont--;}
             }
-            switch(orientacao){
+            switch(p.getOrientacao()){
                 case 1: j++; break;
                 case 2: i++; break;
                 case 3: i++;j++; break;
@@ -89,7 +89,7 @@ public class Palavras {
                 default: break;
             }
         }
-        
+        palavras.add(p);
         return true;
     }
     
@@ -142,5 +142,8 @@ public class Palavras {
     }
     public String[][] getM2() {
         return m2;
+    }
+    public ArrayList<Palavra> getPalavras() {
+        return palavras;
     }
 }
