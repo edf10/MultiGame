@@ -145,7 +145,7 @@ public class MultiGameTela extends Frame{
         @Override
         public void actionPerformed(ActionEvent ae) {
             dispose();
-            Cadastro c = new Cadastro();
+            Cadastro c = new Cadastro(); c.setRedirecionamento(1);c.telaRegister();
         }
     }
 }
