@@ -14,6 +14,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import padroes.Fonts;
 import padroes.ItemsTela;
+import padroes.Score;
+import user.Conta;
+import user.User;
 public class TelaWP extends Frame{
     private boolean[][] mWords;
     private ItemsTela it = new ItemsTela();
@@ -34,6 +37,8 @@ public class TelaWP extends Frame{
     private Letra[][] letras;
     private String wordsLetras[][];
     private Contador cont = new Contador();
+    private User user;
+    public void setUser(User user) {this.user = user;}
     public void CP(){
         GridLayout campo = new GridLayout(x,y);
         int pnWordsP[] = {145,130,908,573};
@@ -110,6 +115,13 @@ public class TelaWP extends Frame{
         }
         if(cont==quantCWords()){
             this.cont.stop();
+            int tempo = Integer.parseInt(lbminutos.getText())*60+Integer.parseInt(lbsegundos.getText());
+            Score sc = new Score(tempo, p.getPalavras().size());
+            String nil = "";if(nivel==1){nil = "EASY";}else if(nivel==2){nil = "MEDIUM";}else{nil = "HARD";}
+            user.addScoreWP(sc.scoreRankingWP(), nil);
+            user.setMoedas(sc.scoreMoedasWP());
+            Conta c = new Conta(user);
+            c.gravar();
             JOptionPane.showMessageDialog(null, "You Win: M-"+lbminutos.getText()+" S-"+lbsegundos.getText());
         }
     }
