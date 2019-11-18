@@ -80,7 +80,7 @@ public class TelaWP extends Frame{
         Font f = new Font("Arial", Font.PLAIN, 25); 
         ImageIcon btn_arrow_left[] = {im.addImagem("arrow_left_wp"),im.addImagem("arrow_left_wp_t")};
         ImageIcon btn_arrow_rigth[] = {im.addImagem("arrow_rigth_wp"),im.addImagem("arrow_rigth_wp_t")};
-        if(words.size()>0){lbWord = new Lb(words.get(0).getPalavra().toUpperCase(), f, lbWordPos, Color.white);}
+        if(words.size()>=0){lbWord = new Lb(words.get(0).getPalavra().toUpperCase(), f, lbWordPos, Color.white);}
         else{lbWord = new Lb("--END--".toUpperCase(), f, lbWordPos, Color.white);}
         Component cp[] = {
             new Btn(btn_arrow_left, btnLeftPos, new EventSetas(2)),
@@ -98,9 +98,8 @@ public class TelaWP extends Frame{
         @Override
         public void actionPerformed(ActionEvent ae) {
             if(direcao==1&&palavraDaVez+1<p.getPalavras().size()){//rigth
-                System.out.println(p.getPalavras().size());
                 palavraDaVez++;lbWord.setText(words.get(palavraDaVez).getPalavra().toUpperCase());
-            }else if(direcao==2&&palavraDaVez-1>0){//left
+            }else if(direcao==2&&palavraDaVez-1>=0){//left
                 palavraDaVez--;lbWord.setText(words.get(palavraDaVez).getPalavra().toUpperCase());
             }
             
@@ -146,7 +145,17 @@ public class TelaWP extends Frame{
                     }
                 }
             }
-            if(cont==pos.size()){wordsEnc.add(true);words.remove(i);pnW.setVisible(false);barraWords();pnW.setVisible(true);}else{wordsEnc.add(false);}
+            if(cont==pos.size()){wordsEnc.add(true);words.remove(i);pnW.setVisible(false);barraWords();pnW.setVisible(true);
+                for(int j = 0; j<pos.size(); j++){//posições de cada palavras (suas letras)
+                    for(int k = 0; k<letras.length; k++){//Matriz letras
+                        for(int h = 0; h<letras[k].length; h++){//Matriz letras
+                            if(pos.get(j)[0]==k&&pos.get(j)[1]==h){
+                                letras[k][h].setPermanente(true);
+                            }
+                        }
+                    }
+                }
+            }else{wordsEnc.add(false);}
             cont = 0;
         }
     }
@@ -168,6 +177,7 @@ public class TelaWP extends Frame{
         private boolean caracterWord;
         private int troca = 1;
         private boolean acionado;
+        private boolean permanente; //se for uma palavra não sai a marcação.
         private String l;
         public Letra(String l, int x, int y, boolean conf){
             super();
@@ -179,15 +189,18 @@ public class TelaWP extends Frame{
             setForeground(Color.white);
             setFont(new Font("Arial", Font.PLAIN, 18));
             addActionListener(new Evento());
-            acionado = false;
+            acionado = false; permanente = false;
         }
         public boolean isAcionado() {
             return acionado;
         }
+        public void setPermanente(boolean permanente) {
+            this.permanente = permanente;
+        }
         public class Evento implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent ae) {
-                if(troca==1){setBackground(Color.blue); troca = 2; caracterWord = true;}else{setBackground(Color.black); troca = 1; caracterWord = false;}
+                if(troca==1){setBackground(Color.blue); troca = 2; caracterWord = true;}else if(permanente==false){setBackground(Color.black); troca = 1; caracterWord = false;}
                 mWords[x][y] = caracterWord; acionado = true;
                 wordsEncontradas();
                 ganhar();
