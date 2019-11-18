@@ -175,7 +175,7 @@ public class TelaCM extends Frame{
             if(x==14){nivel = "EASY";}else if(x==16){nivel = "MEDIUM";}else{nivel = "HARD";}
             user.getUsername();
             sc = new ScoreCM(scoreFat[0],scoreFat[1],scoreFat[2]); sc.setUser(user);
-            System.out.println(sc.getRanking().size());
+            sc.setNivel(x);
             user.addScoreCM(sc.scoreRankingCM(), nivel);
             user.setMoedas(sc.scoreMoedaCM());
             sc.gravar();sc.leitura();sc.gravar();//Grava, sequencia com o método leitura e grava de novo.
@@ -256,7 +256,7 @@ public class TelaCM extends Frame{
                     }
                     m4[x][y] = 1;
                 }
-                Ganhar();//Faz-se uma verificação a cada botão clicado.
+                if(GO==false){Ganhar();}//Faz-se uma verificação a cada botão clicado.
             }
         }
         public class Troca implements MouseListener{
