@@ -91,11 +91,16 @@ public class IntroductionCM extends Frame{
             pnIntro.setVisible(false);
             switch (n) {
                 case 1:niveis();break;
-                case 2:break;
+                case 2:ranking();
                 case 3:tutorial();break;
                 default:break;
             }
         }
+    }
+    private Pn pnRanking;
+    public void ranking(){
+        pnRanking = new Recordes();
+        add(pnRanking);
         
     }
 }

@@ -20,13 +20,27 @@ public class ScoreCM {
     private static ArrayList<String> usersEasy = new ArrayList<>();
     private static ArrayList<String> usersMedium = new ArrayList<>();
     private static ArrayList<String> usersHard = new ArrayList<>();
-    private int nivel;
-    
+    private static int nivel;
+    public static int getNivel() {
+        return nivel;
+    }
     public static ArrayList<String> getRankingEasy() {
         return rankingEasy;
     }
     public static ArrayList<String> getUsersEasy() {
         return usersEasy;
+    }
+    public static ArrayList<String> getRankingMedium() {
+        return rankingMedium;
+    }
+    public static ArrayList<String> getRankingHard() {
+        return rankingHard;
+    }
+    public static ArrayList<String> getUsersMedium() {
+        return usersMedium;
+    }
+    public static ArrayList<String> getUsersHard() {
+        return usersHard;
     }
     public void setUser(User user) {
         this.user = user;
