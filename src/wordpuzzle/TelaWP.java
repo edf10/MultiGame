@@ -14,7 +14,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import padroes.Fonts;
 import padroes.ItemsTela;
-import padroes.Score;
 import user.Conta;
 import user.User;
 public class TelaWP extends Frame{
@@ -117,7 +116,7 @@ public class TelaWP extends Frame{
             this.cont.stop();
             int tempo = Integer.parseInt(lbminutos.getText())*60+Integer.parseInt(lbsegundos.getText());int wordQuant = 0;
             String nil = "";if(nivel==1){nil = "EASY"; wordQuant = 12;}else if(nivel==2){nil = "MEDIUM"; wordQuant = 14;}else{nil = "HARD"; wordQuant = 16;}
-            Score sc = new Score(tempo, wordQuant);
+            ScoreWP sc = new ScoreWP(tempo, wordQuant);
             user.addScoreWP(sc.scoreRankingWP(), nil);
             user.setMoedas(sc.scoreMoedasWP());
             System.out.println(sc.scoreRankingWP());
