@@ -13,7 +13,7 @@ import user.User;
 public class IntroductionWP extends Frame{
     private ItemsTela it = new ItemsTela();
     private Btn menu[];
-    private User user;
+    private User user = new User();
     public IntroductionWP(User user){
         this.user = user; it.setUser(user);
     }

@@ -1,5 +1,6 @@
 package user;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -70,7 +71,11 @@ public class User {
     public void setHistoricCM(HashMap<Integer,String> historicCM) {
         this.historicCM = historicCM;
     }
-    public int getMoedas() {
+    public String getMoedasString() {
+        DecimalFormat dc = new DecimalFormat("00.00");
+        return dc.format(moedas);
+    }
+    public int getMoedas(){
         return moedas;
     }
     public void setMoedas(int moedas) {

@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.border.Border;
+import jogodavelha.IntroductionJDV;
 import multigame.MultiGameTela;
 import padroes.Fonts;
 import padroes.ItemsTela;
@@ -21,8 +22,19 @@ public class Cadastro extends Frame{
     private Pn pnCadastro;
     private Txt txtName;
     private Pass txtPass;
+    private User user;
     private ItemsTela it = new ItemsTela();
-    public Cadastro(){
+    private int redirecionamento;
+    public void setRedirecionamento(int redirecionamento) {
+        this.redirecionamento = redirecionamento;
+    }
+    
+    public Cadastro(){}
+    public Cadastro(User user){
+        this.user = user;
+    }
+    
+    public void telaRegister(){
         int txtUserPos[] = {725,253,369,68}; int txtPassPos[] = {725,350,369,68};
         int backQuadroPos[] = {0,0,587,700}; int barraPos[] = {587,0,5,700};
         int titlePos[] = {765,87,286,84}; int userIconPos[] = {666,264,40,46};
@@ -60,7 +72,12 @@ public class Cadastro extends Frame{
                 Conta c = new Conta(user);
                 c.gravar();
             }
-            MultiGameTela m = new MultiGameTela(); m.intro();m.show();
+            if(redirecionamento==1){
+                MultiGameTela m = new MultiGameTela(); m.intro();m.show();
+            }else{
+                IntroductionJDV ijdv = new IntroductionJDV(user); ijdv.intro(); ijdv.show();
+            }
+            
         }
     }
 }

@@ -16,6 +16,7 @@ import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import padroes.Fonts;
 import padroes.ItemsTela;
+import user.Cadastro;
 import user.Conta;
 import user.User;
 public class IntroductionJDV extends Frame{
@@ -35,8 +36,8 @@ public class IntroductionJDV extends Frame{
     private Pn pnIntro;
     public void intro(){
         int backPos[] = {0,0,1200,700}; menu = it.menuOpGamesIntro(this); 
-        int titlePos[] = {254,70,752,109}; int multPos[] = {435,262,404,71};
-        int tutorialPos[] = {496,364,284,71}; int histPos[] = {503,465,270,71};
+        int titlePos[] = {254,70,752,109}; int multPos[] = {379,267,473,75};
+        int tutorialPos[] = {455,372,325,75}; int histPos[] = {465,491,307,75};
         ImageIcon btn_multi[] = {im.addImagem("btn_multiplayer_jdv"),im.addImagem("btn_multiplayer_jdv_t"),im.addImagem("btn_multiplayer_jdv_p")};
         ImageIcon btn_tutorial[] = {im.addImagem("btn_tutorial_jdv"),im.addImagem("btn_tutorial_jdv_t"),im.addImagem("btn_tutorial_jdv_p")};
         ImageIcon btn_hist[] = {im.addImagem("btn_historic_jdv"),im.addImagem("btn_historic_jdv_t"),im.addImagem("btn_historic_jdv_p")};
@@ -95,18 +96,20 @@ public class IntroductionJDV extends Frame{
             int titlePos[] = {70,59,482,66}; int backPos[] = {0,0,600,500};
             int txtUser[] = {162,180,340,64}; int txtpass[] = {162,262,340,64};
             int userPos[] = {112,189,36,47}; int passPos[] = {110,271,37,48};
-            int btnLoginPos[] = {233,366,177,64};
+            int btnLoginPos[] = {332,382,190,62}; int btnRegisterPos[] = {88,382,192,62};
             Border d = BorderFactory.createLineBorder(new Color(52,103,77), 3);
             Fonts fs = new Fonts(); Font f = fs.addNewFont("DS-DIGIT", 40);
             txtUsername = new Txt(txtUser, f, Color.black, d);
             txtPassword = new Pass(txtpass, f, Color.black, d);
-            ImageIcon btn_login[] = {im.addImagem("btn_logar_outro_user_jdv"),im.addImagem("btn_logar_outro_user_jdv_t"),im.addImagem("btn_logar_outro_user_jdv_p")};
+            ImageIcon btn_login[] = {im.addImagem("btn_logar"),im.addImagem("btn_logar_t"),im.addImagem("btn_logar_p")};
+            ImageIcon btn_register[] = {im.addImagem("btn_register"),im.addImagem("btn_register_t"),im.addImagem("btn_register_p")};
             Component cp[] = {
                 new Lb(im.addImagem("title_outro_user_jdv"), titlePos),
                 txtUsername,txtPassword,
                 new Lb(im.addImagem("avatar_jdv_outro_user"), userPos),
                 new Lb(im.addImagem("pass_jdv_outro_user"), passPos),
                 new Btn(btn_login, btnLoginPos, new EventLogar(this)),
+                new Btn(btn_register, btnRegisterPos, new EventRegister(TelaOutroUser.this)),
                 btnClose(this)
             };
             Pn pnLogin = new Pn(backPos, cp);
@@ -115,6 +118,18 @@ public class IntroductionJDV extends Frame{
             pnLogin.setBorder(b);
             add(pnLogin);
             show();
+        }
+    }
+    private class EventRegister implements ActionListener{
+        private Frame f;
+        public EventRegister(Frame f){
+            this.f = f;
+        }
+        @Override
+        public void actionPerformed(ActionEvent e){
+            f.dispose();
+            dispose();
+            Cadastro c = new Cadastro(user1); c.telaRegister();
         }
     }
     private class EventLogar implements ActionListener{

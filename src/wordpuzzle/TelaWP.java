@@ -14,7 +14,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import padroes.Fonts;
 import padroes.ItemsTela;
-import padroes.Score;
 import user.Conta;
 import user.User;
 public class TelaWP extends Frame{
@@ -27,7 +26,7 @@ public class TelaWP extends Frame{
         x = y = p.getX();
         mWords = new boolean[x][y];
         words = p.getPalavras();
-        it.setTelaAntIntro(3);
+        it.setTelaAntIntro(3); it.setUser(user);
         CP();
         cont.start();
     }
@@ -37,7 +36,7 @@ public class TelaWP extends Frame{
     private Letra[][] letras;
     private String wordsLetras[][];
     private Contador cont = new Contador();
-    private User user;
+    private User user = new User();
     public void setUser(User user) {this.user = user;}
     public void CP(){
         GridLayout campo = new GridLayout(x,y);
@@ -80,7 +79,7 @@ public class TelaWP extends Frame{
         Font f = new Font("Arial", Font.PLAIN, 25); 
         ImageIcon btn_arrow_left[] = {im.addImagem("arrow_left_wp"),im.addImagem("arrow_left_wp_t")};
         ImageIcon btn_arrow_rigth[] = {im.addImagem("arrow_rigth_wp"),im.addImagem("arrow_rigth_wp_t")};
-        if(words.size()>0){lbWord = new Lb(words.get(0).getPalavra().toUpperCase(), f, lbWordPos, Color.white);}
+        if(words.size()>=0){lbWord = new Lb(words.get(0).getPalavra().toUpperCase(), f, lbWordPos, Color.white);}
         else{lbWord = new Lb("--END--".toUpperCase(), f, lbWordPos, Color.white);}
         Component cp[] = {
             new Btn(btn_arrow_left, btnLeftPos, new EventSetas(2)),
@@ -115,11 +114,12 @@ public class TelaWP extends Frame{
         }
         if(cont==quantCWords()){
             this.cont.stop();
-            int tempo = Integer.parseInt(lbminutos.getText())*60+Integer.parseInt(lbsegundos.getText());
-            Score sc = new Score(tempo, p.getPalavras().size());
-            String nil = "";if(nivel==1){nil = "EASY";}else if(nivel==2){nil = "MEDIUM";}else{nil = "HARD";}
+            int tempo = Integer.parseInt(lbminutos.getText())*60+Integer.parseInt(lbsegundos.getText());int wordQuant = 0;
+            String nil = "";if(nivel==1){nil = "EASY"; wordQuant = 12;}else if(nivel==2){nil = "MEDIUM"; wordQuant = 14;}else{nil = "HARD"; wordQuant = 16;}
+            ScoreWP sc = new ScoreWP(tempo, wordQuant);
             user.addScoreWP(sc.scoreRankingWP(), nil);
             user.setMoedas(sc.scoreMoedasWP());
+            System.out.println(sc.scoreRankingWP());
             Conta c = new Conta(user);
             c.gravar();
             JOptionPane.showMessageDialog(null, "You Win: M-"+lbminutos.getText()+" S-"+lbsegundos.getText());
@@ -144,7 +144,17 @@ public class TelaWP extends Frame{
                     }
                 }
             }
-            if(cont==pos.size()){wordsEnc.add(true);words.remove(i);pnW.setVisible(false);barraWords();pnW.setVisible(true);}else{wordsEnc.add(false);}
+            if(cont==pos.size()){wordsEnc.add(true);words.remove(i);pnW.setVisible(false);barraWords();pnW.setVisible(true);
+                for(int j = 0; j<pos.size(); j++){//posições de cada palavras (suas letras)
+                    for(int k = 0; k<letras.length; k++){//Matriz letras
+                        for(int h = 0; h<letras[k].length; h++){//Matriz letras
+                            if(pos.get(j)[0]==k&&pos.get(j)[1]==h){
+                                letras[k][h].setPermanente(true);
+                            }
+                        }
+                    }
+                }
+            }else{wordsEnc.add(false);}
             cont = 0;
         }
     }
@@ -166,6 +176,7 @@ public class TelaWP extends Frame{
         private boolean caracterWord;
         private int troca = 1;
         private boolean acionado;
+        private boolean permanente; //se for uma palavra não sai a marcação.
         private String l;
         public Letra(String l, int x, int y, boolean conf){
             super();
@@ -177,15 +188,18 @@ public class TelaWP extends Frame{
             setForeground(Color.white);
             setFont(new Font("Arial", Font.PLAIN, 18));
             addActionListener(new Evento());
-            acionado = false;
+            acionado = false; permanente = false;
         }
         public boolean isAcionado() {
             return acionado;
         }
+        public void setPermanente(boolean permanente) {
+            this.permanente = permanente;
+        }
         public class Evento implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent ae) {
-                if(troca==1){setBackground(Color.blue); troca = 2; caracterWord = true;}else{setBackground(Color.black); troca = 1; caracterWord = false;}
+                if(troca==1){setBackground(Color.blue); troca = 2; caracterWord = true;}else if(permanente==false){setBackground(Color.black); troca = 1; caracterWord = false;}
                 mWords[x][y] = caracterWord; acionado = true;
                 wordsEncontradas();
                 ganhar();

@@ -1,5 +1,4 @@
 package campominado;
-import padroes.Score;
 import java.awt.GridLayout;
 import java.awt.Font;
 import java.awt.Color;
@@ -19,12 +18,12 @@ import user.User;
 public class TelaCM extends Frame{
     private Campo r;
     public void setR(Campo r) {this.r = r;}
-    private User user;
+    private User user = new User();
     public void setUser(User user) {this.user = user;}
     private int m5[][]; //1=posOpen 3=marcadores 2=minas abertas
     private String nivel;
     public void configuracoes(){
-        it.setTelaAntIntro(1);
+        it.setTelaAntIntro(1); it.setUser(user);
         x = r.getX(); y = r.getY();
         vet = new Button[x][y];
         m4 = new int[x][y];
@@ -175,8 +174,11 @@ public class TelaCM extends Frame{
             ct.stop();//Para o cronômetro
             if(x==14){nivel = "EASY";}else if(x==16){nivel = "MEDIUM";}else{nivel = "HARD";}
             user.getUsername();
+            sc = new ScoreCM(scoreFat[0],scoreFat[1],scoreFat[2]); sc.setUser(user);
+            sc.setNivel(x);
             user.addScoreCM(sc.scoreRankingCM(), nivel);
             user.setMoedas(sc.scoreMoedaCM());
+            sc.gravar();sc.leitura();sc.gravar();//Grava, sequencia com o método leitura e grava de novo.
             Conta c = new Conta(user);
             c.gravar();
         }
@@ -200,7 +202,7 @@ public class TelaCM extends Frame{
         return scoreFat;
     }
     
-    public Score sc;
+    public ScoreCM sc;
     public int scoreFat[] = new int[3];
     public boolean press = false; public boolean GO = false; public boolean win = false;
     public int iniciarJogo = 0; public int marc[][]; public int[][] m4;
@@ -227,7 +229,6 @@ public class TelaCM extends Frame{
         public String getS(){return s;}
         public void btnsAbertos(String s) {
             scoreFat = calcScore();
-            sc = new Score(scoreFat[0],scoreFat[1],scoreFat[2]);
             /*Se press==false, significa que nem uma mina foi clicada, caso contrário, ela foi acionada. Mas quando essa variável assume
               o valor true, não se consegue mais entrar nos ifs após a condição inicial, então quando o método GameOver for chamado, não
               poderá abrir as outras posições devido esta condição inicial. Por isso é necessário esta variável GO, onde quando uma mina
@@ -255,7 +256,7 @@ public class TelaCM extends Frame{
                     }
                     m4[x][y] = 1;
                 }
-                Ganhar();//Faz-se uma verificação a cada botão clicado.
+                if(GO==false){Ganhar();}//Faz-se uma verificação a cada botão clicado.
             }
         }
         public class Troca implements MouseListener{

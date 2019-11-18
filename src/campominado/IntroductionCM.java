@@ -12,7 +12,7 @@ import user.User;
 public class IntroductionCM extends Frame{
     private ItemsTela it = new ItemsTela();
     private Btn menu[];
-    private User user;
+    private User user = new User();;
     private Pn pnNiveis;
     public IntroductionCM(User user){
         this.user = user;
@@ -91,7 +91,8 @@ public class IntroductionCM extends Frame{
             pnIntro.setVisible(false);
             switch (n) {
                 case 1:niveis();break;
-                case 2:tutorial();break;
+                case 2:break;
+                case 3:tutorial();break;
                 default:break;
             }
         }
