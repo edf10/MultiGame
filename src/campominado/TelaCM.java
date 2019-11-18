@@ -19,12 +19,12 @@ import user.User;
 public class TelaCM extends Frame{
     private Campo r;
     public void setR(Campo r) {this.r = r;}
-    private User user;
+    private User user = new User();
     public void setUser(User user) {this.user = user;}
     private int m5[][]; //1=posOpen 3=marcadores 2=minas abertas
     private String nivel;
     public void configuracoes(){
-        it.setTelaAntIntro(1);
+        it.setTelaAntIntro(1); it.setUser(user);
         x = r.getX(); y = r.getY();
         vet = new Button[x][y];
         m4 = new int[x][y];

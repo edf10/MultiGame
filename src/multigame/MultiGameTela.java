@@ -25,7 +25,10 @@ import user.User;
 public class MultiGameTela extends Frame{
     private Pn pnIniciar;
     private final ItemsTela it = new ItemsTela();
-    private User user;
+    private User user = new User();
+    public void setUser(User user) {
+        this.user = user;
+    }
     public MultiGameTela(){}
     public void intro(){
         ImageIcon btn_play[] = {im.addImagem("btn_play"), im.addImagem("btn_play_t"), im.addImagem("btn_play_p")};
@@ -57,7 +60,8 @@ public class MultiGameTela extends Frame{
         ImageIcon btn_cm[] = {im.addImagem("btn_cm"),im.addImagem("btn_cm_t"),im.addImagem("btn_cm_p")};
         ImageIcon btn_jdv[] = {im.addImagem("btn_jdv"),im.addImagem("btn_jdv_t"),im.addImagem("btn_jdv_p")};
         ImageIcon btn_wp[] = {im.addImagem("btn_wp"),im.addImagem("btn_wp_t"),im.addImagem("btn_wp_p")}; 
-        Btn menu[] = it.menuOp(this);
+        Btn menu[] = it.menuOp(this); int lbCoinsPos[] = {150,27,33,29}; int lbMoedasPos[] = {191,29,120,29};
+        Fonts fs = new Fonts(); Font f = fs.addNewFont("DS-DIGIT", 30);
         Component cp[] = {
             new Lb(im.addImagem("title_games"),titlePos),
             new Btn(btn_cm, btnCMPos, new EventInitialGame(1)),
@@ -66,6 +70,8 @@ public class MultiGameTela extends Frame{
             menu[0],
             menu[1],
             menu[2],
+            new Lb(im.addImagem("moedas"), lbCoinsPos),
+            new Lb(user.getMoedasString(), f, lbMoedasPos, Color.white),
             new Lb(im.addImagem("back_capa_cm"),capaCMPos),
             new Lb(im.addImagem("back_capa_jdv"), capaJDVPos),
             new Lb(im.addImagem("back_capa_wp"), capaCPPos),

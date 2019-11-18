@@ -11,7 +11,7 @@ public class Score {
     }
     
     public int scoreRankingWP(){
-        int score = 60*words-40*tempoSegundos;
+        int score = 110*words-4*tempoSegundos;
         if(score>0){
             return score;
         }else{
@@ -20,7 +20,7 @@ public class Score {
     }
     
     public int scoreMoedasWP(){
-        int moedas = 6*words-4*tempoSegundos;
+        int moedas = 60*words-4*tempoSegundos;
         if(moedas>0){
             return moedas;
         }else{

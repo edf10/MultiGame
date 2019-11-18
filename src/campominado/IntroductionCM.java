@@ -12,7 +12,7 @@ import user.User;
 public class IntroductionCM extends Frame{
     private ItemsTela it = new ItemsTela();
     private Btn menu[];
-    private User user;
+    private User user = new User();;
     private Pn pnNiveis;
     public IntroductionCM(User user){
         this.user = user;

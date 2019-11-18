@@ -27,7 +27,7 @@ public class TelaWP extends Frame{
         x = y = p.getX();
         mWords = new boolean[x][y];
         words = p.getPalavras();
-        it.setTelaAntIntro(3);
+        it.setTelaAntIntro(3); it.setUser(user);
         CP();
         cont.start();
     }
@@ -37,7 +37,7 @@ public class TelaWP extends Frame{
     private Letra[][] letras;
     private String wordsLetras[][];
     private Contador cont = new Contador();
-    private User user;
+    private User user = new User();
     public void setUser(User user) {this.user = user;}
     public void CP(){
         GridLayout campo = new GridLayout(x,y);
@@ -98,8 +98,9 @@ public class TelaWP extends Frame{
         @Override
         public void actionPerformed(ActionEvent ae) {
             if(direcao==1&&palavraDaVez+1<p.getPalavras().size()){//rigth
+                System.out.println(p.getPalavras().size());
                 palavraDaVez++;lbWord.setText(words.get(palavraDaVez).getPalavra().toUpperCase());
-            }else if(direcao==2&&palavraDaVez-1>=0){//left
+            }else if(direcao==2&&palavraDaVez-1>0){//left
                 palavraDaVez--;lbWord.setText(words.get(palavraDaVez).getPalavra().toUpperCase());
             }
             
@@ -115,11 +116,12 @@ public class TelaWP extends Frame{
         }
         if(cont==quantCWords()){
             this.cont.stop();
-            int tempo = Integer.parseInt(lbminutos.getText())*60+Integer.parseInt(lbsegundos.getText());
-            Score sc = new Score(tempo, p.getPalavras().size());
-            String nil = "";if(nivel==1){nil = "EASY";}else if(nivel==2){nil = "MEDIUM";}else{nil = "HARD";}
+            int tempo = Integer.parseInt(lbminutos.getText())*60+Integer.parseInt(lbsegundos.getText());int wordQuant = 0;
+            String nil = "";if(nivel==1){nil = "EASY"; wordQuant = 12;}else if(nivel==2){nil = "MEDIUM"; wordQuant = 14;}else{nil = "HARD"; wordQuant = 16;}
+            Score sc = new Score(tempo, wordQuant);
             user.addScoreWP(sc.scoreRankingWP(), nil);
             user.setMoedas(sc.scoreMoedasWP());
+            System.out.println(sc.scoreRankingWP());
             Conta c = new Conta(user);
             c.gravar();
             JOptionPane.showMessageDialog(null, "You Win: M-"+lbminutos.getText()+" S-"+lbsegundos.getText());

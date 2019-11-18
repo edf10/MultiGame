@@ -154,7 +154,7 @@ public class ItemsTela {
         public void actionPerformed(ActionEvent e){
             switch(esc){
                 case 1: break;
-                case 2: telaAtual.dispose(); MultiGameTela mg = new MultiGameTela(); mg.Jogos(); mg.show();break;
+                case 2: telaAtual.dispose(); MultiGameTela mg = new MultiGameTela(); mg.setUser(user); mg.Jogos(); mg.show();break;
                 case 3: telaAtual.dispose(); MultiGameTela mg1 = new MultiGameTela(); mg1.login_user(); mg1.show();break;
                 default: break;
             }
