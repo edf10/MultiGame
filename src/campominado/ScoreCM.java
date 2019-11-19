@@ -48,7 +48,7 @@ public class ScoreCM {
     public void setNivel(int nivel) {
         this.nivel = nivel;
     }
-    public ScoreCM(){}
+    public ScoreCM(){leitura();}
     public ScoreCM(int posOpen, int tempoSegundos, int minasNivel){
         this.posOpen = posOpen;
         this.tempoSegundos = tempoSegundos;
@@ -136,5 +136,4 @@ public class ScoreCM {
             arquivo.close();
         }catch(FileNotFoundException e){}catch(IOException e){}
     }
-    
 }

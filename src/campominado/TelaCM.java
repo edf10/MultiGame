@@ -173,7 +173,6 @@ public class TelaCM extends Frame{
             }
             ct.stop();//Para o cronômetro
             if(x==14){nivel = "EASY";}else if(x==16){nivel = "MEDIUM";}else{nivel = "HARD";}
-            user.getUsername();
             sc = new ScoreCM(scoreFat[0],scoreFat[1],scoreFat[2]); sc.setUser(user);
             sc.setNivel(x);
             user.addScoreCM(sc.scoreRankingCM(), nivel);
@@ -181,6 +180,9 @@ public class TelaCM extends Frame{
             sc.gravar();sc.leitura();sc.gravar();//Grava, sequencia com o método leitura e grava de novo.
             Conta c = new Conta(user);
             c.gravar();
+            dispose();
+            Recordes rec = new Recordes();
+            rec.setUser(user); rec.setNivel(x); rec.decVars(); rec.tabela(); rec.show();
         }
         abertos = 0;
     }
