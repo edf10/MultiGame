@@ -97,10 +97,7 @@ public class IntroductionCM extends Frame{
             }
         }
     }
-    private Pn pnRanking;
     public void ranking(){
-        pnRanking = new Recordes();
-        add(pnRanking);
-        
+        add(new Recordes());
     }
 }
