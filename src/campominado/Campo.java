@@ -20,9 +20,9 @@ public class Campo {
             }
         }
         switch (x) {
-            case 14:sortMinas(5);break;
-            case 16:sortMinas(6);break;
-            case 18:sortMinas(7);break;
+            case 14:sortMinas(20);break;
+            case 16:sortMinas(25);break;
+            case 18:sortMinas(30);break;
             default:break;
         }
         orgNumeros();

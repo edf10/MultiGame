@@ -12,18 +12,19 @@ import componentes.Btn;
 import componentes.Frame;
 import padroes.Fonts;
 import padroes.ItemsTela;
+import padroes.WinOrGameOver;
 import user.Conta;
 import user.User;
 
 public class TelaCM extends Frame{
     private Campo r;
     public void setR(Campo r) {this.r = r;}
-    private User user = new User();
+    private User user = User.getUser();
     public void setUser(User user) {this.user = user;}
     private int m5[][]; //1=posOpen 3=marcadores 2=minas abertas
     private String nivel;
     public void configuracoes(){
-        it.setTelaAntIntro(1); it.setUser(user);
+        it.setTelaAntIntro(1);
         x = r.getX(); y = r.getY();
         vet = new Button[x][y];
         m4 = new int[x][y];
@@ -149,6 +150,7 @@ public class TelaCM extends Frame{
             }
         }
         ct.stop();//Para o cronômetro.
+        WinOrGameOver go = new WinOrGameOver(this); go.setNivel(x); go.addGameOverCM(); go.show();
     }
     public void Ganhar(){
         int abertos = 0;
@@ -173,14 +175,16 @@ public class TelaCM extends Frame{
             }
             ct.stop();//Para o cronômetro
             if(x==14){nivel = "EASY";}else if(x==16){nivel = "MEDIUM";}else{nivel = "HARD";}
-            user.getUsername();
-            sc = new ScoreCM(scoreFat[0],scoreFat[1],scoreFat[2]); sc.setUser(user);
+            sc = new ScoreCM(scoreFat[0],scoreFat[1],scoreFat[2]); 
             sc.setNivel(x);
             user.addScoreCM(sc.scoreRankingCM(), nivel);
             user.setMoedas(sc.scoreMoedaCM());
-            sc.gravar();sc.leitura();sc.gravar();//Grava, sequencia com o método leitura e grava de novo.
+            sc.gravar("cm");sc.leitura("cm");sc.gravar("cm");//Grava, sequencia com o método leitura e grava de novo.
             Conta c = new Conta(user);
             c.gravar();
+            dispose();
+            RecordesCM rec = new RecordesCM();
+            rec.setNivel(x); rec.decVars(); rec.tabela(); rec.show();
         }
         abertos = 0;
     }

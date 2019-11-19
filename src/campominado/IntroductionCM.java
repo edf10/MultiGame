@@ -12,12 +12,8 @@ import user.User;
 public class IntroductionCM extends Frame{
     private ItemsTela it = new ItemsTela();
     private Btn menu[];
-    private User user = new User();;
+    private User user = User.getUser();
     private Pn pnNiveis;
-    public IntroductionCM(User user){
-        this.user = user;
-        it.setUser(user);
-    }
     public void niveis() {
         int backNiveisPos[] = {0,0,1200,700}; int btnEasyPos[] = {496,174,189,71};
         int btnMediumPos[] = {439,311,304,71}; int btnHardPos[] = {502,445,189,79};
@@ -98,6 +94,7 @@ public class IntroductionCM extends Frame{
         }
     }
     public void ranking(){
-        add(new Recordes());
+        dispose(); 
+        RecordesCM r = new RecordesCM(); r.initial();
     }
 }

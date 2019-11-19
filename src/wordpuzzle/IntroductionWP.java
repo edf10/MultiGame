@@ -13,11 +13,7 @@ import user.User;
 public class IntroductionWP extends Frame{
     private ItemsTela it = new ItemsTela();
     private Btn menu[];
-    private User user = new User();
-    public IntroductionWP(User user){
-        this.user = user; it.setUser(user);
-    }
-    
+    private User user = User.getUser();
     public void tutorial() {
     }
     

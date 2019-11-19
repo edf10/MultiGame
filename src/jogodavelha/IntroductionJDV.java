@@ -23,12 +23,8 @@ public class IntroductionJDV extends Frame{
     private ItemsTela it = new ItemsTela();
     private Btn menu[]; 
     private TelaJDV tjdv = new TelaJDV();
-    private User user1;//user logado na conta do projeto
+    private User user1 = User.getUser();//user logado na conta do projeto
     private User user2;//user que vai jogar contra pra salvar os dados em ambas as contas
-    
-    public IntroductionJDV(User user){
-        this.user1 = user; it.setUser(user);
-    }
     
     public void tutorial() {
     }

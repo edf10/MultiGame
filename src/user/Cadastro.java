@@ -75,7 +75,7 @@ public class Cadastro extends Frame{
             if(redirecionamento==1){
                 MultiGameTela m = new MultiGameTela(); m.intro();m.show();
             }else{
-                IntroductionJDV ijdv = new IntroductionJDV(user); ijdv.intro(); ijdv.show();
+                IntroductionJDV ijdv = new IntroductionJDV(); ijdv.intro(); ijdv.show();
             }
             
         }
