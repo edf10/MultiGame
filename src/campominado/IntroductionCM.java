@@ -95,7 +95,6 @@ public class IntroductionCM extends Frame{
     }
     public void ranking(){
         dispose(); 
-        Recordes r = new Recordes();
-        r.escRankingNivel(); r.show();
+        RecordesCM r = new RecordesCM(); r.initial();
     }
 }

@@ -1,5 +1,6 @@
-package campominado;
+package padroes;
 
+import campominado.ScoreCM;
 import componentes.Btn;
 import componentes.Frame;
 import componentes.Lb;
@@ -13,22 +14,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import padroes.Fonts;
-import padroes.ItemsTela;
+
 public class Recordes extends Frame{
-    private Im im = new Im();
+    private ArrayList<String> scores = new ArrayList<>();
+    private ArrayList<String> users = new ArrayList<>();
+    private final String[] lin = {"01","02","03","04","05","06","07","08","09","10"};
+    private Pn pnPosicoes;
+    private Pn pnScores;
+    private Pn pnUsers;
     private ItemsTela it = new ItemsTela();
+    private ScoreCM scm = new ScoreCM();
     private int nivel;
     public void setNivel(int nivel) {
         this.nivel = nivel;
     }
-    private ScoreCM scm = new ScoreCM();
     public Recordes(){
-        
         it.setTelaAntIntro(1);
         setLayout(null);
     }
-    
     public void decVars(){
         switch(nivel){
             case 14: scores = scm.getRankingEasy(); users = scm.getUsersEasy(); break;
@@ -37,13 +40,16 @@ public class Recordes extends Frame{
             default: break;
         }
     }
+    
+    private ImageIcon[][] ims;
+    public void setIms(ImageIcon[][] ims) {
+        this.ims = ims;
+    }
     private Pn pnRanking;
     public void escRankingNivel(){
         int backNiveisPos[] = {0,0,1200,700}; int btnEasyPos[] = {496,174,189,71};
         int btnMediumPos[] = {439,311,304,71}; int btnHardPos[] = {502,445,189,79};
-        ImageIcon btn_easy[] = {im.addImagem("btn_easy_cm"),im.addImagem("btn_easy_cm_t"),im.addImagem("btn_easy_cm_p")};
-        ImageIcon btn_medium[] = {im.addImagem("btn_medium_cm"),im.addImagem("btn_medium_cm_t"),im.addImagem("btn_medium_cm_p")};
-        ImageIcon btn_hard[] = {im.addImagem("btn_hard_cm"),im.addImagem("btn_hard_cm_t"),im.addImagem("btn_hard_cm_p")};
+        ImageIcon btn_easy[] = ims[0];ImageIcon btn_medium[] = ims[1];ImageIcon btn_hard[] = ims[2];
         Component cp[] = {
             it.btnClose(),
             it.btnSomOutro(),
@@ -51,7 +57,7 @@ public class Recordes extends Frame{
             new Btn(btn_easy, btnEasyPos, new EventBtnsRank(14)),
             new Btn(btn_medium, btnMediumPos, new EventBtnsRank(16)),
             new Btn(btn_hard, btnHardPos, new EventBtnsRank(18)),
-            new Lb(im.addImagem("back_intro_cm"), backNiveisPos)
+            new Lb(ims[3][0], backNiveisPos)
         };
         int pnNiveisPos[] = {0,0,1200,700};
         pnRanking = new Pn(pnNiveisPos, cp);
@@ -67,6 +73,7 @@ public class Recordes extends Frame{
             nivel = n; decVars(); tabela();
         }
     }
+    
     
     public void tabela(){
         GridLayout col = new GridLayout(10,1);
@@ -93,15 +100,11 @@ public class Recordes extends Frame{
         }
         
         add(it.btnClose()); add(it.returnGames(this)); int backPos[] = {0,0,1200,700}; int barrasPos[] = {96,243,1009,360};
-        add(new Lb(im.addImagem("barras_ranking_cm"), barrasPos));
+        add(new Lb(ims[4][0], barrasPos));
         add(pnPosicoes);add(pnScores);add(pnUsers);
-        add(new Lb(im.addImagem("back_ranking_cm"), backPos));
+        add(new Lb(ims[5][0], backPos));
     }
     
-    private ArrayList<String> scores = new ArrayList<>();
-    private ArrayList<String> users = new ArrayList<>();
-    private final String[] lin = {"01","02","03","04","05","06","07","08","09","10"};
-    private Pn pnPosicoes;
-    private Pn pnScores;
-    private Pn pnUsers;
+    
+    
 }

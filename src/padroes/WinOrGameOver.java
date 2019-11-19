@@ -1,7 +1,7 @@
 package padroes;
 
 import campominado.IntroductionCM;
-import campominado.Recordes;
+import campominado.RecordesCM;
 import componentes.Btn;
 import componentes.Frame;
 import componentes.Lb;
@@ -53,7 +53,7 @@ public class WinOrGameOver extends Frame{
             if(esc==1){
                 IntroductionCM cm = new IntroductionCM(); cm.intro(); cm.show();
             }else{
-                Recordes r = new Recordes();
+                RecordesCM r = new RecordesCM();
                 r.setNivel(nivel); r.decVars(); r.tabela();r.show();
             }
         }

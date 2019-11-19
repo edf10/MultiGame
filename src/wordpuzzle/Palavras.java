@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 public class Palavras {
     private final Random sortear = new Random();
@@ -25,15 +24,6 @@ public class Palavras {
         m2 = new String[x][y];
         escWords();
         letras();
-       /* for (int i = 0; i < x; i++) {
-            for (int j = 0; j < y; j++) {
-                System.out.print("|"+m2[i][j]+"|");
-            }
-            System.out.println();
-        }
-        for(int i = 0; i<mapawords.size(); i++){
-            System.out.println(Arrays.toString(mapawords.get(i)));
-        }*/
     }
     
     public void escWords(){

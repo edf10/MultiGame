@@ -71,7 +71,7 @@ public class TelaWP extends Frame{
     
     private Lb lbWord;
     private int palavraDaVez = 0;
-    private ArrayList<Palavra> words;
+    private ArrayList<Palavra> words = new ArrayList<>();
     private Pn pnW;
     public void barraWords(){
         int btnLeftPos[] = {0,0,21,37}; int btnRigthPos[] = {233,0,21,37};
@@ -79,7 +79,7 @@ public class TelaWP extends Frame{
         Font f = new Font("Arial", Font.PLAIN, 25); 
         ImageIcon btn_arrow_left[] = {im.addImagem("arrow_left_wp"),im.addImagem("arrow_left_wp_t")};
         ImageIcon btn_arrow_rigth[] = {im.addImagem("arrow_rigth_wp"),im.addImagem("arrow_rigth_wp_t")};
-        if(words.size()>=0){lbWord = new Lb(words.get(0).getPalavra().toUpperCase(), f, lbWordPos, Color.white);}
+        if(words.size()>0){lbWord = new Lb(words.get(0).getPalavra().toUpperCase(), f, lbWordPos, Color.white);}
         else{lbWord = new Lb("--END--".toUpperCase(), f, lbWordPos, Color.white);}
         Component cp[] = {
             new Btn(btn_arrow_left, btnLeftPos, new EventSetas(2)),
@@ -101,7 +101,6 @@ public class TelaWP extends Frame{
             }else if(direcao==2&&palavraDaVez-1>=0){//left
                 palavraDaVez--;lbWord.setText(words.get(palavraDaVez).getPalavra().toUpperCase());
             }
-            
         }
     }
     

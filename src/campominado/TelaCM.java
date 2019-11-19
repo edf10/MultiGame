@@ -183,7 +183,7 @@ public class TelaCM extends Frame{
             Conta c = new Conta(user);
             c.gravar();
             dispose();
-            Recordes rec = new Recordes();
+            RecordesCM rec = new RecordesCM();
             rec.setNivel(x); rec.decVars(); rec.tabela(); rec.show();
         }
         abertos = 0;
