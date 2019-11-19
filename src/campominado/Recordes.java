@@ -15,27 +15,25 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import padroes.Fonts;
 import padroes.ItemsTela;
-import user.User;
 public class Recordes extends Frame{
     private Im im = new Im();
     private ItemsTela it = new ItemsTela();
-    private Btn menu[];
     private int nivel;
-    private User user = User.getUser();
     public void setNivel(int nivel) {
         this.nivel = nivel;
     }
+    private ScoreCM scm = new ScoreCM();
     public Recordes(){
-        ScoreCM scm = new ScoreCM();
+        
         it.setTelaAntIntro(1);
         setLayout(null);
     }
     
     public void decVars(){
         switch(nivel){
-            case 14: scores = ScoreCM.getRankingEasy(); users = ScoreCM.getUsersEasy(); break;
-            case 16: scores = ScoreCM.getRankingMedium(); users = ScoreCM.getUsersMedium(); break;
-            case 18: scores = ScoreCM.getRankingHard(); users = ScoreCM.getUsersHard(); break;
+            case 14: scores = scm.getRankingEasy(); users = scm.getUsersEasy(); break;
+            case 16: scores = scm.getRankingMedium(); users = scm.getUsersMedium(); break;
+            case 18: scores = scm.getRankingHard(); users = scm.getUsersHard(); break;
             default: break;
         }
     }
