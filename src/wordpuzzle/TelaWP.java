@@ -26,7 +26,7 @@ public class TelaWP extends Frame{
         x = y = p.getX();
         mWords = new boolean[x][y];
         words = p.getPalavras();
-        it.setTelaAntIntro(3); it.setUser(user);
+        it.setTelaAntIntro(3); 
         CP();
         cont.start();
     }

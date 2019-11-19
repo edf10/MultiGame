@@ -13,7 +13,7 @@ public class ScoreCM {
     private int minasNivel;
     private int posOpen; //campos diferentes de minas que estejam abertos
     private int tempoSegundos;
-    private User user = new User();
+    private User user = User.getUser();
     private static ArrayList<String> rankingEasy = new ArrayList<>();
     private static ArrayList<String> rankingMedium = new ArrayList<>();
     private static ArrayList<String> rankingHard = new ArrayList<>();

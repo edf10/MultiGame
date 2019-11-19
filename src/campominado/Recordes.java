@@ -21,16 +21,13 @@ public class Recordes extends Frame{
     private ItemsTela it = new ItemsTela();
     private Btn menu[];
     private int nivel;
-    private User user;
-    public void setUser(User user) {
-        this.user = user;
-    }
+    private User user = User.getUser();
     public void setNivel(int nivel) {
         this.nivel = nivel;
     }
     public Recordes(){
         ScoreCM scm = new ScoreCM();
-        it.setTelaAntIntro(4);
+        it.setTelaAntIntro(1);
         setLayout(null);
     }
     
@@ -49,7 +46,6 @@ public class Recordes extends Frame{
         ImageIcon btn_easy[] = {im.addImagem("btn_easy_cm"),im.addImagem("btn_easy_cm_t"),im.addImagem("btn_easy_cm_p")};
         ImageIcon btn_medium[] = {im.addImagem("btn_medium_cm"),im.addImagem("btn_medium_cm_t"),im.addImagem("btn_medium_cm_p")};
         ImageIcon btn_hard[] = {im.addImagem("btn_hard_cm"),im.addImagem("btn_hard_cm_t"),im.addImagem("btn_hard_cm_p")};
-        it.setTelaAntIntro(1);
         Component cp[] = {
             it.btnClose(),
             it.btnSomOutro(),

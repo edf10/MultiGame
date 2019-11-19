@@ -168,13 +168,10 @@ public class ItemsTela {
     }
     private int telaAntIntro;
     private Frame telaAtual;
-    private User user;
+    private User user = User.getUser();
 
     public void setTelaAntIntro(int telaAntIntro) {
         this.telaAntIntro = telaAntIntro;
-    }
-    public void setUser(User user) {
-        this.user = user;
     }
     
     public class EventBtnReturn implements ActionListener{
@@ -182,11 +179,11 @@ public class ItemsTela {
         public void actionPerformed(ActionEvent e){
             telaAtual.dispose();
             if(telaAntIntro==1){
-                IntroductionCM icm = new IntroductionCM(user);icm.intro();icm.show();
+                IntroductionCM icm = new IntroductionCM();icm.intro();icm.show();
             }else if(telaAntIntro==2){
-                IntroductionJDV ijdv = new IntroductionJDV(user);ijdv.intro();ijdv.show();
+                IntroductionJDV ijdv = new IntroductionJDV();ijdv.intro();ijdv.show();
             }else if(telaAntIntro==3){
-                IntroductionWP iwp = new IntroductionWP(user);iwp.intro();iwp.show();
+                IntroductionWP iwp = new IntroductionWP();iwp.intro();iwp.show();
             }else if(telaAntIntro==4){
                 
             }

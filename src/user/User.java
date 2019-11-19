@@ -12,7 +12,13 @@ public class User {
     private HashMap<Integer,String> historicCM = new HashMap<>();
     private ArrayList<ArrayList> historicJDV = new ArrayList<>();
     private HashMap<Integer,String> historicWP = new HashMap<>();
-    
+    private static User user;
+    public static User getUser() {
+        return user;
+    }
+    public static void setUser(User user) {
+        User.user = user;
+    }
     public User(){}
     
     public User(String username, String password){

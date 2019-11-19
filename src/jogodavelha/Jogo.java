@@ -72,7 +72,7 @@ public class Jogo {
         return nums;
     }
     public int[] addDivision(){
-        int nums[] = {sortear.nextInt(11),sortear.nextInt(11)};
+        int nums[] = {sortear.nextInt(11),sortear.nextInt(10)+1};
         while(true){
             if(nums[0]%nums[1]==0){
                 break;

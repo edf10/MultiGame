@@ -25,7 +25,7 @@ import user.User;
 public class MultiGameTela extends Frame{
     private Pn pnIniciar;
     private final ItemsTela it = new ItemsTela();
-    private User user = new User();
+    private User user = User.getUser();
     public void setUser(User user) {
         this.user = user;
     }
@@ -88,9 +88,9 @@ public class MultiGameTela extends Frame{
         public void actionPerformed(ActionEvent e) {
             dispose();
             switch (n) {
-                case 1:IntroductionCM cm = new IntroductionCM(user); cm.intro(); cm.show();break;
-                case 2:IntroductionJDV jdv = new IntroductionJDV(user); jdv.intro(); jdv.show();break;
-                case 3:IntroductionWP wp = new IntroductionWP(user); wp.intro(); wp.show(); break;
+                case 1:IntroductionCM cm = new IntroductionCM(); cm.intro(); cm.show();break;
+                case 2:IntroductionJDV jdv = new IntroductionJDV(); jdv.intro(); jdv.show();break;
+                case 3:IntroductionWP wp = new IntroductionWP(); wp.intro(); wp.show(); break;
                 default:break;
             }
             
@@ -137,6 +137,7 @@ public class MultiGameTela extends Frame{
             user = new User(txtUserName.getText(),txtPassword.getText());
             Conta c = new Conta(user);
             user = c.login();
+            User.setUser(user);
             pnLogin.setVisible(false);
             if(c.isLogado()){
                 Jogos();
