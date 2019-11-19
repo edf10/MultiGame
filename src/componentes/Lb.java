@@ -17,6 +17,9 @@ public final class Lb extends JLabel{
         configBase();setIcon(im);
         setBounds(pos[0], pos[1], pos[2], pos[3]);
     }
+    public Lb(String s, Font f, Color c){
+        configBase();setText(s);setFont(f);setForeground(c);
+    }
     public Lb(Color c, int pos[]){
         configBase();setBackground(c);
         setBounds(pos[0], pos[1], pos[2], pos[3]);

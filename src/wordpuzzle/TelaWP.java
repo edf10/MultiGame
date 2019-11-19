@@ -200,7 +200,7 @@ public class TelaWP extends Frame{
             @Override
             public void actionPerformed(ActionEvent ae) {
                 if(troca==1){setBackground(Color.blue); troca = 2; caracterWord = true;}else if(permanente==false){setBackground(Color.black); troca = 1; caracterWord = false;}
-                mWords[x][y] = caracterWord; acionado = true;
+                mWords[x][y] = (caracterWord); acionado = true;
                 wordsEncontradas();
                 ganhar();
             }
