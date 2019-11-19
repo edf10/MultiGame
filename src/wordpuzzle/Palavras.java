@@ -93,7 +93,7 @@ public class Palavras {
     }
     private void niveis(int n){
         switch(n){
-            case 1: x = y = 14; quantWords = 12; break;
+            case 1: x = y = 14; quantWords = 2; break;
             case 2: x = y = 16; quantWords = 14; break;
             case 3: x = y = 18; quantWords = 16; break;
             default: break;
