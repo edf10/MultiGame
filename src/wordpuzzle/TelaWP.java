@@ -11,9 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import padroes.Fonts;
 import padroes.ItemsTela;
+import padroes.WinOrGameOver;
 import user.Conta;
 import user.User;
 public class TelaWP extends Frame{
@@ -124,18 +124,18 @@ public class TelaWP extends Frame{
                 if(letras[i][j].isWordLetter()==true){cont++;}
             }
         }
-        System.out.println(cont);
         if(cont==quantCaracWords){
             this.cont.stop();
             int tempo = Integer.parseInt(lbminutos.getText())*60+Integer.parseInt(lbsegundos.getText());int wordQuant = 0;
             String nil = "";if(nivel==1){nil = "EASY"; wordQuant = 12;}else if(nivel==2){nil = "MEDIUM"; wordQuant = 14;}else{nil = "HARD"; wordQuant = 16;}
             ScoreWP sc = new ScoreWP(tempo, wordQuant);
+            sc.setNivel(x);sc.setArq("wp");
             user.addScoreWP(sc.scoreRankingWP(), nil);
             user.setMoedas(sc.scoreMoedasWP());
-            System.out.println(sc.scoreRankingWP());
+            sc.gravar();sc.leitura();sc.gravar();
             Conta c = new Conta(user);
             c.gravar();
-            JOptionPane.showMessageDialog(null, "You Win: M-"+lbminutos.getText()+" S-"+lbsegundos.getText());
+            WinOrGameOver w = new WinOrGameOver(this); w.setNivel(x); w.addWinCMWP(4); w.show();
         }
     }
     
@@ -207,7 +207,7 @@ public class TelaWP extends Frame{
             public void actionPerformed(ActionEvent ae) {
                 if(troca==1){setBackground(Color.blue); troca = 2; caracterWord = true;}else if(permanente==false){setBackground(Color.black); troca = 1; caracterWord = false;}
                 acionado = true;
-                wordLetter = (conf==true) ? true:false;
+                wordLetter = (conf==true);
                 wordsEncontradas();
                 ganhar();
             }

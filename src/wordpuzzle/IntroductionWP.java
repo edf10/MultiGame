@@ -16,7 +16,10 @@ public class IntroductionWP extends Frame{
     private User user = User.getUser();
     public void tutorial() {
     }
-    
+    public void ranking(){
+        dispose();
+        RecordesWP r = new RecordesWP(); r.initial();
+    }
     private Pn pnIntro;
     public void intro() {
         int backPos[] = {0,0,1200,700}; int titlePos[] = {252,73,700,107};
@@ -32,9 +35,9 @@ public class IntroductionWP extends Frame{
             it.btnClose(),
             it.btnSomOutro(),
             menu[0],menu[1],menu[2],menu[3],menu[4],
-            new Btn(btn_classic, classicPos, new EventBtnsIntro()),
+            new Btn(btn_classic, classicPos, new EventBtnsIntro(1)),
             new Btn(btn_custom, customPos, null),
-            new Btn(btn_rank, rankPos, null),
+            new Btn(btn_rank, rankPos, new EventBtnsIntro(2)),
             new Btn(btn_tuto, tutoPos, null),
             new Lb(im.addImagem("back_intro_wp"), backPos)
         };
@@ -46,10 +49,17 @@ public class IntroductionWP extends Frame{
     }
     
     public class EventBtnsIntro implements ActionListener{
+        private int esc;
+        public EventBtnsIntro(int esc){this.esc = esc;}
         @Override
         public void actionPerformed(ActionEvent ae) {
             pnIntro.setVisible(false);
-            niveis();
+            switch(esc){
+                case 1: niveis();break;
+                case 2: ranking();break;
+                case 3: break;
+                default: break;
+            }
         }
     }
     

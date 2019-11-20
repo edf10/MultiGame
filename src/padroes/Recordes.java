@@ -1,11 +1,9 @@
 package padroes;
 
-import campominado.ScoreCM;
 import componentes.Btn;
 import componentes.Frame;
 import componentes.Lb;
 import componentes.Pn;
-import imagens.Im;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -15,28 +13,25 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
-public class Recordes extends Frame{
+public abstract class Recordes extends Frame{
     private ArrayList<String> scores = new ArrayList<>();
     private ArrayList<String> users = new ArrayList<>();
     private final String[] lin = {"01","02","03","04","05","06","07","08","09","10"};
     private Pn pnPosicoes;
     private Pn pnScores;
     private Pn pnUsers;
-    private ItemsTela it = new ItemsTela();
-    private ScoreCM scm = new ScoreCM();
-    private int nivel;
-    public void setNivel(int nivel) {
+    public ItemsTela it = new ItemsTela();
+    protected Score s;
+    protected int nivel;
+    public Recordes(){}
+    public Recordes(int nivel){
         this.nivel = nivel;
-    }
-    public Recordes(){
-        it.setTelaAntIntro(1);
-        setLayout(null);
     }
     public void decVars(){
         switch(nivel){
-            case 14: scores = scm.getRankingEasy(); users = scm.getUsersEasy(); break;
-            case 16: scores = scm.getRankingMedium(); users = scm.getUsersMedium(); break;
-            case 18: scores = scm.getRankingHard(); users = scm.getUsersHard(); break;
+            case 14: scores = s.getRankingEasy(); users = s.getUsersEasy(); break;
+            case 16: scores = s.getRankingMedium(); users = s.getUsersMedium(); break;
+            case 18: scores = s.getRankingHard(); users = s.getUsersHard(); break;
             default: break;
         }
     }
@@ -99,7 +94,7 @@ public class Recordes extends Frame{
             pnUsers.add(new Lb("-",f,Color.white));
         }
         
-        add(it.btnClose()); add(it.returnGames(this)); int backPos[] = {0,0,1200,700}; int barrasPos[] = {96,243,1009,360};
+        add(it.btnClose()); add(it.returnGames(this)); int backPos[] = {0,0,1200,700}; int barrasPos[] = {94,243,1009,360};
         add(new Lb(ims[4][0], barrasPos));
         add(pnPosicoes);add(pnScores);add(pnUsers);
         add(new Lb(ims[5][0], backPos));

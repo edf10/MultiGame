@@ -5,10 +5,10 @@ public class ScoreWP extends Score{
     private int tempoSegundos;
     private int words;
     
-    public ScoreWP(){leitura("wp");}
+    public ScoreWP(){setArq("wp");leitura();}
     public ScoreWP(int tempoSegundos, int words){
         this.tempoSegundos = tempoSegundos;
-        this.words = words;leitura("wp");
+        this.words = words;setArq("wp");leitura();
     }
     
     public int scoreRankingWP(){

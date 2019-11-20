@@ -77,11 +77,8 @@ public class IntroductionJDV extends Frame{
         add(pnAss);
     }
     public void jogadores(String jogad1, String jogad2){
-        Random sortear = new Random();
-        int jog1 = sortear.nextInt(2); int jog2 = (jog1==1) ? 0:1;
-        String names[] = {jogad1,jogad2};
-        tjdv.setJog1(names[jog1]);
-        tjdv.setJog2(names[jog2]);
+        tjdv.setJog1(jogad1);
+        tjdv.setJog2(jogad2);
     }
     
     private Txt txtUsername;
@@ -166,7 +163,7 @@ public class IntroductionJDV extends Frame{
             switch (n) {
                 case 1:pnIntro.setVisible(true);new TelaOutroUser();break;
                 case 2:tutorial();break;
-                case 3:tutorial();break;
+                case 3:dispose();new HistoricJDV();break;
                 default:break;
             }
         }

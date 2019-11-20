@@ -30,7 +30,7 @@ public class Conta {
                     user.setPassword(objectArquivo.get("password").toString());
                     user.setDataRegistro(objectArquivo.get("data_register").toString());
                     user.setHistoricCM((HashMap<Integer,String>) objectArquivo.get("historicCM"));
-                    user.setHistoricJDV((ArrayList<ArrayList>) objectArquivo.get("historicJDV"));
+                    user.setHistoricJDV((ArrayList<ArrayList<String>>) objectArquivo.get("historicJDV"));
                     user.setHistoricWP((HashMap<Integer, String>) objectArquivo.get("historicWP"));
                     user.setMoedas(Integer.parseInt(objectArquivo.get("moedas").toString()));
                     return user;

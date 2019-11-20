@@ -12,6 +12,17 @@ public class RecordesCM extends Recordes{
                                    {im.addImagem("back_ranking_cm")}};
 
     public RecordesCM(){
+        super();
+        s = new ScoreCM();
+        decVars();
+        it.setTelaAntIntro(1);
+        setIms(ims);
+    }
+    public RecordesCM(int nivel){
+        super(nivel);
+        s = new ScoreCM();
+        decVars();
+        it.setTelaAntIntro(1);
         setIms(ims);
     }
     public void initial(){
