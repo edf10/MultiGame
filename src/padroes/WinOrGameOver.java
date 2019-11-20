@@ -58,12 +58,12 @@ public class WinOrGameOver extends Frame{
                 IntroductionCM cm = new IntroductionCM(); cm.intro(); cm.show();
             }else if(esc==1){
                 RecordesCM r = new RecordesCM();
-                r.setNivel(nivel);r.setS(new ScoreCM()); r.decVars(); r.tabela();r.show();
+                r.setNivel(nivel); r.tabela();r.show();
             }else if(esc==4){
                 IntroductionWP wp = new IntroductionWP(); wp.intro(); wp.show();
             }else{
                 RecordesWP r = new RecordesWP();
-                r.setNivel(nivel);r.setS(new ScoreWP()); r.decVars(); r.tabela();r.show();
+                r.setNivel(nivel); r.tabela();r.show();
             }
         }
     }

@@ -18,7 +18,7 @@ public class IntroductionWP extends Frame{
     }
     public void ranking(){
         dispose();
-        RecordesWP r = new RecordesWP(); r.setS(new ScoreWP()); r.initial();
+        RecordesWP r = new RecordesWP(); r.initial();
     }
     private Pn pnIntro;
     public void intro() {

@@ -13,6 +13,8 @@ public class RecordesWP extends Recordes{
     
     public RecordesWP(){
         super();
+        s = new ScoreWP();
+        decVars();
         it.setTelaAntIntro(3);
         setIms(ims);
     }

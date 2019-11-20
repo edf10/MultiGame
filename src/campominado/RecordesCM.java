@@ -13,6 +13,8 @@ public class RecordesCM extends Recordes{
 
     public RecordesCM(){
         super();
+        s = new ScoreCM();
+        decVars();
         it.setTelaAntIntro(1);
         setIms(ims);
     }

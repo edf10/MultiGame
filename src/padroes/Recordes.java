@@ -1,6 +1,5 @@
 package padroes;
 
-import campominado.ScoreCM;
 import componentes.Btn;
 import componentes.Frame;
 import componentes.Lb;
@@ -22,10 +21,7 @@ public abstract class Recordes extends Frame{
     private Pn pnScores;
     private Pn pnUsers;
     public ItemsTela it = new ItemsTela();
-    private Score s;
-    public void setS(Score s) {
-        this.s = s;
-    }
+    protected Score s;
     private int nivel;
     public void setNivel(int nivel) {
         this.nivel = nivel;
