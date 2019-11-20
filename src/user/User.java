@@ -10,7 +10,7 @@ public class User {
     private String dataRegistro;
     private int moedas;
     private HashMap<Integer,String> historicCM = new HashMap<>();
-    private ArrayList<ArrayList> historicJDV = new ArrayList<>();
+    private ArrayList<ArrayList<String>> historicJDV = new ArrayList<>();
     private HashMap<Integer,String> historicWP = new HashMap<>();
     private static User user;
     public static User getUser() {
@@ -87,10 +87,10 @@ public class User {
     public void setMoedas(int moedas) {
         this.moedas += moedas;
     }
-    public ArrayList<ArrayList> getHistoricJDV() {
+    public ArrayList<ArrayList<String>> getHistoricJDV() {
         return historicJDV;
     }
-    public void setHistoricJDV(ArrayList<ArrayList> historicJDV) {
+    public void setHistoricJDV(ArrayList<ArrayList<String>> historicJDV) {
         this.historicJDV = historicJDV;
     }
     
