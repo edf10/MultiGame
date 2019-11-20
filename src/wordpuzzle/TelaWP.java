@@ -130,9 +130,10 @@ public class TelaWP extends Frame{
             int tempo = Integer.parseInt(lbminutos.getText())*60+Integer.parseInt(lbsegundos.getText());int wordQuant = 0;
             String nil = "";if(nivel==1){nil = "EASY"; wordQuant = 12;}else if(nivel==2){nil = "MEDIUM"; wordQuant = 14;}else{nil = "HARD"; wordQuant = 16;}
             ScoreWP sc = new ScoreWP(tempo, wordQuant);
+            sc.setNivel(x);sc.setArq("wp");
             user.addScoreWP(sc.scoreRankingWP(), nil);
             user.setMoedas(sc.scoreMoedasWP());
-            System.out.println(sc.scoreRankingWP());
+            sc.gravar();sc.leitura();sc.gravar();
             Conta c = new Conta(user);
             c.gravar();
             JOptionPane.showMessageDialog(null, "You Win: M-"+lbminutos.getText()+" S-"+lbsegundos.getText());

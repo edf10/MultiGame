@@ -20,6 +20,10 @@ public abstract class Score {
     protected ArrayList<String> usersMedium = new ArrayList<>();
     protected ArrayList<String> usersHard = new ArrayList<>();
     protected int nivel;
+    private String arq;
+    public void setArq(String arq) {
+        this.arq = arq;
+    }
     public int getNivel() {
         return nivel;
     }
@@ -75,7 +79,7 @@ public abstract class Score {
         }
     }
     
-    public void leitura(String arq){
+    public void leitura(){
         JSONObject objectArquivo;
         JSONParser parser = new JSONParser();
         try{
@@ -90,7 +94,7 @@ public abstract class Score {
         }catch(FileNotFoundException e){}catch(IOException e){} catch (ParseException ex) {}
     }
     
-    public void gravar(String arq){
+    public void gravar(){
         JSONObject objectArquivo = new JSONObject();
         objectArquivo.put("ranking_easy", rankingEasy);
         objectArquivo.put("ranking_medium", rankingMedium);

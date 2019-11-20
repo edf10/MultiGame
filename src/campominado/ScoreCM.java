@@ -4,12 +4,12 @@ public class ScoreCM extends Score{
     private int minasNivel;
     private int posOpen; //campos diferentes de minas que estejam abertos
     private int tempoSegundos;
-    public ScoreCM(){leitura("cm");}
+    public ScoreCM(){setArq("cm");leitura();}
     public ScoreCM(int posOpen, int tempoSegundos, int minasNivel){
         this.posOpen = posOpen;
         this.tempoSegundos = tempoSegundos;
         this.minasNivel = minasNivel;
-        leitura("cm");
+        setArq("cm");leitura();
     }
     public int scoreRankingCM(){
         int score = 30*posOpen+30*minasNivel-40*tempoSegundos;

@@ -12,6 +12,8 @@ public class RecordesCM extends Recordes{
                                    {im.addImagem("back_ranking_cm")}};
 
     public RecordesCM(){
+        super();
+        it.setTelaAntIntro(1);
         setIms(ims);
     }
     public void initial(){
