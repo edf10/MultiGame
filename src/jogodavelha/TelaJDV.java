@@ -173,7 +173,7 @@ public class TelaJDV extends Frame{
         private final Enter e = new Enter();
         public void tela(){
             Fonts fs = new Fonts();
-            Font f = fs.addNewFont("airstrip", 50); Font q = fs.addNewFont("airstrip", 70); Font r = fs.addNewFont("airstrip", 55);
+            Font f = fs.addNewFont("airstrip", 50); Font q = fs.addNewFont("airstrip", 60); Font r = fs.addNewFont("airstrip", 55);
             Border b = BorderFactory.createLineBorder(Color.black, 3);
             int lbSegundosPos[] = {225,35,66,45}; int backPos[] = {0,0,500,300};
             int questPos[] = {55,140,300,100}; int resPos[] = {345,157,100,65};
