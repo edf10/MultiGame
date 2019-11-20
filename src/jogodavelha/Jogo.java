@@ -1,5 +1,7 @@
 package jogodavelha;
+import componentes.Frame;
 import java.util.Random;
+import padroes.WinOrGameOver;
 import user.Conta;
 import user.User;
 public class Jogo {
@@ -29,8 +31,10 @@ public class Jogo {
     public void addPress(int x, int y, int ic){
         m[x][y] = ic;
     }
-    public void ganhar(User user1, User user2, String assunto){
+    private WinOrGameOver w; 
+    public void ganhar(User user1, User user2, String assunto, Frame tela){
         Conta c1 = new Conta(user1); Conta c2 = new Conta(user2); 
+        w = new WinOrGameOver(tela);
         int m2[][][] = {{{0,0},{1,0},{2,0}},{{0,0},{0,1},{0,2}},{{0,0},{1,1},{2,2}},{{0,1},{1,1},{2,1}},
                         {{1,0},{1,1},{1,2}},{{0,2},{1,1},{2,0}},{{0,2},{1,2},{2,2}},{{2,0},{2,1},{2,2}}};
         for(int i = 0; i<8; i++){
@@ -38,11 +42,14 @@ public class Jogo {
                 user1.addPartidaJDV("Win", user2.getUsername(), assunto); user2.addPartidaJDV("GameOver", user1.getUsername(), assunto);
                 user1.setMoedas(400); user2.setMoedas(100);
                 c1.gravar(); c2.gravar();
+                w.addWin(6);
+                w.show();
             }
             if(m[m2[i][0][0]][m2[i][0][1]]==2&&m[m2[i][1][0]][m2[i][1][1]]==2&&m[m2[i][2][0]][m2[i][2][1]]==2){
                 user2.addPartidaJDV("Win", user1.getUsername(), assunto); user1.addPartidaJDV("GameOver", user2.getUsername(), assunto);
                 user2.setMoedas(400); user1.setMoedas(100);
                 c1.gravar(); c2.gravar();
+                w.addGameOver(6); w.show();
             }
         }
         velha(user1,user2,assunto);
@@ -63,6 +70,8 @@ public class Jogo {
             Conta c1 = new Conta(user1); Conta c2 = new Conta(user2); 
             user1.setMoedas(200); user2.setMoedas(200);
             c1.gravar(); c2.gravar();
+            w.addEmpateJDV();
+            w.show();
         }
     }
     

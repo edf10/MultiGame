@@ -51,8 +51,8 @@ public class TelaWP extends Frame{
         }
         for(int i = 0; i<x ; i++){
             for(int j = 0; j<y ; j++){
-                if(!"0".equals(wordsLetras[i][j])){letras[i][j] = new Letra(p.getM(i, j),i,j,true);
-                }else{letras[i][j] = new Letra(p.getM(i, j),i,j,false);}
+                if(!"0".equals(wordsLetras[i][j])){letras[i][j] = new Letra(p.getM(i, j),i,j);
+                }else{letras[i][j] = new Letra(p.getM(i, j),i,j);}
                 pnWords.add(letras[i][j]);
             }
         }
@@ -121,7 +121,7 @@ public class TelaWP extends Frame{
         int cont = 0;
         for(int i = 0; i<x; i++){
             for(int j = 0; j<y; j++){
-                if(letras[i][j].isWordLetter()==true){cont++;}
+                if(letras[i][j].isPermanente()==true){cont++;}
             }
         }
         if(cont==quantCaracWords){
@@ -135,12 +135,13 @@ public class TelaWP extends Frame{
             sc.gravar();sc.leitura();sc.gravar();
             Conta c = new Conta(user);
             c.gravar();
-            WinOrGameOver w = new WinOrGameOver(this); w.setNivel(x); w.addWinCMWP(4); w.show();
+            WinOrGameOver w = new WinOrGameOver(this); w.setNivel(x); w.addWin(4); w.show();
         }
     }
     
     private ArrayList<Boolean> wordsEnc = new ArrayList<Boolean>();
     public void wordsEncontradas(){
+        boolean enc = false;
         wordsEnc.clear();
         int cont = 0;
         ArrayList<Palavra> palavras = p.getPalavras();
@@ -149,7 +150,13 @@ public class TelaWP extends Frame{
             for(int j = 0; j<pos.size(); j++){//posições de cada palavras (suas letras)
                 for(int k = 0; k<letras.length; k++){//Matriz letras
                     for(int h = 0; h<letras[k].length; h++){//Matriz letras
+                        if(letras[pos.get(0)[0]][pos.get(0)[1]].isAcionado()&&letras[pos.get(pos.size()-1)[0]][pos.get(pos.size()-1)[1]].isAcionado()){
+                            enc = true;
+                        }
                         if(pos.get(j)[0]==k&&pos.get(j)[1]==h){
+                            if(enc==true){
+                                letras[k][h].acionar();
+                            }
                             if(letras[k][h].isAcionado()){
                                 cont++;
                             }
@@ -168,25 +175,21 @@ public class TelaWP extends Frame{
                     }
                 }
             }else{wordsEnc.add(false);}
-            cont = 0;
+            cont = 0; enc = false;
         }
     }
     
     public class Letra extends Btn{
         private int x, y;
-        private boolean caracterWord;
         private int troca = 1;
         private boolean acionado;
-        private boolean conf;
-        private boolean wordLetter;
         private boolean permanente; //se for uma palavra não sai a marcação.
         private String l;
-        public Letra(String l, int x, int y, boolean conf){
+        public Letra(String l, int x, int y){
             super();
             this.l = l;
             setText(this.l);
             this.x = x; this.y = y;
-            this.conf = conf;
             setBackground(Color.black);
             setForeground(Color.white);
             setFont(new Font("Arial", Font.PLAIN, 18));
@@ -196,18 +199,22 @@ public class TelaWP extends Frame{
         public boolean isAcionado() {
             return acionado;
         }
+        public boolean isPermanente() {
+            return permanente;
+        }
         public void setPermanente(boolean permanente) {
             this.permanente = permanente;
         }
-        public boolean isWordLetter() {
-            return wordLetter;
+        public void acionar(){
+            setBackground(Color.blue);
+            acionado = true;
+            permanente = true;
         }
         public class Evento implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent ae) {
-                if(troca==1){setBackground(Color.blue); troca = 2; caracterWord = true;}else if(permanente==false){setBackground(Color.black); troca = 1; caracterWord = false;}
+                if(troca==1){setBackground(Color.blue); troca = 2;}else if(permanente==false){setBackground(Color.black); troca = 1;}
                 acionado = true;
-                wordLetter = (conf==true);
                 wordsEncontradas();
                 ganhar();
             }
