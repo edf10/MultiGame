@@ -1,7 +1,6 @@
 package padroes;
 
 import campominado.IntroductionCM;
-import campominado.RecordesCM;
 import componentes.Btn;
 import componentes.Frame;
 import imagens.Im;

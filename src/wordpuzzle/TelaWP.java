@@ -34,7 +34,7 @@ public class TelaWP extends Frame{
     private Letra[][] letras;
     private String wordsLetras[][];
     private Contador cont = new Contador();
-    private User user = new User();
+    private User user = User.getUser();
     public void setUser(User user) {this.user = user;}
     public void CP(){
         GridLayout campo = new GridLayout(x,y);
@@ -174,6 +174,7 @@ public class TelaWP extends Frame{
                         }
                     }
                 }
+                
             }else{wordsEnc.add(false);}
             cont = 0; enc = false;
         }

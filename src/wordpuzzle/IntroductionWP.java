@@ -11,9 +11,10 @@ import javax.swing.ImageIcon;
 import padroes.ItemsTela;
 import user.User;
 public class IntroductionWP extends Frame{
-    private ItemsTela it = new ItemsTela();
+    private final ItemsTela it = new ItemsTela();
     private Btn menu[];
-    private User user = User.getUser();
+    private final User user = User.getUser();
+    private boolean custom = false;
     private Pn pnTutorial;
     public void tutorial() {
         pnTutorial = new Pn(); pnTutorial.setLayout(null);pnTutorial.setBounds(0, 0, 1200, 700);
@@ -55,14 +56,14 @@ public class IntroductionWP extends Frame{
     }
     
     public class EventBtnsIntro implements ActionListener{
-        private int esc;
+        private final int esc;
         public EventBtnsIntro(int esc){this.esc = esc;}
         @Override
         public void actionPerformed(ActionEvent ae) {
             pnIntro.setVisible(false);
             switch(esc){
                 case 1: niveis();break;
-                case 2: break;
+                case 2: custom = true; niveis();break;
                 case 3: ranking();break;
                 default: tutorial();break;
             }
@@ -92,12 +93,12 @@ public class IntroductionWP extends Frame{
     }
     
     public class EventBtnsNiveis implements ActionListener{
-        private int nivel;
+        private final int nivel;
         public EventBtnsNiveis(int n){nivel = n;}
         @Override
         public void actionPerformed(ActionEvent ae) {
             dispose();
-            TelaWP tcp = new TelaWP(); tcp.setUser(user);tcp.setNivel(nivel); tcp.configuracoes(); tcp.show();
+            TelaWP tcp = new TelaWP(); tcp.setNivel(nivel); tcp.configuracoes(); tcp.show();
         }
     }
 }
