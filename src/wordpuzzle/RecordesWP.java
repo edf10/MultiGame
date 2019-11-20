@@ -18,6 +18,13 @@ public class RecordesWP extends Recordes{
         it.setTelaAntIntro(3);
         setIms(ims);
     }
+    public RecordesWP(int nivel){
+        super(nivel);
+        s = new ScoreWP();
+        decVars();
+        it.setTelaAntIntro(3);
+        setIms(ims);
+    }
     
     public void initial(){
         escRankingNivel(); show();

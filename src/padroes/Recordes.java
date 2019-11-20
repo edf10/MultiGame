@@ -22,12 +22,10 @@ public abstract class Recordes extends Frame{
     private Pn pnUsers;
     public ItemsTela it = new ItemsTela();
     protected Score s;
-    private int nivel;
-    public void setNivel(int nivel) {
+    protected int nivel;
+    public Recordes(){}
+    public Recordes(int nivel){
         this.nivel = nivel;
-    }
-    public Recordes(){
-        setLayout(null);
     }
     public void decVars(){
         switch(nivel){

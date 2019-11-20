@@ -18,6 +18,13 @@ public class RecordesCM extends Recordes{
         it.setTelaAntIntro(1);
         setIms(ims);
     }
+    public RecordesCM(int nivel){
+        super(nivel);
+        s = new ScoreCM();
+        decVars();
+        it.setTelaAntIntro(1);
+        setIms(ims);
+    }
     public void initial(){
         escRankingNivel(); show();
     }
