@@ -11,9 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import padroes.Fonts;
 import padroes.ItemsTela;
+import padroes.WinOrGameOver;
 import user.Conta;
 import user.User;
 public class TelaWP extends Frame{
@@ -124,7 +124,6 @@ public class TelaWP extends Frame{
                 if(letras[i][j].isWordLetter()==true){cont++;}
             }
         }
-        System.out.println(cont);
         if(cont==quantCaracWords){
             this.cont.stop();
             int tempo = Integer.parseInt(lbminutos.getText())*60+Integer.parseInt(lbsegundos.getText());int wordQuant = 0;
@@ -136,7 +135,7 @@ public class TelaWP extends Frame{
             sc.gravar();sc.leitura();sc.gravar();
             Conta c = new Conta(user);
             c.gravar();
-            JOptionPane.showMessageDialog(null, "You Win: M-"+lbminutos.getText()+" S-"+lbsegundos.getText());
+            WinOrGameOver w = new WinOrGameOver(this); w.setNivel(x); w.addWinCMWP(4); w.show();
         }
     }
     

@@ -150,7 +150,7 @@ public class TelaCM extends Frame{
             }
         }
         ct.stop();//Para o cronômetro.
-        WinOrGameOver go = new WinOrGameOver(this); go.setNivel(x); go.addGameOverCM(); go.show();
+        WinOrGameOver go = new WinOrGameOver(this); go.setNivel(x); go.addGameOverCM();go.show();
     }
     public void Ganhar(){
         int abertos = 0;
@@ -182,9 +182,7 @@ public class TelaCM extends Frame{
             sc.gravar();sc.leitura();sc.gravar();//Grava, sequencia com o método leitura e grava de novo.
             Conta c = new Conta(user);
             c.gravar();
-            dispose();
-            RecordesCM rec = new RecordesCM();
-            rec.setNivel(x); rec.decVars(); rec.tabela(); rec.show();
+            WinOrGameOver w = new WinOrGameOver(this); w.setNivel(x); w.addWinCMWP(2);w.show();
         }
         abertos = 0;
     }
