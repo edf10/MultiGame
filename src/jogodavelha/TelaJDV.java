@@ -118,7 +118,7 @@ public class TelaJDV extends Frame{
                 System.out.println(vez);
                 press = true;
                 j.addPress(x, y, vez);
-                j.ganhar(user1,user2,ass);
+                j.ganhar(user1,user2,ass,TelaJDV.this);
             }
         }
         private boolean press = false;

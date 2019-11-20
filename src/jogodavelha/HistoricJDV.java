@@ -25,10 +25,18 @@ public class HistoricJDV extends Frame{
     public HistoricJDV(){it.setTelaAntIntro(2);lerHistoric();tabela();show();}
     
     public void lerHistoric(){
-        for(int i = 0; i<user.getHistoricJDV().size(); i++){
-            resultados.add(user.getHistoricJDV().get(i).get(0));
-            users.add(user.getHistoricJDV().get(i).get(1));
-            assuntos.add(user.getHistoricJDV().get(i).get(2));
+        if(user.getHistoricJDV().size()>10){
+           for(int i = user.getHistoricJDV().size()-1; i>user.getHistoricJDV().size()-11; i--){
+                resultados.add(user.getHistoricJDV().get(i).get(0));
+                users.add(user.getHistoricJDV().get(i).get(1));
+                assuntos.add(user.getHistoricJDV().get(i).get(2));
+            } 
+        }else{
+            for(int i = 0; i>user.getHistoricJDV().size(); i++){
+                resultados.add(user.getHistoricJDV().get(i).get(0));
+                users.add(user.getHistoricJDV().get(i).get(1));
+                assuntos.add(user.getHistoricJDV().get(i).get(2));
+            }
         }
     }
     

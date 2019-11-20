@@ -135,7 +135,7 @@ public class TelaWP extends Frame{
             sc.gravar();sc.leitura();sc.gravar();
             Conta c = new Conta(user);
             c.gravar();
-            WinOrGameOver w = new WinOrGameOver(this); w.setNivel(x); w.addWinCMWP(4); w.show();
+            WinOrGameOver w = new WinOrGameOver(this); w.setNivel(x); w.addWin(4); w.show();
         }
     }
     
