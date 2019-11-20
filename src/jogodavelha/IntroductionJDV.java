@@ -26,7 +26,13 @@ public class IntroductionJDV extends Frame{
     private User user1 = User.getUser();//user logado na conta do projeto
     private User user2;//user que vai jogar contra pra salvar os dados em ambas as contas
     
+    private Pn pnTutorial;
     public void tutorial() {
+        pnTutorial = new Pn(); pnTutorial.setBounds(0, 0, 1200, 700);
+        int backPos[] = {0,0,1200,700}; it.setTelaAntIntro(2);
+        add(it.btnClose()); add(it.returnGames());
+        pnTutorial.add(new Lb(im.addImagem("tutorial_jdv"),backPos));
+        add(pnTutorial);
     }
 
     private Pn pnIntro;

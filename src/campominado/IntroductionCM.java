@@ -35,7 +35,13 @@ public class IntroductionCM extends Frame{
         pnNiveis = new Pn(pnNiveisPos, cp);
         add(pnNiveis);
     }
+    private Pn pnTutorial;
     public void tutorial(){
+        pnTutorial = new Pn(); pnTutorial.setBounds(0, 0, 1200, 700);
+        int backPos[] = {0,0,1200,700}; it.setTelaAntIntro(1);
+        add(it.btnClose()); add(it.returnGames());
+        pnTutorial.add(new Lb(im.addImagem("tutorial_cm"),backPos));
+        add(pnTutorial);
     }
     
     private Pn pnIntro;
