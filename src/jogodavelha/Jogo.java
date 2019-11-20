@@ -5,7 +5,7 @@ import user.User;
 public class Jogo {
     
     private int m[][];
-    private final Random sortear = new Random();
+    public final Random sortear = new Random();
     private int x;
     private int y;
     private boolean velha;
@@ -30,7 +30,6 @@ public class Jogo {
         m[x][y] = ic;
     }
     public void ganhar(User user1, User user2, String assunto){
-        System.out.println("oi");
         Conta c1 = new Conta(user1); Conta c2 = new Conta(user2); 
         int m2[][][] = {{{0,0},{1,0},{2,0}},{{0,0},{0,1},{0,2}},{{0,0},{1,1},{2,2}},{{0,1},{1,1},{2,1}},
                         {{1,0},{1,1},{1,2}},{{0,2},{1,1},{2,0}},{{0,2},{1,2},{2,2}},{{2,0},{2,1},{2,2}}};

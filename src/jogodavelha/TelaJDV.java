@@ -24,6 +24,8 @@ public class TelaJDV extends Frame{
         x = j.getX();
         y = j.getY();
         vez = j.sortVez();
+        icUser1 = j.sortear.nextBoolean();
+        icUser2 = !(icUser1);
         JDV();
     }
     private int x;
@@ -32,6 +34,8 @@ public class TelaJDV extends Frame{
     private String jog1;
     private String jog2;
     private Button vet[][];
+    private boolean icUser1;
+    private boolean icUser2;
     private final Jogo j = new Jogo();
     private ItemsTela it = new ItemsTela();
 
@@ -99,10 +103,19 @@ public class TelaJDV extends Frame{
         public void altBtn(){
             if(!press&&!answer){
                 if(vez==1){
-                    setIcon(im.addImagem("icone_x_jdv"));
+                    if(icUser1){
+                        setIcon(im.addImagem("icone_x_jdv"));
+                    }else{
+                        setIcon(im.addImagem("icone_o_jdv"));
+                    }
                 }else if(vez==2){
-                    setIcon(im.addImagem("icone_o_jdv"));
+                    if(icUser2==false){
+                        setIcon(im.addImagem("icone_o_jdv"));
+                    }else{
+                        setIcon(im.addImagem("icone_x_jdv"));
+                    }
                 }
+                System.out.println(vez);
                 press = true;
                 j.addPress(x, y, vez);
                 j.ganhar(user1,user2,ass);
