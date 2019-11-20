@@ -14,7 +14,13 @@ public class IntroductionWP extends Frame{
     private ItemsTela it = new ItemsTela();
     private Btn menu[];
     private User user = User.getUser();
+    private Pn pnTutorial;
     public void tutorial() {
+        pnTutorial = new Pn(); pnTutorial.setLayout(null);pnTutorial.setBounds(0, 0, 1200, 700);
+        int backPos[] = {0,0,1200,700}; it.setTelaAntIntro(2);
+        add(it.btnClose()); add(it.returnGames());
+        pnTutorial.add(new Lb(im.addImagem("tutorial_wp"),backPos));
+        add(pnTutorial);
     }
     public void ranking(){
         dispose();
@@ -36,9 +42,9 @@ public class IntroductionWP extends Frame{
             it.btnSomOutro(),
             menu[0],menu[1],menu[2],menu[3],menu[4],
             new Btn(btn_classic, classicPos, new EventBtnsIntro(1)),
-            new Btn(btn_custom, customPos, null),
-            new Btn(btn_rank, rankPos, new EventBtnsIntro(2)),
-            new Btn(btn_tuto, tutoPos, null),
+            new Btn(btn_custom, customPos, new EventBtnsIntro(2)),
+            new Btn(btn_rank, rankPos, new EventBtnsIntro(3)),
+            new Btn(btn_tuto, tutoPos, new EventBtnsIntro(4)),
             new Lb(im.addImagem("back_intro_wp"), backPos)
         };
         
@@ -56,9 +62,9 @@ public class IntroductionWP extends Frame{
             pnIntro.setVisible(false);
             switch(esc){
                 case 1: niveis();break;
-                case 2: ranking();break;
-                case 3: break;
-                default: break;
+                case 2: break;
+                case 3: ranking();break;
+                default: tutorial();break;
             }
         }
     }

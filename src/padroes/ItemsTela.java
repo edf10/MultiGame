@@ -162,7 +162,7 @@ public class ItemsTela {
         }
     }
     public Btn returnGames(){
-        int returnPos[] = {21,45,125,30};
+        int returnPos[] = {21,20,125,30};
         return new Btn(btn_return, returnPos, new EventBtnReturn());
     }
     public Btn returnGames(Frame telaAtual){
