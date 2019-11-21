@@ -4,14 +4,13 @@ import padroes.Score;
 public class ScoreWP extends Score{
     private int tempoSegundos;
     private int words;
-    
-    public ScoreWP(){setArq("wp");leitura();}
+    public ScoreWP(){setArq("wp");}
     public ScoreWP(int tempoSegundos, int words){
         this.tempoSegundos = tempoSegundos;
         this.words = words;setArq("wp");leitura();
     }
     
-    public int scoreRankingWP(){
+    public void scoreRankingWP(){
         int score = 110*words-4*tempoSegundos;
         if(score>0){
             switch (nivel) {
@@ -19,9 +18,6 @@ public class ScoreWP extends Score{
                 case 16:rankingMedium.add(""+score);usersMedium.add(user.getUsername());break;
                 default:rankingHard.add(""+score);usersHard.add(user.getUsername());break;
             }
-            return score;
-        }else{
-            return 0;
         }
     }
     public int scoreMoedasWP(){

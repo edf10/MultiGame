@@ -37,7 +37,7 @@ public class IntroductionCM extends Frame{
     }
     private Pn pnTutorial;
     public void tutorial(){
-        pnTutorial = new Pn(); pnTutorial.setBounds(0, 0, 1200, 700);
+        pnTutorial = new Pn(); pnTutorial.setLayout(null);pnTutorial.setBounds(0, 0, 1200, 700);
         int backPos[] = {0,0,1200,700}; it.setTelaAntIntro(1);
         add(it.btnClose()); add(it.returnGames());
         pnTutorial.add(new Lb(im.addImagem("tutorial_cm"),backPos));
@@ -80,7 +80,7 @@ public class IntroductionCM extends Frame{
             }
             dispose();
             TelaCM tcm = new TelaCM(); 
-            tcm.setR(new Campo(x,y)); tcm.setUser(user);
+            tcm.setR(new Campo(x,y)); 
             tcm.configuracoes();
             tcm.show(); 
         }

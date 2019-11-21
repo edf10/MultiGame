@@ -102,7 +102,7 @@ public class Palavras {
     }
     public void arqGet(){ //Pegar palavras do arquivo txt.
         try{
-            FileInputStream f = new FileInputStream("questions/caçapalavras/words.txt");
+            FileInputStream f = new FileInputStream("questions/wordpuzzle/words.txt");
             InputStreamReader i = new InputStreamReader(f);
             BufferedReader b = new BufferedReader(i);
             String linha;
