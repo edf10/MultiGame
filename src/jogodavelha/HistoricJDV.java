@@ -13,31 +13,15 @@ import user.User;
 
 public class HistoricJDV extends Frame{
     //As 10 últimas partidas realizadas pelo usuário.
-    private ArrayList<String> users = new ArrayList<>();
-    private ArrayList<String> assuntos = new ArrayList<>();
-    private ArrayList<String> resultados = new ArrayList<>();
     private Pn pnUsers;
     private Pn pnAss;
     private Pn pnRes;
     private ItemsTela it = new ItemsTela();
     private User user = User.getUser();
     
-    public HistoricJDV(){it.setTelaAntIntro(2);lerHistoric();tabela();show();}
-    
-    public void lerHistoric(){
-        if(user.getHistoricJDV().size()>10){
-           for(int i = user.getHistoricJDV().size()-1; i>user.getHistoricJDV().size()-11; i--){
-                resultados.add(user.getHistoricJDV().get(i).get(0));
-                users.add(user.getHistoricJDV().get(i).get(1));
-                assuntos.add(user.getHistoricJDV().get(i).get(2));
-            } 
-        }else{
-            for(int i = 0; i>user.getHistoricJDV().size(); i++){
-                resultados.add(user.getHistoricJDV().get(i).get(0));
-                users.add(user.getHistoricJDV().get(i).get(1));
-                assuntos.add(user.getHistoricJDV().get(i).get(2));
-            }
-        }
+    public HistoricJDV(){
+        it.setTelaAntIntro(2);
+        tabela();show();
     }
     
     public void tabela(){
@@ -53,17 +37,24 @@ public class HistoricJDV extends Frame{
         pnRes.setBackground(new Color(59,57,57));
         
         Fonts fs = new Fonts(); Font f = fs.addNewFont("DS-DIGIT", 30);
-        for(int i = 0; i<users.size(); i++){
-            pnUsers.add(new Lb(users.get(i),f,Color.white));
-            pnAss.add(new Lb(assuntos.get(i),f,Color.white));
-            pnRes.add(new Lb(resultados.get(i),f,Color.white));
+        if(user.getHistoricJDV().size()>10){
+            for(int i = user.getHistoricJDV().size()-1; i>user.getHistoricJDV().size()-11; i--){
+                pnUsers.add(new Lb(user.getHistoricJDV().get(i).get(0),f,Color.white));
+                pnAss.add(new Lb(user.getHistoricJDV().get(i).get(2),f,Color.white));
+                pnRes.add(new Lb(user.getHistoricJDV().get(i).get(1),f,Color.white));
+            } 
+        }else{
+            for(int i = user.getHistoricJDV().size()-1; i>=0; i--){
+                pnUsers.add(new Lb(user.getHistoricJDV().get(i).get(0),f,Color.white));
+                pnAss.add(new Lb(user.getHistoricJDV().get(i).get(2),f,Color.white));
+                pnRes.add(new Lb(user.getHistoricJDV().get(i).get(1),f,Color.white));
+            }
         }
-        for(int i = users.size(); i<10; i++){
+        for(int i = user.getHistoricJDV().size(); i<10; i++){
             pnUsers.add(new Lb("-",f,Color.white));
             pnAss.add(new Lb("-",f,Color.white));
             pnRes.add(new Lb("-",f,Color.white));
         }
-        
         add(it.btnClose()); add(it.returnGames(this)); int backPos[] = {0,0,1200,700}; int barrasPos[] = {94,247,1009,360};
         add(new Lb(im.addImagem("barras_ranking_cm"), barrasPos));
         add(pnUsers);add(pnAss);add(pnRes);
