@@ -13,14 +13,14 @@ public class RecordesWP extends Recordes{
     
     public RecordesWP(){
         super();
-        s = new ScoreWP();
+        s = new ScoreWP(); s.leitura();
         decVars();
         it.setTelaAntIntro(3);
         setIms(ims);
     }
     public RecordesWP(int nivel){
         super(nivel);
-        s = new ScoreWP();
+        s = new ScoreWP(); s.leitura();
         decVars();
         it.setTelaAntIntro(3);
         setIms(ims);

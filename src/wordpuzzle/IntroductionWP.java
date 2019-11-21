@@ -27,7 +27,7 @@ public class IntroductionWP extends Frame{
     private Pn pnIntro;
     public void intro() {
         int backPos[] = {0,0,1200,700}; int titlePos[] = {252,73,700,107};
-        int classicPos[] = {478,249,227,52}; int rankPos[] = {484,342,231,58}; int tutoPos[] = {475,440,262,58};
+        int classicPos[] = {478,254,227,52}; int rankPos[] = {484,347,231,58}; int tutoPos[] = {475,445,262,58};
         ImageIcon btn_classic[] = {im.addImagem("btn_classic_wp"),im.addImagem("btn_classic_wp_t"),im.addImagem("btn_classic_wp_p")};
         ImageIcon btn_rank[] = {im.addImagem("btn_ranking_wp"),im.addImagem("btn_ranking_wp_t"),im.addImagem("btn_ranking_wp_p")};
         ImageIcon btn_tuto[] = {im.addImagem("btn_tutorial_wp"),im.addImagem("btn_tutorial_wp_t"),im.addImagem("btn_tutorial_wp_p")};

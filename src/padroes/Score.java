@@ -50,14 +50,14 @@ public abstract class Score {
     }
     
     public void sequenciar(ArrayList<String> ranking, ArrayList<String> users){
-        String[] usersAux = new String[users.size()];
-        int[] scoresAux = new int[ranking.size()];
+        String usersAux[] = new String[users.size()];
+        int scoresAux[] = new int[ranking.size()];
         ArrayList<Integer> rankingAux = new ArrayList<>();
         for(int i = 0; i<users.size(); i++){
             usersAux[i] = users.get(i);
             scoresAux[i] = Integer.parseInt(ranking.get(i));
             rankingAux.add(Integer.parseInt(ranking.get(i)));
-}
+        }
         Collections.sort(rankingAux);
         Collections.reverse(rankingAux);
         for(int i = 0; i<ranking.size(); i++){
@@ -107,6 +107,17 @@ public abstract class Score {
             arquivo.write(objectArquivo.toJSONString());
             arquivo.close();
         }catch(FileNotFoundException e){}catch(IOException e){}
+    }
+    
+    public void limpar(){
+        JSONObject objectArquivo = new JSONObject();
+        objectArquivo.clear();
+        try{
+            FileWriter arquivo = new FileWriter("rankings/"+arq+".json");
+            arquivo.write(objectArquivo.toJSONString());
+            arquivo.close();
+        }catch(FileNotFoundException e){}catch(IOException e){}
+        gravar();
     }
     
 }

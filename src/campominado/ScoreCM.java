@@ -4,14 +4,14 @@ public class ScoreCM extends Score{
     private int minasNivel;
     private int posOpen; //campos diferentes de minas que estejam abertos
     private int tempoSegundos;
-    public ScoreCM(){setArq("cm");leitura();}
+    public ScoreCM(){setArq("cm");}
     public ScoreCM(int posOpen, int tempoSegundos, int minasNivel){
         this.posOpen = posOpen;
         this.tempoSegundos = tempoSegundos;
         this.minasNivel = minasNivel;
         setArq("cm");leitura();
     }
-    public int scoreRankingCM(){
+    public void scoreRankingCM(){
         int score = 30*posOpen+30*minasNivel-40*tempoSegundos;
         if(score>0){
             switch (nivel) {
@@ -19,9 +19,6 @@ public class ScoreCM extends Score{
                 case 16:rankingMedium.add(""+score);usersMedium.add(user.getUsername());break;
                 default:rankingHard.add(""+score);usersHard.add(user.getUsername());break;
             }
-            return score;
-        }else{
-            return 0;
         }
     }
     public int scoreMoedaCM(){

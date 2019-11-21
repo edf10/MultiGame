@@ -127,12 +127,11 @@ public class TelaWP extends Frame{
         if(cont==quantCaracWords){
             this.cont.stop();
             int tempo = Integer.parseInt(lbminutos.getText())*60+Integer.parseInt(lbsegundos.getText());int wordQuant = 0;
-            String nil = "";if(nivel==1){nil = "EASY"; wordQuant = 12;}else if(nivel==2){nil = "MEDIUM"; wordQuant = 14;}else{nil = "HARD"; wordQuant = 16;}
+            if(nivel==1){wordQuant = 12;}else if(nivel==2){wordQuant = 14;}else{wordQuant = 16;}
             ScoreWP sc = new ScoreWP(tempo, wordQuant);
-            sc.setNivel(x);sc.setArq("wp");
-            user.addScoreWP(sc.scoreRankingWP(), nil);
+            sc.leitura(); sc.setNivel(x);sc.scoreRankingWP();
             user.setMoedas(sc.scoreMoedasWP());
-            sc.gravar();sc.leitura();sc.gravar();
+            sc.gravar();
             Conta c = new Conta(user);
             c.gravar();
             if(win==true){win = false; WinOrGameOver w = new WinOrGameOver(this); w.setNivel(x); w.addWin(4); w.show();}

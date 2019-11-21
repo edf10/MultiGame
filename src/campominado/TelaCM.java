@@ -175,10 +175,9 @@ public class TelaCM extends Frame{
             ct.stop();//Para o cronômetro
             if(x==14){nivel = "EASY";}else if(x==16){nivel = "MEDIUM";}else{nivel = "HARD";}
             sc = new ScoreCM(scoreFat[0],scoreFat[1],scoreFat[2]); 
-            sc.setNivel(x);sc.setArq("cm");
-            user.addScoreCM(sc.scoreRankingCM(), nivel);
+            sc.setNivel(x);sc.scoreRankingCM();
             user.setMoedas(sc.scoreMoedaCM());
-            sc.gravar();sc.leitura();sc.gravar();//Grava, sequencia com o método leitura e grava de novo.
+            sc.gravar();//Grava, sequencia com o método leitura e grava de novo.
             Conta c = new Conta(user);
             c.gravar();
             WinOrGameOver w = new WinOrGameOver(this); w.setNivel(x); w.addWin(2);w.show();

@@ -13,14 +13,14 @@ public class RecordesCM extends Recordes{
 
     public RecordesCM(){
         super();
-        s = new ScoreCM();
+        s = new ScoreCM(); s.leitura();
         decVars();
         it.setTelaAntIntro(1);
         setIms(ims);
     }
     public RecordesCM(int nivel){
         super(nivel);
-        s = new ScoreCM();
+        s = new ScoreCM(); s.leitura();
         decVars();
         it.setTelaAntIntro(1);
         setIms(ims);
