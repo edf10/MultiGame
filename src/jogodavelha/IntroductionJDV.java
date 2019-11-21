@@ -169,7 +169,7 @@ public class IntroductionJDV extends Frame{
             switch (n) {
                 case 1:pnIntro.setVisible(true);new TelaOutroUser();break;
                 case 2:tutorial();break;
-                case 3:dispose();new HistoricJDV();break;
+                case 3:dispose();HistoricJDV h = new HistoricJDV();break;
                 default:break;
             }
         }

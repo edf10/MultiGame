@@ -54,9 +54,9 @@ public class MultiGameTela extends Frame{
     private Pn pnJogos; 
     public void Jogos() { 
         int backPos[] = {0,0,1200,700}; int titlePos[] = {381,75,453,134};
-        int capaCMPos[] = {100,303,222,247}; int capaJDVPos[] = {343,303,222,247};
-        int capaCPPos[] = {605,303,222,247}; int btnCMPos[] = {132,375,167,156};
-        int btnJDVPos[] = {376,375,167,156}; int btnCPPos[] = {636,375,167,156};
+        int capaCMPos[] = {219,303,222,247}; int capaJDVPos[] = {472,303,222,247};
+        int capaCPPos[] = {724,303,222,247}; int btnCMPos[] = {251,375,167,156};
+        int btnJDVPos[] = {504,375,167,156}; int btnCPPos[] = {756,375,167,156};
         ImageIcon btn_cm[] = {im.addImagem("btn_cm"),im.addImagem("btn_cm_t"),im.addImagem("btn_cm_p")};
         ImageIcon btn_jdv[] = {im.addImagem("btn_jdv"),im.addImagem("btn_jdv_t"),im.addImagem("btn_jdv_p")};
         ImageIcon btn_wp[] = {im.addImagem("btn_wp"),im.addImagem("btn_wp_t"),im.addImagem("btn_wp_p")}; 
