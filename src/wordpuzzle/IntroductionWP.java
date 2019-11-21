@@ -9,16 +9,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import padroes.ItemsTela;
-import user.User;
 public class IntroductionWP extends Frame{
     private final ItemsTela it = new ItemsTela();
     private Btn menu[];
-    private final User user = User.getUser();
-    private boolean custom = false;
     private Pn pnTutorial;
     public void tutorial() {
         pnTutorial = new Pn(); pnTutorial.setLayout(null);pnTutorial.setBounds(0, 0, 1200, 700);
-        int backPos[] = {0,0,1200,700}; it.setTelaAntIntro(2);
+        int backPos[] = {0,0,1200,700}; it.setTelaAntIntro(3);
         add(it.btnClose()); add(it.returnGames());
         pnTutorial.add(new Lb(im.addImagem("tutorial_wp"),backPos));
         add(pnTutorial);
@@ -30,10 +27,8 @@ public class IntroductionWP extends Frame{
     private Pn pnIntro;
     public void intro() {
         int backPos[] = {0,0,1200,700}; int titlePos[] = {252,73,700,107};
-        int classicPos[] = {478,249,227,52}; int customPos[] = {477,342,231,59};
-        int rankPos[] = {484,440,231,58}; int tutoPos[] = {475,530,262,58};
+        int classicPos[] = {478,249,227,52}; int rankPos[] = {484,342,231,58}; int tutoPos[] = {475,440,262,58};
         ImageIcon btn_classic[] = {im.addImagem("btn_classic_wp"),im.addImagem("btn_classic_wp_t"),im.addImagem("btn_classic_wp_p")};
-        ImageIcon btn_custom[] = {im.addImagem("btn_custom_wp"),im.addImagem("btn_custom_wp_t"),im.addImagem("btn_custom_wp_p")};
         ImageIcon btn_rank[] = {im.addImagem("btn_ranking_wp"),im.addImagem("btn_ranking_wp_t"),im.addImagem("btn_ranking_wp_p")};
         ImageIcon btn_tuto[] = {im.addImagem("btn_tutorial_wp"),im.addImagem("btn_tutorial_wp_t"),im.addImagem("btn_tutorial_wp_p")};
         menu = it.menuOpGamesIntro(this);
@@ -43,9 +38,8 @@ public class IntroductionWP extends Frame{
             it.btnSomOutro(),
             menu[0],menu[1],menu[2],menu[3],menu[4],
             new Btn(btn_classic, classicPos, new EventBtnsIntro(1)),
-            new Btn(btn_custom, customPos, new EventBtnsIntro(2)),
-            new Btn(btn_rank, rankPos, new EventBtnsIntro(3)),
-            new Btn(btn_tuto, tutoPos, new EventBtnsIntro(4)),
+            new Btn(btn_rank, rankPos, new EventBtnsIntro(2)),
+            new Btn(btn_tuto, tutoPos, new EventBtnsIntro(3)),
             new Lb(im.addImagem("back_intro_wp"), backPos)
         };
         
@@ -63,8 +57,7 @@ public class IntroductionWP extends Frame{
             pnIntro.setVisible(false);
             switch(esc){
                 case 1: niveis();break;
-                case 2: custom = true; niveis();break;
-                case 3: ranking();break;
+                case 2: ranking();break;
                 default: tutorial();break;
             }
         }

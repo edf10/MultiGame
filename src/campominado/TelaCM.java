@@ -20,7 +20,6 @@ public class TelaCM extends Frame{
     private Campo r;
     public void setR(Campo r) {this.r = r;}
     private User user = User.getUser();
-    public void setUser(User user) {this.user = user;}
     private int m5[][]; //1=posOpen 3=marcadores 2=minas abertas
     private String nivel;
     public void configuracoes(){

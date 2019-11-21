@@ -6,10 +6,11 @@
             <file>file:/C:/Users/eduar/OneDrive/Documentos/GitHub/MultiGame/src/multigame/MultiGame.java</file>
             <file>file:/C:/Users/eduar/OneDrive/Documentos/GitHub/MultiGame/src/wordpuzzle/TelaWP.java</file>
             <file>file:/C:/Users/eduar/OneDrive/Documentos/GitHub/MultiGame/src/wordpuzzle/RecordesWP.java</file>
-            <file>file:/C:/Users/eduar/OneDrive/Documentos/GitHub/MultiGame/src/campominado/RecordesCM.java</file>
-            <file>file:/C:/Users/eduar/OneDrive/Documentos/GitHub/MultiGame/src/campominado/IntroductionCM.java</file>
-            <file>file:/C:/Users/eduar/OneDrive/Documentos/GitHub/MultiGame/src/padroes/ItemsTela.java</file>
-            <file>file:/C:/Users/eduar/OneDrive/Documentos/GitHub/MultiGame/src/jogodavelha/IntroductionJDV.java</file>
+            <file>file:/C:/Users/eduar/OneDrive/Documentos/GitHub/MultiGame/src/user/Conta.java</file>
+            <file>file:/C:/Users/eduar/OneDrive/Documentos/GitHub/MultiGame/src/wordpuzzle/IntroductionWP.java</file>
+            <file>file:/C:/Users/eduar/OneDrive/Documentos/GitHub/MultiGame/src/wordpuzzle/Palavra.java</file>
+            <file>file:/C:/Users/eduar/OneDrive/Documentos/GitHub/MultiGame/src/wordpuzzle/Palavras.java</file>
+            <file>file:/C:/Users/eduar/OneDrive/Documentos/GitHub/MultiGame/src/wordpuzzle/ScoreWP.java</file>
         </group>
     </open-files>
 </project-private>

@@ -108,7 +108,7 @@ public class TelaWP extends Frame{
             }
         }
     }
-    
+    private boolean win = true;
     public void ganhar(){
         int quantCaracWords = 0;
         for(int i = 0; i<x; i++){
@@ -135,7 +135,7 @@ public class TelaWP extends Frame{
             sc.gravar();sc.leitura();sc.gravar();
             Conta c = new Conta(user);
             c.gravar();
-            WinOrGameOver w = new WinOrGameOver(this); w.setNivel(x); w.addWin(4); w.show();
+            if(win==true){win = false; WinOrGameOver w = new WinOrGameOver(this); w.setNivel(x); w.addWin(4); w.show();}
         }
     }
     
@@ -174,7 +174,6 @@ public class TelaWP extends Frame{
                         }
                     }
                 }
-                
             }else{wordsEnc.add(false);}
             cont = 0; enc = false;
         }

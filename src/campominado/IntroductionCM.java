@@ -80,7 +80,7 @@ public class IntroductionCM extends Frame{
             }
             dispose();
             TelaCM tcm = new TelaCM(); 
-            tcm.setR(new Campo(x,y)); tcm.setUser(user);
+            tcm.setR(new Campo(x,y)); 
             tcm.configuracoes();
             tcm.show(); 
         }
