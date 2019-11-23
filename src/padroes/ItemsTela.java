@@ -194,7 +194,9 @@ public class ItemsTela {
     public void setTelaAntIntro(int telaAntIntro) {
         this.telaAntIntro = telaAntIntro;
     }
-    
+    public void setTelaAtual(Frame telaAtual) {
+        this.telaAtual = telaAtual;
+    }
     public class EventBtnReturn implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -203,7 +205,7 @@ public class ItemsTela {
                 case 1:IntroductionCM icm = new IntroductionCM();icm.intro();icm.show();break;
                 case 2:IntroductionJDV ijdv = new IntroductionJDV();ijdv.intro();ijdv.show();break;
                 case 3:IntroductionWP iwp = new IntroductionWP();iwp.intro();iwp.show();break;
-                case 4:break;
+                case 4:MultiGameTela mg = new MultiGameTela();mg.Jogos(); mg.show();break;
                 default:break;
             }
         }

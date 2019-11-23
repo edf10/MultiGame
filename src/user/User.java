@@ -71,6 +71,9 @@ public class User {
     public void setMoedas(int moedas) {
         this.moedas += moedas;
     }
+    public void comprar(int valor){
+        this.moedas -= valor;
+    }
     public ArrayList<ArrayList<String>> getHistoricJDV() {
         return historicJDV;
     }

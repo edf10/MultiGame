@@ -25,7 +25,7 @@ public class Store extends Frame{
         Btn menu[] = it.menuOpWithHome(this);
         Component cp[] = {
             it.btnClose(), menu[0], menu[1], menu[2], 
-            new Btn(btn_cm, btnCMPos, null),
+            new Btn(btn_cm, btnCMPos, new EventBtnsLojas(1)),
             new Btn(btn_jdv, btnJDVPos, null),
             new Btn(btn_wp, btnWPPos, null),
             new Lb(im.addImagem("title_store"), titlePos),
@@ -43,9 +43,9 @@ public class Store extends Frame{
         public EventBtnsLojas(int esc){this.esc = esc;}
         @Override
         public void actionPerformed(ActionEvent ae) {
-            
+            dispose();
             switch(esc){
-                case 1: StoreCM cm = new StoreCM();break;
+                case 1: StoreCM cm = new StoreCM(); cm.introStore(); cm.show(); break;
                 case 2: StoreJDV jdv = new StoreJDV();break;
                 case 3: StoreWP wp = new StoreWP();break;
                 default: break;
