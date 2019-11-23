@@ -5,13 +5,13 @@ import javax.swing.ImageIcon;
 import padroes.Store;
 public class StoreCM extends Store{
     
-    private ImageIcon[] btnsCM = {im.addImagem("btn_cm_easy"),im.addImagem("btn_cm_medium"),im.addImagem("btn_cm_hard")};
-    private ImageIcon[] btnsCMT = {im.addImagem("btn_cm_easy_t"),im.addImagem("btn_cm_medium_t"),im.addImagem("btn_cm_hard_t")};
-    private ImageIcon[] btnsCMP = {im.addImagem("btn_cm_easy_p"),im.addImagem("btn_cm_medium_p"),im.addImagem("btn_cm_hard_p")};
+    private ImageIcon[] btnsCM = {im.addImagem("btn_cm_easy_01"),im.addImagem("btn_cm_medium_01"),im.addImagem("btn_cm_hard_01")};
+    private ImageIcon[] btnsCMT = {im.addImagem("btn_cm_easy_t_01"),im.addImagem("btn_cm_medium_t_01"),im.addImagem("btn_cm_hard_t_01")};
+    private ImageIcon[] btnsCMP = {im.addImagem("btn_cm_easy_p_01"),im.addImagem("btn_cm_medium_p_01"),im.addImagem("btn_cm_hard_p_01")};
     
-    private ImageIcon[] minasCM = {im.addImagem("bomb_cm_easy"),im.addImagem("bomb_cm_medium"),im.addImagem("bomb_cm_hard")};
+    private ImageIcon[] minasCM = {im.addImagem("bomb_cm_easy_01"),im.addImagem("bomb_cm_medium_01"),im.addImagem("bomb_cm_hard_01")};
     
-    private ImageIcon[] flagCM = {im.addImagem("flagF"),im.addImagem("flagM"),im.addImagem("flagD")};
+    private ImageIcon[] flagCM = {im.addImagem("flagF_01"),im.addImagem("flagM_01"),im.addImagem("flagD_01")};
     
     private Pn pnIntro;
     @Override
