@@ -1,11 +1,16 @@
 package padroes;
+import campominado.StoreCM;
 import componentes.Btn;
 import componentes.Frame;
 import componentes.Lb;
 import componentes.Pn;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
+import jogodavelha.StoreJDV;
+import wordpuzzle.StoreWP;
 public class Store extends Frame{
     private ItemsTela it = new ItemsTela();
     
@@ -31,6 +36,31 @@ public class Store extends Frame{
         pnIntroStore = new Pn(backPos, cp);
         pnIntroStore.setBackground(Color.black);
         add(pnIntroStore);
+    }
+    
+    public class EventBtnsLojas implements ActionListener{
+        private int esc;
+        public EventBtnsLojas(int esc){this.esc = esc;}
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            
+            switch(esc){
+                case 1: StoreCM cm = new StoreCM();break;
+                case 2: StoreJDV jdv = new StoreJDV();break;
+                case 3: StoreWP wp = new StoreWP();break;
+                default: break;
+            }
+            
+        }
+    }
+    
+    
+    public void lerItems(String arq){
+        
+    }
+    
+    public void gravarItems(String arq){
+        
     }
  
 }

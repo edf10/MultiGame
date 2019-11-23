@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import jogodavelha.IntroductionJDV;
 import multigame.MultiGameTela;
-import user.User;
 import wordpuzzle.IntroductionWP;
 
 public class ItemsTela {
@@ -192,7 +191,6 @@ public class ItemsTela {
     }
     private int telaAntIntro;
     private Frame telaAtual;
-    private User user = User.getUser();
     public void setTelaAntIntro(int telaAntIntro) {
         this.telaAntIntro = telaAntIntro;
     }
@@ -201,14 +199,12 @@ public class ItemsTela {
         @Override
         public void actionPerformed(ActionEvent e){
             telaAtual.dispose();
-            if(telaAntIntro==1){
-                IntroductionCM icm = new IntroductionCM();icm.intro();icm.show();
-            }else if(telaAntIntro==2){
-                IntroductionJDV ijdv = new IntroductionJDV();ijdv.intro();ijdv.show();
-            }else if(telaAntIntro==3){
-                IntroductionWP iwp = new IntroductionWP();iwp.intro();iwp.show();
-            }else if(telaAntIntro==4){
-                
+            switch (telaAntIntro) {
+                case 1:IntroductionCM icm = new IntroductionCM();icm.intro();icm.show();break;
+                case 2:IntroductionJDV ijdv = new IntroductionJDV();ijdv.intro();ijdv.show();break;
+                case 3:IntroductionWP iwp = new IntroductionWP();iwp.intro();iwp.show();break;
+                case 4:break;
+                default:break;
             }
         }
     }
