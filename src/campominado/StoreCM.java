@@ -1,4 +1,5 @@
 package campominado;
-public class StoreCM {
+import padroes.Store;
+public class StoreCM extends Store{
     
 }

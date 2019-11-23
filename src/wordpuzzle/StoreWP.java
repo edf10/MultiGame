@@ -1,4 +1,5 @@
 package wordpuzzle;
-public class StoreWP {
+import padroes.Store;
+public class StoreWP extends Store{
     
 }

@@ -25,7 +25,7 @@ import user.User;
 public class MultiGameTela extends Frame{
     private Pn pnIniciar;
     private final ItemsTela it = new ItemsTela();
-    private User user = User.getUser();
+    public static User user = User.getUser();
     public void setUser(User user) {
         this.user = user;
     }
@@ -70,6 +70,7 @@ public class MultiGameTela extends Frame{
             menu[0],
             menu[1],
             menu[2],
+            menu[3],
             new Lb(im.addImagem("moedas"), lbCoinsPos),
             new Lb(user.getMoedasString(), f, lbMoedasPos, Color.white),
             new Lb(im.addImagem("back_capa_cm"),capaCMPos),

@@ -1,4 +1,5 @@
 package jogodavelha;
-public class StoreJDV {
+import padroes.Store;
+public class StoreJDV extends Store{
     
 }
