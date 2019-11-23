@@ -19,6 +19,7 @@ import user.User;
 public class TelaJDV extends Frame{
     private User user1;
     private User user2;
+    private StoreJDV sjdv = new StoreJDV();
     public void start(){
         it.setTelaAntIntro(2); 
         x = j.getX();
@@ -96,7 +97,7 @@ public class TelaJDV extends Frame{
             super();
             this.x = x;
             this.y = y;
-            setIcon(im.addImagem("btn_jdv_game"));
+            setIcon(sjdv.btn());
             setBackground(Color.black);
             addActionListener(new Troca());
         }
@@ -104,15 +105,15 @@ public class TelaJDV extends Frame{
             if(!press&&!answer){
                 if(vez==1){
                     if(icUser1){
-                        setIcon(im.addImagem("icone_x_jdv"));
+                        setIcon(sjdv.x());
                     }else{
-                        setIcon(im.addImagem("icone_o_jdv"));
+                        setIcon(sjdv.o());
                     }
                 }else if(vez==2){
                     if(icUser2==false){
-                        setIcon(im.addImagem("icone_o_jdv"));
+                        setIcon(sjdv.o());
                     }else{
-                        setIcon(im.addImagem("icone_x_jdv"));
+                        setIcon(sjdv.x());
                     }
                 }
                 System.out.println(vez);

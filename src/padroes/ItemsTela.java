@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import jogodavelha.IntroductionJDV;
 import multigame.MultiGameTela;
-import user.User;
 import wordpuzzle.IntroductionWP;
 
 public class ItemsTela {
@@ -63,14 +62,32 @@ public class ItemsTela {
     public Btn[] menuOp(Frame telaAtual){
         this.telaAtual = telaAtual;
         int userPos[] = {21,20,99,39}; int settingPos[] = {21,81,140,37};
-        int logoutPos[] = {25,143,124,37};
+        int logoutPos[] = {25,195,124,37}; int storePos[] = {21,143,117,33};
         btnSetting = new Btn(btn_setting, settingPos, null);
         btnLogout = new Btn(btn_logout, logoutPos, new EventOps(3));
+        btnStore = new Btn(btn_store, storePos, new EventOps(1));
         btnSetting.setVisible(false);
         btnLogout.setVisible(false);
+        btnStore.setVisible(false);
         Btn btns[] = {
             new Btn(btn_user, userPos, new EventMenuOp(1)),
             btnSetting,
+            btnStore,
+            btnLogout
+        };
+        return btns;
+    }
+    public Btn[] menuOpWithHome(Frame telaAtual){
+        this.telaAtual = telaAtual;
+        int userPos[] = {21,20,99,39};int logoutPos[] = {25,143,124,37};
+        int returnPos[] = {21,90,125,30}; 
+        btnLogout = new Btn(btn_logout, logoutPos, new EventOps(3));
+        btnReturn = new Btn(btn_return, returnPos, new EventBtnReturn());
+        btnLogout.setVisible(false);
+        btnReturn.setVisible(false);
+        Btn btns[] = {
+            new Btn(btn_user, userPos, new EventMenuOp(4)),
+            btnReturn,
             btnLogout
         };
         return btns;
@@ -85,7 +102,7 @@ public class ItemsTela {
         btnReturn = new Btn(btn_return, returnPos, new EventBtnReturn());
         btnLogout = new Btn(btn_logout, logoutPos, new EventOps(3));
         btnHome = new Btn(btn_home, homePos, new EventOps(2));
-        btnStore = new Btn(btn_store, storePos, null);
+        btnStore = new Btn(btn_store, storePos, new EventOps(1));
         btnSetting.setVisible(false);
         btnReturn.setVisible(false);
         btnLogout.setVisible(false);
@@ -110,7 +127,7 @@ public class ItemsTela {
         btnSetting = new Btn(btn_setting, settingPos, null);
         btnLogout = new Btn(btn_logout, logoutPos, new EventOps(3));
         btnHome = new Btn(btn_home, homePos, new EventOps(2));
-        btnStore = new Btn(btn_store, storePos, null);
+        btnStore = new Btn(btn_store, storePos, new EventOps(1));
         btnSetting.setVisible(false);
         btnLogout.setVisible(false);
         btnHome.setVisible(false);
@@ -134,13 +151,15 @@ public class ItemsTela {
         @Override
         public void actionPerformed(ActionEvent e){
             if(descer==false){
-                btnSetting.setVisible(true);btnLogout.setVisible(true);descer = true;
-                if(esc==2){btnHome.setVisible(true);btnStore.setVisible(true);btnReturn.setVisible(true);}
-                if(esc==3){btnHome.setVisible(true);btnStore.setVisible(true);}
+                btnLogout.setVisible(true);descer = true;
+                if(esc==3||esc==2){btnHome.setVisible(true);}
+                if(esc==3||esc==2||esc==1){btnStore.setVisible(true);btnSetting.setVisible(true);}
+                if(esc==2||esc==4){btnReturn.setVisible(true);}
             }else{
-                btnSetting.setVisible(false);btnLogout.setVisible(false);descer = false;
-                if(esc==2){btnHome.setVisible(false);btnStore.setVisible(false);btnReturn.setVisible(false);}
-                if(esc==3){btnHome.setVisible(false);btnStore.setVisible(false);}
+                btnLogout.setVisible(false);descer = false;
+                if(esc==3||esc==2){btnHome.setVisible(false);}
+                if(esc==3||esc==2||esc==1){btnStore.setVisible(false);btnSetting.setVisible(false);}
+                if(esc==2||esc==4){btnReturn.setVisible(false);}
             }
         }
     }
@@ -153,13 +172,14 @@ public class ItemsTela {
         @Override
         public void actionPerformed(ActionEvent e){
             switch(esc){
-                case 1: break;
-                case 2: telaAtual.dispose(); MultiGameTela mg = new MultiGameTela(); mg.setUser(user); mg.Jogos(); mg.show();break;
+                case 1: telaAtual.dispose(); Store st = new Store(); st.introStore(); st.show(); break;
+                case 2: telaAtual.dispose(); MultiGameTela mg = new MultiGameTela();mg.Jogos(); mg.show();break;
                 case 3: telaAtual.dispose(); MultiGameTela mg1 = new MultiGameTela(); mg1.login_user(); mg1.show();break;
                 default: break;
             }
         }
     }
+    
     public Btn returnGames(){
         int returnPos[] = {21,20,125,30};
         return new Btn(btn_return, returnPos, new EventBtnReturn());
@@ -171,24 +191,22 @@ public class ItemsTela {
     }
     private int telaAntIntro;
     private Frame telaAtual;
-    private User user = User.getUser();
-
     public void setTelaAntIntro(int telaAntIntro) {
         this.telaAntIntro = telaAntIntro;
     }
-    
+    public void setTelaAtual(Frame telaAtual) {
+        this.telaAtual = telaAtual;
+    }
     public class EventBtnReturn implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
             telaAtual.dispose();
-            if(telaAntIntro==1){
-                IntroductionCM icm = new IntroductionCM();icm.intro();icm.show();
-            }else if(telaAntIntro==2){
-                IntroductionJDV ijdv = new IntroductionJDV();ijdv.intro();ijdv.show();
-            }else if(telaAntIntro==3){
-                IntroductionWP iwp = new IntroductionWP();iwp.intro();iwp.show();
-            }else if(telaAntIntro==4){
-                
+            switch (telaAntIntro) {
+                case 1:IntroductionCM icm = new IntroductionCM();icm.intro();icm.show();break;
+                case 2:IntroductionJDV ijdv = new IntroductionJDV();ijdv.intro();ijdv.show();break;
+                case 3:IntroductionWP iwp = new IntroductionWP();iwp.intro();iwp.show();break;
+                case 4:MultiGameTela mg = new MultiGameTela();mg.Jogos(); mg.show();break;
+                default:break;
             }
         }
     }
