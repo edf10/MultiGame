@@ -10,6 +10,7 @@ import componentes.Lb;
 import componentes.Pn;
 import componentes.Btn;
 import componentes.Frame;
+import javax.swing.ImageIcon;
 import padroes.Fonts;
 import padroes.ItemsTela;
 import padroes.WinOrGameOver;
@@ -18,6 +19,7 @@ import user.User;
 
 public class TelaCM extends Frame{
     private Campo r;
+    private StoreCM scm = new StoreCM();
     public void setR(Campo r) {this.r = r;}
     private User user = User.getUser();
     private int m5[][]; //1=posOpen 3=marcadores 2=minas abertas
@@ -39,11 +41,11 @@ public class TelaCM extends Frame{
         }
         m = r.getM();
         if(x==16){
-            botao = "btn_cm_medium";botao_p = "btn_cm_medium_p";botao_t = "btn_cm_medium_t";
-            marcador = "flagM";minas = "bomb_cm_medium";
+            botao = scm.btns()[1];botao_p = scm.btnsP()[1];botao_t = scm.btnsT()[1];
+            marcador = scm.flags()[1];minas = scm.minas()[1];
         }else if(x==18){
-            botao = "btn_cm_hard";botao_p = "btn_cm_hard_p";botao_t = "btn_cm_hard_t";
-            marcador = "flagD";minas = "bomb_cm_hard";
+            botao = scm.btns()[2];botao_p = scm.btnsP()[2];botao_t = scm.btnsT()[2];
+            marcador = scm.flags()[2];minas = scm.minas()[2];
         }
         CM();
     }
@@ -206,10 +208,10 @@ public class TelaCM extends Frame{
     public int scoreFat[] = new int[3];
     public boolean press = false; public boolean GO = false; public boolean win = false;
     public int iniciarJogo = 0; public int marc[][]; public int[][] m4;
-    public String minas = "bomb_cm_easy"; public String marcador = "flagF";
-    public String botao = "btn_cm_easy"; 
-    public String botao_p = "btn_cm_easy_p";
-    public String botao_t = "btn_cm_easy_t";
+    public ImageIcon minas = scm.minas()[0]; public ImageIcon marcador = scm.flags()[0];
+    public ImageIcon botao = scm.btns()[0]; 
+    public ImageIcon botao_p = scm.btnsP()[0];
+    public ImageIcon botao_t = scm.btnsT()[0];
     public Font btn = f.addNewFont("DS-DIGIT", 20);
     
     private class Button extends Btn{
@@ -218,9 +220,9 @@ public class TelaCM extends Frame{
         
         public Button(String s, int x, int y) {
             super();
-            setIcon(im.addImagem(botao));
-            setPressedIcon(im.addImagem(botao_p));
-            setRolloverIcon(im.addImagem(botao_t));
+            setIcon(botao);
+            setPressedIcon(botao_p);
+            setRolloverIcon(botao_t);
             setBackground(Color.black);setFont(btn);
             this.s = s; //Evento do botão (tipo)
             this.x = x; this.y = y;//Posição do btn em relação a matriz
@@ -237,11 +239,11 @@ public class TelaCM extends Frame{
             if(press==false||GO==true){
                 setPressedIcon(null); setRolloverIcon(null);
                 if(marc[x][y]==1){
-                    setIcon(im.addImagem(marcador));
+                    setIcon(marcador);
                     if(GO==false)m5[x][y] = 3;
                 }else if(marc[x][y]==2){
                     if("-1".equals(s)) {
-                        setIcon(im.addImagem(minas));
+                        setIcon(minas);
                         if(GO==false)m5[x][y] = 2;
                         //Se win fosse true, sem essa condição, o código consideraria que o usuário perdeu e ganhou o jogo.
                         if(GO==false&&win==false){ //Caso win seja falso, significa que não ganhou-se o jogo.
@@ -273,7 +275,7 @@ public class TelaCM extends Frame{
                         }
                         break;
                     case InputEvent.BUTTON3_MASK:
-                        if(marc[x][y]==1){setIcon(null);marc[x][y] = 0;setPressedIcon(im.addImagem(botao_p));setIcon(im.addImagem(botao));setRolloverIcon(im.addImagem(botao_t));
+                        if(marc[x][y]==1){setIcon(null);marc[x][y] = 0;setPressedIcon(botao_p);setIcon(botao);setRolloverIcon(botao_t);
                         }else if(marc[x][y]==0){marc[x][y] = 1;posAlt(x, y);}
                         break;
                     default:break;

@@ -3,11 +3,13 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 public class User {
     private String username;
     private String password;
     private String dataRegistro;
     private int moedas;
+    private ArrayList<ArrayList<String>>[] storeCM = new ArrayList[10];
     private ArrayList<ArrayList<String>> historicJDV = new ArrayList<>();
     private static User user;
     public static User getUser() {
@@ -22,6 +24,10 @@ public class User {
         this.username = username;
         this.password = password;
         moedas = 0;
+    }
+    
+    public void addItemComprado(String item){
+        
     }
     
     public void addDataRegister(){
@@ -64,6 +70,9 @@ public class User {
     }
     public void setMoedas(int moedas) {
         this.moedas += moedas;
+    }
+    public void comprar(int valor){
+        this.moedas -= valor;
     }
     public ArrayList<ArrayList<String>> getHistoricJDV() {
         return historicJDV;

@@ -25,7 +25,7 @@ import user.User;
 public class MultiGameTela extends Frame{
     private Pn pnIniciar;
     private final ItemsTela it = new ItemsTela();
-    private User user = User.getUser();
+    public static User user = User.getUser();
     public void setUser(User user) {
         this.user = user;
     }
