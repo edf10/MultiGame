@@ -48,29 +48,21 @@ public class ItemsTela {
         }
     }
     
-    private Btn btnSetting;
     private Btn btnReturn;
     private Btn btnLogout;
     private Btn btnHome;
-    private Btn btnStore;
     
     private final ImageIcon btn_user[] = {im.addImagem("btn_user"),im.addImagem("btn_user_t")}; 
-    private final ImageIcon btn_setting[] = {im.addImagem("btn_setting"),im.addImagem("btn_setting_t")};
     private final ImageIcon btn_return[] = {im.addImagem("btn_return"),im.addImagem("btn_return_t")}; 
     private final ImageIcon btn_logout[] = {im.addImagem("btn_logout"),im.addImagem("btn_logout_t")};
     private final ImageIcon btn_home[] = {im.addImagem("btn_home"),im.addImagem("btn_home_t")}; 
-    private final ImageIcon btn_store[] = {im.addImagem("btn_store"),im.addImagem("btn_store_t")};
     public Btn[] menuOp(Frame telaAtual){
         this.telaAtual = telaAtual;
-        int userPos[] = {21,20,99,39}; int settingPos[] = {21,81,140,37};
-        int logoutPos[] = {25,143,124,37};
-        btnSetting = new Btn(btn_setting, settingPos, null);
+        int userPos[] = {21,20,99,39}; int logoutPos[] = {25,81,124,37};
         btnLogout = new Btn(btn_logout, logoutPos, new EventOps(3));
-        btnSetting.setVisible(false);
         btnLogout.setVisible(false);
         Btn btns[] = {
             new Btn(btn_user, userPos, new EventMenuOp(1)),
-            btnSetting,
             btnLogout
         };
         return btns;
@@ -78,25 +70,18 @@ public class ItemsTela {
     
     public Btn[] menuOpGames(Frame telaAtual){
         this.telaAtual = telaAtual;
-        int userPos[] = {21,20,99,39}; int settingPos[] = {21,81,140,37};
-        int returnPos[] = {21,143,125,30}; int logoutPos[] = {25,303,124,37};
-        int homePos[] = {21,195,105,33}; int storePos[] = {21,248,117,33};
-        btnSetting = new Btn(btn_setting, settingPos, null);
+        int userPos[] = {21,20,99,39}; int homePos[] = {21,137,105,33};
+        int returnPos[] = {21,81,125,30}; int logoutPos[] = {25,195,124,37};
         btnReturn = new Btn(btn_return, returnPos, new EventBtnReturn());
         btnLogout = new Btn(btn_logout, logoutPos, new EventOps(3));
         btnHome = new Btn(btn_home, homePos, new EventOps(2));
-        btnStore = new Btn(btn_store, storePos, null);
-        btnSetting.setVisible(false);
         btnReturn.setVisible(false);
         btnLogout.setVisible(false);
         btnHome.setVisible(false);
-        btnStore.setVisible(false);
         Btn btns[] = {
             new Btn(btn_user, userPos, new EventMenuOp(2)),
-            btnSetting,
             btnReturn,
             btnHome,
-            btnStore,
             btnLogout
         };
         return btns;
@@ -104,22 +89,14 @@ public class ItemsTela {
     
     public Btn[] menuOpGamesIntro(Frame telaAtual){
         this.telaAtual = telaAtual;//20,81,143,195,248,303
-        int userPos[] = {21,20,99,39}; int settingPos[] = {21,81,140,37};
-        int logoutPos[] = {25,248,124,37};
-        int homePos[] = {21,143,105,33}; int storePos[] = {21,195,117,33};
-        btnSetting = new Btn(btn_setting, settingPos, null);
+        int userPos[] = {21,20,99,39};int logoutPos[] = {25,143,124,37};int homePos[] = {21,81,105,33};
         btnLogout = new Btn(btn_logout, logoutPos, new EventOps(3));
         btnHome = new Btn(btn_home, homePos, new EventOps(2));
-        btnStore = new Btn(btn_store, storePos, null);
-        btnSetting.setVisible(false);
         btnLogout.setVisible(false);
         btnHome.setVisible(false);
-        btnStore.setVisible(false);
         Btn btns[] = {
             new Btn(btn_user, userPos, new EventMenuOp(3)),
-            btnSetting,
             btnHome,
-            btnStore,
             btnLogout
         };
         return btns;
@@ -134,13 +111,13 @@ public class ItemsTela {
         @Override
         public void actionPerformed(ActionEvent e){
             if(descer==false){
-                btnSetting.setVisible(true);btnLogout.setVisible(true);descer = true;
-                if(esc==2){btnHome.setVisible(true);btnStore.setVisible(true);btnReturn.setVisible(true);}
-                if(esc==3){btnHome.setVisible(true);btnStore.setVisible(true);}
+                btnLogout.setVisible(true);descer = true;
+                if(esc==2){btnHome.setVisible(true);btnReturn.setVisible(true);}
+                if(esc==3){btnHome.setVisible(true);}
             }else{
-                btnSetting.setVisible(false);btnLogout.setVisible(false);descer = false;
-                if(esc==2){btnHome.setVisible(false);btnStore.setVisible(false);btnReturn.setVisible(false);}
-                if(esc==3){btnHome.setVisible(false);btnStore.setVisible(false);}
+                btnLogout.setVisible(false);descer = false;
+                if(esc==2){btnHome.setVisible(false);btnReturn.setVisible(false);}
+                if(esc==3){btnHome.setVisible(false);}
             }
         }
     }

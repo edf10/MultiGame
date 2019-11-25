@@ -69,7 +69,6 @@ public class MultiGameTela extends Frame{
             new Btn(btn_wp, btnCPPos, new EventInitialGame(3)),
             menu[0],
             menu[1],
-            menu[2],
             new Lb(im.addImagem("moedas"), lbCoinsPos),
             new Lb(user.getMoedasString(), f, lbMoedasPos, Color.white),
             new Lb(im.addImagem("back_capa_cm"),capaCMPos),

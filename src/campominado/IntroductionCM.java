@@ -25,7 +25,7 @@ public class IntroductionCM extends Frame{
         Component cp[] = {
             it.btnClose(),
             it.btnSomOutro(),
-            menu[0],menu[1],menu[2],menu[3],menu[4],menu[5],
+            menu[0],menu[1],menu[2],menu[3],
             new Btn(btn_easy, btnEasyPos, new EventBtnsNiveis(1)),
             new Btn(btn_medium, btnMediumPos, new EventBtnsNiveis(2)),
             new Btn(btn_hard, btnHardPos, new EventBtnsNiveis(3)),
@@ -55,7 +55,7 @@ public class IntroductionCM extends Frame{
         Component cp[] = {
             it.btnClose(),
             it.btnSomOutro(),
-            menu[0],menu[1],menu[2],menu[3],menu[4],
+            menu[0],menu[1],menu[2],
             new Lb(im.addImagem("title_cm"), titlePos),
             new Btn(btn_play_cm, btnPlayPos, new EventBtnsIntro(1)),
             new Btn(btn_ranking_cm, btnRankingPos, new EventBtnsIntro(2)),
