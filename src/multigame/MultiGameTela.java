@@ -37,7 +37,6 @@ public class MultiGameTela extends Frame{
         Component cp[] = {
             new Btn(btn_play, playPos, new EventBtnPlay()),
             new Lb(im.addImagem("title_multigame"), titlePos),
-            it.btnSom(),
             it.btnClose(),
             new Lb(im.addImagem("back_initial_multigame"), backPos)
         };
@@ -75,7 +74,6 @@ public class MultiGameTela extends Frame{
             new Lb(im.addImagem("back_capa_jdv"), capaJDVPos),
             new Lb(im.addImagem("back_capa_wp"), capaCPPos),
             it.btnClose(),
-            it.btnSomOutro(),
             new Lb(im.addImagem("back_games"), backPos)
         };
         int pnJogosP[] = {0,0,1200,700}; pnJogos = new Pn(pnJogosP, cp);
@@ -122,8 +120,7 @@ public class MultiGameTela extends Frame{
             new Lb(im.addImagem("password_icon"), passIconPos),
             new Btn(btn_logar, logarPos, new Logar()),
             new Btn(btn_cadastro, cadastroPos, new Register()),
-            it.btnClose(),
-            it.btnSomOutro()
+            it.btnClose()
         };
         int pnLoginP[] = {0,0,1200,700};
         pnLogin = new Pn(pnLoginP, cp, Color.black);

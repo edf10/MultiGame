@@ -19,7 +19,6 @@ import user.User;
 public class TelaJDV extends Frame{
     private User user1;
     private User user2;
-    private StoreJDV sjdv = new StoreJDV();
     public void start(){
         it.setTelaAntIntro(2); 
         x = j.getX();
@@ -73,7 +72,7 @@ public class TelaJDV extends Frame{
         int backBackPos[] = {228,147,750,561};
         Component cp[] = {
             pnCC,lbJog,
-            it.btnClose(),it.returnGames(this),it.btnSomOutro(),
+            it.btnClose(),it.returnGames(this),
             new Lb(im.addImagem("back_tab_jdv"), backTabPos),
             new Lb(im.addImagem("back_back_jdv"), backBackPos),
             new Lb(im.addImagem("back_game_jdv"), backPos)
@@ -97,7 +96,7 @@ public class TelaJDV extends Frame{
             super();
             this.x = x;
             this.y = y;
-            setIcon(sjdv.btn());
+            setIcon(im.addImagem("btn_jdv_game"));
             setBackground(Color.black);
             addActionListener(new Troca());
         }
@@ -105,15 +104,15 @@ public class TelaJDV extends Frame{
             if(!press&&!answer){
                 if(vez==1){
                     if(icUser1){
-                        setIcon(sjdv.x());
+                        setIcon(im.addImagem("icone_x_jdv"));
                     }else{
-                        setIcon(sjdv.o());
+                        setIcon(im.addImagem("icone_o_jdv"));
                     }
                 }else if(vez==2){
                     if(icUser2==false){
-                        setIcon(sjdv.o());
+                        setIcon(im.addImagem("icone_o_jdv"));
                     }else{
-                        setIcon(sjdv.x());
+                        setIcon(im.addImagem("icone_x_jdv"));
                     }
                 }
                 System.out.println(vez);

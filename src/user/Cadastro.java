@@ -48,7 +48,6 @@ public class Cadastro extends Frame{
         Component cp[] = {
             txtName, txtPass,
             it.btnClose(),
-            it.btnSomOutro(),
             new Lb(im.addImagem("barra"), barraPos),
             new Lb(im.addImagem("title_singup"), titlePos),
             new Lb(im.addImagem("avatar_icon"), userIconPos),

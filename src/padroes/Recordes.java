@@ -47,7 +47,6 @@ public abstract class Recordes extends Frame{
         ImageIcon btn_easy[] = ims[0];ImageIcon btn_medium[] = ims[1];ImageIcon btn_hard[] = ims[2];
         Component cp[] = {
             it.btnClose(),
-            it.btnSomOutro(),
             it.returnGames(this),
             new Btn(btn_easy, btnEasyPos, new EventBtnsRank(14)),
             new Btn(btn_medium, btnMediumPos, new EventBtnsRank(16)),

@@ -45,7 +45,6 @@ public class IntroductionJDV extends Frame{
         ImageIcon btn_hist[] = {im.addImagem("btn_historic_jdv"),im.addImagem("btn_historic_jdv_t"),im.addImagem("btn_historic_jdv_p")};
         Component cp[] = {
             it.btnClose(),
-            it.btnSomOutro(),
             menu[0],menu[1],menu[2],
             new Lb(im.addImagem("title_jdv"), titlePos),
             new Btn(btn_multi, multPos, new EventBtnsIntro(1)),
@@ -70,7 +69,6 @@ public class IntroductionJDV extends Frame{
         it.setTelaAntIntro(2);
         Component cp[] = {
             it.btnClose(),
-            it.btnSomOutro(),
             menu[0],menu[1],menu[2],menu[3],
             new Btn(btn_addtion, btnAddtionPos, new EventBtnsAss("Addtion")),
             new Btn(btn_division, btnDivisionPos, new EventBtnsAss("Division")),

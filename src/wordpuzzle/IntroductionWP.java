@@ -35,7 +35,6 @@ public class IntroductionWP extends Frame{
         Component cp[] = {
             new Lb(im.addImagem("title_wp"), titlePos),
             it.btnClose(),
-            it.btnSomOutro(),
             menu[0],menu[1],menu[2],
             new Btn(btn_classic, classicPos, new EventBtnsIntro(1)),
             new Btn(btn_rank, rankPos, new EventBtnsIntro(2)),
@@ -73,7 +72,6 @@ public class IntroductionWP extends Frame{
         it.setTelaAntIntro(3);
         Component cp[] = {
             it.btnClose(),
-            it.btnSomOutro(),
             menu[0],menu[1],menu[2],menu[3],
             new Btn(btn_easy, btnEasyPos, new EventBtnsNiveis(1)),
             new Btn(btn_medium, btnMediumPos, new EventBtnsNiveis(2)),
