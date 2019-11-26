@@ -38,7 +38,7 @@ public class TelaWP extends Frame{
     public void setUser(User user) {this.user = user;}
     public void CP(){
         GridLayout campo = new GridLayout(x,y);
-        int pnWordsP[] = {145,130,908,573};
+        int pnWordsP[] = {145,130,910,573};
         pnWords = new Pn(pnWordsP, campo);
         letras = new Letra[x][y];
         wordsLetras = p.getM2();
@@ -51,8 +51,8 @@ public class TelaWP extends Frame{
         }
         for(int i = 0; i<x ; i++){
             for(int j = 0; j<y ; j++){
-                if(!"0".equals(wordsLetras[i][j])){letras[i][j] = new Letra(p.getM(i, j),i,j);
-                }else{letras[i][j] = new Letra(p.getM(i, j),i,j);}
+                if(!"0".equals(wordsLetras[i][j])){letras[i][j] = new Letra(p.getM(i, j));
+                }else{letras[i][j] = new Letra(p.getM(i, j));}
                 pnWords.add(letras[i][j]);
             }
         }
@@ -179,19 +179,17 @@ public class TelaWP extends Frame{
     }
     
     public class Letra extends Btn{
-        private int x, y;
         private int troca = 1;
         private boolean acionado;
         private boolean permanente; //se for uma palavra não sai a marcação.
         private String l;
-        public Letra(String l, int x, int y){
+        public Letra(String l){
             super();
             this.l = l;
             setText(this.l);
-            this.x = x; this.y = y;
             setBackground(Color.black);
             setForeground(Color.white);
-            setFont(new Font("Arial", Font.PLAIN, 20));
+            setFont(new Font("Arial", Font.PLAIN, 18));
             addActionListener(new Evento());
             acionado = false; permanente = false;
         }
