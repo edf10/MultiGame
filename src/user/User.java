@@ -3,7 +3,6 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 public class User {
     private String username;
     private String password;
