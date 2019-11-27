@@ -71,7 +71,7 @@ public class TelaWP extends Frame{
         add(lbdoispontos);
         add(lbsegundos);
         barraWords();
-        add(it.btnClose()); add(it.returnGames(this));
+        add(it.btnClose()); add(it.returnGames(this)); add(it.btnSomOutro());
     }
     
     private Lb lbWord;

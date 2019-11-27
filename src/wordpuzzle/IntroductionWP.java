@@ -16,7 +16,7 @@ public class IntroductionWP extends Frame{
     public void tutorial() {
         pnTutorial = new Pn(); pnTutorial.setLayout(null);pnTutorial.setBounds(0, 0, 1200, 700);
         int backPos[] = {0,0,1200,700}; it.setTelaAntIntro(3);
-        add(it.btnClose()); add(it.returnGames());
+        add(it.btnClose()); add(it.returnGames()); add(it.btnSomOutro());
         pnTutorial.add(new Lb(im.addImagem("tutorial_wp"),backPos));
         add(pnTutorial);
     }
@@ -34,8 +34,8 @@ public class IntroductionWP extends Frame{
         menu = it.menuOpGamesIntro(this);
         Component cp[] = {
             new Lb(im.addImagem("title_wp"), titlePos),
-            it.btnClose(),
-            menu[0],menu[1],menu[2],
+            it.btnClose(), it.btnSomOutro(),
+            menu[0],menu[1],menu[2],menu[3],
             new Btn(btn_classic, classicPos, new EventBtnsIntro(1)),
             new Btn(btn_rank, rankPos, new EventBtnsIntro(2)),
             new Btn(btn_tuto, tutoPos, new EventBtnsIntro(3)),
@@ -71,7 +71,7 @@ public class IntroductionWP extends Frame{
         ImageIcon btn_hard[] = {im.addImagem("btn_hard_wp"),im.addImagem("btn_hard_wp_t"),im.addImagem("btn_hard_wp_p")};
         it.setTelaAntIntro(3);
         Component cp[] = {
-            it.btnClose(),
+            it.btnClose(), it.btnSomOutro(),
             menu[0],menu[1],menu[2],menu[3],
             new Btn(btn_easy, btnEasyPos, new EventBtnsNiveis(1)),
             new Btn(btn_medium, btnMediumPos, new EventBtnsNiveis(2)),

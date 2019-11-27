@@ -46,7 +46,7 @@ public abstract class Recordes extends Frame{
         int btnMediumPos[] = {439,311,304,71}; int btnHardPos[] = {502,445,189,79};
         ImageIcon btn_easy[] = ims[0];ImageIcon btn_medium[] = ims[1];ImageIcon btn_hard[] = ims[2];
         Component cp[] = {
-            it.btnClose(),
+            it.btnClose(), it.btnSomOutro(),
             it.returnGames(this),
             new Btn(btn_easy, btnEasyPos, new EventBtnsRank(14)),
             new Btn(btn_medium, btnMediumPos, new EventBtnsRank(16)),
@@ -94,6 +94,7 @@ public abstract class Recordes extends Frame{
         }
         
         add(it.btnClose()); add(it.returnGames(this)); int backPos[] = {0,0,1200,700}; int barrasPos[] = {94,243,1009,360};
+        add(it.btnSomOutro());
         add(new Lb(ims[4][0], barrasPos));
         add(pnPosicoes);add(pnScores);add(pnUsers);
         add(new Lb(ims[5][0], backPos));

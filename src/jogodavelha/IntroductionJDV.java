@@ -11,7 +11,6 @@ import componentes.Frame;
 import componentes.Pass;
 import componentes.Txt;
 import java.awt.Font;
-import java.util.Random;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import padroes.Fonts;
@@ -30,7 +29,7 @@ public class IntroductionJDV extends Frame{
     public void tutorial() {
         pnTutorial = new Pn(); pnTutorial.setLayout(null);pnTutorial.setBounds(0, 0, 1200, 700);
         int backPos[] = {0,0,1200,700}; it.setTelaAntIntro(2);
-        add(it.btnClose()); add(it.returnGames());
+        add(it.btnClose()); add(it.returnGames()); add(it.btnSomOutro());
         pnTutorial.add(new Lb(im.addImagem("tutorial_jdv"),backPos));
         add(pnTutorial);
     }
@@ -44,8 +43,8 @@ public class IntroductionJDV extends Frame{
         ImageIcon btn_tutorial[] = {im.addImagem("btn_tutorial_jdv"),im.addImagem("btn_tutorial_jdv_t"),im.addImagem("btn_tutorial_jdv_p")};
         ImageIcon btn_hist[] = {im.addImagem("btn_historic_jdv"),im.addImagem("btn_historic_jdv_t"),im.addImagem("btn_historic_jdv_p")};
         Component cp[] = {
-            it.btnClose(),
-            menu[0],menu[1],menu[2],
+            it.btnClose(), it.btnSomOutro(),
+            menu[0],menu[1],menu[2],menu[3],
             new Lb(im.addImagem("title_jdv"), titlePos),
             new Btn(btn_multi, multPos, new EventBtnsIntro(1)),
             new Btn(btn_tutorial, tutorialPos, new EventBtnsIntro(2)),
@@ -68,7 +67,7 @@ public class IntroductionJDV extends Frame{
         ImageIcon btn_multiplication[] = {im.addImagem("btn_multiplication_jdv"),im.addImagem("btn_multiplication_jdv_t"),im.addImagem("btn_multiplication_jdv_p")};
         it.setTelaAntIntro(2);
         Component cp[] = {
-            it.btnClose(),
+            it.btnClose(), it.btnSomOutro(),
             menu[0],menu[1],menu[2],menu[3],
             new Btn(btn_addtion, btnAddtionPos, new EventBtnsAss("Addtion")),
             new Btn(btn_division, btnDivisionPos, new EventBtnsAss("Division")),
