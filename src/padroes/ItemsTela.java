@@ -23,23 +23,49 @@ public class ItemsTela {
             System.exit(0);
         }
     }
-    
+    private final ImageIcon imSom = im.addImagem("btn_som");
+    private final ImageIcon imMute = im.addImagem("btn_mute");
+    private Btn som;
+    public Btn btnSom(){
+        int somPos[] = {20,20,42,35};
+        ImageIcon imDaVez = (vez==1) ? imSom:imMute;
+        som = new Btn(imDaVez, somPos, new EventSom());
+        return som;
+    }
+    public Btn btnSomOutro(){
+        int somPos[] = {1129,642,42,35};
+        ImageIcon imDaVez = (vez==1) ? imSom:imMute;
+        som = new Btn(imDaVez, somPos, new EventSom());
+        return som;
+    }
+    private static int vez = 1;
+    public class EventSom implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            if(vez==1){som.setIcon(imMute);vez = 2;}else{som.setIcon(imSom);vez = 1;}
+        }
+    }
     private Btn btnReturn;
     private Btn btnLogout;
     private Btn btnHome;
+    private Btn btnStore;
     
     private final ImageIcon btn_user[] = {im.addImagem("btn_user"),im.addImagem("btn_user_t")}; 
     private final ImageIcon btn_return[] = {im.addImagem("btn_return"),im.addImagem("btn_return_t")}; 
     private final ImageIcon btn_logout[] = {im.addImagem("btn_logout"),im.addImagem("btn_logout_t")};
     private final ImageIcon btn_home[] = {im.addImagem("btn_home"),im.addImagem("btn_home_t")}; 
+    private final ImageIcon btn_store[] = {im.addImagem("btn_store"),im.addImagem("btn_store_t")};
     public Btn[] menuOp(Frame telaAtual){
         this.telaAtual = telaAtual;
-        int userPos[] = {21,20,99,39}; int logoutPos[] = {25,81,124,37};
+        int userPos[] = {21,20,99,39}; int logoutPos[] = {25,143,124,37}; int storePos[] = {21,86,117,33};
         btnLogout = new Btn(btn_logout, logoutPos, new EventOps(2));
+        btnStore = new Btn(btn_store, storePos, new EventOps(3));
         btnLogout.setVisible(false);
+        btnStore.setVisible(false);
         Btn btns[] = {
             new Btn(btn_user, userPos, new EventMenuOp(1)),
-            btnLogout
+            btnLogout,
+            btnStore
         };
         return btns;
     }
@@ -64,15 +90,18 @@ public class ItemsTela {
     
     public Btn[] menuOpGamesIntro(Frame telaAtual){
         this.telaAtual = telaAtual;//20,81,143,195,248,303
-        int userPos[] = {21,20,99,39};int logoutPos[] = {25,143,124,37};int homePos[] = {21,81,105,33};
+        int userPos[] = {21,20,99,39};int logoutPos[] = {25,195,124,37};int homePos[] = {21,81,105,33}; int storePos[] = {19,139,117,33};
         btnLogout = new Btn(btn_logout, logoutPos, new EventOps(2));
         btnHome = new Btn(btn_home, homePos, new EventOps(1));
+        btnStore = new Btn(btn_store, storePos, new EventOps(3));
         btnLogout.setVisible(false);
         btnHome.setVisible(false);
+        btnStore.setVisible(false);
         Btn btns[] = {
             new Btn(btn_user, userPos, new EventMenuOp(3)),
             btnHome,
-            btnLogout
+            btnLogout,
+            btnStore
         };
         return btns;
     }
@@ -87,10 +116,12 @@ public class ItemsTela {
         public void actionPerformed(ActionEvent e){
             if(descer==false){
                 btnLogout.setVisible(true);descer = true;
+                if(esc==1||esc==3){btnStore.setVisible(true);}
                 if(esc==2){btnHome.setVisible(true);btnReturn.setVisible(true);}
-                if(esc==3){btnHome.setVisible(true);}
+                if(esc==3){btnHome.setVisible(true);btnStore.setVisible(true);}
             }else{
                 btnLogout.setVisible(false);descer = false;
+                if(esc==1||esc==3){btnStore.setVisible(false);}
                 if(esc==2){btnHome.setVisible(false);btnReturn.setVisible(false);}
                 if(esc==3){btnHome.setVisible(false);}
             }
@@ -107,6 +138,7 @@ public class ItemsTela {
             switch(esc){
                 case 1: telaAtual.dispose(); MultiGameTela mg = new MultiGameTela();mg.Jogos(); mg.show();break;
                 case 2: telaAtual.dispose(); MultiGameTela mg1 = new MultiGameTela(); mg1.login_user(); mg1.show();break;
+                case 3: Store s = new Store();
                 default: break;
             }
         }

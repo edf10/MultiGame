@@ -23,7 +23,7 @@ public class IntroductionCM extends Frame{
         ImageIcon btn_hard[] = {im.addImagem("btn_hard_cm"),im.addImagem("btn_hard_cm_t"),im.addImagem("btn_hard_cm_p")};
         it.setTelaAntIntro(1);
         Component cp[] = {
-            it.btnClose(),
+            it.btnClose(), it.btnSomOutro(),
             menu[0],menu[1],menu[2],menu[3],
             new Btn(btn_easy, btnEasyPos, new EventBtnsNiveis(1)),
             new Btn(btn_medium, btnMediumPos, new EventBtnsNiveis(2)),
@@ -38,7 +38,7 @@ public class IntroductionCM extends Frame{
     public void tutorial(){
         pnTutorial = new Pn(); pnTutorial.setLayout(null);pnTutorial.setBounds(0, 0, 1200, 700);
         int backPos[] = {0,0,1200,700}; it.setTelaAntIntro(1);
-        add(it.btnClose()); add(it.returnGames());
+        add(it.btnClose()); add(it.returnGames()); add(it.btnSomOutro());
         pnTutorial.add(new Lb(im.addImagem("tutorial_cm"),backPos));
         add(pnTutorial);
     }
@@ -52,8 +52,8 @@ public class IntroductionCM extends Frame{
         ImageIcon btn_ranking_cm[] = {im.addImagem("btn_ranking_cm"),im.addImagem("btn_ranking_cm_t"),im.addImagem("btn_ranking_cm_p")};
         ImageIcon btn_tutorial_cm[] = {im.addImagem("btn_tutorial_cm"),im.addImagem("btn_tutorial_cm_t"),im.addImagem("btn_tutorial_cm_p")};
         Component cp[] = {
-            it.btnClose(),
-            menu[0],menu[1],menu[2],
+            it.btnClose(), it.btnSomOutro(),
+            menu[0],menu[1],menu[2],menu[3],
             new Lb(im.addImagem("title_cm"), titlePos),
             new Btn(btn_play_cm, btnPlayPos, new EventBtnsIntro(1)),
             new Btn(btn_ranking_cm, btnRankingPos, new EventBtnsIntro(2)),

@@ -84,7 +84,7 @@ public class TelaCM extends Frame{
         pnBorda.setBackground(new Color(45,39,39));
         add(pnBorda);
         getContentPane().setBackground(new Color(45,39,39));
-        add(it.btnClose());
+        add(it.btnClose()); add(it.btnSomOutro());
         add(lbminutos);
         add(lbsegundos);
         add(lbdoispontos);

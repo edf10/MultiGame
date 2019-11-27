@@ -6,7 +6,6 @@ import componentes.Pn;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.util.ArrayList;
 import padroes.Fonts;
 import padroes.ItemsTela;
 import user.User;
@@ -56,6 +55,7 @@ public class HistoricJDV extends Frame{
             pnRes.add(new Lb("-",f,Color.white));
         }
         add(it.btnClose()); add(it.returnGames(this)); int backPos[] = {0,0,1200,700}; int barrasPos[] = {94,247,1009,360};
+        add(it.btnSomOutro());
         add(new Lb(im.addImagem("barras_ranking_cm"), barrasPos));
         add(pnUsers);add(pnAss);add(pnRes);
         add(new Lb(im.addImagem("back_historic_jdv"), backPos));
