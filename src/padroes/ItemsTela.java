@@ -1,6 +1,7 @@
 package padroes;
 
 import campominado.IntroductionCM;
+import campominado.StoreCM;
 import componentes.Btn;
 import componentes.Frame;
 import imagens.Im;
@@ -88,12 +89,12 @@ public class ItemsTela {
         return btns;
     }
     
-    public Btn[] menuOpGamesIntro(Frame telaAtual){
+    public Btn[] menuOpGamesIntro(Frame telaAtual, int store){
         this.telaAtual = telaAtual;//20,81,143,195,248,303
         int userPos[] = {21,20,99,39};int logoutPos[] = {25,195,124,37};int homePos[] = {21,81,105,33}; int storePos[] = {19,139,117,33};
         btnLogout = new Btn(btn_logout, logoutPos, new EventOps(2));
         btnHome = new Btn(btn_home, homePos, new EventOps(1));
-        btnStore = new Btn(btn_store, storePos, new EventOps(3));
+        btnStore = new Btn(btn_store, storePos, new EventOps(store));
         btnLogout.setVisible(false);
         btnHome.setVisible(false);
         btnStore.setVisible(false);
@@ -139,6 +140,7 @@ public class ItemsTela {
                 case 1: telaAtual.dispose(); MultiGameTela mg = new MultiGameTela();mg.Jogos(); mg.show();break;
                 case 2: telaAtual.dispose(); MultiGameTela mg1 = new MultiGameTela(); mg1.login_user(); mg1.show();break;
                 case 3: telaAtual.dispose(); Store s = new Store(); s.intro(); s.show(); break;
+                case 4: telaAtual.dispose(); StoreCM scm = new StoreCM(); scm.intro(); scm.show(); break;
                 default: break;
             }
         }
@@ -158,6 +160,9 @@ public class ItemsTela {
     public void setTelaAntIntro(int telaAntIntro) {
         this.telaAntIntro = telaAntIntro;
     }
+    public int getTelaAntIntro() {
+        return telaAntIntro;
+    }
     public void setTelaAtual(Frame telaAtual) {
         this.telaAtual = telaAtual;
     }
@@ -170,6 +175,7 @@ public class ItemsTela {
                 case 2:IntroductionJDV ijdv = new IntroductionJDV();ijdv.intro();ijdv.show();break;
                 case 3:IntroductionWP iwp = new IntroductionWP();iwp.intro();iwp.show();break;
                 case 4:MultiGameTela mg = new MultiGameTela();mg.Jogos(); mg.show();break;
+                case 5:Store s = new Store(); s.intro(); s.show();
                 default:break;
             }
         }

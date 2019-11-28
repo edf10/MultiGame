@@ -36,7 +36,7 @@ public class IntroductionJDV extends Frame{
 
     private Pn pnIntro;
     public void intro(){
-        int backPos[] = {0,0,1200,700}; menu = it.menuOpGamesIntro(this); 
+        int backPos[] = {0,0,1200,700}; menu = it.menuOpGamesIntro(this,5); 
         int titlePos[] = {254,70,752,109}; int multPos[] = {379,267,473,75};
         int tutorialPos[] = {455,372,325,75}; int histPos[] = {465,491,307,75};
         ImageIcon btn_multi[] = {im.addImagem("btn_multiplayer_jdv"),im.addImagem("btn_multiplayer_jdv_t"),im.addImagem("btn_multiplayer_jdv_p")};

@@ -1,15 +1,15 @@
 package padroes;
-
+import campominado.StoreCM;
 import componentes.Btn;
 import componentes.Frame;
 import componentes.Lb;
 import componentes.Pn;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
-
 public class Store extends Frame{
-    
     private ItemsTela it = new ItemsTela();
     private Pn pnIntro;
     public void intro(){
@@ -22,9 +22,9 @@ public class Store extends Frame{
         Component cp[] = {
             it.btnClose(), it.btnSomOutro(), it.returnGames(this),
             new Lb(im.addImagem("title_store"), titlePos),
-            new Btn(btn_cm, cmPos, null),
-            new Btn(btn_jdv, jdvPos, null),
-            new Btn(btn_wp, wpPos, null),
+            new Btn(btn_cm, cmPos, new EventBtns(1)),
+            new Btn(btn_jdv, jdvPos, new EventBtns(2)),
+            new Btn(btn_wp, wpPos, new EventBtns(3)),
             new Lb(im.addGif("back_gif_store_in"), gifRightPos),
             new Lb(im.addGif("back_gif_store"), gifLeftPos)
         };
@@ -33,6 +33,20 @@ public class Store extends Frame{
         pnIntro.setBackground(Color.black);
         add(pnIntro);
     }
-    
-    
+    public class EventBtns implements ActionListener{
+        private int esc;
+        public EventBtns(int esc){
+            this.esc = esc;
+        }
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            dispose();
+            switch(esc){
+                case 1: StoreCM scm = new StoreCM(); scm.definirTelaVoltar(5); scm.intro(); scm.show(); break;
+                case 2: break;
+                case 3: break;
+                default: break;
+            }
+        }
+    }
 }

@@ -47,7 +47,7 @@ public class IntroductionCM extends Frame{
     public void intro(){
         int backCMPos[] = {0,0,1200,700}; int titlePos[] = {250,52,805,100};
         int btnPlayPos[] = {526,273,185,71}; int btnRankingPos[] = {467,381,304,79};
-        int btnTutorialPos[] = {464,497,346,79}; menu = it.menuOpGamesIntro(this);
+        int btnTutorialPos[] = {464,497,346,79}; menu = it.menuOpGamesIntro(this,4);
         ImageIcon btn_play_cm[] = {im.addImagem("btn_play_cm"),im.addImagem("btn_play_cm_t"),im.addImagem("btn_play_cm_p")};
         ImageIcon btn_ranking_cm[] = {im.addImagem("btn_ranking_cm"),im.addImagem("btn_ranking_cm_t"),im.addImagem("btn_ranking_cm_p")};
         ImageIcon btn_tutorial_cm[] = {im.addImagem("btn_tutorial_cm"),im.addImagem("btn_tutorial_cm_t"),im.addImagem("btn_tutorial_cm_p")};
