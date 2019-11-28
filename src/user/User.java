@@ -8,7 +8,8 @@ public class User {
     private String password;
     private String dataRegistro;
     private int moedas;
-    private ArrayList<ArrayList<String>>[] storeCM = new ArrayList[10];
+    private ArrayList<ArrayList<String>> storeCM = new ArrayList<>();
+    private ArrayList<ArrayList<String>> emUsoCM = new ArrayList<>();
     private ArrayList<ArrayList<String>> historicJDV = new ArrayList<>();
     private static User user;
     public static User getUser() {
@@ -18,17 +19,39 @@ public class User {
         User.user = user;
     }
     public User(){}
-    
     public User(String username, String password){
         this.username = username;
         this.password = password;
         moedas = 0;
+        ArrayList<String> lista_items = new ArrayList<>();
+        lista_items.add("1");
+        for(int i = 1; i<10; i++){
+            lista_items.add("0");
+        }
+        storeCM.add(lista_items);storeCM.add(lista_items);storeCM.add(lista_items);
+        emUsoCM.add(lista_items);emUsoCM.add(lista_items);emUsoCM.add(lista_items);
     }
-    
-    public void addItemComprado(String item){
-        
+    public void addItemComprado(int tipo, int item){
+        storeCM.get(tipo).set(item, "1");
     }
-    
+    public void addItemUso(int tipo, int item){
+        emUsoCM.get(tipo).set(item, "1");
+    }
+    public void removerItemUso(int tipo, int item){
+        emUsoCM.get(tipo).set(item, "0");
+    }
+    public ArrayList<ArrayList<String>> getStoreCM() {
+        return storeCM;
+    }
+    public void setStoreCM(ArrayList<ArrayList<String>> storeCM) {
+        this.storeCM = storeCM;
+    }
+    public ArrayList<ArrayList<String>> getEmUsoCM() {
+        return emUsoCM;
+    }
+    public void setEmUsoCM(ArrayList<ArrayList<String>> emUsoCM) {
+        this.emUsoCM = emUsoCM;
+    }
     public void addDataRegister(){
         Date d = new Date();
         dataRegistro = java.text.DateFormat.getDateInstance(DateFormat.MEDIUM).format(d);

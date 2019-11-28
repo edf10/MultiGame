@@ -138,7 +138,7 @@ public class ItemsTela {
             switch(esc){
                 case 1: telaAtual.dispose(); MultiGameTela mg = new MultiGameTela();mg.Jogos(); mg.show();break;
                 case 2: telaAtual.dispose(); MultiGameTela mg1 = new MultiGameTela(); mg1.login_user(); mg1.show();break;
-                case 3: Store s = new Store();
+                case 3: telaAtual.dispose(); Store s = new Store(); s.intro(); s.show(); break;
                 default: break;
             }
         }
