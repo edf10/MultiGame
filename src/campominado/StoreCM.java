@@ -23,18 +23,26 @@ public class StoreCM extends Store{
     
     private ArrayList<ImageIcon[]> btn_niveis = new ArrayList<>();
     private ArrayList<ImageIcon> btn_bombs = new ArrayList<>();
+    private ArrayList<ImageIcon> btn_flags = new ArrayList<>();
     
     public StoreCM(){
         btnNiveis(ims[user.getEmUsoCM().get(2).indexOf("1")]);
         btnNiveis(ims[user.getEmUsoCM().get(2).indexOf("1")], "t");
         btnNiveis(ims[user.getEmUsoCM().get(2).indexOf("1")], "p");
         btnBombs(ims[user.getEmUsoCM().get(1).indexOf("1")]);
+        btnFlags(ims[user.getEmUsoCM().get(0).indexOf("1")]);
+    }
+    
+    public void btnFlags(String esc){
+        btn_flags.clear();
+        ImageIcon flagE = im.addImagem("flagF_"+esc);ImageIcon flagM = im.addImagem("flagM_"+esc);ImageIcon flagH = im.addImagem("flagD_"+esc);
+        btn_flags.add(flagE);btn_flags.add(flagM);btn_flags.add(flagH);
     }
     
     public void btnBombs(String esc){
         btn_bombs.clear();
-        ImageIcon btn_bomb = im.addImagem("bomb_cm_easy_"+esc);ImageIcon btn_bomb_m = im.addImagem("bomb_cm_medium_"+esc);ImageIcon btn_bomb_h = im.addImagem("bomb_cm_hard_"+esc);
-        btn_bombs.add(btn_bomb); btn_bombs.add(btn_bomb_m);btn_bombs.add(btn_bomb_h);
+        ImageIcon bomb = im.addImagem("bomb_cm_easy_"+esc);ImageIcon bomb_m = im.addImagem("bomb_cm_medium_"+esc);ImageIcon bomb_h = im.addImagem("bomb_cm_hard_"+esc);
+        btn_bombs.add(bomb); btn_bombs.add(bomb_m);btn_bombs.add(bomb_h);
     }
     
     public void btnNiveis(String esc){
@@ -45,6 +53,10 @@ public class StoreCM extends Store{
     public void btnNiveis(String esc, String complemento){
         ImageIcon btn_niveis[] = {im.addImagem("btn_cm_easy_"+complemento+"_"+esc),im.addImagem("btn_cm_medium_"+complemento+"_"+esc),im.addImagem("btn_cm_hard_"+complemento+"_"+esc)};
         this.btn_niveis.add(btn_niveis);
+    }
+
+    public ArrayList<ImageIcon> getBtn_flags() {
+        return btn_flags;
     }
     public ArrayList<ImageIcon> getBtn_bombs() {
         return btn_bombs;
@@ -202,6 +214,7 @@ public class StoreCM extends Store{
                 btnNiveis(ims[btn], "t");
                 btnNiveis(ims[btn], "p");
                 btnBombs(ims[btn]);
+                btnFlags(ims[btn]);
                 Conta c = new Conta(user); c.gravar(); User.setUser(user);
             }
         }
