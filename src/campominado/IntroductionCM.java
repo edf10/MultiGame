@@ -89,9 +89,9 @@ public class IntroductionCM extends Frame{
         @Override
         public void actionPerformed(ActionEvent ae) {
             pnIntro.setVisible(false);
-            switch (n) {
+            switch(n) {
                 case 1:niveis();break;
-                case 2:ranking();
+                case 2:ranking();break;
                 case 3:tutorial();break;
                 default:break;
             }

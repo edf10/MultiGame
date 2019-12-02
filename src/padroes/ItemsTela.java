@@ -1,5 +1,6 @@
 package padroes;
 
+import arduino.ArduinoSerial;
 import campominado.IntroductionCM;
 import campominado.StoreCM;
 import componentes.Btn;
@@ -14,8 +15,13 @@ import wordpuzzle.IntroductionWP;
 
 public class ItemsTela {
     private Im im = new Im();
+    private ArduinoSerial arduino = new ArduinoSerial("COM4");
+    public ItemsTela(){
+        arduino.initialize();
+    }
     public Btn btnClose(){
         int closePos[] = {1161,15,19,19}; ImageIcon btn_close[] = {im.addImagem("btn_close"),im.addImagem("btn_close_t")};
+        VerificarPressExit sair = new VerificarPressExit(); sair.start();
         return new Btn(btn_close, closePos, new EventClose());
     }
     private class EventClose implements ActionListener{
@@ -24,19 +30,36 @@ public class ItemsTela {
             System.exit(0);
         }
     }
+    public class VerificarPressExit extends Thread{
+        private String lido;
+        @Override
+        public void run(){
+            while(true){
+                //System.out.println(lido);
+                try{Thread.sleep(100);}catch(Exception e){}
+                if((lido = (arduino.read()!=null)?arduino.read():"0").equals("A")){
+                    System.out.println("e");
+                    System.exit(0);
+                    stop();
+                    break;
+                }
+            }
+        }
+    }
+    
     private final ImageIcon imSom = im.addImagem("btn_som");
     private final ImageIcon imMute = im.addImagem("btn_mute");
     private Btn som;
     public Btn btnSom(){
         int somPos[] = {20,20,42,35};
         ImageIcon imDaVez = (vez==1) ? imSom:imMute;
-        som = new Btn(imDaVez, somPos, new EventSom());
+        som = new Btn(imDaVez, somPos, new EventSom()); 
         return som;
     }
     public Btn btnSomOutro(){
         int somPos[] = {1129,642,42,35};
         ImageIcon imDaVez = (vez==1) ? imSom:imMute;
-        som = new Btn(imDaVez, somPos, new EventSom());
+        som = new Btn(imDaVez, somPos, new EventSom()); 
         return som;
     }
     private static int vez = 1;
@@ -140,7 +163,7 @@ public class ItemsTela {
                 case 1: telaAtual.dispose(); MultiGameTela mg = new MultiGameTela();mg.Jogos(); mg.show();break;
                 case 2: telaAtual.dispose(); MultiGameTela mg1 = new MultiGameTela(); mg1.login_user(); mg1.show();break;
                 case 3: telaAtual.dispose(); Store s = new Store(); s.intro(); s.show(); break;
-                case 4: telaAtual.dispose(); StoreCM scm = new StoreCM(); scm.intro(); scm.show(); break;
+                case 4: telaAtual.dispose(); StoreCM scm = new StoreCM(); scm.loja(); scm.show(); break;
                 default: break;
             }
         }

@@ -42,7 +42,7 @@ public class Store extends Frame{
         public void actionPerformed(ActionEvent ae) {
             dispose();
             switch(esc){
-                case 1: StoreCM scm = new StoreCM(); scm.definirTelaVoltar(5); scm.intro(); scm.show(); break;
+                case 1: StoreCM scm = new StoreCM(); scm.definirTelaVoltar(5); scm.loja(); scm.show(); break;
                 case 2: break;
                 case 3: break;
                 default: break;
