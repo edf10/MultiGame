@@ -31,7 +31,7 @@ public class IntroductionWP extends Frame{
         ImageIcon btn_classic[] = {im.addImagem("btn_classic_wp"),im.addImagem("btn_classic_wp_t"),im.addImagem("btn_classic_wp_p")};
         ImageIcon btn_rank[] = {im.addImagem("btn_ranking_wp"),im.addImagem("btn_ranking_wp_t"),im.addImagem("btn_ranking_wp_p")};
         ImageIcon btn_tuto[] = {im.addImagem("btn_tutorial_wp"),im.addImagem("btn_tutorial_wp_t"),im.addImagem("btn_tutorial_wp_p")};
-        menu = it.menuOpGamesIntro(this);
+        menu = it.menuOpGamesIntro(this,6);
         Component cp[] = {
             new Lb(im.addImagem("title_wp"), titlePos),
             it.btnClose(), it.btnSomOutro(),

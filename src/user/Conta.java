@@ -4,7 +4,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -31,6 +30,8 @@ public class Conta {
                     user.setDataRegistro(objectArquivo.get("data_register").toString());
                     user.setHistoricJDV((ArrayList<ArrayList<String>>) objectArquivo.get("historicJDV"));
                     user.setMoedas(Integer.parseInt(objectArquivo.get("moedas").toString()));
+                    user.setStoreCM((ArrayList<ArrayList<String>>) objectArquivo.get("storeCM"));
+                    user.setEmUsoCM((ArrayList<ArrayList<String>>) objectArquivo.get("emUsoCM"));
                     return user;
                 }
                 
@@ -46,6 +47,8 @@ public class Conta {
             objectArquivo.put("data_register", user.getDataRegistro());
             objectArquivo.put("historicJDV", user.getHistoricJDV());
             objectArquivo.put("moedas", user.getMoedas());
+            objectArquivo.put("storeCM", user.getStoreCM());
+            objectArquivo.put("emUsoCM", user.getEmUsoCM());
         }
         try{
             FileWriter arquivo = new FileWriter("users/"+user.getUsername()+".json");

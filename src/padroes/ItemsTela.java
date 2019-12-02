@@ -1,6 +1,8 @@
 package padroes;
 
+import arduino.ArduinoSerial;
 import campominado.IntroductionCM;
+import campominado.StoreCM;
 import componentes.Btn;
 import componentes.Frame;
 import imagens.Im;
@@ -13,8 +15,13 @@ import wordpuzzle.IntroductionWP;
 
 public class ItemsTela {
     private Im im = new Im();
+    private ArduinoSerial arduino = new ArduinoSerial("COM4");
+    public ItemsTela(){
+        arduino.initialize();
+    }
     public Btn btnClose(){
         int closePos[] = {1161,15,19,19}; ImageIcon btn_close[] = {im.addImagem("btn_close"),im.addImagem("btn_close_t")};
+        VerificarPressExit sair = new VerificarPressExit(); sair.start();
         return new Btn(btn_close, closePos, new EventClose());
     }
     private class EventClose implements ActionListener{
@@ -23,19 +30,36 @@ public class ItemsTela {
             System.exit(0);
         }
     }
+    public class VerificarPressExit extends Thread{
+        private String lido;
+        @Override
+        public void run(){
+            while(true){
+                //System.out.println(lido);
+                try{Thread.sleep(100);}catch(Exception e){}
+                if((lido = (arduino.read()!=null)?arduino.read():"0").equals("A")){
+                    System.out.println("e");
+                    System.exit(0);
+                    stop();
+                    break;
+                }
+            }
+        }
+    }
+    
     private final ImageIcon imSom = im.addImagem("btn_som");
     private final ImageIcon imMute = im.addImagem("btn_mute");
     private Btn som;
     public Btn btnSom(){
         int somPos[] = {20,20,42,35};
         ImageIcon imDaVez = (vez==1) ? imSom:imMute;
-        som = new Btn(imDaVez, somPos, new EventSom());
+        som = new Btn(imDaVez, somPos, new EventSom()); 
         return som;
     }
     public Btn btnSomOutro(){
         int somPos[] = {1129,642,42,35};
         ImageIcon imDaVez = (vez==1) ? imSom:imMute;
-        som = new Btn(imDaVez, somPos, new EventSom());
+        som = new Btn(imDaVez, somPos, new EventSom()); 
         return som;
     }
     private static int vez = 1;
@@ -88,12 +112,12 @@ public class ItemsTela {
         return btns;
     }
     
-    public Btn[] menuOpGamesIntro(Frame telaAtual){
+    public Btn[] menuOpGamesIntro(Frame telaAtual, int store){
         this.telaAtual = telaAtual;//20,81,143,195,248,303
         int userPos[] = {21,20,99,39};int logoutPos[] = {25,195,124,37};int homePos[] = {21,81,105,33}; int storePos[] = {19,139,117,33};
         btnLogout = new Btn(btn_logout, logoutPos, new EventOps(2));
         btnHome = new Btn(btn_home, homePos, new EventOps(1));
-        btnStore = new Btn(btn_store, storePos, new EventOps(3));
+        btnStore = new Btn(btn_store, storePos, new EventOps(store));
         btnLogout.setVisible(false);
         btnHome.setVisible(false);
         btnStore.setVisible(false);
@@ -138,7 +162,8 @@ public class ItemsTela {
             switch(esc){
                 case 1: telaAtual.dispose(); MultiGameTela mg = new MultiGameTela();mg.Jogos(); mg.show();break;
                 case 2: telaAtual.dispose(); MultiGameTela mg1 = new MultiGameTela(); mg1.login_user(); mg1.show();break;
-                case 3: Store s = new Store();
+                case 3: telaAtual.dispose(); Store s = new Store(); s.intro(); s.show(); break;
+                case 4: telaAtual.dispose(); StoreCM scm = new StoreCM(); scm.loja(); scm.show(); break;
                 default: break;
             }
         }
@@ -158,6 +183,9 @@ public class ItemsTela {
     public void setTelaAntIntro(int telaAntIntro) {
         this.telaAntIntro = telaAntIntro;
     }
+    public int getTelaAntIntro() {
+        return telaAntIntro;
+    }
     public void setTelaAtual(Frame telaAtual) {
         this.telaAtual = telaAtual;
     }
@@ -170,6 +198,7 @@ public class ItemsTela {
                 case 2:IntroductionJDV ijdv = new IntroductionJDV();ijdv.intro();ijdv.show();break;
                 case 3:IntroductionWP iwp = new IntroductionWP();iwp.intro();iwp.show();break;
                 case 4:MultiGameTela mg = new MultiGameTela();mg.Jogos(); mg.show();break;
+                case 5:Store s = new Store(); s.intro(); s.show();
                 default:break;
             }
         }
