@@ -22,23 +22,33 @@ public class StoreCM extends Store{
                                   {110,548,165,38},{318,548,165,38},{522,548,165,38},{717,548,165,38},{919,548,165,38}};
     
     private ArrayList<ImageIcon[]> btn_niveis = new ArrayList<>();
+    private ArrayList<ImageIcon> btn_bombs = new ArrayList<>();
     
     public StoreCM(){
-        btnNiveis(ims[user.getEmUsoCM().get(2).indexOf("1")], 0);
-        btnNiveis(ims[user.getEmUsoCM().get(2).indexOf("1")], "t", 0);
-        btnNiveis(ims[user.getEmUsoCM().get(2).indexOf("1")], "p", 0);
+        btnNiveis(ims[user.getEmUsoCM().get(2).indexOf("1")]);
+        btnNiveis(ims[user.getEmUsoCM().get(2).indexOf("1")], "t");
+        btnNiveis(ims[user.getEmUsoCM().get(2).indexOf("1")], "p");
+        btnBombs(ims[user.getEmUsoCM().get(1).indexOf("1")]);
     }
     
-    public void btnNiveis(String esc, int btn){
+    public void btnBombs(String esc){
+        btn_bombs.clear();
+        ImageIcon btn_bomb = im.addImagem("bomb_cm_easy_"+esc);ImageIcon btn_bomb_m = im.addImagem("bomb_cm_medium_"+esc);ImageIcon btn_bomb_h = im.addImagem("bomb_cm_hard_"+esc);
+        btn_bombs.add(btn_bomb); btn_bombs.add(btn_bomb_m);btn_bombs.add(btn_bomb_h);
+    }
+    
+    public void btnNiveis(String esc){
         btn_niveis.clear();
         ImageIcon btn_niveis[] = {im.addImagem("btn_cm_easy_"+esc),im.addImagem("btn_cm_medium_"+esc),im.addImagem("btn_cm_hard_"+esc)};
         this.btn_niveis.add(btn_niveis);
     }
-    public void btnNiveis(String esc, String complemento, int btn){
+    public void btnNiveis(String esc, String complemento){
         ImageIcon btn_niveis[] = {im.addImagem("btn_cm_easy_"+complemento+"_"+esc),im.addImagem("btn_cm_medium_"+complemento+"_"+esc),im.addImagem("btn_cm_hard_"+complemento+"_"+esc)};
         this.btn_niveis.add(btn_niveis);
     }
-
+    public ArrayList<ImageIcon> getBtn_bombs() {
+        return btn_bombs;
+    }
     public ArrayList<ImageIcon[]> getBtn_niveis() {
         return btn_niveis;
     }
@@ -114,7 +124,7 @@ public class StoreCM extends Store{
         btnFlags.setIcon(btnFlags.getRolloverIcon());
         pnItemsFlags = new Pn(); pnItemsFlags.setLayout(null); pnItemsFlags.setBounds(0, 0, 1200, 700);
         for(int i = 0; i<10; i++){
-            pnItemsFlags.add(new Btn(im.addImagem("flagF_"+ims[i]), posBtns[i], null));
+            pnItemsFlags.add(new Lb(im.addImagem("flagF_"+ims[i]), posBtns[i]));
         }
         addBtnBasic(pnItemsFlags, 0);
         return pnItemsFlags;
@@ -125,7 +135,7 @@ public class StoreCM extends Store{
         btnButtons.setIcon(btnButtons.getRolloverIcon());
         pnItemsButtons = new Pn(); pnItemsButtons.setLayout(null); pnItemsButtons.setBounds(0, 0, 1200, 700);
         for(int i = 0; i<10; i++){
-            pnItemsButtons.add(new Btn(im.addImagem("btn_cm_easy_"+ims[i]), posBtns[i], null));
+            pnItemsButtons.add(new Lb(im.addImagem("btn_cm_easy_"+ims[i]), posBtns[i]));
         }
         addBtnBasic(pnItemsButtons, 2);
         return pnItemsButtons;
@@ -188,9 +198,10 @@ public class StoreCM extends Store{
                 user.getEmUsoCM().get(tipo).set(user.getEmUsoCM().get(tipo).indexOf("1"), "0");
                 user.getEmUsoCM().get(tipo).set(btn, "1");
                 btnsUso[tipo][btn].setIcon(im.addImagem("btn_uso_store"));
-                btnNiveis(ims[btn], btn);
-                btnNiveis(ims[btn], "t", btn);
-                btnNiveis(ims[btn], "p", btn);
+                btnNiveis(ims[btn]);
+                btnNiveis(ims[btn], "t");
+                btnNiveis(ims[btn], "p");
+                btnBombs(ims[btn]);
                 Conta c = new Conta(user); c.gravar(); User.setUser(user);
             }
         }

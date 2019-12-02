@@ -26,6 +26,7 @@ public class TelaCM extends Frame{
     private int m5[][]; //1=posOpen 3=marcadores 2=minas abertas
     private String nivel;
     private ArrayList<ImageIcon[]> btns_tab = scm.getBtn_niveis();
+    private ArrayList<ImageIcon> bombs = scm.getBtn_bombs();
     public void configuracoes(){
         it.setTelaAntIntro(1);
         x = r.getX(); y = r.getY();
@@ -42,13 +43,12 @@ public class TelaCM extends Frame{
             }
         }
         m = r.getM();
-        
         if(x==16){
             botao = btns_tab.get(0)[1];botao_p = btns_tab.get(1)[1];botao_t = btns_tab.get(2)[1];
-            marcador = im.addImagem("flagM_01");minas = im.addImagem("bomb_cm_medium_01");
+            marcador = im.addImagem("flagM_01");minas = bombs.get(1);
         }else if(x==18){
             botao = btns_tab.get(0)[2];botao_p = btns_tab.get(1)[2];botao_t = btns_tab.get(2)[2];
-            marcador = im.addImagem("flagD_01");minas = im.addImagem("bomb_cm_hard_01");
+            marcador = im.addImagem("flagD_01");minas = bombs.get(2);
         }
         CM();
     }
@@ -210,7 +210,7 @@ public class TelaCM extends Frame{
     public int scoreFat[] = new int[3];
     public boolean press = false; public boolean GO = false; public boolean win = false;
     public int iniciarJogo = 0; public int marc[][]; public int[][] m4;
-    public ImageIcon minas = im.addImagem("bomb_cm_easy_01"); public ImageIcon marcador = im.addImagem("flagF_01");
+    public ImageIcon minas = bombs.get(0); public ImageIcon marcador = im.addImagem("flagF_01");
     public ImageIcon botao = btns_tab.get(0)[0]; 
     public ImageIcon botao_p = btns_tab.get(1)[0];
     public ImageIcon botao_t = btns_tab.get(2)[0];
