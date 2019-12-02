@@ -12,6 +12,7 @@ import padroes.Store;
 import user.User;
 public class StoreCM extends Store{
     private User user = User.getUser();
+    private String[] ims = {"01","02","03","04","05","06","07","08","09","10"};
     private int[][] posBtns = {{158,214,65,41},{362,214,65,41},{576,214,65,41},{764,214,65,41},{969,214,65,41},
                                {158,431,65,41},{362,431,65,41},{576,431,65,41},{764,431,65,41},{969,431,65,41}};
     private int[][] posBtnsComprado = {{110,283,165,38},{318,283,165,38},{522,283,165,38},{717,283,165,38},{919,283,165,38},
@@ -111,29 +112,27 @@ public class StoreCM extends Store{
     private Pn pnItemsFlags;
     public Pn addStoreFlags(){
         btnFlags.setIcon(btnFlags.getRolloverIcon());
-        int backPos[] = {0,0,1200,700};
-        
-        pnItemsFlags = new Pn(); pnItemsFlags.setBounds(0, 0, 1200, 700);
-        pnItemsFlags.setBackground(Color.yellow);
+        pnItemsFlags = new Pn(); pnItemsFlags.setLayout(null); pnItemsFlags.setBounds(0, 0, 1200, 700);
+        /*for(int i = 0; i<10; i++){
+            pnItemsFlags.add(new Btn(im.addImagem("btn_cm_easy_"+ims[i]), posBtns[i], null));
+        }*/
+        addBtnBasic(pnItemsFlags);
         return pnItemsFlags;
     }
     
     private Pn pnItemsButtons;
     public Pn addStoreButtons(){
         btnButtons.setIcon(btnButtons.getRolloverIcon());
-        int backPos[] = {0,0,1200,700};
-        String[] ims = {"01","02","03","04","05","06","07","08","09","10"};
         pnItemsButtons = new Pn(); pnItemsButtons.setLayout(null); pnItemsButtons.setBounds(0, 0, 1200, 700);
         for(int i = 0; i<10; i++){
             pnItemsButtons.add(new Btn(im.addImagem("btn_cm_easy_"+ims[i]), posBtns[i], null));
         }
         addBtnBasic(pnItemsButtons);
-        pnItemsButtons.add(new Lb(im.addImagem("back_store_cm"), backPos));
-        pnItemsButtons.setBackground(null);
         return pnItemsButtons;
     }
     
     public void addBtnBasic(Pn pn){
+        int backPos[] = {0,0,1200,700};
         for(int i = 0; i<10; i++){
             if(user.getStoreCM().get(0).get(i).equals("1")){
                 pn.add(new Btn(im.addImagem("comprado_store"), posBtnsComprado[i], null));
@@ -146,6 +145,7 @@ public class StoreCM extends Store{
                 pn.add(new Btn(im.addImagem("sem_uso_btn_cm_store"), posBtnsUso[i], null));
             }
         }
+        pn.add(new Lb(im.addImagem("back_store_cm"), backPos));
     }
     
     public void definirTelaVoltar(int x){
