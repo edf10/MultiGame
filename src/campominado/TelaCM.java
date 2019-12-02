@@ -41,10 +41,10 @@ public class TelaCM extends Frame{
         m = r.getM();
         if(x==16){
             botao = im.addImagem("btn_cm_medium_01");botao_p = im.addImagem("btn_cm_medium_t_01");botao_t = im.addImagem("btn_cm_medium_p_01");
-            marcador = im.addImagem("flagM");minas = im.addImagem("bomb_cm_medium");
+            marcador = im.addImagem("flagM_01");minas = im.addImagem("bomb_cm_medium");
         }else if(x==18){
             botao = im.addImagem("btn_cm_hard_01");botao_p = im.addImagem("btn_cm_hard_t_01");botao_t = im.addImagem("btn_cm_hard_p_01");
-            marcador = im.addImagem("flagD");minas = im.addImagem("bomb_cm_hard");
+            marcador = im.addImagem("flagD_01");minas = im.addImagem("bomb_cm_hard");
         }
         CM();
     }
@@ -206,7 +206,7 @@ public class TelaCM extends Frame{
     public int scoreFat[] = new int[3];
     public boolean press = false; public boolean GO = false; public boolean win = false;
     public int iniciarJogo = 0; public int marc[][]; public int[][] m4;
-    public ImageIcon minas = im.addImagem("bomb_cm_easy"); public ImageIcon marcador = im.addImagem("flagF");
+    public ImageIcon minas = im.addImagem("bomb_cm_easy"); public ImageIcon marcador = im.addImagem("flagF_01");
     public ImageIcon botao = im.addImagem("btn_cm_easy_01"); 
     public ImageIcon botao_p = im.addImagem("btn_cm_easy_t_01");
     public ImageIcon botao_t = im.addImagem("btn_cm_easy_p_01");

@@ -21,6 +21,17 @@ public class StoreCM extends Store{
     
     private ImageIcon btn_niveis[];
     
+    public StoreCM(){
+        int btnFlagPos[] = {150,38,255,72}; int btnButtonPos[] = {834,38,255,72};
+        int btnBombsPos[] = {487,38,255,72};
+        ImageIcon btn_flag[] = {im.addImagem("btn_flags_cm"),im.addImagem("btn_flags_cm_t"),im.addImagem("btn_flags_cm_p")};
+        ImageIcon btn_bombs[] = {im.addImagem("btn_bombs_cm"),im.addImagem("btn_bombs_cm_t"),im.addImagem("btn_bombs_cm_p")};
+        ImageIcon btn_buttons[] = {im.addImagem("btn_buttons_cm"),im.addImagem("btn_buttons_cm_t"),im.addImagem("btn_buttons_cm_p")};
+        btnButtons = new Btn(btn_buttons, btnButtonPos, new EventBtnsIntro(3));
+        btnFlags = new Btn(btn_flag, btnFlagPos, new EventBtnsIntro(1));
+        btnBombs = new Btn(btn_bombs, btnBombsPos, new EventBtnsIntro(2));
+    }
+    
     public ImageIcon[] btnNiveis(String nivel){
         if("1".equals(nivel)){
             ImageIcon btn_niveis[] = {im.addImagem("btn_cm_easy"),im.addImagem("btn_cm_medium"),im.addImagem("btn_cm_hard")};
@@ -55,14 +66,7 @@ public class StoreCM extends Store{
         add(pnIntro);
     }
     public void loja(Pn pn){
-        int backPos[] = {0,0,1200,700}; int btnFlagPos[] = {150,38,255,72}; int btnButtonPos[] = {834,38,255,72};
-        int btnBombsPos[] = {487,38,255,72};
-        ImageIcon btn_flag[] = {im.addImagem("btn_flags_cm"),im.addImagem("btn_flags_cm_t"),im.addImagem("btn_flags_cm_p")};
-        ImageIcon btn_bombs[] = {im.addImagem("btn_bombs_cm"),im.addImagem("btn_bombs_cm_t"),im.addImagem("btn_bombs_cm_p")};
-        ImageIcon btn_buttons[] = {im.addImagem("btn_buttons_cm"),im.addImagem("btn_buttons_cm_t"),im.addImagem("btn_buttons_cm_p")};
-        btnButtons = new Btn(btn_buttons, btnButtonPos, new EventBtnsIntro(3));
-        btnFlags = new Btn(btn_flag, btnFlagPos, new EventBtnsIntro(1));
-        btnBombs = new Btn(btn_bombs, btnBombsPos, new EventBtnsIntro(2));
+        int backPos[] = {0,0,1200,700};
         Component cp[] = {
             it.btnClose(), it.returnGames(this),
             btnButtons, btnFlags, btnBombs,
@@ -81,6 +85,9 @@ public class StoreCM extends Store{
         public void actionPerformed(ActionEvent ae) {
             int backPos[] = {0,0,1200,700};
             pnIntro.setVisible(false);
+            btnButtons.setIcon(im.addImagem("btn_buttons_cm"));
+            btnBombs.setIcon(im.addImagem("btn_bombs_cm"));
+            btnFlags.setIcon(im.addImagem("btn_flags_cm"));
             if(btn==1){
                 loja(addStoreFlags());
             }else if(btn==2){
@@ -93,6 +100,7 @@ public class StoreCM extends Store{
     
     private Pn pnItemsBombs;
     public Pn addStoreBombs(){
+        btnBombs.setIcon(btnBombs.getRolloverIcon());
         int backPos[] = {0,0,1200,700};
         
         pnItemsBombs = new Pn(); pnItemsBombs.setBounds(0, 0, 1200, 700);
@@ -102,6 +110,7 @@ public class StoreCM extends Store{
     
     private Pn pnItemsFlags;
     public Pn addStoreFlags(){
+        btnFlags.setIcon(btnFlags.getRolloverIcon());
         int backPos[] = {0,0,1200,700};
         
         pnItemsFlags = new Pn(); pnItemsFlags.setBounds(0, 0, 1200, 700);
@@ -117,20 +126,26 @@ public class StoreCM extends Store{
         pnItemsButtons = new Pn(); pnItemsButtons.setLayout(null); pnItemsButtons.setBounds(0, 0, 1200, 700);
         for(int i = 0; i<10; i++){
             pnItemsButtons.add(new Btn(im.addImagem("btn_cm_easy_"+ims[i]), posBtns[i], null));
-            if(user.getStoreCM().get(0).get(i).equals("1")){
-                pnItemsButtons.add(new Btn(im.addImagem("comprado_store"), posBtnsComprado[i], null));
-            }else{
-                pnItemsButtons.add(new Btn(im.addImagem("valor_btn_cm_store"), posBtnsComprado[i], null));
-            }
-            if(user.getEmUsoCM().get(0).get(i).equals("1")){
-                pnItemsButtons.add(new Btn(im.addImagem("btn_uso_store"), posBtnsUso[i], null));
-            }else{
-                pnItemsButtons.add(new Btn(im.addImagem("sem_uso_btn_cm_store"), posBtnsUso[i], null));
-            }
         }
+        addBtnBasic(pnItemsButtons);
         pnItemsButtons.add(new Lb(im.addImagem("back_store_cm"), backPos));
         pnItemsButtons.setBackground(null);
         return pnItemsButtons;
+    }
+    
+    public void addBtnBasic(Pn pn){
+        for(int i = 0; i<10; i++){
+            if(user.getStoreCM().get(0).get(i).equals("1")){
+                pn.add(new Btn(im.addImagem("comprado_store"), posBtnsComprado[i], null));
+            }else{
+                pn.add(new Btn(im.addImagem("valor_btn_cm_store"), posBtnsComprado[i], null));
+            }
+            if(user.getEmUsoCM().get(0).get(i).equals("1")){
+                pn.add(new Btn(im.addImagem("btn_uso_store"), posBtnsUso[i], null));
+            }else{
+                pn.add(new Btn(im.addImagem("sem_uso_btn_cm_store"), posBtnsUso[i], null));
+            }
+        }
     }
     
     public void definirTelaVoltar(int x){
