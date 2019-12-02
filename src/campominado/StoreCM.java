@@ -102,10 +102,11 @@ public class StoreCM extends Store{
     private Pn pnItemsBombs;
     public Pn addStoreBombs(){
         btnBombs.setIcon(btnBombs.getRolloverIcon());
-        int backPos[] = {0,0,1200,700};
-        
-        pnItemsBombs = new Pn(); pnItemsBombs.setBounds(0, 0, 1200, 700);
-        pnItemsBombs.setBackground(Color.blue);
+        pnItemsBombs = new Pn(); pnItemsBombs.setLayout(null); pnItemsBombs.setBounds(0, 0, 1200, 700);
+        /*for(int i = 0; i<10; i++){
+            pnItemsFlags.add(new Btn(im.addImagem("btn_cm_easy_"+ims[i]), posBtns[i], null));
+        }*/
+        addBtnBasic(pnItemsBombs);
         return pnItemsBombs;
     }
     
@@ -113,9 +114,9 @@ public class StoreCM extends Store{
     public Pn addStoreFlags(){
         btnFlags.setIcon(btnFlags.getRolloverIcon());
         pnItemsFlags = new Pn(); pnItemsFlags.setLayout(null); pnItemsFlags.setBounds(0, 0, 1200, 700);
-        /*for(int i = 0; i<10; i++){
-            pnItemsFlags.add(new Btn(im.addImagem("btn_cm_easy_"+ims[i]), posBtns[i], null));
-        }*/
+        for(int i = 0; i<10; i++){
+            pnItemsFlags.add(new Btn(im.addImagem("flagF_"+ims[i]), posBtns[i], null));
+        }
         addBtnBasic(pnItemsFlags);
         return pnItemsFlags;
     }
