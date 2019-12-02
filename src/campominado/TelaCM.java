@@ -10,6 +10,7 @@ import componentes.Lb;
 import componentes.Pn;
 import componentes.Btn;
 import componentes.Frame;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import padroes.Fonts;
 import padroes.ItemsTela;
@@ -21,8 +22,12 @@ public class TelaCM extends Frame{
     private Campo r;
     public void setR(Campo r) {this.r = r;}
     private User user = User.getUser();
+    private StoreCM scm = new StoreCM();
     private int m5[][]; //1=posOpen 3=marcadores 2=minas abertas
     private String nivel;
+    private ArrayList<ImageIcon[]> btns_tab = scm.getBtn_niveis();
+    private ArrayList<ImageIcon> bombs = scm.getBtn_bombs();
+    private ArrayList<ImageIcon> flags = scm.getBtn_flags();
     public void configuracoes(){
         it.setTelaAntIntro(1);
         x = r.getX(); y = r.getY();
@@ -40,11 +45,11 @@ public class TelaCM extends Frame{
         }
         m = r.getM();
         if(x==16){
-            botao = im.addImagem("btn_cm_medium_01");botao_p = im.addImagem("btn_cm_medium_t_01");botao_t = im.addImagem("btn_cm_medium_p_01");
-            marcador = im.addImagem("flagM_01");minas = im.addImagem("bomb_cm_medium");
+            botao = btns_tab.get(0)[1];botao_p = btns_tab.get(1)[1];botao_t = btns_tab.get(2)[1];
+            marcador = flags.get(1);minas = bombs.get(1);
         }else if(x==18){
-            botao = im.addImagem("btn_cm_hard_01");botao_p = im.addImagem("btn_cm_hard_t_01");botao_t = im.addImagem("btn_cm_hard_p_01");
-            marcador = im.addImagem("flagD_01");minas = im.addImagem("bomb_cm_hard");
+            botao = btns_tab.get(0)[2];botao_p = btns_tab.get(1)[2];botao_t = btns_tab.get(2)[2];
+            marcador = flags.get(2);minas = bombs.get(2);
         }
         CM();
     }
@@ -206,10 +211,10 @@ public class TelaCM extends Frame{
     public int scoreFat[] = new int[3];
     public boolean press = false; public boolean GO = false; public boolean win = false;
     public int iniciarJogo = 0; public int marc[][]; public int[][] m4;
-    public ImageIcon minas = im.addImagem("bomb_cm_easy"); public ImageIcon marcador = im.addImagem("flagF_01");
-    public ImageIcon botao = im.addImagem("btn_cm_easy_01"); 
-    public ImageIcon botao_p = im.addImagem("btn_cm_easy_t_01");
-    public ImageIcon botao_t = im.addImagem("btn_cm_easy_p_01");
+    public ImageIcon minas = bombs.get(0); public ImageIcon marcador = flags.get(0);
+    public ImageIcon botao = btns_tab.get(0)[0]; 
+    public ImageIcon botao_p = btns_tab.get(1)[0];
+    public ImageIcon botao_t = btns_tab.get(2)[0];
     public Font btn = f.addNewFont("DS-DIGIT", 20);
     
     private class Button extends Btn{
