@@ -71,15 +71,7 @@ public class StoreJDV extends Store{
         add(pnIntro);
     }
     public void loja(Pn pn){
-        int backPos[] = {0,0,1200,700}; int btnXPos[] = {150,38,255,72}; int btnButtonPos[] = {834,38,255,72};
-        int btnOPos[] = {487,38,255,72};
-        ImageIcon btn_xs[] = {im.addImagem("btn_x_jdv"),im.addImagem("btn_x_jdv_t"),im.addImagem("btn_x_jdv_p")};
-        ImageIcon btn_os[] = {im.addImagem("btn_o_jdv"),im.addImagem("btn_o_jdv_t"),im.addImagem("btn_o_jdv_p")};
-        ImageIcon btn_buttons[] = {im.addImagem("btn_buttons_jdv"),im.addImagem("btn_buttons_jdv_t"),im.addImagem("btn_buttons_jdv_p")};
-        if(it.getTelaAntIntro()==0){it.setTelaAntIntro(2);}else{it.setTelaAntIntro(5);}
-        btnButtons = new Btn(btn_buttons, btnButtonPos, new EventBtnsIntro(3));
-        btnXs = new Btn(btn_xs, btnXPos, new EventBtnsIntro(1));
-        btnOs = new Btn(btn_os, btnOPos, new EventBtnsIntro(2));
+        int backPos[] = {0,0,1200,700};
         Component cp[] = {
             it.btnClose(), it.returnGames(this),
             btnButtons, btnXs, btnOs,
