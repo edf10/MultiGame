@@ -13,4 +13,12 @@ public class Fonts {
         Font r = f.deriveFont(0,tamanho);
         return r;
     }
+    public Font addNewFontOutro(String arquivo, int tamanho){
+        try {
+            InputStream is = getClass().getResourceAsStream("Fonts/"+arquivo+".otf");
+            f = Font.createFont(Font.TRUETYPE_FONT, is);
+        }catch(Exception e){}
+        Font r = f.deriveFont(0,tamanho);
+        return r;
+    }
 }
