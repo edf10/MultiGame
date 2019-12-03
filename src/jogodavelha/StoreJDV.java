@@ -22,15 +22,16 @@ public class StoreJDV extends Store{
         setStore(user.getStoreJDV());
         setEmUso(user.getEmUsoJDV());
         btnX(ims[user.getEmUsoJDV().get(0).indexOf("1")]);
-        btnO(ims[user.getEmUsoJDV().get(0).indexOf("1")]);
-        btnButtons(ims[user.getEmUsoJDV().get(0).indexOf("1")]);
+        btnO(ims[user.getEmUsoJDV().get(1).indexOf("1")]);
+        btnButtons(ims[user.getEmUsoJDV().get(2).indexOf("1")]);
+        ItemsAdd ia = new ItemsAdd(); ia.start();
     }
     
     public void btnX(String esc){
         btn_x = im.addImagem("x_jdv_"+esc);
     }
     public void btnO(String esc){
-        btn_o = im.addImagem("");
+        btn_o = im.addImagem("o_jdv_"+esc);
     }
     public void btnButtons(String esc){
         btn_button.clear();
@@ -159,9 +160,9 @@ public class StoreJDV extends Store{
     public void addItems(){
         user.setStoreJDV(getStore());
         user.setEmUsoJDV(getEmUso());
-        btnX(ims[user.getEmUsoJDV().get(0).indexOf("1")]);
-        btnO(ims[user.getEmUsoJDV().get(0).indexOf("1")]);
-        btnButtons(ims[user.getEmUsoJDV().get(0).indexOf("1")]);
+        btnX(ims[botao]);
+        btnO(ims[botao]);
+        btnButtons(ims[botao]);
         Conta c = new Conta(user); c.gravar(); User.setUser(user);
     }
     

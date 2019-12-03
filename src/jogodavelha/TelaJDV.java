@@ -12,6 +12,8 @@ import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import componentes.Frame;
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import padroes.Fonts;
 import padroes.ItemsTela;
 import user.User;
@@ -19,6 +21,10 @@ import user.User;
 public class TelaJDV extends Frame{
     private User user1;
     private User user2;
+    private StoreJDV sjdv = new StoreJDV();
+    private ImageIcon btnX = sjdv.getBtn_x();
+    private ImageIcon btnO = sjdv.getBtn_o();
+    private ArrayList<ImageIcon> btn_game = sjdv.getBtn_button();
     public void start(){
         it.setTelaAntIntro(2); 
         x = j.getX();
@@ -96,9 +102,9 @@ public class TelaJDV extends Frame{
             super();
             this.x = x;
             this.y = y;
-            setIcon(im.addImagem("btn_jdv_game_01"));
-            setRolloverIcon(im.addImagem("btn_jdv_game_t_01"));
-            setPressedIcon(im.addImagem("btn_jdv_game_p_01"));
+            setIcon(btn_game.get(0));
+            setRolloverIcon(btn_game.get(1));
+            setPressedIcon(btn_game.get(2));
             setBackground(Color.black);
             addActionListener(new Troca());
         }
@@ -106,15 +112,15 @@ public class TelaJDV extends Frame{
             if(!press&&!answer){
                 if(vez==1){
                     if(icUser1){
-                        setIcon(im.addImagem("x_jdv_01"));
+                        setIcon(btnX);
                     }else{
-                        setIcon(im.addImagem("icone_o_jdv"));
+                        setIcon(btnO);
                     }
                 }else if(vez==2){
                     if(icUser2==false){
-                        setIcon(im.addImagem("icone_o_jdv"));
+                        setIcon(btnO);
                     }else{
-                        setIcon(im.addImagem("x_jdv_01"));
+                        setIcon(btnX);
                     }
                 }
                 setPressedIcon(getIcon());

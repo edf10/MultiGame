@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import jogodavelha.IntroductionJDV;
+import jogodavelha.StoreJDV;
 import multigame.MultiGameTela;
 import wordpuzzle.IntroductionWP;
 
@@ -164,6 +165,7 @@ public class ItemsTela {
                 case 2: telaAtual.dispose(); MultiGameTela mg1 = new MultiGameTela(); mg1.login_user(); mg1.show();break;
                 case 3: telaAtual.dispose(); Store s = new Store(); s.intro(); s.show(); break;
                 case 4: telaAtual.dispose(); StoreCM scm = new StoreCM(); scm.intro(); scm.show(); break;
+                case 5: telaAtual.dispose(); StoreJDV sjdv = new StoreJDV(); sjdv.intro(); sjdv.show(); break;
                 default: break;
             }
         }
