@@ -32,6 +32,8 @@ public class Conta {
                     user.setMoedas(Integer.parseInt(objectArquivo.get("moedas").toString()));
                     user.setStoreCM((ArrayList<ArrayList<String>>) objectArquivo.get("storeCM"));
                     user.setEmUsoCM((ArrayList<ArrayList<String>>) objectArquivo.get("emUsoCM"));
+                    user.setStoreJDV((ArrayList<ArrayList<String>>) objectArquivo.get("storeJDV"));
+                    user.setEmUsoJDV((ArrayList<ArrayList<String>>) objectArquivo.get("emUsoJDV"));
                     return user;
                 }
                 
@@ -49,6 +51,8 @@ public class Conta {
             objectArquivo.put("moedas", user.getMoedas());
             objectArquivo.put("storeCM", user.getStoreCM());
             objectArquivo.put("emUsoCM", user.getEmUsoCM());
+            objectArquivo.put("storeJDV", user.getStoreJDV());
+            objectArquivo.put("emUsoJDV", user.getEmUsoJDV());
         }
         try{
             FileWriter arquivo = new FileWriter("users/"+user.getUsername()+".json");

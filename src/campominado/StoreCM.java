@@ -12,15 +12,6 @@ import padroes.Store;
 import user.Conta;
 import user.User;
 public class StoreCM extends Store{
-    private User user = User.getUser();
-    private String[] ims = {"01","02","03","04","05","06","07","08","09","10"};
-    private int[][] posBtns = {{158,214,65,41},{362,214,65,41},{576,214,65,41},{764,214,65,41},{969,214,65,41},
-                               {158,431,65,41},{362,431,65,41},{576,431,65,41},{764,431,65,41},{969,431,65,41}};
-    private int[][] posBtnsComprado = {{110,283,165,38},{318,283,165,38},{522,283,165,38},{717,283,165,38},{919,283,165,38},
-                                       {110,500,165,38},{318,500,165,38},{522,500,165,38},{717,500,165,38},{919,500,165,38}};
-    private int[][] posBtnsUso = {{110,331,165,38},{318,331,165,38},{522,331,165,38},{717,331,165,38},{919,331,165,38},
-                                  {110,548,165,38},{318,548,165,38},{522,548,165,38},{717,548,165,38},{919,548,165,38}};
-    
     private ArrayList<ImageIcon[]> btn_niveis = new ArrayList<>();
     private ArrayList<ImageIcon> btn_bombs = new ArrayList<>();
     private ArrayList<ImageIcon> btn_flags = new ArrayList<>();
@@ -64,13 +55,16 @@ public class StoreCM extends Store{
     public ArrayList<ImageIcon[]> getBtn_niveis() {
         return btn_niveis;
     }
-    
+    public void definirTelaVoltar(int x){
+        it.setTelaAntIntro(x);
+    }
     private ItemsTela it = new ItemsTela();
     private Pn pnIntro;
     private Btn btnButtons;
     private Btn btnFlags;
     private Btn btnBombs;
-    public void loja(){
+    @Override
+    public void intro(){
         int backPos[] = {0,0,1200,700}; int btnFlagPos[] = {150,38,255,72}; int btnButtonPos[] = {834,38,255,72};
         int btnBombsPos[] = {487,38,255,72};
         ImageIcon btn_flag[] = {im.addImagem("btn_flags_cm"),im.addImagem("btn_flags_cm_t"),im.addImagem("btn_flags_cm_p")};
@@ -83,7 +77,7 @@ public class StoreCM extends Store{
         Component cp[] = {
             it.btnClose(), it.returnGames(this),
             btnButtons, btnFlags, btnBombs,
-            new Lb(im.addImagem("back_store_cm"), backPos)
+            new Lb(im.addImagem("back_store"), backPos)
         };
         pnIntro = new Pn(backPos, cp);
         add(pnIntro);
@@ -171,11 +165,7 @@ public class StoreCM extends Store{
             pn.add(btnsComprado[tipo][i]);
             pn.add(btnsUso[tipo][i]);
         }
-        pn.add(new Lb(im.addImagem("back_store_cm"), backPos));
-    }
-    
-    public void definirTelaVoltar(int x){
-        it.setTelaAntIntro(x);
+        pn.add(new Lb(im.addImagem("back_store"), backPos));
     }
     
     public class EventComprar implements ActionListener{

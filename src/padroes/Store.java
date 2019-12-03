@@ -9,7 +9,17 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
+import jogodavelha.StoreJDV;
+import user.User;
 public class Store extends Frame{
+    protected int[][] posBtns = {{158,214,65,41},{362,214,65,41},{576,214,65,41},{764,214,65,41},{969,214,65,41},
+                               {158,431,65,41},{362,431,65,41},{576,431,65,41},{764,431,65,41},{969,431,65,41}};
+    protected int[][] posBtnsComprado = {{110,283,165,38},{318,283,165,38},{522,283,165,38},{717,283,165,38},{919,283,165,38},
+                                       {110,500,165,38},{318,500,165,38},{522,500,165,38},{717,500,165,38},{919,500,165,38}};
+    protected int[][] posBtnsUso = {{110,331,165,38},{318,331,165,38},{522,331,165,38},{717,331,165,38},{919,331,165,38},
+                                  {110,548,165,38},{318,548,165,38},{522,548,165,38},{717,548,165,38},{919,548,165,38}};
+    protected User user = User.getUser();
+    protected String[] ims = {"01","02","03","04","05","06","07","08","09","10"};
     private ItemsTela it = new ItemsTela();
     private Pn pnIntro;
     public void intro(){
@@ -42,8 +52,8 @@ public class Store extends Frame{
         public void actionPerformed(ActionEvent ae) {
             dispose();
             switch(esc){
-                case 1: StoreCM scm = new StoreCM(); scm.definirTelaVoltar(5); scm.loja(); scm.show(); break;
-                case 2: break;
+                case 1: StoreCM scm = new StoreCM(); scm.definirTelaVoltar(5); scm.intro(); scm.show(); break;
+                case 2: StoreJDV sjdv = new StoreJDV(); sjdv.definirTelaVoltar(5); sjdv.intro(); sjdv.show(); break;
                 case 3: break;
                 default: break;
             }

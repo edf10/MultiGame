@@ -163,7 +163,7 @@ public class ItemsTela {
                 case 1: telaAtual.dispose(); MultiGameTela mg = new MultiGameTela();mg.Jogos(); mg.show();break;
                 case 2: telaAtual.dispose(); MultiGameTela mg1 = new MultiGameTela(); mg1.login_user(); mg1.show();break;
                 case 3: telaAtual.dispose(); Store s = new Store(); s.intro(); s.show(); break;
-                case 4: telaAtual.dispose(); StoreCM scm = new StoreCM(); scm.loja(); scm.show(); break;
+                case 4: telaAtual.dispose(); StoreCM scm = new StoreCM(); scm.intro(); scm.show(); break;
                 default: break;
             }
         }
