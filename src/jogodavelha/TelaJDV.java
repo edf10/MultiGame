@@ -57,7 +57,7 @@ public class TelaJDV extends Frame{
         lbJog = new Lb(s , f, lbJogP, Color.white);
         
         GridLayout mz = new GridLayout(x, y);
-        int pnCCP[] = {248,166,703,534};
+        int pnCCP[] = {248,166,699,531};
         pnCC = new Pn(pnCCP, mz);
         
         vet = new Button[x][y];
@@ -97,6 +97,8 @@ public class TelaJDV extends Frame{
             this.x = x;
             this.y = y;
             setIcon(im.addImagem("btn_jdv_game"));
+            setRolloverIcon(im.addImagem("btn_jdv_game_t"));
+            setPressedIcon(im.addImagem("btn_jdv_game_p"));
             setBackground(Color.black);
             addActionListener(new Troca());
         }
@@ -115,7 +117,7 @@ public class TelaJDV extends Frame{
                         setIcon(im.addImagem("icone_x_jdv"));
                     }
                 }
-                System.out.println(vez);
+                setPressedIcon(getIcon());
                 press = true;
                 j.addPress(x, y, vez);
                 j.ganhar(user1,user2,ass,TelaJDV.this);
@@ -212,6 +214,7 @@ public class TelaJDV extends Frame{
                 answer = false;
                 if(txtRes.getText().equals(res)){
                     vet[xb][yb].altBtn();
+                    vet[xb][yb].setRolloverIcon(null);
                 }
                 vez();
             }
