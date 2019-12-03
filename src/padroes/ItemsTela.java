@@ -13,6 +13,7 @@ import jogodavelha.IntroductionJDV;
 import jogodavelha.StoreJDV;
 import multigame.MultiGameTela;
 import wordpuzzle.IntroductionWP;
+import wordpuzzle.StoreWP;
 
 public class ItemsTela {
     private Im im = new Im();
@@ -166,6 +167,7 @@ public class ItemsTela {
                 case 3: telaAtual.dispose(); Store s = new Store(); s.intro(); s.show(); break;
                 case 4: telaAtual.dispose(); StoreCM scm = new StoreCM(); scm.intro(); scm.show(); break;
                 case 5: telaAtual.dispose(); StoreJDV sjdv = new StoreJDV(); sjdv.intro(); sjdv.show(); break;
+                case 6: telaAtual.dispose(); StoreWP swp = new StoreWP(); swp.intro(); swp.show(); break;
                 default: break;
             }
         }

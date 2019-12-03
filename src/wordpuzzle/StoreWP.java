@@ -98,6 +98,10 @@ public class StoreWP extends Store{
         add(pnIntro);
     }
     
+    public void definirTelaVoltar(int x){
+        it.setTelaAntIntro(x);
+    }
+    
     public class EventBtnsIntro implements ActionListener{
         private int btn;
         public EventBtnsIntro(int btn){

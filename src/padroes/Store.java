@@ -62,7 +62,7 @@ public class Store extends Frame{
             switch(esc){
                 case 1: StoreCM scm = new StoreCM(); scm.definirTelaVoltar(5); scm.intro(); scm.show(); break;
                 case 2: StoreJDV sjdv = new StoreJDV(); sjdv.definirTelaVoltar(5); sjdv.intro(); sjdv.show(); break;
-                case 3: StoreWP swp = new StoreWP(); swp.intro(); swp.show(); break;
+                case 3: StoreWP swp = new StoreWP(); swp.definirTelaVoltar(5); swp.intro(); swp.show(); break;
                 default: break;
             }
         }
