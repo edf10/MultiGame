@@ -10,6 +10,10 @@ public class User {
     private int moedas;
     private ArrayList<ArrayList<String>> storeCM = new ArrayList<>();
     private ArrayList<ArrayList<String>> emUsoCM = new ArrayList<>();
+    private ArrayList<ArrayList<String>> storeJDV = new ArrayList<>();
+    private ArrayList<ArrayList<String>> emUsoJDV = new ArrayList<>();
+    private ArrayList<ArrayList<String>> storeWP = new ArrayList<>();
+    private ArrayList<ArrayList<String>> emUsoWP = new ArrayList<>();
     private ArrayList<ArrayList<String>> historicJDV = new ArrayList<>();
     private static User user;
     public static User getUser() {
@@ -30,15 +34,35 @@ public class User {
         }
         storeCM.add(lista_items);storeCM.add(lista_items);storeCM.add(lista_items);
         emUsoCM.add(lista_items);emUsoCM.add(lista_items);emUsoCM.add(lista_items);
+        storeJDV.add(lista_items);storeJDV.add(lista_items);storeJDV.add(lista_items);
+        emUsoJDV.add(lista_items);emUsoJDV.add(lista_items);emUsoJDV.add(lista_items);
+        storeWP.add(lista_items);storeWP.add(lista_items);
+        emUsoWP.add(lista_items);emUsoWP.add(lista_items);
     }
-    public void addItemComprado(int tipo, int item){
-        storeCM.get(tipo).set(item, "1");
+
+    public ArrayList<ArrayList<String>> getStoreWP() {
+        return storeWP;
     }
-    public void addItemUso(int tipo, int item){
-        emUsoCM.get(tipo).set(item, "1");
+    public void setStoreWP(ArrayList<ArrayList<String>> storeWP) {
+        this.storeWP = storeWP;
     }
-    public void removerItemUso(int tipo, int item){
-        emUsoCM.get(tipo).set(item, "0");
+    public ArrayList<ArrayList<String>> getEmUsoWP() {
+        return emUsoWP;
+    }
+    public void setEmUsoWP(ArrayList<ArrayList<String>> emUsoWP) {
+        this.emUsoWP = emUsoWP;
+    }
+    public ArrayList<ArrayList<String>> getStoreJDV() {
+        return storeJDV;
+    }
+    public void setStoreJDV(ArrayList<ArrayList<String>> storeJDV) {
+        this.storeJDV = storeJDV;
+    }
+    public ArrayList<ArrayList<String>> getEmUsoJDV() {
+        return emUsoJDV;
+    }
+    public void setEmUsoJDV(ArrayList<ArrayList<String>> emUsoJDV) {
+        this.emUsoJDV = emUsoJDV;
     }
     public ArrayList<ArrayList<String>> getStoreCM() {
         return storeCM;

@@ -12,25 +12,19 @@ import padroes.Store;
 import user.Conta;
 import user.User;
 public class StoreCM extends Store{
-    private User user = User.getUser();
-    private String[] ims = {"01","02","03","04","05","06","07","08","09","10"};
-    private int[][] posBtns = {{158,214,65,41},{362,214,65,41},{576,214,65,41},{764,214,65,41},{969,214,65,41},
-                               {158,431,65,41},{362,431,65,41},{576,431,65,41},{764,431,65,41},{969,431,65,41}};
-    private int[][] posBtnsComprado = {{110,283,165,38},{318,283,165,38},{522,283,165,38},{717,283,165,38},{919,283,165,38},
-                                       {110,500,165,38},{318,500,165,38},{522,500,165,38},{717,500,165,38},{919,500,165,38}};
-    private int[][] posBtnsUso = {{110,331,165,38},{318,331,165,38},{522,331,165,38},{717,331,165,38},{919,331,165,38},
-                                  {110,548,165,38},{318,548,165,38},{522,548,165,38},{717,548,165,38},{919,548,165,38}};
-    
     private ArrayList<ImageIcon[]> btn_niveis = new ArrayList<>();
     private ArrayList<ImageIcon> btn_bombs = new ArrayList<>();
     private ArrayList<ImageIcon> btn_flags = new ArrayList<>();
     
     public StoreCM(){
+        setStore(user.getStoreCM());
+        setEmUso(user.getEmUsoCM());
         btnNiveis(ims[user.getEmUsoCM().get(2).indexOf("1")]);
         btnNiveis(ims[user.getEmUsoCM().get(2).indexOf("1")], "t");
         btnNiveis(ims[user.getEmUsoCM().get(2).indexOf("1")], "p");
         btnBombs(ims[user.getEmUsoCM().get(1).indexOf("1")]);
         btnFlags(ims[user.getEmUsoCM().get(0).indexOf("1")]);
+        ItemsAdd ia = new ItemsAdd(); ia.start();
     }
     
     public void btnFlags(String esc){
@@ -64,13 +58,16 @@ public class StoreCM extends Store{
     public ArrayList<ImageIcon[]> getBtn_niveis() {
         return btn_niveis;
     }
-    
+    public void definirTelaVoltar(int x){
+        it.setTelaAntIntro(x);
+    }
     private ItemsTela it = new ItemsTela();
     private Pn pnIntro;
     private Btn btnButtons;
     private Btn btnFlags;
     private Btn btnBombs;
-    public void loja(){
+    @Override
+    public void intro(){
         int backPos[] = {0,0,1200,700}; int btnFlagPos[] = {150,38,255,72}; int btnButtonPos[] = {834,38,255,72};
         int btnBombsPos[] = {487,38,255,72};
         ImageIcon btn_flag[] = {im.addImagem("btn_flags_cm"),im.addImagem("btn_flags_cm_t"),im.addImagem("btn_flags_cm_p")};
@@ -83,7 +80,7 @@ public class StoreCM extends Store{
         Component cp[] = {
             it.btnClose(), it.returnGames(this),
             btnButtons, btnFlags, btnBombs,
-            new Lb(im.addImagem("back_store_cm"), backPos)
+            new Lb(im.addImagem("back_store"), backPos)
         };
         pnIntro = new Pn(backPos, cp);
         add(pnIntro);
@@ -153,71 +150,27 @@ public class StoreCM extends Store{
         return pnItemsButtons;
     }
     
-    private Btn btnsComprado[][] = new Btn[3][10];
-    private Btn btnsUso[][] = new Btn[3][10];
-    public void addBtnBasic(Pn pn, int tipo){
-        int backPos[] = {0,0,1200,700};
-        for(int i = 0; i<10; i++){
-            if(user.getStoreCM().get(tipo).get(i).equals("1")){
-                btnsComprado[tipo][i] = new Btn(im.addImagem("comprado_store"), posBtnsComprado[i], new EventComprar(i, tipo));
-            }else{
-                btnsComprado[tipo][i] = new Btn(im.addImagem("valor_btn_cm_store"), posBtnsComprado[i], new EventComprar(i, tipo));
-            }
-            if(user.getEmUsoCM().get(tipo).get(i).equals("1")){
-                btnsUso[tipo][i] = new Btn(im.addImagem("btn_uso_store"), posBtnsUso[i], new EventUso(i, tipo));
-            }else{
-                btnsUso[tipo][i] = new Btn(im.addImagem("sem_uso_btn_cm_store"), posBtnsUso[i], new EventUso(i, tipo));
-            }
-            pn.add(btnsComprado[tipo][i]);
-            pn.add(btnsUso[tipo][i]);
-        }
-        pn.add(new Lb(im.addImagem("back_store_cm"), backPos));
-    }
-    
-    public void definirTelaVoltar(int x){
-        it.setTelaAntIntro(x);
-    }
-    
-    public class EventComprar implements ActionListener{
-        private int btn; private int tipo;
-        public EventComprar(int btn, int tipo){
-            this.btn = btn; this.tipo = tipo;
-        }
+    public class ItemsAdd extends Thread{
         @Override
-        public void actionPerformed(ActionEvent ae) {
-            if(user.getStoreCM().get(tipo).get(btn).equals("0")&&user.getMoedas()-1000>=0){
-                user.getStoreCM().get(tipo).set(btn, "1");
-                user.setMoedas(-1000);
-                btnsComprado[tipo][btn].setIcon(im.addImagem("comprado_store"));
-                Conta c = new Conta(user); c.gravar(); User.setUser(user);
-            }else if(user.getStoreCM().get(tipo).get(btn).equals("1")){
-                System.out.println("Item já foi comprado");
-            }else{
-                System.out.println("Dinheiro insuficiente");
+        public void run(){
+            while(true){
+                if(botao!=11){
+                    addItems();
+                    botao = 11;
+                }
             }
         }
     }
     
-    public class EventUso implements ActionListener{
-        public int btn; private int tipo;
-        public EventUso(int btn, int tipo){
-            this.btn = btn; this.tipo = tipo;
-        }
-        @Override
-        public void actionPerformed(ActionEvent ae) {
-            if(user.getEmUsoCM().get(tipo).get(btn).equals("0")&&user.getStoreCM().get(tipo).get(btn).equals("1")){
-                btnsUso[tipo][user.getEmUsoCM().get(tipo).indexOf("1")].setIcon(im.addImagem("sem_uso_btn_cm_store"));
-                user.getEmUsoCM().get(tipo).set(user.getEmUsoCM().get(tipo).indexOf("1"), "0");
-                user.getEmUsoCM().get(tipo).set(btn, "1");
-                btnsUso[tipo][btn].setIcon(im.addImagem("btn_uso_store"));
-                btnNiveis(ims[btn]);
-                btnNiveis(ims[btn], "t");
-                btnNiveis(ims[btn], "p");
-                btnBombs(ims[btn]);
-                btnFlags(ims[btn]);
-                Conta c = new Conta(user); c.gravar(); User.setUser(user);
-            }
-        }
+    public void addItems(){
+        user.setStoreCM(getStore());
+        user.setEmUsoCM(getEmUso());
+        btnNiveis(ims[botao]);
+        btnNiveis(ims[botao], "t");
+        btnNiveis(ims[botao], "p");
+        btnFlags(ims[botao]);
+        btnBombs(ims[botao]);
+        Conta c = new Conta(user); c.gravar(); User.setUser(user);
     }
     
 }

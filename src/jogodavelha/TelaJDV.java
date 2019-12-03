@@ -12,6 +12,8 @@ import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import componentes.Frame;
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import padroes.Fonts;
 import padroes.ItemsTela;
 import user.User;
@@ -19,6 +21,10 @@ import user.User;
 public class TelaJDV extends Frame{
     private User user1;
     private User user2;
+    private StoreJDV sjdv = new StoreJDV();
+    private ImageIcon btnX = sjdv.getBtn_x();
+    private ImageIcon btnO = sjdv.getBtn_o();
+    private ArrayList<ImageIcon> btn_game = sjdv.getBtn_button();
     public void start(){
         it.setTelaAntIntro(2); 
         x = j.getX();
@@ -57,7 +63,7 @@ public class TelaJDV extends Frame{
         lbJog = new Lb(s , f, lbJogP, Color.white);
         
         GridLayout mz = new GridLayout(x, y);
-        int pnCCP[] = {248,166,703,534};
+        int pnCCP[] = {248,166,699,531};
         pnCC = new Pn(pnCCP, mz);
         
         vet = new Button[x][y];
@@ -96,7 +102,9 @@ public class TelaJDV extends Frame{
             super();
             this.x = x;
             this.y = y;
-            setIcon(im.addImagem("btn_jdv_game"));
+            setIcon(btn_game.get(0));
+            setRolloverIcon(btn_game.get(1));
+            setPressedIcon(btn_game.get(2));
             setBackground(Color.black);
             addActionListener(new Troca());
         }
@@ -104,18 +112,18 @@ public class TelaJDV extends Frame{
             if(!press&&!answer){
                 if(vez==1){
                     if(icUser1){
-                        setIcon(im.addImagem("icone_x_jdv"));
+                        setIcon(btnX);
                     }else{
-                        setIcon(im.addImagem("icone_o_jdv"));
+                        setIcon(btnO);
                     }
                 }else if(vez==2){
                     if(icUser2==false){
-                        setIcon(im.addImagem("icone_o_jdv"));
+                        setIcon(btnO);
                     }else{
-                        setIcon(im.addImagem("icone_x_jdv"));
+                        setIcon(btnX);
                     }
                 }
-                System.out.println(vez);
+                setPressedIcon(getIcon());
                 press = true;
                 j.addPress(x, y, vez);
                 j.ganhar(user1,user2,ass,TelaJDV.this);
@@ -212,6 +220,7 @@ public class TelaJDV extends Frame{
                 answer = false;
                 if(txtRes.getText().equals(res)){
                     vet[xb][yb].altBtn();
+                    vet[xb][yb].setRolloverIcon(null);
                 }
                 vez();
             }
