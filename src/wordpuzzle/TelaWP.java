@@ -210,7 +210,7 @@ public class TelaWP extends Frame{
         public class Evento implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent ae) {
-                if(troca==1){setBackground(Color.blue); troca = 2;}else if(permanente==false){setBackground(Color.black); troca = 1;}
+                if(troca==1){setBackground(Color.blue); setForeground(Color.black); troca = 2;}else if(permanente==false){setBackground(Color.black); setForeground(Color.white); troca = 1;}
                 acionado = true;
                 wordsEncontradas();
                 ganhar();

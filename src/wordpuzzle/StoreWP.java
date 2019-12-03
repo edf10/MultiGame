@@ -2,18 +2,27 @@ package wordpuzzle;
 import componentes.Btn;
 import componentes.Lb;
 import componentes.Pn;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
+import padroes.Fonts;
 import padroes.ItemsTela;
 import padroes.Store;
 public class StoreWP extends Store{
     private ItemsTela it = new ItemsTela();
+    private Fonts fs = new Fonts();
+    private Font font;
+    private Color cor;
     
     public StoreWP(){
         setStore(user.getStoreWP());
         setEmUso(user.getEmUsoWP());
+    }
+    
+    public void fontAdd(){
     }
     
     private Pn pnIntro;
@@ -52,7 +61,7 @@ public class StoreWP extends Store{
         btnCor.setIcon(btnCor.getRolloverIcon());
         pnCores = new Pn(); pnCores.setLayout(null); pnCores.setBounds(0,0,1200,700);
         for(int i = 0; i<10; i++){
-            pnCores.add(new Lb(im.addImagem("bomb_cm_easy_"+ims[i]), posBtns[i]));
+            pnCores.add(new Lb(im.addImagem("mostra_cor_wp_"+ims[i]), posBtns[i]));
         }
         addBtnBasic(pnCores, 1);
         return pnCores;
