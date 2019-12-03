@@ -96,9 +96,9 @@ public class TelaJDV extends Frame{
             super();
             this.x = x;
             this.y = y;
-            setIcon(im.addImagem("btn_jdv_game"));
-            setRolloverIcon(im.addImagem("btn_jdv_game_t"));
-            setPressedIcon(im.addImagem("btn_jdv_game_p"));
+            setIcon(im.addImagem("btn_jdv_game_01"));
+            setRolloverIcon(im.addImagem("btn_jdv_game_t_01"));
+            setPressedIcon(im.addImagem("btn_jdv_game_p_01"));
             setBackground(Color.black);
             addActionListener(new Troca());
         }
