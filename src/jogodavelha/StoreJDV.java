@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import padroes.ItemsTela;
 import padroes.Store;
+import user.Conta;
+import user.User;
 public class StoreJDV extends Store{
     private ItemsTela it = new ItemsTela();
     
@@ -19,6 +21,29 @@ public class StoreJDV extends Store{
     public StoreJDV(){
         setStore(user.getStoreJDV());
         setEmUso(user.getEmUsoJDV());
+        btnX(ims[user.getEmUsoJDV().get(0).indexOf("1")]);
+        btnO(ims[user.getEmUsoJDV().get(0).indexOf("1")]);
+        btnButtons(ims[user.getEmUsoJDV().get(0).indexOf("1")]);
+    }
+    
+    public void btnX(String esc){
+        btn_x = im.addImagem("x_jdv_"+esc);
+    }
+    public void btnO(String esc){
+        btn_o = im.addImagem("");
+    }
+    public void btnButtons(String esc){
+        btn_button.clear();
+        btn_button.add(im.addImagem("btn_jdv_game_"+esc));btn_button.add(im.addImagem("btn_jdv_game_t_"+esc));btn_button.add(im.addImagem("btn_jdv_game_p_"+esc));
+    }
+    public ImageIcon getBtn_x() {
+        return btn_x;
+    }
+    public ImageIcon getBtn_o() {
+        return btn_o;
+    }
+    public ArrayList<ImageIcon> getBtn_button() {
+        return btn_button;
     }
     
     private Pn pnIntro;
@@ -103,7 +128,7 @@ public class StoreJDV extends Store{
         btnOs.setIcon(btnOs.getRolloverIcon());
         pnItemsOs = new Pn(); pnItemsOs.setLayout(null); pnItemsOs.setBounds(0, 0, 1200, 700);
         for(int i = 0; i<10; i++){
-            pnItemsOs.add(new Lb(im.addImagem("bomb_cm_easy_"+ims[i]), posBtns[i]));
+            pnItemsOs.add(new Lb(im.addImagem("o_jdv_"+ims[i]+"_z"), posBtns[i]));
         }
         addBtnBasic(pnItemsOs, 1);
         return pnItemsOs;
@@ -117,6 +142,27 @@ public class StoreJDV extends Store{
         }
         addBtnBasic(pnItemsXs, 0);
         return pnItemsXs;
+    }
+    
+    public class ItemsAdd extends Thread{
+        @Override
+        public void run(){
+            while(true){
+                if(botao!=11){
+                    addItems();
+                    botao = 11;
+                }
+            }
+        }
+    }
+    
+    public void addItems(){
+        user.setStoreJDV(getStore());
+        user.setEmUsoJDV(getEmUso());
+        btnX(ims[user.getEmUsoJDV().get(0).indexOf("1")]);
+        btnO(ims[user.getEmUsoJDV().get(0).indexOf("1")]);
+        btnButtons(ims[user.getEmUsoJDV().get(0).indexOf("1")]);
+        Conta c = new Conta(user); c.gravar(); User.setUser(user);
     }
     
 }

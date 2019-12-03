@@ -106,7 +106,7 @@ public class TelaJDV extends Frame{
             if(!press&&!answer){
                 if(vez==1){
                     if(icUser1){
-                        setIcon(im.addImagem("icone_x_jdv"));
+                        setIcon(im.addImagem("x_jdv_01"));
                     }else{
                         setIcon(im.addImagem("icone_o_jdv"));
                     }
@@ -114,7 +114,7 @@ public class TelaJDV extends Frame{
                     if(icUser2==false){
                         setIcon(im.addImagem("icone_o_jdv"));
                     }else{
-                        setIcon(im.addImagem("icone_x_jdv"));
+                        setIcon(im.addImagem("x_jdv_01"));
                     }
                 }
                 setPressedIcon(getIcon());
