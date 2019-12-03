@@ -3,11 +3,19 @@ import componentes.Btn;
 import componentes.Lb;
 import componentes.Pn;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import padroes.ItemsTela;
 import padroes.Store;
 public class StoreWP extends Store{
     private ItemsTela it = new ItemsTela();
+    
+    public StoreWP(){
+        setStore(user.getStoreWP());
+        setEmUso(user.getEmUsoWP());
+    }
+    
     private Pn pnIntro;
     private Btn btnFont;
     private Btn btnCor;
@@ -16,9 +24,9 @@ public class StoreWP extends Store{
         int backPos[] = {0,0,1200,700}; int btnFontPos[] = {298,37,255,72}; int btnCorPos[] = {641,37,255,72};
         ImageIcon btn_font[] = {im.addImagem("btn_fonts_wp"),im.addImagem("btn_fonts_wp_t"),im.addImagem("btn_fonts_wp_p")};
         ImageIcon btn_cor[] = {im.addImagem("btn_cores_wp"),im.addImagem("btn_cores_wp_t"),im.addImagem("btn_cores_wp_p")};
-        if(it.getTelaAntIntro()==0){it.setTelaAntIntro(1);}else{it.setTelaAntIntro(5);}
-        btnFont = new Btn(btn_font, btnFontPos, null);
-        btnCor = new Btn(btn_cor, btnCorPos, null);
+        if(it.getTelaAntIntro()==0){it.setTelaAntIntro(3);}else{it.setTelaAntIntro(5);}
+        btnFont = new Btn(btn_font, btnFontPos, new EventBtnsIntro(1));
+        btnCor = new Btn(btn_cor, btnCorPos, new EventBtnsIntro(2));
         Component cp[] = {
             it.btnClose(), it.returnGames(this),
             btnFont, btnCor,
@@ -29,23 +37,53 @@ public class StoreWP extends Store{
     }
     
     private Pn pnFonts;
-    public void addFonts(){
+    public Pn addFonts(){
         btnFont.setIcon(btnFont.getRolloverIcon());
         pnFonts = new Pn(); pnFonts.setLayout(null); pnFonts.setBounds(0, 0, 1200, 700);
         for(int i = 0; i<10; i++){
             pnFonts.add(new Lb(im.addImagem("bomb_cm_easy_"+ims[i]), posBtns[i]));
         }
         addBtnBasic(pnFonts, 0);
+        return pnFonts;
     }
     
     private Pn pnCores;
-    public void addCores(){
+    public Pn addCores(){
         btnCor.setIcon(btnCor.getRolloverIcon());
         pnCores = new Pn(); pnCores.setLayout(null); pnCores.setBounds(0,0,1200,700);
         for(int i = 0; i<10; i++){
             pnCores.add(new Lb(im.addImagem("bomb_cm_easy_"+ims[i]), posBtns[i]));
         }
         addBtnBasic(pnCores, 1);
+        return pnCores;
     }
     
+    public void loja(Pn pn){
+        int backPos[] = {0,0,1200,700};
+        Component cp[] = {
+            it.btnClose(), it.returnGames(this),
+            btnFont, btnCor,
+            pn
+        };
+        pnIntro = new Pn(backPos, cp);
+        add(pnIntro);
+    }
+    
+    public class EventBtnsIntro implements ActionListener{
+        private int btn;
+        public EventBtnsIntro(int btn){
+            this.btn = btn;
+        }
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            pnIntro.setVisible(false);
+            btnFont.setIcon(im.addImagem("btn_fonts_wp"));
+            btnCor.setIcon(im.addImagem("btn_cores_wp"));
+            if(btn==1){
+                loja(addFonts());
+            }else{
+                loja(addCores());
+            }
+        }
+    }
 }

@@ -36,8 +36,8 @@ public class User {
         emUsoCM.add(lista_items);emUsoCM.add(lista_items);emUsoCM.add(lista_items);
         storeJDV.add(lista_items);storeJDV.add(lista_items);storeJDV.add(lista_items);
         emUsoJDV.add(lista_items);emUsoJDV.add(lista_items);emUsoJDV.add(lista_items);
-        storeWP.add(lista_items);storeWP.add(lista_items);storeWP.add(lista_items);
-        emUsoWP.add(lista_items);emUsoWP.add(lista_items);emUsoWP.add(lista_items);
+        storeWP.add(lista_items);storeWP.add(lista_items);
+        emUsoWP.add(lista_items);emUsoWP.add(lista_items);
     }
 
     public ArrayList<ArrayList<String>> getStoreWP() {
