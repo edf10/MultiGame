@@ -41,7 +41,7 @@ public class StoreWP extends Store{
         btnFont.setIcon(btnFont.getRolloverIcon());
         pnFonts = new Pn(); pnFonts.setLayout(null); pnFonts.setBounds(0, 0, 1200, 700);
         for(int i = 0; i<10; i++){
-            pnFonts.add(new Lb(im.addImagem("bomb_cm_easy_"+ims[i]), posBtns[i]));
+            pnFonts.add(new Lb(im.addImagem("font_wp_"+ims[i]+"_z"), posBtns[i]));
         }
         addBtnBasic(pnFonts, 0);
         return pnFonts;
