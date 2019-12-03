@@ -11,20 +11,40 @@ import javax.swing.ImageIcon;
 import padroes.Fonts;
 import padroes.ItemsTela;
 import padroes.Store;
+import user.Conta;
+import user.User;
 public class StoreWP extends Store{
     private ItemsTela it = new ItemsTela();
     private Fonts fs = new Fonts();
     private Font font;
     private Color cor;
+    private Color cores[] = {new Color(91,191,150),new Color(191,91,129),new Color(82,119,188),new Color(139,82,188),new Color(188,107,82),
+                             new Color(145,46,46),new Color(196,200,93),new Color(143,80,30),new Color(65,130,65),new Color(69,111,135)};
     
     public StoreWP(){
         setStore(user.getStoreWP());
         setEmUso(user.getEmUsoWP());
+        fontAdd(ims[user.getEmUsoWP().get(0).indexOf("1")]);
+        corAdd(Integer.parseInt(ims[user.getEmUsoWP().get(1).indexOf("1")])-1);
+        ItemsAdd ia = new ItemsAdd(); ia.start();
     }
     
-    public void fontAdd(){
+    public void fontAdd(String esc){
+        if(esc.equals("01")||esc.equals("07")||esc.equals("09")||esc.equals("10")){
+            font = fs.addNewFontOutro("font_"+esc, 18); 
+        }else{
+            font = fs.addNewFont("font_"+esc, 18);
+        }
     }
-    
+    public void corAdd(int esc){
+        cor = cores[esc];
+    }
+    public Font getFont() {
+        return font;
+    }
+    public Color getCor() {
+        return cor;
+    }
     private Pn pnIntro;
     private Btn btnFont;
     private Btn btnCor;
@@ -95,4 +115,25 @@ public class StoreWP extends Store{
             }
         }
     }
+    
+    public class ItemsAdd extends Thread{
+        @Override
+        public void run(){
+            while(true){
+                if(botao!=11){
+                    addItems();
+                    botao = 11;
+                }
+            }
+        }
+    }
+    
+    public void addItems(){
+        user.setStoreWP(getStore());
+        user.setEmUsoWP(getEmUso());
+        fontAdd(ims[botao]);
+        corAdd(Integer.parseInt(ims[botao])-1);
+        Conta c = new Conta(user); c.gravar(); User.setUser(user);
+    }
+    
 }

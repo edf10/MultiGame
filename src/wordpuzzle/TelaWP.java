@@ -19,6 +19,9 @@ import user.User;
 public class TelaWP extends Frame{
     private ItemsTela it = new ItemsTela();
     private int nivel;
+    private StoreWP swp = new StoreWP();
+    private Font font = swp.getFont();
+    private Color cor = swp.getCor();
     public void setNivel(int nivel) {this.nivel = nivel;}
     public void configuracoes(){
         p = new Palavras(nivel);
@@ -189,7 +192,7 @@ public class TelaWP extends Frame{
             setText(this.l);
             setBackground(Color.black);
             setForeground(Color.white);
-            setFont(new Font("Arial", Font.PLAIN, 18));
+            setFont(font);
             addActionListener(new Evento());
             acionado = false; permanente = false;
         }
@@ -203,14 +206,15 @@ public class TelaWP extends Frame{
             this.permanente = permanente;
         }
         public void acionar(){
-            setBackground(Color.blue);
+            setBackground(cor);
+            setForeground(Color.black);
             acionado = true;
             permanente = true;
         }
         public class Evento implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent ae) {
-                if(troca==1){setBackground(Color.blue); setForeground(Color.black); troca = 2;}else if(permanente==false){setBackground(Color.black); setForeground(Color.white); troca = 1;}
+                if(troca==1){setBackground(cor); setForeground(Color.black); troca = 2;}else if(permanente==false){setBackground(Color.black); setForeground(Color.white); troca = 1;}
                 acionado = true;
                 wordsEncontradas();
                 ganhar();
