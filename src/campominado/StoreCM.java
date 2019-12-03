@@ -17,11 +17,14 @@ public class StoreCM extends Store{
     private ArrayList<ImageIcon> btn_flags = new ArrayList<>();
     
     public StoreCM(){
+        setStore(user.getStoreCM());
+        setEmUso(user.getEmUsoCM());
         btnNiveis(ims[user.getEmUsoCM().get(2).indexOf("1")]);
         btnNiveis(ims[user.getEmUsoCM().get(2).indexOf("1")], "t");
         btnNiveis(ims[user.getEmUsoCM().get(2).indexOf("1")], "p");
         btnBombs(ims[user.getEmUsoCM().get(1).indexOf("1")]);
         btnFlags(ims[user.getEmUsoCM().get(0).indexOf("1")]);
+        ItemsAdd ia = new ItemsAdd(); ia.start();
     }
     
     public void btnFlags(String esc){
@@ -147,67 +150,27 @@ public class StoreCM extends Store{
         return pnItemsButtons;
     }
     
-    private Btn btnsComprado[][] = new Btn[3][10];
-    private Btn btnsUso[][] = new Btn[3][10];
-    public void addBtnBasic(Pn pn, int tipo){
-        int backPos[] = {0,0,1200,700};
-        for(int i = 0; i<10; i++){
-            if(user.getStoreCM().get(tipo).get(i).equals("1")){
-                btnsComprado[tipo][i] = new Btn(im.addImagem("comprado_store"), posBtnsComprado[i], new EventComprar(i, tipo));
-            }else{
-                btnsComprado[tipo][i] = new Btn(im.addImagem("valor_btn_cm_store"), posBtnsComprado[i], new EventComprar(i, tipo));
-            }
-            if(user.getEmUsoCM().get(tipo).get(i).equals("1")){
-                btnsUso[tipo][i] = new Btn(im.addImagem("btn_uso_store"), posBtnsUso[i], new EventUso(i, tipo));
-            }else{
-                btnsUso[tipo][i] = new Btn(im.addImagem("sem_uso_btn_cm_store"), posBtnsUso[i], new EventUso(i, tipo));
-            }
-            pn.add(btnsComprado[tipo][i]);
-            pn.add(btnsUso[tipo][i]);
-        }
-        pn.add(new Lb(im.addImagem("back_store"), backPos));
-    }
-    
-    public class EventComprar implements ActionListener{
-        private int btn; private int tipo;
-        public EventComprar(int btn, int tipo){
-            this.btn = btn; this.tipo = tipo;
-        }
+    public class ItemsAdd extends Thread{
         @Override
-        public void actionPerformed(ActionEvent ae) {
-            if(user.getStoreCM().get(tipo).get(btn).equals("0")&&user.getMoedas()-1000>=0){
-                user.getStoreCM().get(tipo).set(btn, "1");
-                user.setMoedas(-1000);
-                btnsComprado[tipo][btn].setIcon(im.addImagem("comprado_store"));
-                Conta c = new Conta(user); c.gravar(); User.setUser(user);
-            }else if(user.getStoreCM().get(tipo).get(btn).equals("1")){
-                System.out.println("Item já foi comprado");
-            }else{
-                System.out.println("Dinheiro insuficiente");
+        public void run(){
+            while(true){
+                if(botao!=11){
+                    addItems();
+                    botao = 11;
+                }
             }
         }
     }
     
-    public class EventUso implements ActionListener{
-        public int btn; private int tipo;
-        public EventUso(int btn, int tipo){
-            this.btn = btn; this.tipo = tipo;
-        }
-        @Override
-        public void actionPerformed(ActionEvent ae) {
-            if(user.getEmUsoCM().get(tipo).get(btn).equals("0")&&user.getStoreCM().get(tipo).get(btn).equals("1")){
-                btnsUso[tipo][user.getEmUsoCM().get(tipo).indexOf("1")].setIcon(im.addImagem("sem_uso_btn_cm_store"));
-                user.getEmUsoCM().get(tipo).set(user.getEmUsoCM().get(tipo).indexOf("1"), "0");
-                user.getEmUsoCM().get(tipo).set(btn, "1");
-                btnsUso[tipo][btn].setIcon(im.addImagem("btn_uso_store"));
-                btnNiveis(ims[btn]);
-                btnNiveis(ims[btn], "t");
-                btnNiveis(ims[btn], "p");
-                btnBombs(ims[btn]);
-                btnFlags(ims[btn]);
-                Conta c = new Conta(user); c.gravar(); User.setUser(user);
-            }
-        }
+    public void addItems(){
+        user.setStoreCM(getStore());
+        user.setEmUsoCM(getEmUso());
+        btnNiveis(ims[botao]);
+        btnNiveis(ims[botao], "t");
+        btnNiveis(ims[botao], "p");
+        btnFlags(ims[botao]);
+        btnBombs(ims[botao]);
+        Conta c = new Conta(user); c.gravar(); User.setUser(user);
     }
     
 }
