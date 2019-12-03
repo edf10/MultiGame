@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import jogodavelha.StoreJDV;
 import user.Conta;
 import user.User;
+import wordpuzzle.StoreWP;
 public class Store extends Frame{
     protected int[][] posBtns = {{158,214,65,41},{362,214,65,41},{576,214,65,41},{764,214,65,41},{969,214,65,41},
                                {158,431,65,41},{362,431,65,41},{576,431,65,41},{764,431,65,41},{969,431,65,41}};
@@ -61,7 +62,7 @@ public class Store extends Frame{
             switch(esc){
                 case 1: StoreCM scm = new StoreCM(); scm.definirTelaVoltar(5); scm.intro(); scm.show(); break;
                 case 2: StoreJDV sjdv = new StoreJDV(); sjdv.definirTelaVoltar(5); sjdv.intro(); sjdv.show(); break;
-                case 3: break;
+                case 3: StoreWP swp = new StoreWP(); swp.intro(); swp.show(); break;
                 default: break;
             }
         }

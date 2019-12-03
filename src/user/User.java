@@ -12,6 +12,8 @@ public class User {
     private ArrayList<ArrayList<String>> emUsoCM = new ArrayList<>();
     private ArrayList<ArrayList<String>> storeJDV = new ArrayList<>();
     private ArrayList<ArrayList<String>> emUsoJDV = new ArrayList<>();
+    private ArrayList<ArrayList<String>> storeWP = new ArrayList<>();
+    private ArrayList<ArrayList<String>> emUsoWP = new ArrayList<>();
     private ArrayList<ArrayList<String>> historicJDV = new ArrayList<>();
     private static User user;
     public static User getUser() {
@@ -34,8 +36,22 @@ public class User {
         emUsoCM.add(lista_items);emUsoCM.add(lista_items);emUsoCM.add(lista_items);
         storeJDV.add(lista_items);storeJDV.add(lista_items);storeJDV.add(lista_items);
         emUsoJDV.add(lista_items);emUsoJDV.add(lista_items);emUsoJDV.add(lista_items);
+        storeWP.add(lista_items);storeWP.add(lista_items);storeWP.add(lista_items);
+        emUsoWP.add(lista_items);emUsoWP.add(lista_items);emUsoWP.add(lista_items);
     }
 
+    public ArrayList<ArrayList<String>> getStoreWP() {
+        return storeWP;
+    }
+    public void setStoreWP(ArrayList<ArrayList<String>> storeWP) {
+        this.storeWP = storeWP;
+    }
+    public ArrayList<ArrayList<String>> getEmUsoWP() {
+        return emUsoWP;
+    }
+    public void setEmUsoWP(ArrayList<ArrayList<String>> emUsoWP) {
+        this.emUsoWP = emUsoWP;
+    }
     public ArrayList<ArrayList<String>> getStoreJDV() {
         return storeJDV;
     }

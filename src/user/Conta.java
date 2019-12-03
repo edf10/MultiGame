@@ -1,4 +1,5 @@
 package user;
+import com.sun.xml.internal.ws.client.ContentNegotiation;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -34,6 +35,8 @@ public class Conta {
                     user.setEmUsoCM((ArrayList<ArrayList<String>>) objectArquivo.get("emUsoCM"));
                     user.setStoreJDV((ArrayList<ArrayList<String>>) objectArquivo.get("storeJDV"));
                     user.setEmUsoJDV((ArrayList<ArrayList<String>>) objectArquivo.get("emUsoJDV"));
+                    user.setStoreWP((ArrayList<ArrayList<String>>) objectArquivo.get("storeWP"));
+                    user.setEmUsoWP((ArrayList<ArrayList<String>>) objectArquivo.get("emUsoWP"));
                     return user;
                 }
                 
@@ -53,6 +56,8 @@ public class Conta {
             objectArquivo.put("emUsoCM", user.getEmUsoCM());
             objectArquivo.put("storeJDV", user.getStoreJDV());
             objectArquivo.put("emUsoJDV", user.getEmUsoJDV());
+            objectArquivo.put("storeWP", user.getStoreWP());
+            objectArquivo.put("emUsoWP", user.getEmUsoWP());
         }
         try{
             FileWriter arquivo = new FileWriter("users/"+user.getUsername()+".json");
