@@ -1,6 +1,7 @@
 package padroes;
 
 import arduino.ArduinoSerial;
+import arduino.Controle;
 import campominado.IntroductionCM;
 import campominado.StoreCM;
 import componentes.Btn;
@@ -17,13 +18,9 @@ import wordpuzzle.StoreWP;
 
 public class ItemsTela {
     private Im im = new Im();
-    private ArduinoSerial arduino = new ArduinoSerial("COM4");
-    public ItemsTela(){
-        arduino.initialize();
-    }
     public Btn btnClose(){
         int closePos[] = {1161,15,19,19}; ImageIcon btn_close[] = {im.addImagem("btn_close"),im.addImagem("btn_close_t")};
-        VerificarPressExit sair = new VerificarPressExit(); sair.start();
+        Controle c = new Controle("E", 1); c.start();
         return new Btn(btn_close, closePos, new EventClose());
     }
     private class EventClose implements ActionListener{
@@ -32,23 +29,6 @@ public class ItemsTela {
             System.exit(0);
         }
     }
-    public class VerificarPressExit extends Thread{
-        private String lido;
-        @Override
-        public void run(){
-            while(true){
-                //System.out.println(lido);
-                try{Thread.sleep(100);}catch(Exception e){}
-                if((lido = (arduino.read()!=null)?arduino.read():"0").equals("A")){
-                    System.out.println("e");
-                    System.exit(0);
-                    stop();
-                    break;
-                }
-            }
-        }
-    }
-    
     private final ImageIcon imSom = im.addImagem("btn_som");
     private final ImageIcon imMute = im.addImagem("btn_mute");
     private Btn som;

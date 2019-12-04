@@ -1,14 +1,15 @@
 package multigame;
 
-import padroes.EasterEgg;
+import arduino.ArduinoSerial;
 
 public class MultiGame {
     public static void main(String []args){
-        /*MultiGameTela mg = new MultiGameTela();
+        MultiGameTela mg = new MultiGameTela();
         mg.intro();
-        mg.show();*/
-        EasterEgg e = new EasterEgg();
+        mg.show();
+        /*EasterEgg e = new EasterEgg();
         e.addEasterCM();
-        e.show();
+        e.show();*/
+        
     }
 }
