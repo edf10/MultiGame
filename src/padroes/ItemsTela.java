@@ -23,7 +23,7 @@ public class ItemsTela {
     }
     public Btn btnClose(){
         int closePos[] = {1161,15,19,19}; ImageIcon btn_close[] = {im.addImagem("btn_close"),im.addImagem("btn_close_t")};
-        VerificarPressExit sair = new VerificarPressExit(); sair.start();
+        //VerificarPressExit sair = new VerificarPressExit(); sair.start();
         return new Btn(btn_close, closePos, new EventClose());
     }
     private class EventClose implements ActionListener{
@@ -33,14 +33,13 @@ public class ItemsTela {
         }
     }
     public class VerificarPressExit extends Thread{
-        private String lido;
         @Override
         public void run(){
+            String lido = "";
             while(true){
-                //System.out.println(lido);
                 try{Thread.sleep(100);}catch(Exception e){}
-                if((lido = (arduino.read()!=null)?arduino.read():"0").equals("A")){
-                    System.out.println("e");
+                System.out.println(arduino.read());
+                if((lido = (arduino.read()!=null)?arduino.read():"0").equals("E")){
                     System.exit(0);
                     stop();
                     break;
@@ -52,10 +51,12 @@ public class ItemsTela {
     private final ImageIcon imSom = im.addImagem("btn_som");
     private final ImageIcon imMute = im.addImagem("btn_mute");
     private Btn som;
+    private VerificarPressMute vpm = new VerificarPressMute();
     public Btn btnSom(){
         int somPos[] = {20,20,42,35};
         ImageIcon imDaVez = (vez==1) ? imSom:imMute;
         som = new Btn(imDaVez, somPos, new EventSom()); 
+        vpm.start();
         return som;
     }
     public Btn btnSomOutro(){
@@ -71,6 +72,21 @@ public class ItemsTela {
             if(vez==1){som.setIcon(imMute);vez = 2;}else{som.setIcon(imSom);vez = 1;}
         }
     }
+    
+    public class VerificarPressMute extends Thread{
+        @Override
+        public void run(){
+            String lido = "";
+            while(true){
+                try{Thread.sleep(100);}catch(Exception e){}
+                if((lido = (arduino.read()!=null)?arduino.read():"0").equals("M")){
+                    if(vez==1){som.setIcon(imMute);vez = 2;}else{som.setIcon(imSom);vez = 1;}
+                    System.out.println(vez);
+                }
+            }
+        }
+    }
+    
     private Btn btnReturn;
     private Btn btnLogout;
     private Btn btnHome;
