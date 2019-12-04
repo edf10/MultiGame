@@ -1,4 +1,5 @@
 package jogodavelha;
+import arduino.Arduino;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -12,6 +13,7 @@ import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import componentes.Frame;
+import static componentes.Frame.arduino;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import padroes.Fonts;
@@ -32,6 +34,7 @@ public class TelaJDV extends Frame{
         vez = j.sortVez();
         icUser1 = j.sortear.nextBoolean();
         icUser2 = !(icUser1);
+        arduino.initialize();
         JDV();
     }
     private int x;
@@ -85,6 +88,7 @@ public class TelaJDV extends Frame{
         };
         pnGame = new Pn(backPos, cp);
         add(pnGame);
+        ControleJDV c = new ControleJDV(); c.start();
     }
     public void vez(){
         vez = (vez==1)? 2:1;
@@ -141,6 +145,37 @@ public class TelaJDV extends Frame{
             }
         }
     }
+    
+    private int[] posSelecionar = {0,0};
+    public class ControleJDV extends Thread{
+        @Override
+        public void run(){
+            String lido = ""; String tecla = "-";
+            boolean one_vez = false;
+            vet[posSelecionar[0]][posSelecionar[1]].setIcon(vet[posSelecionar[0]][posSelecionar[1]].getRolloverIcon());
+            while(true){
+                try{Thread.sleep(100);}catch(Exception e){}
+                System.out.println(arduino.read());
+                if((lido = (arduino.read()!=null)?arduino.read():"0").equals("D")){if(posSelecionar[1]+1<3){tecla = "D"; one_vez = false;}}
+                if((lido = (arduino.read()!=null)?arduino.read():"0").equals("A")){if(posSelecionar[1]-1>-1){tecla = "A"; one_vez = false;}}
+                
+                if(one_vez==false){
+                    switch(tecla){
+                        case "D": vet[posSelecionar[0]][posSelecionar[1]].setIcon(btn_game.get(0)); posSelecionar[1]++; break;
+                        case "A": vet[posSelecionar[0]][posSelecionar[1]].setIcon(btn_game.get(0)); posSelecionar[1]--; break;
+                        default: break;
+                    }
+                }
+                if(tecla.equals("-")==false&&one_vez==false){
+                    vet[posSelecionar[0]][posSelecionar[1]].setIcon(vet[posSelecionar[0]][posSelecionar[1]].getRolloverIcon());
+                    one_vez = true;
+                }
+                
+                
+            }
+        }
+    }
+    
     private boolean answer = false;
     private boolean clickBtn = false;
     private class Perguntas extends Frame{

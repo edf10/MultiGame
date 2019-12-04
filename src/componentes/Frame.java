@@ -1,10 +1,10 @@
 package componentes;
-import arduino.ArduinoSerial;
+import arduino.Arduino;
 import imagens.Im;
 import javax.swing.JFrame;
 public class Frame extends JFrame{
     public Im im = new Im();
-    private ArduinoSerial arduino = new ArduinoSerial("COM4");
+    public static Arduino arduino = Arduino.getArduino();
     public Frame(){
         setSize(1200,700);
         setLayout(null);
