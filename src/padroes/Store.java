@@ -131,15 +131,14 @@ public class Store extends Frame{
         }
         @Override
         public void actionPerformed(ActionEvent ae) {
-            System.out.println(emUso.get(tipo).get(btn));
+            //System.out.println(emUso.get(tipo).get(btn));
             if(emUso.get(tipo).get(btn).equals("0")&&store.get(tipo).get(btn).equals("1")){
-                System.out.println("oi");
                 btnsUso[tipo][emUso.get(tipo).indexOf("1")].setIcon(im.addImagem("sem_uso_btn_cm_store"));
                 emUso.get(tipo).set(emUso.get(tipo).indexOf("1"), "0");
                 emUso.get(tipo).set(btn, "1");
+                System.out.println(emUso.toString());
                 btnsUso[tipo][btn].setIcon(im.addImagem("btn_uso_store"));
                 botao = btn;
-                //adds e gravar
             }
         }
     }

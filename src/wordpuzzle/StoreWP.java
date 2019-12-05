@@ -25,7 +25,7 @@ public class StoreWP extends Store{
         setStore(user.getStoreWP());
         setEmUso(user.getEmUsoWP());
         fontAdd(ims[user.getEmUsoWP().get(0).indexOf("1")]);
-        corAdd(Integer.parseInt(ims[user.getEmUsoWP().get(1).indexOf("1")])-1);
+        corAdd(Integer.parseInt(ims[user.getEmUsoWP().get(1).indexOf("1")]));
         ItemsAdd ia = new ItemsAdd(); ia.start();
     }
     
@@ -124,10 +124,7 @@ public class StoreWP extends Store{
         @Override
         public void run(){
             while(true){
-                if(botao!=11){
-                    addItems();
-                    botao = 11;
-                }
+                addItems();
             }
         }
     }
@@ -135,8 +132,8 @@ public class StoreWP extends Store{
     public void addItems(){
         user.setStoreWP(getStore());
         user.setEmUsoWP(getEmUso());
-        fontAdd(ims[botao]);
-        corAdd(Integer.parseInt(ims[botao])-1);
+        fontAdd(""+getEmUso().get(0).indexOf("1")+1);
+        corAdd(getEmUso().get(0).indexOf("1")+1);
         Conta c = new Conta(user); c.gravar(); User.setUser(user);
     }
     

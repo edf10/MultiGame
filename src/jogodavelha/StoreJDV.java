@@ -141,7 +141,7 @@ public class StoreJDV extends Store{
         @Override
         public void run(){
             while(true){
-                if(botao!=11){
+                if(botao!=11){  
                     addItems();
                     botao = 11;
                 }
