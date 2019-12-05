@@ -28,6 +28,7 @@ public class ArduinoSerial implements SerialPortEventListener {
 
     public ArduinoSerial(String portName) {
         this.namePort = portName;
+        initialize();
     }
 
     /**
