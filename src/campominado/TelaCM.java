@@ -10,6 +10,7 @@ import componentes.Lb;
 import componentes.Pn;
 import componentes.Btn;
 import componentes.Frame;
+import static componentes.Frame.arduino;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import padroes.Fonts;
@@ -28,6 +29,7 @@ public class TelaCM extends Frame{
     private ArrayList<ImageIcon[]> btns_tab = scm.getBtn_niveis();
     private ArrayList<ImageIcon> bombs = scm.getBtn_bombs();
     private ArrayList<ImageIcon> flags = scm.getBtn_flags();
+    private ControleCM ccm = new ControleCM();
     public void configuracoes(){
         it.setTelaAntIntro(1);
         x = r.getX(); y = r.getY();
@@ -45,10 +47,10 @@ public class TelaCM extends Frame{
         }
         m = r.getM();
         if(x==16){
-            botao = btns_tab.get(0)[1];botao_p = btns_tab.get(1)[1];botao_t = btns_tab.get(2)[1];
+            botao = btns_tab.get(0)[1];botao_p = btns_tab.get(2)[1];botao_t = btns_tab.get(1)[1];
             marcador = flags.get(1);minas = bombs.get(1);
         }else if(x==18){
-            botao = btns_tab.get(0)[2];botao_p = btns_tab.get(1)[2];botao_t = btns_tab.get(2)[2];
+            botao = btns_tab.get(0)[2];botao_p = btns_tab.get(2)[2];botao_t = btns_tab.get(1)[2];
             marcador = flags.get(2);minas = bombs.get(2);
         }
         CM();
@@ -94,6 +96,7 @@ public class TelaCM extends Frame{
         add(lbsegundos);
         add(lbdoispontos);
         add(it.returnGames(this));
+        ccm.start();
     }
     public class contarTempo extends Thread{
         @Override
@@ -155,6 +158,7 @@ public class TelaCM extends Frame{
         }
         ct.stop();//Para o cronômetro.
         WinOrGameOver go = new WinOrGameOver(this); go.setNivel(x); go.addGameOver(2);go.show();
+        ccm.stop();
     }
     public void Ganhar(){
         int abertos = 0;
@@ -186,6 +190,7 @@ public class TelaCM extends Frame{
             Conta c = new Conta(user);
             c.gravar();
             WinOrGameOver w = new WinOrGameOver(this); w.setNivel(x); w.addWin(2);w.show();
+            ccm.stop();
         }
         abertos = 0;
     }
@@ -207,14 +212,56 @@ public class TelaCM extends Frame{
         return scoreFat;
     }
     
+    private int posSelect[] = {0,0};
+    private ArrayList<int[][]> clicks = new ArrayList<>();
+    public class ControleCM extends Thread{
+        @Override
+        public void run(){
+            String lido = ""; String tecla = "";
+            int mat[][] = new int[x][y];
+            for(int i = 0; i<x; i++){
+                for(int j = 0; j<y; j++){
+                    mat[i][j] = y;
+                }
+            }
+            clicks.add(mat);boolean one_vez = false;
+            vet[posSelect[0]][posSelect[1]].setIcon(vet[posSelect[0]][posSelect[1]].getRolloverIcon());
+            while(true){
+                try{Thread.sleep(100);}catch(Exception e){}
+                System.out.println(arduino.read());
+                if((lido = (arduino.read()!=null)?arduino.read():"0").equals("D")){if(posSelect[1]+1<x){tecla = "D"; one_vez = false;}}
+                if((lido = (arduino.read()!=null)?arduino.read():"0").equals("A")){if(posSelect[1]-1>-1){tecla = "A"; one_vez = false;}}
+                if((lido = (arduino.read()!=null)?arduino.read():"0").equals("W")){if(posSelect[0]-1>-1){tecla = "W"; one_vez = false;}}
+                if((lido = (arduino.read()!=null)?arduino.read():"0").equals("S")){if(posSelect[0]+1<x){tecla = "S"; one_vez = false;}}
+                if((lido = (arduino.read()!=null)?arduino.read():"0").equals("K")){tecla = "K"; one_vez = false;}
+                if((lido = (arduino.read()!=null)?arduino.read():"0").equals("J")){tecla = "J"; one_vez = false;}
+                if(one_vez==false){
+                    switch(tecla){
+                        case "D": if(vet[posSelect[0]][posSelect[1]].getIcon()==botao_t)vet[posSelect[0]][posSelect[1]].setIcon(botao); posSelect[1]++; break;
+                        case "A": if(vet[posSelect[0]][posSelect[1]].getIcon()==botao_t)vet[posSelect[0]][posSelect[1]].setIcon(botao); posSelect[1]--; break;
+                        case "W": if(vet[posSelect[0]][posSelect[1]].getIcon()==botao_t)vet[posSelect[0]][posSelect[1]].setIcon(botao); posSelect[0]--; break;
+                        case "S": if(vet[posSelect[0]][posSelect[1]].getIcon()==botao_t)vet[posSelect[0]][posSelect[1]].setIcon(botao); posSelect[0]++; break;
+                        case "K": vet[posSelect[0]][posSelect[1]].altBtnNor();
+                        case "J": vet[posSelect[0]][posSelect[1]].altBtnMarc();
+                        default: tecla = "-"; break;
+                    }
+                    if(tecla.equals("-")==false&&one_vez==false&&tecla.equals("K")==false&&tecla.equals("J")==false&&vet[posSelect[0]][posSelect[1]].getIcon()==botao){
+                        vet[posSelect[0]][posSelect[1]].setIcon(vet[posSelect[0]][posSelect[1]].getRolloverIcon());
+                    }
+                    one_vez = true;
+                }
+            }
+        }
+    }
+    
     public ScoreCM sc;
     public int scoreFat[] = new int[3];
     public boolean press = false; public boolean GO = false; public boolean win = false;
     public int iniciarJogo = 0; public int marc[][]; public int[][] m4;
     public ImageIcon minas = bombs.get(0); public ImageIcon marcador = flags.get(0);
     public ImageIcon botao = btns_tab.get(0)[0]; 
-    public ImageIcon botao_p = btns_tab.get(1)[0];
-    public ImageIcon botao_t = btns_tab.get(2)[0];
+    public ImageIcon botao_p = btns_tab.get(2)[0];
+    public ImageIcon botao_t = btns_tab.get(1)[0];
     public Font btn = f.addNewFont("DS-DIGIT", 20);
     
     private class Button extends Btn{
@@ -264,6 +311,23 @@ public class TelaCM extends Frame{
                 if(GO==false){Ganhar();}//Faz-se uma verificação a cada botão clicado.
             }
         }
+        
+        public void altBtnNor(){
+            iniciarJogo += 1;
+            if(iniciarJogo==1){ct.start();}
+            if(marc[x][y]==0){marc[x][y] = 2;}
+            if(marc[x][y]==2){
+                //Caso seja número, abrir só essa posição. //Caso seja vazio, abre-se até os números através deste método.
+                if(r.posNumero(x, y)){posAlt(x,y);}else{abrir(x,y);}
+            }
+        }
+        public void altBtnMarc(){
+            iniciarJogo += 1;
+            if(iniciarJogo==1){ct.start();}
+            if(marc[x][y]==1){setIcon(null);marc[x][y] = 0;setPressedIcon(botao_p);setIcon(botao);setRolloverIcon(botao_t);
+            }else if(marc[x][y]==0){marc[x][y] = 1;posAlt(x, y);}
+        }
+        
         public class Troca implements MouseListener{
             @Override
             public void mouseClicked(MouseEvent me) {

@@ -26,7 +26,7 @@ public class TelaJDV extends Frame{
     private ImageIcon btnX = sjdv.getBtn_x();
     private ImageIcon btnO = sjdv.getBtn_o();
     private ArrayList<ImageIcon> btn_game = sjdv.getBtn_button();
-    private ControleJDV c = new ControleJDV();
+    private ControleJDV cjdv = new ControleJDV();
     public void start(){
         it.setTelaAntIntro(2); 
         x = j.getX();
@@ -34,7 +34,6 @@ public class TelaJDV extends Frame{
         vez = j.sortVez();
         icUser1 = j.sortear.nextBoolean();
         icUser2 = !(icUser1);
-        //arduino.initialize();
         JDV();
     }
     private int x;
@@ -88,7 +87,7 @@ public class TelaJDV extends Frame{
         };
         pnGame = new Pn(backPos, cp);
         add(pnGame);
-        c.start();
+        cjdv.start();
     }
     public void vez(){
         vez = (vez==1)? 2:1;
@@ -127,13 +126,12 @@ public class TelaJDV extends Frame{
                         setIcon(btnX);
                     }
                 }
-                cliques.get(0)[posSelecionar[0]][posSelecionar[1]] = 9;
                 setPressedIcon(getIcon());
                 press = true;
                 j.addPress(x, y, vez);
                 boolean res = j.ganhar(user1,user2,ass,TelaJDV.this);
                 if(res==true){
-                    c.stop();
+                    cjdv.stop();
                 }
             }
         }
@@ -154,14 +152,11 @@ public class TelaJDV extends Frame{
     }
     
     private int[] posSelecionar = {0,0};
-    private ArrayList<int[][]> cliques = new ArrayList<>(); 
     public class ControleJDV extends Thread{
         @Override
         public void run(){
             String lido = ""; String tecla = "-";
             boolean one_vez = false;
-            int[][] mat = {{0,1,2},{0,1,2},{0,1,2}};
-            cliques.add(mat);
             vet[posSelecionar[0]][posSelecionar[1]].setIcon(vet[posSelecionar[0]][posSelecionar[1]].getRolloverIcon());
             while(true){
                 try{Thread.sleep(100);}catch(Exception e){}
@@ -172,7 +167,6 @@ public class TelaJDV extends Frame{
                 if((lido = (arduino.read()!=null)?arduino.read():"0").equals("S")){if(posSelecionar[0]+1<3){tecla = "S"; one_vez = false;}}
                 if((lido = (arduino.read()!=null)?arduino.read():"0").equals("K")){tecla = "K"; one_vez = false;}
                 if(one_vez==false){
-                    int auxX = posSelecionar[0]; int auxY = posSelecionar[1];
                     switch(tecla){
                         case "D": if(vet[posSelecionar[0]][posSelecionar[1]].getIcon()==vet[posSelecionar[0]][posSelecionar[1]].getRolloverIcon())vet[posSelecionar[0]][posSelecionar[1]].setIcon(btn_game.get(0)); posSelecionar[1]++; break;
                         case "A": if(vet[posSelecionar[0]][posSelecionar[1]].getIcon()==vet[posSelecionar[0]][posSelecionar[1]].getRolloverIcon())vet[posSelecionar[0]][posSelecionar[1]].setIcon(btn_game.get(0)); posSelecionar[1]--; break;
