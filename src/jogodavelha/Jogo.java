@@ -32,7 +32,7 @@ public class Jogo {
         m[x][y] = ic;
     }
     private WinOrGameOver w; 
-    public void ganhar(User user1, User user2, String assunto, Frame tela){
+    public boolean ganhar(User user1, User user2, String assunto, Frame tela){
         Conta c1 = new Conta(user1); Conta c2 = new Conta(user2); 
         w = new WinOrGameOver(tela);
         int m2[][][] = {{{0,0},{1,0},{2,0}},{{0,0},{0,1},{0,2}},{{0,0},{1,1},{2,2}},{{0,1},{1,1},{2,1}},
@@ -44,18 +44,20 @@ public class Jogo {
                 c1.gravar(); c2.gravar();
                 w.addWin(6);
                 w.show();
+                return true;
             }
             if(m[m2[i][0][0]][m2[i][0][1]]==2&&m[m2[i][1][0]][m2[i][1][1]]==2&&m[m2[i][2][0]][m2[i][2][1]]==2){
                 user2.addPartidaJDV("Win", user1.getUsername(), assunto); user1.addPartidaJDV("GameOver", user2.getUsername(), assunto);
                 user2.setMoedas(400); user1.setMoedas(100);
                 c1.gravar(); c2.gravar();
                 w.addGameOver(6); w.show();
+                return true;
             }
         }
-        velha(user1,user2,assunto);
+        return velha(user1,user2,assunto);
     }
     
-    public void velha(User user1, User user2, String assunto){
+    public boolean velha(User user1, User user2, String assunto){
         int cont = 0;
         for(int i = 0; i<x; i++){
             for(int j = 0; j<y; j++){
@@ -72,7 +74,9 @@ public class Jogo {
             c1.gravar(); c2.gravar();
             w.addEmpateJDV();
             w.show();
+            return true;
         }
+        return false;
     }
     
     public int[] addQuestion(){

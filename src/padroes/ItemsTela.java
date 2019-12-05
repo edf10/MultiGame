@@ -15,11 +15,12 @@ import wordpuzzle.StoreWP;
 public class ItemsTela extends Frame{
     private Im im = new Im();
     public ItemsTela(){
-        //arduino.initialize();
+        btnSom(); btnSomOutro();
+        VerificarPressMute vpm = new VerificarPressMute();vpm.start();
+        VerificarPressExit sair = new VerificarPressExit();sair.start();
     }
     public Btn btnClose(){
         int closePos[] = {1161,15,19,19}; ImageIcon btn_close[] = {im.addImagem("btn_close"),im.addImagem("btn_close_t")};
-        //VerificarPressExit sair = new VerificarPressExit(); sair.start();
         return new Btn(btn_close, closePos, new EventClose());
     }
     private class EventClose implements ActionListener{
@@ -46,12 +47,10 @@ public class ItemsTela extends Frame{
     private final ImageIcon imSom = im.addImagem("btn_som");
     private final ImageIcon imMute = im.addImagem("btn_mute");
     private Btn som;
-    private VerificarPressMute vpm = new VerificarPressMute();
     public Btn btnSom(){
         int somPos[] = {20,20,42,35};
         ImageIcon imDaVez = (vez==1) ? imSom:imMute;
         som = new Btn(imDaVez, somPos, new EventSom()); 
-        //vpm.start();
         return som;
     }
     public Btn btnSomOutro(){

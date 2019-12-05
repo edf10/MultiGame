@@ -26,6 +26,7 @@ public class TelaJDV extends Frame{
     private ImageIcon btnX = sjdv.getBtn_x();
     private ImageIcon btnO = sjdv.getBtn_o();
     private ArrayList<ImageIcon> btn_game = sjdv.getBtn_button();
+    private ControleJDV c = new ControleJDV();
     public void start(){
         it.setTelaAntIntro(2); 
         x = j.getX();
@@ -33,7 +34,7 @@ public class TelaJDV extends Frame{
         vez = j.sortVez();
         icUser1 = j.sortear.nextBoolean();
         icUser2 = !(icUser1);
-        arduino.initialize();
+        //arduino.initialize();
         JDV();
     }
     private int x;
@@ -87,7 +88,7 @@ public class TelaJDV extends Frame{
         };
         pnGame = new Pn(backPos, cp);
         add(pnGame);
-        ControleJDV c = new ControleJDV(); c.start();
+        c.start();
     }
     public void vez(){
         vez = (vez==1)? 2:1;
@@ -130,7 +131,10 @@ public class TelaJDV extends Frame{
                 setPressedIcon(getIcon());
                 press = true;
                 j.addPress(x, y, vez);
-                j.ganhar(user1,user2,ass,TelaJDV.this);
+                boolean res = j.ganhar(user1,user2,ass,TelaJDV.this);
+                if(res==true){
+                    c.stop();
+                }
             }
         }
         public void troc(){
