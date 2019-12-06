@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.ImageIcon;
 import padroes.ItemsTela;
 import padroes.Store;
@@ -24,7 +25,6 @@ public class StoreCM extends Store{
         btnNiveis(ims[user.getEmUsoCM().get(2).indexOf("1")], "p");
         btnBombs(ims[user.getEmUsoCM().get(1).indexOf("1")]);
         btnFlags(ims[user.getEmUsoCM().get(0).indexOf("1")]);
-        ItemsAdd ia = new ItemsAdd(); ia.start();
     }
     
     public void btnFlags(String esc){
@@ -116,14 +116,27 @@ public class StoreCM extends Store{
             }
         }
     }
+    private Btn btnsUso[][] = new Btn[3][10];
+    public void addBtnsUso(Pn pn, int tipo){
+        for(int i = 0; i<10; i++){
+            if(getEmUso().get(tipo).get(i).equals("1")){
+                btnsUso[tipo][i] = new Btn(im.addImagem("btn_uso_store"), posBtnsUso[i], new EventUso(i, tipo));
+            }else{
+                btnsUso[tipo][i] = new Btn(im.addImagem("sem_uso_btn_cm_store"), posBtnsUso[i], new EventUso(i, tipo));
+            }
+        }
+    }
     
     private Pn pnItemsBombs;
     public Pn addStoreBombs(){
         btnBombs.setIcon(btnBombs.getRolloverIcon());
         pnItemsBombs = new Pn(); pnItemsBombs.setLayout(null); pnItemsBombs.setBounds(0, 0, 1200, 700);
+        addBtnsUso(pnItemsBombs, 1);
         for(int i = 0; i<10; i++){
             pnItemsBombs.add(new Lb(im.addImagem("bomb_cm_easy_"+ims[i]), posBtns[i]));
+            pnItemsBombs.add(btnsUso[1][i]);
         }
+        
         addBtnBasic(pnItemsBombs, 1);
         return pnItemsBombs;
     }
@@ -132,8 +145,10 @@ public class StoreCM extends Store{
     public Pn addStoreFlags(){
         btnFlags.setIcon(btnFlags.getRolloverIcon());
         pnItemsFlags = new Pn(); pnItemsFlags.setLayout(null); pnItemsFlags.setBounds(0, 0, 1200, 700);
+        addBtnsUso(pnItemsFlags, 0);
         for(int i = 0; i<10; i++){
             pnItemsFlags.add(new Lb(im.addImagem("flagF_"+ims[i]), posBtns[i]));
+            pnItemsFlags.add(btnsUso[0][i]);
         }
         addBtnBasic(pnItemsFlags, 0);
         return pnItemsFlags;
@@ -143,23 +158,13 @@ public class StoreCM extends Store{
     public Pn addStoreButtons(){
         btnButtons.setIcon(btnButtons.getRolloverIcon());
         pnItemsButtons = new Pn(); pnItemsButtons.setLayout(null); pnItemsButtons.setBounds(0, 0, 1200, 700);
+        addBtnsUso(pnItemsButtons, 2);
         for(int i = 0; i<10; i++){
             pnItemsButtons.add(new Lb(im.addImagem("btn_cm_easy_"+ims[i]), posBtns[i]));
+            pnItemsButtons.add(btnsUso[2][i]);
         }
         addBtnBasic(pnItemsButtons, 2);
         return pnItemsButtons;
-    }
-    
-    public class ItemsAdd extends Thread{
-        @Override
-        public void run(){
-            while(true){
-                if(botao!=11){
-                    addItems();
-                    botao = 11;
-                }
-            }
-        }
     }
     
     public void addItems(){
@@ -171,6 +176,25 @@ public class StoreCM extends Store{
         btnFlags(ims[botao]);
         btnBombs(ims[botao]);
         Conta c = new Conta(user); c.gravar(); User.setUser(user);
+    }
+    private int botao;
+    public class EventUso implements ActionListener{
+        private int btn;private int tipo;
+        public EventUso(int auxBtn, int auxTipo){
+            btn = auxBtn; tipo = auxTipo;
+        }
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            if(getEmUso().get(tipo).get(btn).equals("0")&&getStore().get(tipo).get(btn).equals("1")){
+                btnsUso[tipo][getEmUso().get(tipo).indexOf("1")].setIcon(im.addImagem("sem_uso_btn_cm_store"));
+                getEmUso().get(tipo).set(getEmUso().get(tipo).indexOf("1"), "0");
+                getEmUso().get(tipo).set(btn, "1");
+                System.out.println(getEmUso().toString());
+                btnsUso[tipo][btn].setIcon(im.addImagem("btn_uso_store"));
+                botao = btn;
+                addItems();
+            }
+        }
     }
     
 }

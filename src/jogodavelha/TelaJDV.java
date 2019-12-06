@@ -15,6 +15,7 @@ import componentes.Frame;
 import static componentes.Frame.arduino;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import padroes.EasterEgg;
 import padroes.Fonts;
 import padroes.ItemsTela;
 import user.User;
@@ -195,6 +196,7 @@ public class TelaJDV extends Frame{
             this.yb = yb;
             question();
             tela();
+            TwoEasterEgg on = new TwoEasterEgg(); on.start();
             setLocationRelativeTo(null);
             setVisible(true);
         }
@@ -266,6 +268,18 @@ public class TelaJDV extends Frame{
                     vet[xb][yb].setRolloverIcon(null);
                 }
                 vez();
+            }
+        }
+        public class TwoEasterEgg extends Thread{
+            @Override
+            public void run(){
+                while(true){
+                    if(txtRes.getText()!=null){
+                        if(txtRes.getText().equals("01")){
+                            EasterEgg is = new EasterEgg("easter_egg_02"); is.addEaster(); is.show(); stop();
+                        }
+                    }
+                }
             }
         }
     }

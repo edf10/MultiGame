@@ -24,7 +24,6 @@ public class StoreJDV extends Store{
         btnX(ims[user.getEmUsoJDV().get(0).indexOf("1")]);
         btnO(ims[user.getEmUsoJDV().get(1).indexOf("1")]);
         btnButtons(ims[user.getEmUsoJDV().get(2).indexOf("1")]);
-        ItemsAdd ia = new ItemsAdd(); ia.start();
     }
     
     public void btnX(String esc){
@@ -110,8 +109,10 @@ public class StoreJDV extends Store{
     public Pn addButtons(){
         btnButtons.setIcon(btnButtons.getRolloverIcon());
         pnItemsButtons = new Pn(); pnItemsButtons.setLayout(null); pnItemsButtons.setBounds(0, 0, 1200, 700);
+        addBtnsUso(pnItemsButtons, 2);
         for(int i = 0; i<10; i++){
             pnItemsButtons.add(new Lb(im.addImagem("btn_jdv_game_"+ims[i]+"_z"), posBtns[i]));
+            pnItemsButtons.add(btnsUso[2][i]);
         }
         addBtnBasic(pnItemsButtons, 2);
         return pnItemsButtons;
@@ -120,8 +121,10 @@ public class StoreJDV extends Store{
     public Pn addOs(){
         btnOs.setIcon(btnOs.getRolloverIcon());
         pnItemsOs = new Pn(); pnItemsOs.setLayout(null); pnItemsOs.setBounds(0, 0, 1200, 700);
+        addBtnsUso(pnItemsOs, 1);
         for(int i = 0; i<10; i++){
             pnItemsOs.add(new Lb(im.addImagem("o_jdv_"+ims[i]+"_z"), posBtns[i]));
+            pnItemsOs.add(btnsUso[1][i]);
         }
         addBtnBasic(pnItemsOs, 1);
         return pnItemsOs;
@@ -130,23 +133,13 @@ public class StoreJDV extends Store{
     public Pn addXs(){
         btnXs.setIcon(btnXs.getRolloverIcon());
         pnItemsXs = new Pn(); pnItemsXs.setLayout(null); pnItemsXs.setBounds(0, 0, 1200, 700);
+        addBtnsUso(pnItemsXs, 0);
         for(int i = 0; i<10; i++){
             pnItemsXs.add(new Lb(im.addImagem("x_jdv_"+ims[i]+"_z"), posBtns[i]));
+            pnItemsXs.add(btnsUso[0][i]);
         }
         addBtnBasic(pnItemsXs, 0);
         return pnItemsXs;
-    }
-    
-    public class ItemsAdd extends Thread{
-        @Override
-        public void run(){
-            while(true){
-                if(botao!=11){
-                    addItems();
-                    botao = 11;
-                }
-            }
-        }
     }
     
     public void addItems(){
@@ -156,6 +149,37 @@ public class StoreJDV extends Store{
         btnO(ims[botao]);
         btnButtons(ims[botao]);
         Conta c = new Conta(user); c.gravar(); User.setUser(user);
+    }
+    
+    private Btn btnsUso[][] = new Btn[3][10];
+    public void addBtnsUso(Pn pn, int tipo){
+        for(int i = 0; i<10; i++){
+            if(getEmUso().get(tipo).get(i).equals("1")){
+                btnsUso[tipo][i] = new Btn(im.addImagem("btn_uso_store"), posBtnsUso[i], new EventUso(i, tipo));
+            }else{
+                btnsUso[tipo][i] = new Btn(im.addImagem("sem_uso_btn_cm_store"), posBtnsUso[i], new EventUso(i, tipo));
+            }
+        }
+    }
+    
+    private int botao;
+    public class EventUso implements ActionListener{
+        private int btn;private int tipo;
+        public EventUso(int auxBtn, int auxTipo){
+            btn = auxBtn; tipo = auxTipo;
+        }
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            if(getEmUso().get(tipo).get(btn).equals("0")&&getStore().get(tipo).get(btn).equals("1")){
+                btnsUso[tipo][getEmUso().get(tipo).indexOf("1")].setIcon(im.addImagem("sem_uso_btn_cm_store"));
+                getEmUso().get(tipo).set(getEmUso().get(tipo).indexOf("1"), "0");
+                getEmUso().get(tipo).set(btn, "1");
+                System.out.println(getEmUso().toString());
+                btnsUso[tipo][btn].setIcon(im.addImagem("btn_uso_store"));
+                botao = btn;
+                addItems();
+            }
+        }
     }
     
 }

@@ -16,6 +16,7 @@ import componentes.Pass;
 import componentes.Txt;
 import javax.swing.border.Border;
 import jogodavelha.IntroductionJDV;
+import padroes.EasterEgg;
 import padroes.Fonts;
 import padroes.ItemsTela;
 import user.Cadastro;
@@ -109,7 +110,7 @@ public class MultiGameTela extends Frame{
         Fonts fonte = new Fonts(); 
         Font f = fonte.addNewFont("DS-DIGIT", 40);
         Border b = BorderFactory.createLineBorder(new Color(52,103,77), 3);
-        txtUserName = new Txt(txtUser, f, Color.black, b);
+        txtUserName = new Txt(txtUser, f, Color.black, b); txtUserName.setText("");
         txtPassword = new Pass(txtpass, f, Color.black, b);
         ImageIcon btn_logar[] = {im.addImagem("btn_logar"), im.addImagem("btn_logar_t"), im.addImagem("btn_logar_p")};
         ImageIcon btn_cadastro[] = {im.addImagem("btn_cadastro"), im.addImagem("btn_cadastro_t")};
@@ -128,6 +129,7 @@ public class MultiGameTela extends Frame{
         int pnLoginP[] = {0,0,1200,700};
         pnLogin = new Pn(pnLoginP, cp, Color.black);
         add(pnLogin);
+        OneEasterEgg on = new OneEasterEgg(); on.start();
     }
     
     public class Logar implements ActionListener{
@@ -147,6 +149,23 @@ public class MultiGameTela extends Frame{
             }
         }
     }
+    
+    public class OneEasterEgg extends Thread{
+        @Override
+        public void run(){
+            while(true){
+                if(txtUserName.getText()!=null){
+                    if(txtUserName.getText().equals("007")){
+                        EasterEgg one = new EasterEgg("easter_egg_01");
+                        one.addEaster();
+                        one.show();
+                        stop();
+                    }
+                }
+            }
+        }
+    }
+    
     public class Register implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent ae) {

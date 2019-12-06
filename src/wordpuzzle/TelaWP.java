@@ -1,6 +1,7 @@
 package wordpuzzle;
 import componentes.Btn;
 import componentes.Frame;
+import static componentes.Frame.arduino;
 import componentes.Lb;
 import componentes.Pn;
 import java.awt.Color;
@@ -22,6 +23,7 @@ public class TelaWP extends Frame{
     private StoreWP swp = new StoreWP();
     private Font font = swp.getFont();
     private Color cor = swp.getCor();
+    private ControleWP cwp = new ControleWP();
     public void setNivel(int nivel) {this.nivel = nivel;}
     public void configuracoes(){
         p = new Palavras(nivel);
@@ -74,7 +76,7 @@ public class TelaWP extends Frame{
         add(lbdoispontos);
         add(lbsegundos);
         barraWords();
-        add(it.btnClose()); add(it.returnGames(this)); add(it.btnSomOutro());
+        add(it.btnClose()); add(it.returnGames(this)); add(it.btnSomOutro()); cwp.start();
     }
     
     private Lb lbWord;
@@ -137,7 +139,41 @@ public class TelaWP extends Frame{
             sc.gravar();
             Conta c = new Conta(user);
             c.gravar();
-            if(win==true){win = false; WinOrGameOver w = new WinOrGameOver(this); w.setNivel(x); w.addWin(4); w.show();}
+            if(win==true){win = false; WinOrGameOver w = new WinOrGameOver(this); w.setNivel(x); w.addWin(4); w.show();cwp.stop();}
+        }
+    }
+    
+    private int[] posSelect = {0,0};
+    public class ControleWP extends Thread{
+        @Override
+        public void run(){
+            String lido = ""; String tecla = "";
+            boolean one_vez = false;
+            Color cor = new Color(24,21,21);
+            letras[posSelect[0]][posSelect[1]].setBackground(new Color(24,21,21));
+            while(true){
+                try{Thread.sleep(100);}catch(Exception e){}
+                System.out.println(arduino.read());
+                if((lido = (arduino.read()!=null)?arduino.read():"0").equals("D")){if(posSelect[1]+1<x){tecla = "D"; one_vez = false;}}
+                if((lido = (arduino.read()!=null)?arduino.read():"0").equals("A")){if(posSelect[1]-1>-1){tecla = "A"; one_vez = false;}}
+                if((lido = (arduino.read()!=null)?arduino.read():"0").equals("W")){if(posSelect[0]-1>-1){tecla = "W"; one_vez = false;}}
+                if((lido = (arduino.read()!=null)?arduino.read():"0").equals("S")){if(posSelect[0]+1<x){tecla = "S"; one_vez = false;}}
+                if((lido = (arduino.read()!=null)?arduino.read():"0").equals("K")){tecla = "K"; one_vez = false;}
+                if(one_vez==false){
+                    switch(tecla){
+                        case "D": if(letras[posSelect[0]][posSelect[1]].getBackground().equals(cor)){letras[posSelect[0]][posSelect[1]].setBackground(Color.black);letras[posSelect[0]][posSelect[1]].setForeground(Color.white);} posSelect[1]++; break;
+                        case "A": if(letras[posSelect[0]][posSelect[1]].getBackground().equals(cor)){letras[posSelect[0]][posSelect[1]].setBackground(Color.black);letras[posSelect[0]][posSelect[1]].setForeground(Color.white);} posSelect[1]--; break;
+                        case "W": if(letras[posSelect[0]][posSelect[1]].getBackground().equals(cor)){letras[posSelect[0]][posSelect[1]].setBackground(Color.black);letras[posSelect[0]][posSelect[1]].setForeground(Color.white);} posSelect[0]--; break;
+                        case "S": if(letras[posSelect[0]][posSelect[1]].getBackground().equals(cor)){letras[posSelect[0]][posSelect[1]].setBackground(Color.black);letras[posSelect[0]][posSelect[1]].setForeground(Color.white);} posSelect[0]++; break;
+                        case "K": letras[posSelect[0]][posSelect[1]].alt();
+                        default: tecla = "-"; break;
+                    }
+                    if(tecla.equals("-")==false&&one_vez==false&&tecla.equals("K")==false&&letras[posSelect[0]][posSelect[1]].getBackground()==Color.black){
+                        letras[posSelect[0]][posSelect[1]].setBackground(new Color(24,21,21));
+                    }
+                    one_vez = true;
+                }
+            }
         }
     }
     
@@ -210,6 +246,12 @@ public class TelaWP extends Frame{
             setForeground(Color.black);
             acionado = true;
             permanente = true;
+        }
+        public void alt(){
+            if(troca==1){setBackground(cor); setForeground(Color.black); troca = 2;}else if(permanente==false){setBackground(Color.black); setForeground(Color.white); troca = 1;}
+            acionado = true;
+            wordsEncontradas();
+            ganhar();
         }
         public class Evento implements ActionListener{
             @Override

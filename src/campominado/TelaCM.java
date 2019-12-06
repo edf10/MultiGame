@@ -213,18 +213,11 @@ public class TelaCM extends Frame{
     }
     
     private int posSelect[] = {0,0};
-    private ArrayList<int[][]> clicks = new ArrayList<>();
     public class ControleCM extends Thread{
         @Override
         public void run(){
             String lido = ""; String tecla = "";
-            int mat[][] = new int[x][y];
-            for(int i = 0; i<x; i++){
-                for(int j = 0; j<y; j++){
-                    mat[i][j] = y;
-                }
-            }
-            clicks.add(mat);boolean one_vez = false;
+            boolean one_vez = false;
             vet[posSelect[0]][posSelect[1]].setIcon(vet[posSelect[0]][posSelect[1]].getRolloverIcon());
             while(true){
                 try{Thread.sleep(100);}catch(Exception e){}
