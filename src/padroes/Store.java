@@ -24,9 +24,7 @@ public class Store extends Frame{
     protected User user = User.getUser();
     protected String[] ims = {"01","02","03","04","05","06","07","08","09","10"};
     private ItemsTela it = new ItemsTela();
-    
     public Store(){
-        
     }
     
     private Pn pnIntro;
@@ -68,7 +66,6 @@ public class Store extends Frame{
         }
     }
     private Btn btnsComprado[][] = new Btn[3][10];
-    private Btn btnsUso[][] = new Btn[3][10];
     public void addBtnBasic(Pn pn, int tipo){
         int backPos[] = {0,0,1200,700};
         for(int i = 0; i<10; i++){
@@ -77,13 +74,7 @@ public class Store extends Frame{
             }else{
                 btnsComprado[tipo][i] = new Btn(im.addImagem("valor_btn_cm_store"), posBtnsComprado[i], new EventComprar(i, tipo));
             }
-            if(emUso.get(tipo).get(i).equals("1")){
-                btnsUso[tipo][i] = new Btn(im.addImagem("btn_uso_store"), posBtnsUso[i], new EventUso(i, tipo));
-            }else{
-                btnsUso[tipo][i] = new Btn(im.addImagem("sem_uso_btn_cm_store"), posBtnsUso[i], new EventUso(i, tipo));
-            }
             pn.add(btnsComprado[tipo][i]);
-            pn.add(btnsUso[tipo][i]);
         }
         pn.add(new Lb(im.addImagem("back_store"), backPos));
     }
@@ -119,26 +110,6 @@ public class Store extends Frame{
                 System.out.println("Item já foi comprado");
             }else{
                 System.out.println("Dinheiro insuficiente");
-            }
-        }
-    }
-    protected int botao = 11;
-    protected boolean adItems = false;
-    public class EventUso implements ActionListener{
-        public int btn; private int tipo;
-        public EventUso(int btn, int tipo){
-            this.btn = btn; this.tipo = tipo;
-        }
-        @Override
-        public void actionPerformed(ActionEvent ae) {
-            //System.out.println(emUso.get(tipo).get(btn));
-            if(emUso.get(tipo).get(btn).equals("0")&&store.get(tipo).get(btn).equals("1")){
-                btnsUso[tipo][emUso.get(tipo).indexOf("1")].setIcon(im.addImagem("sem_uso_btn_cm_store"));
-                emUso.get(tipo).set(emUso.get(tipo).indexOf("1"), "0");
-                emUso.get(tipo).set(btn, "1");
-                System.out.println(emUso.toString());
-                btnsUso[tipo][btn].setIcon(im.addImagem("btn_uso_store"));
-                botao = btn;
             }
         }
     }

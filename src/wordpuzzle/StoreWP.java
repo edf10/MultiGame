@@ -1,4 +1,5 @@
 package wordpuzzle;
+import campominado.StoreCM;
 import componentes.Btn;
 import componentes.Lb;
 import componentes.Pn;
@@ -26,7 +27,6 @@ public class StoreWP extends Store{
         setEmUso(user.getEmUsoWP());
         fontAdd(ims[user.getEmUsoWP().get(0).indexOf("1")]);
         corAdd(Integer.parseInt(ims[user.getEmUsoWP().get(1).indexOf("1")]));
-        ItemsAdd ia = new ItemsAdd(); ia.start();
     }
     
     public void fontAdd(String esc){
@@ -69,8 +69,10 @@ public class StoreWP extends Store{
     public Pn addFonts(){
         btnFont.setIcon(btnFont.getRolloverIcon());
         pnFonts = new Pn(); pnFonts.setLayout(null); pnFonts.setBounds(0, 0, 1200, 700);
+        addBtnsUso(pnFonts, 0);
         for(int i = 0; i<10; i++){
             pnFonts.add(new Lb(im.addImagem("font_wp_"+ims[i]+"_z"), posBtns[i]));
+            pnFonts.add(btnsUso[0][i]);
         }
         addBtnBasic(pnFonts, 0);
         return pnFonts;
@@ -80,8 +82,10 @@ public class StoreWP extends Store{
     public Pn addCores(){
         btnCor.setIcon(btnCor.getRolloverIcon());
         pnCores = new Pn(); pnCores.setLayout(null); pnCores.setBounds(0,0,1200,700);
+        addBtnsUso(pnCores, 1);
         for(int i = 0; i<10; i++){
             pnCores.add(new Lb(im.addImagem("mostra_cor_wp_"+ims[i]), posBtns[i]));
+            pnCores.add(btnsUso[1][i]);
         }
         addBtnBasic(pnCores, 1);
         return pnCores;
@@ -120,21 +124,43 @@ public class StoreWP extends Store{
         }
     }
     
-    public class ItemsAdd extends Thread{
-        @Override
-        public void run(){
-            while(true){
-                addItems();
+    public void addItems(){
+        user.setStoreWP(getStore());
+        user.setEmUsoWP(getEmUso());
+        fontAdd(ims[botao]);
+        corAdd(Integer.parseInt(ims[botao])-1);
+        Conta c = new Conta(user); c.gravar(); User.setUser(user);
+    }
+    
+    private Btn btnsUso[][] = new Btn[3][10];
+    public void addBtnsUso(Pn pn, int tipo){
+        for(int i = 0; i<10; i++){
+            if(getEmUso().get(tipo).get(i).equals("1")){
+                btnsUso[tipo][i] = new Btn(im.addImagem("btn_uso_store"), posBtnsUso[i], new EventUso(i, tipo));
+            }else{
+                btnsUso[tipo][i] = new Btn(im.addImagem("sem_uso_btn_cm_store"), posBtnsUso[i], new EventUso(i, tipo));
             }
         }
     }
     
-    public void addItems(){
-        user.setStoreWP(getStore());
-        user.setEmUsoWP(getEmUso());
-        fontAdd(""+getEmUso().get(0).indexOf("1")+1);
-        corAdd(getEmUso().get(0).indexOf("1")+1);
-        Conta c = new Conta(user); c.gravar(); User.setUser(user);
+    private int botao;
+    public class EventUso implements ActionListener{
+        private int btn;private int tipo;
+        public EventUso(int auxBtn, int auxTipo){
+            btn = auxBtn; tipo = auxTipo;
+        }
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            if(getEmUso().get(tipo).get(btn).equals("0")&&getStore().get(tipo).get(btn).equals("1")){
+                btnsUso[tipo][getEmUso().get(tipo).indexOf("1")].setIcon(im.addImagem("sem_uso_btn_cm_store"));
+                getEmUso().get(tipo).set(getEmUso().get(tipo).indexOf("1"), "0");
+                getEmUso().get(tipo).set(btn, "1");
+                System.out.println(getEmUso().toString());
+                btnsUso[tipo][btn].setIcon(im.addImagem("btn_uso_store"));
+                botao = btn;
+                addItems();
+            }
+        }
     }
     
 }

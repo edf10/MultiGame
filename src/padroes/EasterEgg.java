@@ -4,19 +4,21 @@ import componentes.Lb;
 import java.awt.Color;
 import java.awt.Font;
 public class EasterEgg extends Frame{
-    public EasterEgg(){
-        setSize(320, 240);
+    public EasterEgg(String imagem){
+        setSize(im.addGif(imagem).getIconWidth(), im.addGif(imagem).getIconHeight());
+        this.imagem = imagem;
         setLocationRelativeTo(null);
     }
     
+    private String imagem;
     private Lb lbCont;
-    public void addEasterCM(){
+    public void addEaster(){
         Fonts fs = new Fonts();
         Font f = fs.addNewFont("font_06", 20);
-        int backPos[] = {0,0,320,240}; int contPos[] = {14,10,28,19};
+        int backPos[] = {0,0,im.addGif(imagem).getIconWidth(), im.addGif(imagem).getIconHeight()}; int contPos[] = {14,10,28,19};
         lbCont = new Lb("00",f,contPos, Color.white);
         add(lbCont);
-        add(new Lb(im.addGif("aleatorio_gif_cm"), backPos));
+        add(new Lb(im.addGif(imagem), backPos));
         Apagar ap = new Apagar(); ap.start();
     }
     
@@ -34,5 +36,4 @@ public class EasterEgg extends Frame{
             }
         }
     }
-    
 }
