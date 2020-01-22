@@ -10,14 +10,15 @@ import javax.swing.ImageIcon;
 import jogodavelha.IntroductionJDV;
 import jogodavelha.StoreJDV;
 import multigame.MultiGameTela;
+import musics.Music;
 import wordpuzzle.IntroductionWP;
 import wordpuzzle.StoreWP;
 public class ItemsTela extends Frame{
     private Im im = new Im();
     public ItemsTela(){
         btnSom(); btnSomOutro();
-        VerificarPressMute vpm = new VerificarPressMute();vpm.start();
-        VerificarPressExit sair = new VerificarPressExit();sair.start();
+        //VerificarPressMute vpm = new VerificarPressMute();vpm.start();
+        //VerificarPressExit sair = new VerificarPressExit();sair.start();
     }
     public Btn btnClose(){
         int closePos[] = {1161,15,19,19}; ImageIcon btn_close[] = {im.addImagem("btn_close"),im.addImagem("btn_close_t")};
@@ -29,6 +30,7 @@ public class ItemsTela extends Frame{
             System.exit(0);
         }
     }
+    /*
     public class VerificarPressExit extends Thread{
         @Override
         public void run(){
@@ -43,7 +45,7 @@ public class ItemsTela extends Frame{
             }
         }
     }
-    
+    */
     private final ImageIcon imSom = im.addImagem("btn_som");
     private final ImageIcon imMute = im.addImagem("btn_mute");
     private Btn som;
@@ -63,10 +65,11 @@ public class ItemsTela extends Frame{
     public class EventSom implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            if(vez==1){som.setIcon(imMute);vez = 2;}else{som.setIcon(imSom);vez = 1;}
+            if(vez==1){som.setIcon(imMute);vez = 2;m.parar();}else{som.setIcon(imSom);vez = 1;m.continuar();}
         }
     }
-    
+    private static Music m = new Music();
+    /*
     public class VerificarPressMute extends Thread{
         @Override
         public void run(){
@@ -74,12 +77,12 @@ public class ItemsTela extends Frame{
             while(true){
                 try{Thread.sleep(100);}catch(Exception e){}
                 if((lido = (arduino.read()!=null)?arduino.read():"0").equals("M")){
-                    if(vez==1){som.setIcon(imMute);vez = 2;}else{som.setIcon(imSom);vez = 1;}
+                    if(vez==1){som.setIcon(imMute);vez = 2;m.parar();}else{som.setIcon(imSom);vez = 1;m.continuar();}
                 }
             }
         }
     }
-    
+    */
     private Btn btnReturn;
     private Btn btnLogout;
     private Btn btnHome;

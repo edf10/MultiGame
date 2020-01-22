@@ -129,8 +129,11 @@ public class MultiGameTela extends Frame{
         int pnLoginP[] = {0,0,1200,700};
         pnLogin = new Pn(pnLoginP, cp, Color.black);
         add(pnLogin);
-        OneEasterEgg on = new OneEasterEgg(); on.start();
+        on = new OneEasterEgg();
+        on.start();
     }
+    
+    private OneEasterEgg on;
     
     public class Logar implements ActionListener{
         @Override
@@ -143,6 +146,7 @@ public class MultiGameTela extends Frame{
             if(c.isLogado()){
                 Jogos();
                 c.setLogado(true);
+                on.stop();
             }else{
                 dispose();
                 MultiGameTela mg = new MultiGameTela(); mg.intro(); mg.show();
@@ -155,11 +159,11 @@ public class MultiGameTela extends Frame{
         public void run(){
             while(true){
                 if(txtUserName.getText()!=null){
-                    if(txtUserName.getText().equals("007")){
+                    if(java.util.Objects.equals(txtUserName.getText(), "007")){
                         EasterEgg one = new EasterEgg("easter_egg_01");
                         one.addEaster();
                         one.show();
-                        stop();
+                        return;
                     }
                 }
             }

@@ -62,7 +62,7 @@ public class StoreJDV extends Store{
         btnXs = new Btn(btn_xs, btnXPos, new EventBtnsIntro(1));
         btnOs = new Btn(btn_os, btnOPos, new EventBtnsIntro(2));
         Component cp[] = {
-            it.btnClose(), it.returnGames(this),
+            it.btnClose(), it.btnSomOutro(), it.returnGames(this),
             btnButtons, btnXs, btnOs,
             new Lb(im.addImagem("back_store"), backPos)
         };
@@ -72,7 +72,7 @@ public class StoreJDV extends Store{
     public void loja(Pn pn){
         int backPos[] = {0,0,1200,700};
         Component cp[] = {
-            it.btnClose(), it.returnGames(this),
+            it.btnClose(), it.btnSomOutro(), it.returnGames(this),
             btnButtons, btnXs, btnOs,
             pn
         };

@@ -10,7 +10,7 @@ import componentes.Lb;
 import componentes.Pn;
 import componentes.Btn;
 import componentes.Frame;
-import static componentes.Frame.arduino;
+//import static componentes.Frame.arduino;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import padroes.Fonts;
@@ -29,7 +29,7 @@ public class TelaCM extends Frame{
     private ArrayList<ImageIcon[]> btns_tab = scm.getBtn_niveis();
     private ArrayList<ImageIcon> bombs = scm.getBtn_bombs();
     private ArrayList<ImageIcon> flags = scm.getBtn_flags();
-    private ControleCM ccm = new ControleCM();
+    //private ControleCM ccm = new ControleCM();
     public void configuracoes(){
         it.setTelaAntIntro(1);
         x = r.getX(); y = r.getY();
@@ -91,12 +91,13 @@ public class TelaCM extends Frame{
         pnBorda.setBackground(new Color(45,39,39));
         add(pnBorda);
         getContentPane().setBackground(new Color(45,39,39));
-        add(it.btnClose()); add(it.btnSomOutro());
+        add(it.btnClose()); 
+        add(it.btnSomOutro());
         add(lbminutos);
         add(lbsegundos);
         add(lbdoispontos);
         add(it.returnGames(this));
-        ccm.start();
+        //ccm.start();
     }
     public class contarTempo extends Thread{
         @Override
@@ -158,7 +159,7 @@ public class TelaCM extends Frame{
         }
         ct.stop();//Para o cronômetro.
         WinOrGameOver go = new WinOrGameOver(this); go.setNivel(x); go.addGameOver(2);go.show();
-        ccm.stop();
+        //sccm.stop();
     }
     public void Ganhar(){
         int abertos = 0;
@@ -190,7 +191,7 @@ public class TelaCM extends Frame{
             Conta c = new Conta(user);
             c.gravar();
             WinOrGameOver w = new WinOrGameOver(this); w.setNivel(x); w.addWin(2);w.show();
-            ccm.stop();
+            //ccm.stop();
         }
         abertos = 0;
     }
@@ -211,7 +212,7 @@ public class TelaCM extends Frame{
         scoreFat[0] = p; scoreFat[1] = t; scoreFat[2] = m;
         return scoreFat;
     }
-    
+    /*
     private int posSelect[] = {0,0};
     public class ControleCM extends Thread{
         @Override
@@ -246,7 +247,7 @@ public class TelaCM extends Frame{
             }
         }
     }
-    
+    */
     public ScoreCM sc;
     public int scoreFat[] = new int[3];
     public boolean press = false; public boolean GO = false; public boolean win = false;

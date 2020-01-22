@@ -20,13 +20,13 @@ public class StoreWP extends Store{
     private Font font;
     private Color cor;
     private Color cores[] = {new Color(91,191,150),new Color(191,91,129),new Color(82,119,188),new Color(139,82,188),new Color(188,107,82),
-                             new Color(145,46,46),new Color(196,200,93),new Color(143,80,30),new Color(65,130,65),new Color(69,111,135)};
+                             new Color(145,46,46),new Color(196,200,93),new Color(143,80,30),new Color(69,111,135),new Color(65,130,65)};
     
     public StoreWP(){
         setStore(user.getStoreWP());
         setEmUso(user.getEmUsoWP());
         fontAdd(ims[user.getEmUsoWP().get(0).indexOf("1")]);
-        corAdd(Integer.parseInt(ims[user.getEmUsoWP().get(1).indexOf("1")]));
+        corAdd(Integer.parseInt(ims[user.getEmUsoWP().get(1).indexOf("1")])-1);
     }
     
     public void fontAdd(String esc){
@@ -57,7 +57,7 @@ public class StoreWP extends Store{
         btnFont = new Btn(btn_font, btnFontPos, new EventBtnsIntro(1));
         btnCor = new Btn(btn_cor, btnCorPos, new EventBtnsIntro(2));
         Component cp[] = {
-            it.btnClose(), it.returnGames(this),
+            it.btnClose(), it.btnSomOutro(), it.returnGames(this),
             btnFont, btnCor,
             new Lb(im.addImagem("back_store"), backPos)
         };
@@ -94,7 +94,7 @@ public class StoreWP extends Store{
     public void loja(Pn pn){
         int backPos[] = {0,0,1200,700};
         Component cp[] = {
-            it.btnClose(), it.returnGames(this),
+            it.btnClose(), it.btnSomOutro(), it.returnGames(this),
             btnFont, btnCor,
             pn
         };
@@ -155,7 +155,6 @@ public class StoreWP extends Store{
                 btnsUso[tipo][getEmUso().get(tipo).indexOf("1")].setIcon(im.addImagem("sem_uso_btn_cm_store"));
                 getEmUso().get(tipo).set(getEmUso().get(tipo).indexOf("1"), "0");
                 getEmUso().get(tipo).set(btn, "1");
-                System.out.println(getEmUso().toString());
                 btnsUso[tipo][btn].setIcon(im.addImagem("btn_uso_store"));
                 botao = btn;
                 addItems();

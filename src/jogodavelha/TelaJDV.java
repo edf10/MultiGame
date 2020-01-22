@@ -12,7 +12,7 @@ import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import componentes.Frame;
-import static componentes.Frame.arduino;
+//import static componentes.Frame.arduino;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import padroes.EasterEgg;
@@ -27,7 +27,7 @@ public class TelaJDV extends Frame{
     private ImageIcon btnX = sjdv.getBtn_x();
     private ImageIcon btnO = sjdv.getBtn_o();
     private ArrayList<ImageIcon> btn_game = sjdv.getBtn_button();
-    private ControleJDV cjdv = new ControleJDV();
+    //private ControleJDV cjdv = new ControleJDV();
     public void start(){
         it.setTelaAntIntro(2); 
         x = j.getX();
@@ -88,7 +88,7 @@ public class TelaJDV extends Frame{
         };
         pnGame = new Pn(backPos, cp);
         add(pnGame);
-        cjdv.start();
+        //cjdv.start();
     }
     public void vez(){
         vez = (vez==1)? 2:1;
@@ -132,7 +132,7 @@ public class TelaJDV extends Frame{
                 j.addPress(x, y, vez);
                 boolean res = j.ganhar(user1,user2,ass,TelaJDV.this);
                 if(res==true){
-                    cjdv.stop();
+                    //cjdv.stop();
                 }
             }
         }
@@ -151,7 +151,7 @@ public class TelaJDV extends Frame{
             }
         }
     }
-    
+    /*
     private int[] posSelecionar = {0,0};
     public class ControleJDV extends Thread{
         @Override
@@ -184,7 +184,7 @@ public class TelaJDV extends Frame{
             }
         }
     }
-    
+    */
     private boolean answer = false;
     private boolean clickBtn = false;
     private class Perguntas extends Frame{
@@ -275,7 +275,7 @@ public class TelaJDV extends Frame{
             public void run(){
                 while(true){
                     if(txtRes.getText()!=null){
-                        if(txtRes.getText().equals("01")){
+                        if(java.util.Objects.equals(txtRes.getText(), "01")){
                             EasterEgg is = new EasterEgg("easter_egg_02"); is.addEaster(); is.show(); stop();
                         }
                     }

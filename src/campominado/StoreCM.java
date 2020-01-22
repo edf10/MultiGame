@@ -78,7 +78,7 @@ public class StoreCM extends Store{
         btnFlags = new Btn(btn_flag, btnFlagPos, new EventBtnsIntro(1));
         btnBombs = new Btn(btn_bombs, btnBombsPos, new EventBtnsIntro(2));
         Component cp[] = {
-            it.btnClose(), it.returnGames(this),
+            it.btnClose(), it.btnSomOutro(), it.returnGames(this),
             btnButtons, btnFlags, btnBombs,
             new Lb(im.addImagem("back_store"), backPos)
         };
@@ -88,7 +88,7 @@ public class StoreCM extends Store{
     public void loja(Pn pn){
         int backPos[] = {0,0,1200,700};
         Component cp[] = {
-            it.btnClose(), it.returnGames(this),
+            it.btnClose(), it.btnSomOutro(), it.returnGames(this),
             btnButtons, btnFlags, btnBombs,
             pn
         };
@@ -136,7 +136,6 @@ public class StoreCM extends Store{
             pnItemsBombs.add(new Lb(im.addImagem("bomb_cm_easy_"+ims[i]), posBtns[i]));
             pnItemsBombs.add(btnsUso[1][i]);
         }
-        
         addBtnBasic(pnItemsBombs, 1);
         return pnItemsBombs;
     }

@@ -1,7 +1,7 @@
 package wordpuzzle;
 import componentes.Btn;
 import componentes.Frame;
-import static componentes.Frame.arduino;
+//import static componentes.Frame.arduino;
 import componentes.Lb;
 import componentes.Pn;
 import java.awt.Color;
@@ -23,7 +23,7 @@ public class TelaWP extends Frame{
     private StoreWP swp = new StoreWP();
     private Font font = swp.getFont();
     private Color cor = swp.getCor();
-    private ControleWP cwp = new ControleWP();
+    //private ControleWP cwp = new ControleWP();
     public void setNivel(int nivel) {this.nivel = nivel;}
     public void configuracoes(){
         p = new Palavras(nivel);
@@ -76,7 +76,7 @@ public class TelaWP extends Frame{
         add(lbdoispontos);
         add(lbsegundos);
         barraWords();
-        add(it.btnClose()); add(it.returnGames(this)); add(it.btnSomOutro()); cwp.start();
+        add(it.btnClose()); add(it.returnGames(this)); add(it.btnSomOutro()); //cwp.start();
     }
     
     private Lb lbWord;
@@ -139,10 +139,10 @@ public class TelaWP extends Frame{
             sc.gravar();
             Conta c = new Conta(user);
             c.gravar();
-            if(win==true){win = false; WinOrGameOver w = new WinOrGameOver(this); w.setNivel(x); w.addWin(4); w.show();cwp.stop();}
+            if(win==true){win = false; WinOrGameOver w = new WinOrGameOver(this); w.setNivel(x); w.addWin(4); w.show();/*cwp.stop();*/}
         }
     }
-    
+    /*
     private int[] posSelect = {0,0};
     public class ControleWP extends Thread{
         @Override
@@ -176,6 +176,7 @@ public class TelaWP extends Frame{
             }
         }
     }
+    */
     
     private ArrayList<Boolean> wordsEnc = new ArrayList<Boolean>();
     public void wordsEncontradas(){
